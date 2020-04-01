@@ -1,0 +1,30 @@
+//
+//  FMCollectionLayoutView.h
+//  FMLayoutKit
+//
+//  Created by 郑桂华 on 2020/4/1.
+//  Copyright © 2020 ZhouFaMing. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "FMCollectionViewLayout.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol FMCollectionLayoutViewConfigurationDelegate <NSObject>
+@optional
+- (void)configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath;
+- (void)configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath;
+- (void)configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath;
+- (void)configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath;
+@end
+
+@interface FMCollectionLayoutView : UICollectionView
+@property(nonatomic, weak)id<FMCollectionLayoutViewConfigurationDelegate> configuration;
+@property(nonatomic, strong)FMCollectionViewLayout *layout;
+
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_UNAVAILABLE;
+
+@end
+
+NS_ASSUME_NONNULL_END

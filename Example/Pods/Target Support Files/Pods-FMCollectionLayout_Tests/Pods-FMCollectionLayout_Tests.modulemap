@@ -1,0 +1,6 @@
+framework module Pods_FMCollectionLayout_Tests {
+  umbrella header "Pods-FMCollectionLayout_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - FMCollectionLayout (0.1.0)
+
+DEPENDENCIES:
+  - FMCollectionLayout (from `../`)
+
+EXTERNAL SOURCES:
+  FMCollectionLayout:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FMCollectionLayout: 97cddbc2007467ff5719a8e24e1d67c9fe17dfe6
+
+PODFILE CHECKSUM: 911e01377a67ec57c323e2c4fe0f1356c7ada0e5
+
+COCOAPODS: 1.9.0
