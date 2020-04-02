@@ -16,9 +16,9 @@ typedef NS_ENUM(NSInteger, FMSupplementaryType) {/// 目前仅支持header悬浮
 };
 
 typedef NS_ENUM(NSInteger, FMSupplementaryZIndex) {
-    FMSupplementaryZIndexBg = -2, ///最底层   头部  底部   Item的下方
+    FMSupplementaryZIndexBg = -9999, ///最底层   头部  底部   Item的下方
     FMSupplementaryZIndexBackOfItem = -1,///Item的下方
-    FMSupplementaryZIndexAuto = 0,/// 自动
+    FMSupplementaryZIndexAuto = 0,/// 自动悬浮可能会被覆盖
     FMSupplementaryZIndexFrontOfItem = 1, /// Item的上方
     FMSupplementaryZIndexFrontAlways = 9999 /// 最最上方
 };

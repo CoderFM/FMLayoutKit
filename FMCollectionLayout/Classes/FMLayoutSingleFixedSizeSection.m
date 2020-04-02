@@ -17,12 +17,19 @@
 - (void)prepareItems{
     if (self.isHorizontalCanScroll) {
         FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:self.indexPath];
-        CGSize itemSize = CGSizeMake(self.collectionView.bounds.size.width, self.header.bottomMargin + self.itemSize.height + self.footer.topMargin);
+        
+        NSInteger itemCount = self.itemDatas.count;
+        NSInteger singleCount = self.collectionView.bounds.size.width / (self.itemSize.width + self.itemSpace);///单行可显示的最大个数
+        if (itemCount > singleCount * self.column) { //可滚动
+            singleCount = itemCount % self.column == 0 ? itemCount / self.column : (itemCount / self.column + 1);
+        }
+        NSInteger realLines = itemCount % singleCount == 0 ? itemCount / singleCount : (itemCount / singleCount + 1);
+        CGSize itemSize = CGSizeMake(self.collectionView.bounds.size.width, self.header.bottomMargin + self.itemSize.height * realLines + (realLines - 1) * self.lineSpace + self.footer.topMargin);
         CGFloat x = 0;
         CGFloat y = self.sectionOffset + self.sectionInset.top + self.header.height;
         itemAttr.frame = CGRectMake(x, y, itemSize.width, itemSize.height);
         self.itemsAttribute = @[itemAttr];
-        self.columnHeights[@(0)] = @(itemSize.height);
+        self.columnHeights[@(0)] = @(itemSize.height - self.header.bottomMargin);
     } else {
         [self resetColumnHeights];
         NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];

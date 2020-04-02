@@ -10,18 +10,25 @@
 #import "FMLayoutSingleFixedSizeSection.h"
 #import "FMSupplementaryFooter.h"
 #import "FMSupplementaryHeader.h"
+#import "FMCollectionHorizontalLayout.h"
 
 @interface FMHorizontalScrollCollCell ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property(nonatomic, weak)UICollectionView *collectionView;
+@property(nonatomic, strong)FMCollectionHorizontalLayout *layout;
 @end
 
 @implementation FMHorizontalScrollCollCell
 
+- (FMCollectionHorizontalLayout *)layout{
+    if (_layout == nil) {
+        _layout = [[FMCollectionHorizontalLayout alloc] init];
+    }
+    return _layout;
+}
+
 - (UICollectionView *)collectionView{
     if (_collectionView == nil) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        UICollectionView *coll = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        UICollectionView *coll = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
         coll.backgroundColor = [UIColor clearColor];
         coll.delegate = self;
         coll.dataSource = self;
@@ -48,10 +55,12 @@
 - (void)setSection:(FMLayoutSingleFixedSizeSection *)section{
     _section = section;
     [self.collectionView registerClass:section.cellElement.viewClass forCellWithReuseIdentifier:section.cellElement.reuseIdentifier];
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    layout.itemSize = section.itemSize;
-    layout.sectionInset = UIEdgeInsetsMake(section.header.bottomMargin, section.sectionInset.left, section.footer.topMargin, section.sectionInset.right);
-    layout.minimumInteritemSpacing = section.itemSpace;
+    self.layout.section = section;
+    
+//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+//    layout.itemSize = section.itemSize;
+//    layout.sectionInset = UIEdgeInsetsMake(section.header.bottomMargin, section.sectionInset.left, section.footer.topMargin, section.sectionInset.right);
+//    layout.minimumInteritemSpacing = section.itemSpace;
     [self.collectionView reloadData];
 }
 

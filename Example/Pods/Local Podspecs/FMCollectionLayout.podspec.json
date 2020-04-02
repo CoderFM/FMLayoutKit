@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "A short description of FMCollectionLayout.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/周发明/FMCollectionLayout",
+  "homepage": "https://github.com/CoderFM/FMCollectionLayout",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "周发明": "zhoufaming251@163.com"
   },
   "source": {
-    "git": "https://github.com/周发明/FMCollectionLayout.git",
+    "git": "https://github.com/CoderFM/FMCollectionLayout.git",
     "tag": "0.1.0"
   },
   "platforms": {

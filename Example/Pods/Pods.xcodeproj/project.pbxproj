@@ -7,44 +7,77 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04AE831BF82EF7656DABB1BEC03BA6A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		021A2C2BA709826E06C16A3BF746877A /* Pods-FMCollectionLayout_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E21069846E23FF4EDFCA37A3738DF31 /* Pods-FMCollectionLayout_Example-dummy.m */; };
+		04EB73167D4F3363ADED948A88D7EBD9 /* FMCollectionLayoutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EDA7DA0B8D669AF86087957E9D46563 /* FMCollectionLayoutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05A040F35BF1C88F869404E1A940B493 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 27E12E3D2779B5C7A8301A94F715DB4C /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05EA1447EEA0EB669F8DEE73964A7C60 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 30EC6C5D191587619B42076546EDC448 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0967598607D521318F69D7D39D517B20 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 342C4D9B5E1E36390E7AF01E35444998 /* ViewController+MASAdditions.m */; };
+		098630ECDB64ED7B89F5F687C82B4AC3 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEBD88282BA13360CAA867D8465C75 /* NSArray+MASAdditions.m */; };
+		0AF1AD35706D90B1A91F291B899EF8C0 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = E7851906D7976272A721C8C4E0CE9092 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1972E85F0FCD0F3EAF28ED7CD036286E /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A85AE9E36F67A1B513CB8DA940771B4F /* Masonry-dummy.m */; };
+		280D36330BAC5715615FF4A8B42D60D6 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 607937A372913475EE7EAE532760ACD4 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		297A3627CF2F032CBFDC61D1A3786E63 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BCCE8C6C17F326AFEDF4357C62ADAF /* MASViewAttribute.m */; };
 		3097C826D8DBB00E4A5A838C9BDBCB7E /* Pods-FMCollectionLayout_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 516EE56789581D89B70E693041127992 /* Pods-FMCollectionLayout_Tests-dummy.m */; };
-		31C46714C29511A12E0BFF5EB40000DC /* FMCollectionLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 49CE8174474FE186C71A2A6FB222396C /* FMCollectionLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		511F193B7862E201886987022158E453 /* Pods-FMCollectionLayout_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E21069846E23FF4EDFCA37A3738DF31 /* Pods-FMCollectionLayout_Example-dummy.m */; };
+		31CC8BD84B8C8E0BF16858252156855F /* FMCollectionLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DCCB2BB4125C23F9D6F11D14130C20 /* FMCollectionLayoutAttributes.m */; };
+		327C0A303D251685DB20B6F6AB477A63 /* FMSupplementaryFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C00F7EADCE52FFC5129DFEFB1C71711 /* FMSupplementaryFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		346080C0D1CA23399ADD739D722D7CEF /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = EDA8A3885BC33F25CB32442EB2449111 /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3DA5F1D8E51CDD102A871C2F37770C7B /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = A78D3443F105E00FC21FE5A357C8F716 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B0981F9AC628CF5100C50FF4A163A4A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 047EE388CF208BD5F57049BD98558C94 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5046BD4E300E4AB5E142B4092994AB6E /* FMHorizontalScrollCollCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 26324B13CFDB47DDDB2D72D41E6F6DFC /* FMHorizontalScrollCollCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		51F8031E3AE5DE722E325BD9E31E16E8 /* Pods-FMCollectionLayout_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2378821DD471C614559255FD50DEE44C /* Pods-FMCollectionLayout_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A59E73875E8C34DBE7387612C84D1187 /* Pods-FMCollectionLayout_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DC5C593A9AC364BE556F8C43D55826E /* Pods-FMCollectionLayout_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AB2661E4C12B52B332870B413EAF2C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		ABF35F46688B7141A8804CA3B57DE60A /* FMCollectionLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3949FD88084C13AC0BA38CC02CFE71 /* FMCollectionLayout-dummy.m */; };
-		C30D6A6324347ABD0004B576 /* FMSupplementaryHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A4A24347ABC0004B576 /* FMSupplementaryHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A6424347ABD0004B576 /* FMCollectionLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A4B24347ABC0004B576 /* FMCollectionLayoutAttributes.m */; };
-		C30D6A6524347ABD0004B576 /* FMCollectionLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A4C24347ABC0004B576 /* FMCollectionLayoutView.m */; };
-		C30D6A6624347ABD0004B576 /* FMLayoutDynamicSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A4D24347ABC0004B576 /* FMLayoutDynamicSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A6724347ABD0004B576 /* FMCollectionLayoutBaseSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A4E24347ABC0004B576 /* FMCollectionLayoutBaseSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A6824347ABD0004B576 /* FMCollectionViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A4F24347ABC0004B576 /* FMCollectionViewElement.m */; };
-		C30D6A6924347ABD0004B576 /* FMCollectionLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5024347ABC0004B576 /* FMCollectionLayoutBaseSection.m */; };
-		C30D6A6A24347ABD0004B576 /* FMCollectionLayoutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5124347ABC0004B576 /* FMCollectionLayoutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A6B24347ABD0004B576 /* FMHorizontalScrollCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5224347ABC0004B576 /* FMHorizontalScrollCollCell.m */; };
-		C30D6A6C24347ABD0004B576 /* FMHorizontalScrollCollCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5324347ABC0004B576 /* FMHorizontalScrollCollCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A6D24347ABD0004B576 /* FMCollectionLayoutAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5424347ABC0004B576 /* FMCollectionLayoutAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A6E24347ABD0004B576 /* FMSupplementaryBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5524347ABC0004B576 /* FMSupplementaryBackground.m */; };
-		C30D6A6F24347ABD0004B576 /* FMLayoutDynamicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5624347ABC0004B576 /* FMLayoutDynamicSection.m */; };
-		C30D6A7024347ABD0004B576 /* FMSupplementaryBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5724347ABC0004B576 /* FMSupplementaryBackground.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A7124347ABD0004B576 /* FMCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5824347ABD0004B576 /* FMCollectionViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A7224347ABD0004B576 /* FMSupplementaryFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5924347ABD0004B576 /* FMSupplementaryFooter.m */; };
-		C30D6A7324347ABD0004B576 /* FMCollectionSupplementary.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5A24347ABD0004B576 /* FMCollectionSupplementary.m */; };
-		C30D6A7424347ABD0004B576 /* FMLayoutSingleFixedSizeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5B24347ABD0004B576 /* FMLayoutSingleFixedSizeSection.m */; };
-		C30D6A7524347ABD0004B576 /* FMLayoutSingleFixedSizeSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5C24347ABD0004B576 /* FMLayoutSingleFixedSizeSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A7624347ABD0004B576 /* FMCollectionSupplementary.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A5D24347ABD0004B576 /* FMCollectionSupplementary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A7724347ABD0004B576 /* FMSupplementaryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5E24347ABD0004B576 /* FMSupplementaryHeader.m */; };
-		C30D6A7824347ABD0004B576 /* FMCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D6A5F24347ABD0004B576 /* FMCollectionViewLayout.m */; };
-		C30D6A7924347ABD0004B576 /* FMSupplementaryFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A6024347ABD0004B576 /* FMSupplementaryFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A7A24347ABD0004B576 /* FMCollectionLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A6124347ABD0004B576 /* FMCollectionLayoutView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C30D6A7B24347ABD0004B576 /* FMCollectionViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = C30D6A6224347ABD0004B576 /* FMCollectionViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F2E3DBBF46445E3F75E23AE3F522413B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		5A73A1C4E63DED4F965E08078F3447E9 /* FMCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CF15D366BCF542252A7144C666A2CEC /* FMCollectionViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DD3F265233A65F4716307E367FADD01 /* FMCollectionLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 075E1D2618FCEF65503852E35C8049C2 /* FMCollectionLayoutView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E0272FE8B2EFE585CDD7D1647BB030C /* FMLayoutSingleFixedSizeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFB59B1AE6316B9B9FF87A9D80F5D32 /* FMLayoutSingleFixedSizeSection.m */; };
+		5F74939E4CE4CBD6014B6BAB901122A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		637450E100E9CC43F35D2FA4903DA8B3 /* FMSupplementaryHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA18183EF94BD0B7FFF5CC214FC3C1D6 /* FMSupplementaryHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		646163ED0DF654A4F39B583C9A0EA9EA /* FMCollectionSupplementary.m in Sources */ = {isa = PBXBuildFile; fileRef = 065F2A0F1E5D88D044787B236905B6AD /* FMCollectionSupplementary.m */; };
+		6A6AD3A5BBDBFD0B4AF936BD518EC0B1 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CF8069504999FB8BF5FA1529175AA74 /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E03653C4E4A5F1F43A9D9B5CC06C97B /* Pods-FMCollectionLayout_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DC5C593A9AC364BE556F8C43D55826E /* Pods-FMCollectionLayout_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E69C82ED21BD2862A4492BC10A33F57 /* FMSupplementaryFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B04F903DDEC0C4DAD228D399932B01B /* FMSupplementaryFooter.m */; };
+		782DB7B2383E6659C187E541799DDA2C /* FMCollectionLayoutAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = CC1AC5E99478C267192D9E5C1D82E657 /* FMCollectionLayoutAttributes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		78B2727EE5D693F58D019DB098005101 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5CD1265270E95A8A89443C727427 /* MASConstraintMaker.m */; };
+		7ABF85E9767F1F29915DACC146D6D981 /* FMCollectionViewElement.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7D5C155227ECBD66F831C118336393 /* FMCollectionViewElement.m */; };
+		7BFF65958F014760B6AC4742824892EB /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7CC7527FD599A1064055C060E14B43 /* MASCompositeConstraint.m */; };
+		7DAA9063AB2A06A63B4D841672E20D9F /* FMCollectionLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3DE09FF46E557FCBDDDF30CE6D22397 /* FMCollectionLayoutView.m */; };
+		838DCF5FAA71DB7D82F1AD4C7736EDD7 /* FMCollectionSupplementary.h in Headers */ = {isa = PBXBuildFile; fileRef = A93E3F0508ED2AB801DB6C963F87E384 /* FMCollectionSupplementary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8539B851E01A58467BE49CA3FA77223C /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E17443EA85E103F4DD0553AB6BB942A /* MASLayoutConstraint.m */; };
+		8682AA85F07093E966111A61B5F6600C /* FMCollectionHorizontalLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 79E8E4464D06169CC86988F2503FB06B /* FMCollectionHorizontalLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8891A8B92B6BEEEDDE2AC0E1AF4E52BD /* FMCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 44BD8ED5829DDC35DD6DD14E294160EF /* FMCollectionViewLayout.m */; };
+		8B92011C9373001132C8148BFC8F50B3 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55960467D1B758EC688A18A171012E78 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D4D1F6E4709EBB13974E95DC1059DDC /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF4AF21902029EC43C354AC0978CE49 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D5ECA4F9DCB7D04A16D585F4AABBEEE /* FMCollectionLayoutBaseSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304D4FCE751DA3526313D82EF91E506 /* FMCollectionLayoutBaseSection.m */; };
+		8D65CE579E516BDD5FB36CAA21D693F6 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AD89987EC7EAE20D7034EEF9935E7CC /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		941955A19C40899D275604E6E9C21A6D /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 02CA69FDFD4D7BB11F8E3E2E7A0B9879 /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		99CD327F93D6ADFB1CAB6BC4CFC7F10A /* FMLayoutSingleFixedSizeSection.h in Headers */ = {isa = PBXBuildFile; fileRef = B88EB0744D552330770D02D7B60809CC /* FMLayoutSingleFixedSizeSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D546E1168C04B0B2EAE005D9275D18B /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 837834476F3329FA118B081516D4FC28 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A0C758AFF9B42CDCF9D36D8B746E8B40 /* FMLayoutHorizontalSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5450334A0875B73AB4A78ABEF09B364A /* FMLayoutHorizontalSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A18E608343BB0137947FDE8147DF0625 /* FMHorizontalScrollCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71AA81997A2007283596C860F98F9D67 /* FMHorizontalScrollCollCell.m */; };
+		A35FBEEC7D088AEC05297E8292A32C77 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4497913DB548AE2E03103D3A97F34F /* View+MASAdditions.m */; };
+		AB2661E4C12B52B332870B413EAF2C7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		AEDD38E1C7BE8A5242959CA3833F73B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		B7D645EC004610E8A581E532D28771EC /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A95F8027E3EB86CB9AE2D7539201FE /* MASViewConstraint.m */; };
+		BC108FF363756E02EC5608F7F0C23EFF /* FMCollectionLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCC36CFAF33838D0907C03E146BE30B /* FMCollectionLayout-dummy.m */; };
+		C0861ADB4C5FA30F4F9E051F7638A264 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 071EEE0A3CE36E163E09EA7F7915F1DE /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		C259EC2D34A52C5A0920F7C57E3B31DD /* FMCollectionLayoutBaseSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F410BAA7325291C70656D5D7E966D79 /* FMCollectionLayoutBaseSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C94A29D778A531E898D1638B92AA3468 /* FMSupplementaryBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 640506C4E71D528027E1DC1326CE99A0 /* FMSupplementaryBackground.m */; };
+		CE93C54413259B4AC3683B6EB874D466 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312B988EF117AE4DE76A268D970131FE /* UIKit.framework */; };
+		D19FCA17DC89AF29FDDAB12D87C3089D /* FMLayoutHorizontalSection.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB8E0B16D46CA6C4CF6031F076E2017 /* FMLayoutHorizontalSection.m */; };
+		DBD1BF875978A7A2776BF4E1B9BC6285 /* FMCollectionLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EA353929142CADBC733A9FB4D5CA77CA /* FMCollectionLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E230BA7FFD6D97381A214E426B3F9AA9 /* FMLayoutDynamicSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE33EE98EE82C249A4F92A79E675E66 /* FMLayoutDynamicSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3613AE90F9C97F9DB7305E654286F6F /* FMLayoutDynamicSection.m in Sources */ = {isa = PBXBuildFile; fileRef = D39CE0C22AF6F9D36CC6ACD7173F0086 /* FMLayoutDynamicSection.m */; };
+		E51F496BDC6ACADE04FDA059C6CB2342 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */; };
+		E7CA20228B3583F41927813EE904CAD3 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 86765B456E483806C4E13D2DD50E40A4 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E8DD5D1D406150E1C80AD015271B6848 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9073C3B74BC30C55B4EB5B2A596EAD72 /* MASConstraint.m */; };
+		EAE8B0895956885A752B173683A0D889 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = D12E9F350C1C8076BE92719B89951AD8 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED6E012E25F92212ECA5A3982781307C /* FMSupplementaryBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BCF83B8390AE28302B62CC63D76BC42 /* FMSupplementaryBackground.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ED7E11C9A7F6117444B891F7E057CF47 /* FMSupplementaryHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8888243C2579FDDD70C7F688F95B3CC3 /* FMSupplementaryHeader.m */; };
+		FAFBFA90F7BC3E7CF50F8A5CF0A8B264 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = B28EC2F4C626ED77509645BE3805CB29 /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB8545B6B662781D4778E81DB57796A5 /* FMCollectionViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 735AD97BAB66978EB707516F0C79C876 /* FMCollectionViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE8B3F6B9D2630AA2FC20C2456AAE68B /* FMCollectionHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6D59AFAFC40EDE29A19E0A718E1BFD /* FMCollectionHorizontalLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		89C1533F6393466B4EF22B3509F0DE8B /* PBXContainerItemProxy */ = {
+		192545668803FDF49C48000D07C9CE0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -58,74 +91,128 @@
 			remoteGlobalIDString = 8C1DD06EB61CC1E34EB3E0C987479231;
 			remoteInfo = "Pods-FMCollectionLayout_Example";
 		};
+		ECB54A3CBB5F9A281E771DA5E2F996B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
+			remoteInfo = Masonry;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02CA69FDFD4D7BB11F8E3E2E7A0B9879 /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
+		047EE388CF208BD5F57049BD98558C94 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
+		065F2A0F1E5D88D044787B236905B6AD /* FMCollectionSupplementary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionSupplementary.m; path = FMCollectionLayout/Classes/FMCollectionSupplementary.m; sourceTree = "<group>"; };
+		071EEE0A3CE36E163E09EA7F7915F1DE /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		075E1D2618FCEF65503852E35C8049C2 /* FMCollectionLayoutView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutView.h; path = FMCollectionLayout/Classes/FMCollectionLayoutView.h; sourceTree = "<group>"; };
 		0EE419B8804140CC8554287BD1ADFE48 /* Pods-FMCollectionLayout_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FMCollectionLayout_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		0F09A11D2A19A1B7F3B49AF934FD1830 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1B680B4D5ACCEF9C9F043D6FD29850FC /* Pods_FMCollectionLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FMCollectionLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B680B4D5ACCEF9C9F043D6FD29850FC /* Pods_FMCollectionLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FMCollectionLayout_Example.framework; path = "Pods-FMCollectionLayout_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BCF83B8390AE28302B62CC63D76BC42 /* FMSupplementaryBackground.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMSupplementaryBackground.h; path = FMCollectionLayout/Classes/FMSupplementaryBackground.h; sourceTree = "<group>"; };
+		1C00F7EADCE52FFC5129DFEFB1C71711 /* FMSupplementaryFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMSupplementaryFooter.h; path = FMCollectionLayout/Classes/FMSupplementaryFooter.h; sourceTree = "<group>"; };
+		1EDA7DA0B8D669AF86087957E9D46563 /* FMCollectionLayoutKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutKit.h; path = FMCollectionLayout/Classes/FMCollectionLayoutKit.h; sourceTree = "<group>"; };
+		1FFED36A657123030ABB700256D73F15 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2378821DD471C614559255FD50DEE44C /* Pods-FMCollectionLayout_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FMCollectionLayout_Tests-umbrella.h"; sourceTree = "<group>"; };
+		26324B13CFDB47DDDB2D72D41E6F6DFC /* FMHorizontalScrollCollCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMHorizontalScrollCollCell.h; path = FMCollectionLayout/Classes/FMHorizontalScrollCollCell.h; sourceTree = "<group>"; };
+		27E12E3D2779B5C7A8301A94F715DB4C /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		28A81F242277816F301BBA826057F462 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		2A131C57CEC89BBB5533EF741FBBAA7B /* Pods-FMCollectionLayout_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FMCollectionLayout_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3B51D3EF37F17782943C0BEC9F31973A /* FMCollectionLayout.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = FMCollectionLayout.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		3F1AE82EAB8812535FB83C44262DC41C /* FMCollectionLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMCollectionLayout.release.xcconfig; sourceTree = "<group>"; };
-		49CE8174474FE186C71A2A6FB222396C /* FMCollectionLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMCollectionLayout-umbrella.h"; sourceTree = "<group>"; };
+		30EC6C5D191587619B42076546EDC448 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		312B988EF117AE4DE76A268D970131FE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		342C4D9B5E1E36390E7AF01E35444998 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		3AFB59B1AE6316B9B9FF87A9D80F5D32 /* FMLayoutSingleFixedSizeSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMLayoutSingleFixedSizeSection.m; path = FMCollectionLayout/Classes/FMLayoutSingleFixedSizeSection.m; sourceTree = "<group>"; };
+		3B04F903DDEC0C4DAD228D399932B01B /* FMSupplementaryFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMSupplementaryFooter.m; path = FMCollectionLayout/Classes/FMSupplementaryFooter.m; sourceTree = "<group>"; };
+		3E537C1F47DA8B06DA4A71E3D14F4DE4 /* Masonry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Masonry.modulemap; sourceTree = "<group>"; };
+		419A961AD957E23BAB6A998ED7623134 /* Masonry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.release.xcconfig; sourceTree = "<group>"; };
+		41DCCB2BB4125C23F9D6F11D14130C20 /* FMCollectionLayoutAttributes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionLayoutAttributes.m; path = FMCollectionLayout/Classes/FMCollectionLayoutAttributes.m; sourceTree = "<group>"; };
+		4304D4FCE751DA3526313D82EF91E506 /* FMCollectionLayoutBaseSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionLayoutBaseSection.m; path = FMCollectionLayout/Classes/FMCollectionLayoutBaseSection.m; sourceTree = "<group>"; };
+		436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		44BD8ED5829DDC35DD6DD14E294160EF /* FMCollectionViewLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionViewLayout.m; path = FMCollectionLayout/Classes/FMCollectionViewLayout.m; sourceTree = "<group>"; };
+		470C5CD1265270E95A8A89443C727427 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
+		4AD89987EC7EAE20D7034EEF9935E7CC /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
+		4CE33EE98EE82C249A4F92A79E675E66 /* FMLayoutDynamicSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMLayoutDynamicSection.h; path = FMCollectionLayout/Classes/FMLayoutDynamicSection.h; sourceTree = "<group>"; };
 		516EE56789581D89B70E693041127992 /* Pods-FMCollectionLayout_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FMCollectionLayout_Tests-dummy.m"; sourceTree = "<group>"; };
+		5450334A0875B73AB4A78ABEF09B364A /* FMLayoutHorizontalSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMLayoutHorizontalSection.h; path = FMCollectionLayout/Classes/FMLayoutHorizontalSection.h; sourceTree = "<group>"; };
+		55960467D1B758EC688A18A171012E78 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		56F20C4F94AC2410885E08FE7FFA7552 /* Pods-FMCollectionLayout_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FMCollectionLayout_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5DC5C593A9AC364BE556F8C43D55826E /* Pods-FMCollectionLayout_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FMCollectionLayout_Example-umbrella.h"; sourceTree = "<group>"; };
 		5E21069846E23FF4EDFCA37A3738DF31 /* Pods-FMCollectionLayout_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FMCollectionLayout_Example-dummy.m"; sourceTree = "<group>"; };
+		5F410BAA7325291C70656D5D7E966D79 /* FMCollectionLayoutBaseSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutBaseSection.h; path = FMCollectionLayout/Classes/FMCollectionLayoutBaseSection.h; sourceTree = "<group>"; };
+		607937A372913475EE7EAE532760ACD4 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
+		640506C4E71D528027E1DC1326CE99A0 /* FMSupplementaryBackground.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMSupplementaryBackground.m; path = FMCollectionLayout/Classes/FMSupplementaryBackground.m; sourceTree = "<group>"; };
+		693AC36300FC9C4EB0A9F4ACB3D5A87B /* FMCollectionLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMCollectionLayout.release.xcconfig; sourceTree = "<group>"; };
+		6CF8069504999FB8BF5FA1529175AA74 /* Masonry-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-umbrella.h"; sourceTree = "<group>"; };
 		6E071D52BF474122F76A983295220BC2 /* Pods-FMCollectionLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FMCollectionLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E17443EA85E103F4DD0553AB6BB942A /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
+		6FF4AF21902029EC43C354AC0978CE49 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
 		7164469F53555F823F90B08DA7795DC8 /* Pods-FMCollectionLayout_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FMCollectionLayout_Example-Info.plist"; sourceTree = "<group>"; };
-		7CAA861AECB234F896D22D621980166B /* FMCollectionLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FMCollectionLayout.modulemap; sourceTree = "<group>"; };
+		71AA81997A2007283596C860F98F9D67 /* FMHorizontalScrollCollCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMHorizontalScrollCollCell.m; path = FMCollectionLayout/Classes/FMHorizontalScrollCollCell.m; sourceTree = "<group>"; };
+		72A95F8027E3EB86CB9AE2D7539201FE /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
+		735AD97BAB66978EB707516F0C79C876 /* FMCollectionViewElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionViewElement.h; path = FMCollectionLayout/Classes/FMCollectionViewElement.h; sourceTree = "<group>"; };
+		79E8E4464D06169CC86988F2503FB06B /* FMCollectionHorizontalLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionHorizontalLayout.h; path = FMCollectionLayout/Classes/FMCollectionHorizontalLayout.h; sourceTree = "<group>"; };
 		7CCE5D31BB655D709D7B90379133D1FD /* Pods-FMCollectionLayout_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FMCollectionLayout_Tests-Info.plist"; sourceTree = "<group>"; };
+		7CF15D366BCF542252A7144C666A2CEC /* FMCollectionViewLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionViewLayout.h; path = FMCollectionLayout/Classes/FMCollectionViewLayout.h; sourceTree = "<group>"; };
+		837834476F3329FA118B081516D4FC28 /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
+		86765B456E483806C4E13D2DD50E40A4 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		8888243C2579FDDD70C7F688F95B3CC3 /* FMSupplementaryHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMSupplementaryHeader.m; path = FMCollectionLayout/Classes/FMSupplementaryHeader.m; sourceTree = "<group>"; };
+		8AEEBD88282BA13360CAA867D8465C75 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		8BAE63666B2ED4179761D33AC9DB789E /* FMCollectionLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMCollectionLayout.debug.xcconfig; sourceTree = "<group>"; };
+		8C2EDF0144AC10C6AC9F20D1FA13E7D7 /* FMCollectionLayout.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FMCollectionLayout.modulemap; sourceTree = "<group>"; };
+		8DEC9CACAE75BE3368593EB53D2BE3B3 /* FMCollectionLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMCollectionLayout-prefix.pch"; sourceTree = "<group>"; };
+		9073C3B74BC30C55B4EB5B2A596EAD72 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
 		9322EEFD000EC6C7C7C4AC32C33E5E12 /* Pods-FMCollectionLayout_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FMCollectionLayout_Example.modulemap"; sourceTree = "<group>"; };
 		93E6D3729CC8994C03C47D5A1DB4BD1E /* Pods-FMCollectionLayout_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FMCollectionLayout_Tests.modulemap"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F1AF9DADDB23DEBC21D033874824BBD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		AD3949FD88084C13AC0BA38CC02CFE71 /* FMCollectionLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMCollectionLayout-dummy.m"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A78D3443F105E00FC21FE5A357C8F716 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		A85AE9E36F67A1B513CB8DA940771B4F /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
+		A8BCCE8C6C17F326AFEDF4357C62ADAF /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
+		A93E3F0508ED2AB801DB6C963F87E384 /* FMCollectionSupplementary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionSupplementary.h; path = FMCollectionLayout/Classes/FMCollectionSupplementary.h; sourceTree = "<group>"; };
+		AA18183EF94BD0B7FFF5CC214FC3C1D6 /* FMSupplementaryHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMSupplementaryHeader.h; path = FMCollectionLayout/Classes/FMSupplementaryHeader.h; sourceTree = "<group>"; };
+		AC6931AA0731D8ED395265157DCA5300 /* FMCollectionLayout-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FMCollectionLayout-Info.plist"; sourceTree = "<group>"; };
+		AC6D59AFAFC40EDE29A19E0A718E1BFD /* FMCollectionHorizontalLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionHorizontalLayout.m; path = FMCollectionLayout/Classes/FMCollectionHorizontalLayout.m; sourceTree = "<group>"; };
+		ACCC36CFAF33838D0907C03E146BE30B /* FMCollectionLayout-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMCollectionLayout-dummy.m"; sourceTree = "<group>"; };
 		AF35FD710DADFAF857B3BD4A96B2DF4A /* Pods-FMCollectionLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FMCollectionLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
-		AF3CFBECBC1918B406DE073FACE66341 /* FMCollectionLayout-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMCollectionLayout-prefix.pch"; sourceTree = "<group>"; };
+		AF4497913DB548AE2E03103D3A97F34F /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
+		AFB8E0B16D46CA6C4CF6031F076E2017 /* FMLayoutHorizontalSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMLayoutHorizontalSection.m; path = FMCollectionLayout/Classes/FMLayoutHorizontalSection.m; sourceTree = "<group>"; };
+		B28EC2F4C626ED77509645BE3805CB29 /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
 		B51131FCC34C2CF399AB20CFDA3FDAEC /* Pods-FMCollectionLayout_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FMCollectionLayout_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		B514F0BEB0A18DA5D1D0F5E25823B37E /* Pods_FMCollectionLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FMCollectionLayout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C050C976EDAD4562560629676C0E0B47 /* FMCollectionLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FMCollectionLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C30D6A4A24347ABC0004B576 /* FMSupplementaryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMSupplementaryHeader.h; path = FMCollectionLayout/Classes/FMSupplementaryHeader.h; sourceTree = "<group>"; };
-		C30D6A4B24347ABC0004B576 /* FMCollectionLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCollectionLayoutAttributes.m; path = FMCollectionLayout/Classes/FMCollectionLayoutAttributes.m; sourceTree = "<group>"; };
-		C30D6A4C24347ABC0004B576 /* FMCollectionLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCollectionLayoutView.m; path = FMCollectionLayout/Classes/FMCollectionLayoutView.m; sourceTree = "<group>"; };
-		C30D6A4D24347ABC0004B576 /* FMLayoutDynamicSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMLayoutDynamicSection.h; path = FMCollectionLayout/Classes/FMLayoutDynamicSection.h; sourceTree = "<group>"; };
-		C30D6A4E24347ABC0004B576 /* FMCollectionLayoutBaseSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutBaseSection.h; path = FMCollectionLayout/Classes/FMCollectionLayoutBaseSection.h; sourceTree = "<group>"; };
-		C30D6A4F24347ABC0004B576 /* FMCollectionViewElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCollectionViewElement.m; path = FMCollectionLayout/Classes/FMCollectionViewElement.m; sourceTree = "<group>"; };
-		C30D6A5024347ABC0004B576 /* FMCollectionLayoutBaseSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCollectionLayoutBaseSection.m; path = FMCollectionLayout/Classes/FMCollectionLayoutBaseSection.m; sourceTree = "<group>"; };
-		C30D6A5124347ABC0004B576 /* FMCollectionLayoutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutKit.h; path = FMCollectionLayout/Classes/FMCollectionLayoutKit.h; sourceTree = "<group>"; };
-		C30D6A5224347ABC0004B576 /* FMHorizontalScrollCollCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMHorizontalScrollCollCell.m; path = FMCollectionLayout/Classes/FMHorizontalScrollCollCell.m; sourceTree = "<group>"; };
-		C30D6A5324347ABC0004B576 /* FMHorizontalScrollCollCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMHorizontalScrollCollCell.h; path = FMCollectionLayout/Classes/FMHorizontalScrollCollCell.h; sourceTree = "<group>"; };
-		C30D6A5424347ABC0004B576 /* FMCollectionLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutAttributes.h; path = FMCollectionLayout/Classes/FMCollectionLayoutAttributes.h; sourceTree = "<group>"; };
-		C30D6A5524347ABC0004B576 /* FMSupplementaryBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMSupplementaryBackground.m; path = FMCollectionLayout/Classes/FMSupplementaryBackground.m; sourceTree = "<group>"; };
-		C30D6A5624347ABC0004B576 /* FMLayoutDynamicSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMLayoutDynamicSection.m; path = FMCollectionLayout/Classes/FMLayoutDynamicSection.m; sourceTree = "<group>"; };
-		C30D6A5724347ABC0004B576 /* FMSupplementaryBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMSupplementaryBackground.h; path = FMCollectionLayout/Classes/FMSupplementaryBackground.h; sourceTree = "<group>"; };
-		C30D6A5824347ABD0004B576 /* FMCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionViewLayout.h; path = FMCollectionLayout/Classes/FMCollectionViewLayout.h; sourceTree = "<group>"; };
-		C30D6A5924347ABD0004B576 /* FMSupplementaryFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMSupplementaryFooter.m; path = FMCollectionLayout/Classes/FMSupplementaryFooter.m; sourceTree = "<group>"; };
-		C30D6A5A24347ABD0004B576 /* FMCollectionSupplementary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCollectionSupplementary.m; path = FMCollectionLayout/Classes/FMCollectionSupplementary.m; sourceTree = "<group>"; };
-		C30D6A5B24347ABD0004B576 /* FMLayoutSingleFixedSizeSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMLayoutSingleFixedSizeSection.m; path = FMCollectionLayout/Classes/FMLayoutSingleFixedSizeSection.m; sourceTree = "<group>"; };
-		C30D6A5C24347ABD0004B576 /* FMLayoutSingleFixedSizeSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMLayoutSingleFixedSizeSection.h; path = FMCollectionLayout/Classes/FMLayoutSingleFixedSizeSection.h; sourceTree = "<group>"; };
-		C30D6A5D24347ABD0004B576 /* FMCollectionSupplementary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionSupplementary.h; path = FMCollectionLayout/Classes/FMCollectionSupplementary.h; sourceTree = "<group>"; };
-		C30D6A5E24347ABD0004B576 /* FMSupplementaryHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMSupplementaryHeader.m; path = FMCollectionLayout/Classes/FMSupplementaryHeader.m; sourceTree = "<group>"; };
-		C30D6A5F24347ABD0004B576 /* FMCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCollectionViewLayout.m; path = FMCollectionLayout/Classes/FMCollectionViewLayout.m; sourceTree = "<group>"; };
-		C30D6A6024347ABD0004B576 /* FMSupplementaryFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMSupplementaryFooter.h; path = FMCollectionLayout/Classes/FMSupplementaryFooter.h; sourceTree = "<group>"; };
-		C30D6A6124347ABD0004B576 /* FMCollectionLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutView.h; path = FMCollectionLayout/Classes/FMCollectionLayoutView.h; sourceTree = "<group>"; };
-		C30D6A6224347ABD0004B576 /* FMCollectionViewElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionViewElement.h; path = FMCollectionLayout/Classes/FMCollectionViewElement.h; sourceTree = "<group>"; };
+		B514F0BEB0A18DA5D1D0F5E25823B37E /* Pods_FMCollectionLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FMCollectionLayout_Tests.framework; path = "Pods-FMCollectionLayout_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B88EB0744D552330770D02D7B60809CC /* FMLayoutSingleFixedSizeSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMLayoutSingleFixedSizeSection.h; path = FMCollectionLayout/Classes/FMLayoutSingleFixedSizeSection.h; sourceTree = "<group>"; };
+		BDB676D9D5D3AFD89D8DDCE3369D4BAC /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
+		C050C976EDAD4562560629676C0E0B47 /* FMCollectionLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FMCollectionLayout.framework; path = FMCollectionLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC1AC5E99478C267192D9E5C1D82E657 /* FMCollectionLayoutAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutAttributes.h; path = FMCollectionLayout/Classes/FMCollectionLayoutAttributes.h; sourceTree = "<group>"; };
+		D12E9F350C1C8076BE92719B89951AD8 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
+		D2E332A74698A8799CB9FB11309EC080 /* FMCollectionLayout.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FMCollectionLayout.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D39CE0C22AF6F9D36CC6ACD7173F0086 /* FMLayoutDynamicSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMLayoutDynamicSection.m; path = FMCollectionLayout/Classes/FMLayoutDynamicSection.m; sourceTree = "<group>"; };
+		D874955DC10458E074D17DB61321A246 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		DF7D5C155227ECBD66F831C118336393 /* FMCollectionViewElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionViewElement.m; path = FMCollectionLayout/Classes/FMCollectionViewElement.m; sourceTree = "<group>"; };
+		DFA1012B6A8BD076CD9F09831AE37A01 /* Masonry-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Masonry-Info.plist"; sourceTree = "<group>"; };
 		E214E8E84DC672B82018936D09603D9F /* Pods-FMCollectionLayout_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FMCollectionLayout_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E85315B7E2E8DF14667B1C3DA0ED0974 /* FMCollectionLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMCollectionLayout.debug.xcconfig; sourceTree = "<group>"; };
+		E3DE09FF46E557FCBDDDF30CE6D22397 /* FMCollectionLayoutView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMCollectionLayoutView.m; path = FMCollectionLayout/Classes/FMCollectionLayoutView.m; sourceTree = "<group>"; };
+		E7851906D7976272A721C8C4E0CE9092 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		EA353929142CADBC733A9FB4D5CA77CA /* FMCollectionLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMCollectionLayout-umbrella.h"; sourceTree = "<group>"; };
+		EB7CC7527FD599A1064055C060E14B43 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
+		EDA8A3885BC33F25CB32442EB2449111 /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
 		EE76D0667161BEE708327D7A8BEB05B5 /* Pods-FMCollectionLayout_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FMCollectionLayout_Example-frameworks.sh"; sourceTree = "<group>"; };
+		F287598D192FA586BD4AECCD85B988A4 /* Masonry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.debug.xcconfig; sourceTree = "<group>"; };
 		F5E1D05109CC2837DF1A78EA06A9FB0C /* Pods-FMCollectionLayout_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FMCollectionLayout_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		FCF87D11FE4358249E82C47C1351B286 /* FMCollectionLayout-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FMCollectionLayout-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2D45B7DDF4282946D9F83DE9353A8A4C /* Frameworks */ = {
+		11F251C9C48E98B9DDA4EFEDC3E81A98 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AE831BF82EF7656DABB1BEC03BA6A5 /* Foundation.framework in Frameworks */,
+				5F74939E4CE4CBD6014B6BAB901122A4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E047F76604659BF1B2099B2C412AC93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E51F496BDC6ACADE04FDA059C6CB2342 /* Foundation.framework in Frameworks */,
+				CE93C54413259B4AC3683B6EB874D466 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,71 +224,74 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA74F41063EA2EED429DC1CE654A239E /* Frameworks */ = {
+		D2D017713A738558E84436223AF9022B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2E3DBBF46445E3F75E23AE3F522413B /* Foundation.framework in Frameworks */,
+				AEDD38E1C7BE8A5242959CA3833F73B8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2912160118E3F3E213602C6D99787AD6 /* Support Files */ = {
+		0AB93882805A601EC55794DF55261721 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				7CAA861AECB234F896D22D621980166B /* FMCollectionLayout.modulemap */,
-				AD3949FD88084C13AC0BA38CC02CFE71 /* FMCollectionLayout-dummy.m */,
-				FCF87D11FE4358249E82C47C1351B286 /* FMCollectionLayout-Info.plist */,
-				AF3CFBECBC1918B406DE073FACE66341 /* FMCollectionLayout-prefix.pch */,
-				49CE8174474FE186C71A2A6FB222396C /* FMCollectionLayout-umbrella.h */,
-				E85315B7E2E8DF14667B1C3DA0ED0974 /* FMCollectionLayout.debug.xcconfig */,
-				3F1AE82EAB8812535FB83C44262DC41C /* FMCollectionLayout.release.xcconfig */,
+				D2E332A74698A8799CB9FB11309EC080 /* FMCollectionLayout.podspec */,
+				28A81F242277816F301BBA826057F462 /* LICENSE */,
+				D874955DC10458E074D17DB61321A246 /* README.md */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/FMCollectionLayout";
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		29CD698AC938C7365D90FF60714B4BBE /* FMCollectionLayout */ = {
+		0CCC0CD98AB951949302B433AFE762AD /* Masonry */ = {
 			isa = PBXGroup;
 			children = (
-				C30D6A5124347ABC0004B576 /* FMCollectionLayoutKit.h */,
-				C30D6A5424347ABC0004B576 /* FMCollectionLayoutAttributes.h */,
-				C30D6A4B24347ABC0004B576 /* FMCollectionLayoutAttributes.m */,
-				C30D6A4E24347ABC0004B576 /* FMCollectionLayoutBaseSection.h */,
-				C30D6A5024347ABC0004B576 /* FMCollectionLayoutBaseSection.m */,
-				C30D6A6124347ABD0004B576 /* FMCollectionLayoutView.h */,
-				C30D6A4C24347ABC0004B576 /* FMCollectionLayoutView.m */,
-				C30D6A5D24347ABD0004B576 /* FMCollectionSupplementary.h */,
-				C30D6A5A24347ABD0004B576 /* FMCollectionSupplementary.m */,
-				C30D6A6224347ABD0004B576 /* FMCollectionViewElement.h */,
-				C30D6A4F24347ABC0004B576 /* FMCollectionViewElement.m */,
-				C30D6A5824347ABD0004B576 /* FMCollectionViewLayout.h */,
-				C30D6A5F24347ABD0004B576 /* FMCollectionViewLayout.m */,
-				C30D6A5324347ABC0004B576 /* FMHorizontalScrollCollCell.h */,
-				C30D6A5224347ABC0004B576 /* FMHorizontalScrollCollCell.m */,
-				C30D6A4D24347ABC0004B576 /* FMLayoutDynamicSection.h */,
-				C30D6A5624347ABC0004B576 /* FMLayoutDynamicSection.m */,
-				C30D6A5C24347ABD0004B576 /* FMLayoutSingleFixedSizeSection.h */,
-				C30D6A5B24347ABD0004B576 /* FMLayoutSingleFixedSizeSection.m */,
-				C30D6A5724347ABC0004B576 /* FMSupplementaryBackground.h */,
-				C30D6A5524347ABC0004B576 /* FMSupplementaryBackground.m */,
-				C30D6A6024347ABD0004B576 /* FMSupplementaryFooter.h */,
-				C30D6A5924347ABD0004B576 /* FMSupplementaryFooter.m */,
-				C30D6A4A24347ABC0004B576 /* FMSupplementaryHeader.h */,
-				C30D6A5E24347ABD0004B576 /* FMSupplementaryHeader.m */,
-				CCC2322A42A4C1A4FF770056AB702B9C /* Pod */,
-				2912160118E3F3E213602C6D99787AD6 /* Support Files */,
+				4AD89987EC7EAE20D7034EEF9935E7CC /* MASCompositeConstraint.h */,
+				EB7CC7527FD599A1064055C060E14B43 /* MASCompositeConstraint.m */,
+				02CA69FDFD4D7BB11F8E3E2E7A0B9879 /* MASConstraint.h */,
+				9073C3B74BC30C55B4EB5B2A596EAD72 /* MASConstraint.m */,
+				837834476F3329FA118B081516D4FC28 /* MASConstraint+Private.h */,
+				B28EC2F4C626ED77509645BE3805CB29 /* MASConstraintMaker.h */,
+				470C5CD1265270E95A8A89443C727427 /* MASConstraintMaker.m */,
+				6FF4AF21902029EC43C354AC0978CE49 /* MASLayoutConstraint.h */,
+				6E17443EA85E103F4DD0553AB6BB942A /* MASLayoutConstraint.m */,
+				EDA8A3885BC33F25CB32442EB2449111 /* Masonry.h */,
+				607937A372913475EE7EAE532760ACD4 /* MASUtilities.h */,
+				A78D3443F105E00FC21FE5A357C8F716 /* MASViewAttribute.h */,
+				A8BCCE8C6C17F326AFEDF4357C62ADAF /* MASViewAttribute.m */,
+				D12E9F350C1C8076BE92719B89951AD8 /* MASViewConstraint.h */,
+				72A95F8027E3EB86CB9AE2D7539201FE /* MASViewConstraint.m */,
+				30EC6C5D191587619B42076546EDC448 /* NSArray+MASAdditions.h */,
+				8AEEBD88282BA13360CAA867D8465C75 /* NSArray+MASAdditions.m */,
+				27E12E3D2779B5C7A8301A94F715DB4C /* NSArray+MASShorthandAdditions.h */,
+				E7851906D7976272A721C8C4E0CE9092 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				071EEE0A3CE36E163E09EA7F7915F1DE /* NSLayoutConstraint+MASDebugAdditions.m */,
+				047EE388CF208BD5F57049BD98558C94 /* View+MASAdditions.h */,
+				AF4497913DB548AE2E03103D3A97F34F /* View+MASAdditions.m */,
+				86765B456E483806C4E13D2DD50E40A4 /* View+MASShorthandAdditions.h */,
+				55960467D1B758EC688A18A171012E78 /* ViewController+MASAdditions.h */,
+				342C4D9B5E1E36390E7AF01E35444998 /* ViewController+MASAdditions.m */,
+				C84A449C2DE4F91F0620A5147DD42E0F /* Support Files */,
 			);
-			name = FMCollectionLayout;
-			path = ../..;
+			name = Masonry;
+			path = Masonry;
 			sourceTree = "<group>";
 		};
-		44C70BDCB531DDB12867F3584730C7AA /* Products */ = {
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2983683FD097A93297E2F5D4E382B36 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		52C4CEB8C751D3A46B2C6C985EEECAC8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				C050C976EDAD4562560629676C0E0B47 /* FMCollectionLayout.framework */,
+				1FFED36A657123030ABB700256D73F15 /* Masonry.framework */,
 				1B680B4D5ACCEF9C9F043D6FD29850FC /* Pods_FMCollectionLayout_Example.framework */,
 				B514F0BEB0A18DA5D1D0F5E25823B37E /* Pods_FMCollectionLayout_Tests.framework */,
 			);
@@ -224,12 +314,35 @@
 			path = "Target Support Files/Pods-FMCollectionLayout_Tests";
 			sourceTree = "<group>";
 		};
-		83E74AAA0C825C67B394808E626537EC /* Development Pods */ = {
+		5FBF0A60F67D7231F45A52A2F9E549D1 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				29CD698AC938C7365D90FF60714B4BBE /* FMCollectionLayout */,
+				D1ED67A01D7AF49DC4F82A203543CD14 /* FMCollectionLayout */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		7529FD53BCE26816CCD46658378AAF1B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0CCC0CD98AB951949302B433AFE762AD /* Masonry */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A4FFC93874F50FFA6B18D4A6E47D20DC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C2EDF0144AC10C6AC9F20D1FA13E7D7 /* FMCollectionLayout.modulemap */,
+				ACCC36CFAF33838D0907C03E146BE30B /* FMCollectionLayout-dummy.m */,
+				AC6931AA0731D8ED395265157DCA5300 /* FMCollectionLayout-Info.plist */,
+				8DEC9CACAE75BE3368593EB53D2BE3B3 /* FMCollectionLayout-prefix.pch */,
+				EA353929142CADBC733A9FB4D5CA77CA /* FMCollectionLayout-umbrella.h */,
+				8BAE63666B2ED4179761D33AC9DB789E /* FMCollectionLayout.debug.xcconfig */,
+				693AC36300FC9C4EB0A9F4ACB3D5A87B /* FMCollectionLayout.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/FMCollectionLayout";
 			sourceTree = "<group>";
 		};
 		B6A67432E0A66289F647FD3413C7C978 /* Pods-FMCollectionLayout_Example */ = {
@@ -249,41 +362,79 @@
 			path = "Target Support Files/Pods-FMCollectionLayout_Example";
 			sourceTree = "<group>";
 		};
-		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+		C84A449C2DE4F91F0620A5147DD42E0F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+				3E537C1F47DA8B06DA4A71E3D14F4DE4 /* Masonry.modulemap */,
+				A85AE9E36F67A1B513CB8DA940771B4F /* Masonry-dummy.m */,
+				DFA1012B6A8BD076CD9F09831AE37A01 /* Masonry-Info.plist */,
+				BDB676D9D5D3AFD89D8DDCE3369D4BAC /* Masonry-prefix.pch */,
+				6CF8069504999FB8BF5FA1529175AA74 /* Masonry-umbrella.h */,
+				F287598D192FA586BD4AECCD85B988A4 /* Masonry.debug.xcconfig */,
+				419A961AD957E23BAB6A998ED7623134 /* Masonry.release.xcconfig */,
 			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		CCC2322A42A4C1A4FF770056AB702B9C /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				3B51D3EF37F17782943C0BEC9F31973A /* FMCollectionLayout.podspec */,
-				9F1AF9DADDB23DEBC21D033874824BBD /* LICENSE */,
-				0F09A11D2A19A1B7F3B49AF934FD1830 /* README.md */,
-			);
-			name = Pod;
+			name = "Support Files";
+			path = "../Target Support Files/Masonry";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				83E74AAA0C825C67B394808E626537EC /* Development Pods */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				44C70BDCB531DDB12867F3584730C7AA /* Products */,
+				5FBF0A60F67D7231F45A52A2F9E549D1 /* Development Pods */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				7529FD53BCE26816CCD46658378AAF1B /* Pods */,
+				52C4CEB8C751D3A46B2C6C985EEECAC8 /* Products */,
 				F487EA22952A8910B8A966E474C52EE3 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+		D1ED67A01D7AF49DC4F82A203543CD14 /* FMCollectionLayout */ = {
 			isa = PBXGroup;
 			children = (
-				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+				79E8E4464D06169CC86988F2503FB06B /* FMCollectionHorizontalLayout.h */,
+				AC6D59AFAFC40EDE29A19E0A718E1BFD /* FMCollectionHorizontalLayout.m */,
+				CC1AC5E99478C267192D9E5C1D82E657 /* FMCollectionLayoutAttributes.h */,
+				41DCCB2BB4125C23F9D6F11D14130C20 /* FMCollectionLayoutAttributes.m */,
+				5F410BAA7325291C70656D5D7E966D79 /* FMCollectionLayoutBaseSection.h */,
+				4304D4FCE751DA3526313D82EF91E506 /* FMCollectionLayoutBaseSection.m */,
+				1EDA7DA0B8D669AF86087957E9D46563 /* FMCollectionLayoutKit.h */,
+				075E1D2618FCEF65503852E35C8049C2 /* FMCollectionLayoutView.h */,
+				E3DE09FF46E557FCBDDDF30CE6D22397 /* FMCollectionLayoutView.m */,
+				A93E3F0508ED2AB801DB6C963F87E384 /* FMCollectionSupplementary.h */,
+				065F2A0F1E5D88D044787B236905B6AD /* FMCollectionSupplementary.m */,
+				735AD97BAB66978EB707516F0C79C876 /* FMCollectionViewElement.h */,
+				DF7D5C155227ECBD66F831C118336393 /* FMCollectionViewElement.m */,
+				7CF15D366BCF542252A7144C666A2CEC /* FMCollectionViewLayout.h */,
+				44BD8ED5829DDC35DD6DD14E294160EF /* FMCollectionViewLayout.m */,
+				26324B13CFDB47DDDB2D72D41E6F6DFC /* FMHorizontalScrollCollCell.h */,
+				71AA81997A2007283596C860F98F9D67 /* FMHorizontalScrollCollCell.m */,
+				4CE33EE98EE82C249A4F92A79E675E66 /* FMLayoutDynamicSection.h */,
+				D39CE0C22AF6F9D36CC6ACD7173F0086 /* FMLayoutDynamicSection.m */,
+				5450334A0875B73AB4A78ABEF09B364A /* FMLayoutHorizontalSection.h */,
+				AFB8E0B16D46CA6C4CF6031F076E2017 /* FMLayoutHorizontalSection.m */,
+				B88EB0744D552330770D02D7B60809CC /* FMLayoutSingleFixedSizeSection.h */,
+				3AFB59B1AE6316B9B9FF87A9D80F5D32 /* FMLayoutSingleFixedSizeSection.m */,
+				1BCF83B8390AE28302B62CC63D76BC42 /* FMSupplementaryBackground.h */,
+				640506C4E71D528027E1DC1326CE99A0 /* FMSupplementaryBackground.m */,
+				1C00F7EADCE52FFC5129DFEFB1C71711 /* FMSupplementaryFooter.h */,
+				3B04F903DDEC0C4DAD228D399932B01B /* FMSupplementaryFooter.m */,
+				AA18183EF94BD0B7FFF5CC214FC3C1D6 /* FMSupplementaryHeader.h */,
+				8888243C2579FDDD70C7F688F95B3CC3 /* FMSupplementaryHeader.m */,
+				0AB93882805A601EC55794DF55261721 /* Pod */,
+				A4FFC93874F50FFA6B18D4A6E47D20DC /* Support Files */,
 			);
-			name = Frameworks;
+			name = FMCollectionLayout;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		E2983683FD097A93297E2F5D4E382B36 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				436BAA54A31999B53B3CC7115C55FE50 /* Foundation.framework */,
+				312B988EF117AE4DE76A268D970131FE /* UIKit.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		F487EA22952A8910B8A966E474C52EE3 /* Targets Support Files */ = {
@@ -298,32 +449,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4F2E49BC141B28D1C401E07A4189892D /* Headers */ = {
+		1A0E71E5687EC4377AAE21F992FFC9A8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A59E73875E8C34DBE7387612C84D1187 /* Pods-FMCollectionLayout_Example-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B2D9C8D266C26BDF8E3BD9BE09CBABF /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C30D6A6A24347ABD0004B576 /* FMCollectionLayoutKit.h in Headers */,
-				C30D6A7924347ABD0004B576 /* FMSupplementaryFooter.h in Headers */,
-				C30D6A6324347ABD0004B576 /* FMSupplementaryHeader.h in Headers */,
-				C30D6A7A24347ABD0004B576 /* FMCollectionLayoutView.h in Headers */,
-				C30D6A7624347ABD0004B576 /* FMCollectionSupplementary.h in Headers */,
-				C30D6A7B24347ABD0004B576 /* FMCollectionViewElement.h in Headers */,
-				C30D6A6C24347ABD0004B576 /* FMHorizontalScrollCollCell.h in Headers */,
-				C30D6A6D24347ABD0004B576 /* FMCollectionLayoutAttributes.h in Headers */,
-				C30D6A7124347ABD0004B576 /* FMCollectionViewLayout.h in Headers */,
-				C30D6A7524347ABD0004B576 /* FMLayoutSingleFixedSizeSection.h in Headers */,
-				C30D6A7024347ABD0004B576 /* FMSupplementaryBackground.h in Headers */,
-				C30D6A6724347ABD0004B576 /* FMCollectionLayoutBaseSection.h in Headers */,
-				C30D6A6624347ABD0004B576 /* FMLayoutDynamicSection.h in Headers */,
-				31C46714C29511A12E0BFF5EB40000DC /* FMCollectionLayout-umbrella.h in Headers */,
+				8682AA85F07093E966111A61B5F6600C /* FMCollectionHorizontalLayout.h in Headers */,
+				DBD1BF875978A7A2776BF4E1B9BC6285 /* FMCollectionLayout-umbrella.h in Headers */,
+				782DB7B2383E6659C187E541799DDA2C /* FMCollectionLayoutAttributes.h in Headers */,
+				C259EC2D34A52C5A0920F7C57E3B31DD /* FMCollectionLayoutBaseSection.h in Headers */,
+				04EB73167D4F3363ADED948A88D7EBD9 /* FMCollectionLayoutKit.h in Headers */,
+				5DD3F265233A65F4716307E367FADD01 /* FMCollectionLayoutView.h in Headers */,
+				838DCF5FAA71DB7D82F1AD4C7736EDD7 /* FMCollectionSupplementary.h in Headers */,
+				FB8545B6B662781D4778E81DB57796A5 /* FMCollectionViewElement.h in Headers */,
+				5A73A1C4E63DED4F965E08078F3447E9 /* FMCollectionViewLayout.h in Headers */,
+				5046BD4E300E4AB5E142B4092994AB6E /* FMHorizontalScrollCollCell.h in Headers */,
+				E230BA7FFD6D97381A214E426B3F9AA9 /* FMLayoutDynamicSection.h in Headers */,
+				A0C758AFF9B42CDCF9D36D8B746E8B40 /* FMLayoutHorizontalSection.h in Headers */,
+				99CD327F93D6ADFB1CAB6BC4CFC7F10A /* FMLayoutSingleFixedSizeSection.h in Headers */,
+				ED6E012E25F92212ECA5A3982781307C /* FMSupplementaryBackground.h in Headers */,
+				327C0A303D251685DB20B6F6AB477A63 /* FMSupplementaryFooter.h in Headers */,
+				637450E100E9CC43F35D2FA4903DA8B3 /* FMSupplementaryHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,17 +480,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7664A466E556C042AA3182C22E1B6BFB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E03653C4E4A5F1F43A9D9B5CC06C97B /* Pods-FMCollectionLayout_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B04ACBA4522760CA66A5D4AFA498F81 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D65CE579E516BDD5FB36CAA21D693F6 /* MASCompositeConstraint.h in Headers */,
+				9D546E1168C04B0B2EAE005D9275D18B /* MASConstraint+Private.h in Headers */,
+				941955A19C40899D275604E6E9C21A6D /* MASConstraint.h in Headers */,
+				FAFBFA90F7BC3E7CF50F8A5CF0A8B264 /* MASConstraintMaker.h in Headers */,
+				8D4D1F6E4709EBB13974E95DC1059DDC /* MASLayoutConstraint.h in Headers */,
+				6A6AD3A5BBDBFD0B4AF936BD518EC0B1 /* Masonry-umbrella.h in Headers */,
+				346080C0D1CA23399ADD739D722D7CEF /* Masonry.h in Headers */,
+				280D36330BAC5715615FF4A8B42D60D6 /* MASUtilities.h in Headers */,
+				3DA5F1D8E51CDD102A871C2F37770C7B /* MASViewAttribute.h in Headers */,
+				EAE8B0895956885A752B173683A0D889 /* MASViewConstraint.h in Headers */,
+				05EA1447EEA0EB669F8DEE73964A7C60 /* NSArray+MASAdditions.h in Headers */,
+				05A040F35BF1C88F869404E1A940B493 /* NSArray+MASShorthandAdditions.h in Headers */,
+				0AF1AD35706D90B1A91F291B899EF8C0 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */,
+				4B0981F9AC628CF5100C50FF4A163A4A /* View+MASAdditions.h in Headers */,
+				E7CA20228B3583F41927813EE904CAD3 /* View+MASShorthandAdditions.h in Headers */,
+				8B92011C9373001132C8148BFC8F50B3 /* ViewController+MASAdditions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		344B42058B9335D7CEADE6D6BCCA23FC /* FMCollectionLayout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DF263CA99D3D2FFCEF138830F4BD70DF /* Build configuration list for PBXNativeTarget "FMCollectionLayout" */;
+			buildConfigurationList = 58257332335C14F80F852667E29E470C /* Build configuration list for PBXNativeTarget "FMCollectionLayout" */;
 			buildPhases = (
-				5B2D9C8D266C26BDF8E3BD9BE09CBABF /* Headers */,
-				D5F9C7792DFA4FFCD81873446357841A /* Sources */,
-				2D45B7DDF4282946D9F83DE9353A8A4C /* Frameworks */,
-				A52CDF93646C8B8C684C52478FB31A94 /* Resources */,
+				1A0E71E5687EC4377AAE21F992FFC9A8 /* Headers */,
+				EEACA866624ED89901AECE1900D611C8 /* Sources */,
+				11F251C9C48E98B9DDA4EFEDC3E81A98 /* Frameworks */,
+				578C8A06CC4A1058AF15B46BC2C6BA38 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -356,19 +532,38 @@
 			productReference = C050C976EDAD4562560629676C0E0B47 /* FMCollectionLayout.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8C1DD06EB61CC1E34EB3E0C987479231 /* Pods-FMCollectionLayout_Example */ = {
+		55AF53E6C77A10ED4985E04D74A8878E /* Masonry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97212403B54DC3406151A6673A597384 /* Build configuration list for PBXNativeTarget "Pods-FMCollectionLayout_Example" */;
+			buildConfigurationList = 87FD40BD683E3BD044AA4D1B5CA58652 /* Build configuration list for PBXNativeTarget "Masonry" */;
 			buildPhases = (
-				4F2E49BC141B28D1C401E07A4189892D /* Headers */,
-				104D7581B037B5625E4A3ABFB35E2FC7 /* Sources */,
-				AA74F41063EA2EED429DC1CE654A239E /* Frameworks */,
-				622D3EB4C2471536712F5E2F9E386BCB /* Resources */,
+				7B04ACBA4522760CA66A5D4AFA498F81 /* Headers */,
+				038B428AD06C5A47FAF2BEFE16C6DC16 /* Sources */,
+				5E047F76604659BF1B2099B2C412AC93 /* Frameworks */,
+				895ED1B8779C1D82DF681CBFF67AC570 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6A86D6B1240BD2B65CD360F9070F82A0 /* PBXTargetDependency */,
+			);
+			name = Masonry;
+			productName = Masonry;
+			productReference = 1FFED36A657123030ABB700256D73F15 /* Masonry.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8C1DD06EB61CC1E34EB3E0C987479231 /* Pods-FMCollectionLayout_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 957C77CBBBDEE355E6A0CB7573ADC799 /* Build configuration list for PBXNativeTarget "Pods-FMCollectionLayout_Example" */;
+			buildPhases = (
+				7664A466E556C042AA3182C22E1B6BFB /* Headers */,
+				09D6D7B1D9084886728008988CF42EC8 /* Sources */,
+				D2D017713A738558E84436223AF9022B /* Frameworks */,
+				84CE38D92B4A63032092248813FB77A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04A07A38CDAD98D0DF5EE899A5049B04 /* PBXTargetDependency */,
+				E3E7FB67C602C5A301C4D3C8336FA560 /* PBXTargetDependency */,
 			);
 			name = "Pods-FMCollectionLayout_Example";
 			productName = "Pods-FMCollectionLayout_Example";
@@ -412,11 +607,12 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 44C70BDCB531DDB12867F3584730C7AA /* Products */;
+			productRefGroup = 52C4CEB8C751D3A46B2C6C985EEECAC8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				344B42058B9335D7CEADE6D6BCCA23FC /* FMCollectionLayout */,
+				55AF53E6C77A10ED4985E04D74A8878E /* Masonry */,
 				8C1DD06EB61CC1E34EB3E0C987479231 /* Pods-FMCollectionLayout_Example */,
 				F4A49135EC6F3DB25883F26773877657 /* Pods-FMCollectionLayout_Tests */,
 			);
@@ -424,7 +620,21 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		622D3EB4C2471536712F5E2F9E386BCB /* Resources */ = {
+		578C8A06CC4A1058AF15B46BC2C6BA38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84CE38D92B4A63032092248813FB77A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895ED1B8779C1D82DF681CBFF67AC570 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -438,21 +648,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A52CDF93646C8B8C684C52478FB31A94 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		104D7581B037B5625E4A3ABFB35E2FC7 /* Sources */ = {
+		038B428AD06C5A47FAF2BEFE16C6DC16 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				511F193B7862E201886987022158E453 /* Pods-FMCollectionLayout_Example-dummy.m in Sources */,
+				7BFF65958F014760B6AC4742824892EB /* MASCompositeConstraint.m in Sources */,
+				E8DD5D1D406150E1C80AD015271B6848 /* MASConstraint.m in Sources */,
+				78B2727EE5D693F58D019DB098005101 /* MASConstraintMaker.m in Sources */,
+				8539B851E01A58467BE49CA3FA77223C /* MASLayoutConstraint.m in Sources */,
+				1972E85F0FCD0F3EAF28ED7CD036286E /* Masonry-dummy.m in Sources */,
+				297A3627CF2F032CBFDC61D1A3786E63 /* MASViewAttribute.m in Sources */,
+				B7D645EC004610E8A581E532D28771EC /* MASViewConstraint.m in Sources */,
+				098630ECDB64ED7B89F5F687C82B4AC3 /* NSArray+MASAdditions.m in Sources */,
+				C0861ADB4C5FA30F4F9E051F7638A264 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				A35FBEEC7D088AEC05297E8292A32C77 /* View+MASAdditions.m in Sources */,
+				0967598607D521318F69D7D39D517B20 /* ViewController+MASAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09D6D7B1D9084886728008988CF42EC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				021A2C2BA709826E06C16A3BF746877A /* Pods-FMCollectionLayout_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,47 +685,89 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D5F9C7792DFA4FFCD81873446357841A /* Sources */ = {
+		EEACA866624ED89901AECE1900D611C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C30D6A6424347ABD0004B576 /* FMCollectionLayoutAttributes.m in Sources */,
-				C30D6A7824347ABD0004B576 /* FMCollectionViewLayout.m in Sources */,
-				C30D6A7224347ABD0004B576 /* FMSupplementaryFooter.m in Sources */,
-				ABF35F46688B7141A8804CA3B57DE60A /* FMCollectionLayout-dummy.m in Sources */,
-				C30D6A6E24347ABD0004B576 /* FMSupplementaryBackground.m in Sources */,
-				C30D6A6F24347ABD0004B576 /* FMLayoutDynamicSection.m in Sources */,
-				C30D6A6824347ABD0004B576 /* FMCollectionViewElement.m in Sources */,
-				C30D6A6524347ABD0004B576 /* FMCollectionLayoutView.m in Sources */,
-				C30D6A7724347ABD0004B576 /* FMSupplementaryHeader.m in Sources */,
-				C30D6A7424347ABD0004B576 /* FMLayoutSingleFixedSizeSection.m in Sources */,
-				C30D6A6924347ABD0004B576 /* FMCollectionLayoutBaseSection.m in Sources */,
-				C30D6A7324347ABD0004B576 /* FMCollectionSupplementary.m in Sources */,
-				C30D6A6B24347ABD0004B576 /* FMHorizontalScrollCollCell.m in Sources */,
+				FE8B3F6B9D2630AA2FC20C2456AAE68B /* FMCollectionHorizontalLayout.m in Sources */,
+				BC108FF363756E02EC5608F7F0C23EFF /* FMCollectionLayout-dummy.m in Sources */,
+				31CC8BD84B8C8E0BF16858252156855F /* FMCollectionLayoutAttributes.m in Sources */,
+				8D5ECA4F9DCB7D04A16D585F4AABBEEE /* FMCollectionLayoutBaseSection.m in Sources */,
+				7DAA9063AB2A06A63B4D841672E20D9F /* FMCollectionLayoutView.m in Sources */,
+				646163ED0DF654A4F39B583C9A0EA9EA /* FMCollectionSupplementary.m in Sources */,
+				7ABF85E9767F1F29915DACC146D6D981 /* FMCollectionViewElement.m in Sources */,
+				8891A8B92B6BEEEDDE2AC0E1AF4E52BD /* FMCollectionViewLayout.m in Sources */,
+				A18E608343BB0137947FDE8147DF0625 /* FMHorizontalScrollCollCell.m in Sources */,
+				E3613AE90F9C97F9DB7305E654286F6F /* FMLayoutDynamicSection.m in Sources */,
+				D19FCA17DC89AF29FDDAB12D87C3089D /* FMLayoutHorizontalSection.m in Sources */,
+				5E0272FE8B2EFE585CDD7D1647BB030C /* FMLayoutSingleFixedSizeSection.m in Sources */,
+				C94A29D778A531E898D1638B92AA3468 /* FMSupplementaryBackground.m in Sources */,
+				6E69C82ED21BD2862A4492BC10A33F57 /* FMSupplementaryFooter.m in Sources */,
+				ED7E11C9A7F6117444B891F7E057CF47 /* FMSupplementaryHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		04A07A38CDAD98D0DF5EE899A5049B04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FMCollectionLayout;
+			target = 344B42058B9335D7CEADE6D6BCCA23FC /* FMCollectionLayout */;
+			targetProxy = 192545668803FDF49C48000D07C9CE0B /* PBXContainerItemProxy */;
+		};
 		0C922F328EB20091AE584CB56423D098 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-FMCollectionLayout_Example";
 			target = 8C1DD06EB61CC1E34EB3E0C987479231 /* Pods-FMCollectionLayout_Example */;
 			targetProxy = CF5DF5B1F319AF36CE48FB044E32B14D /* PBXContainerItemProxy */;
 		};
-		6A86D6B1240BD2B65CD360F9070F82A0 /* PBXTargetDependency */ = {
+		E3E7FB67C602C5A301C4D3C8336FA560 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = FMCollectionLayout;
-			target = 344B42058B9335D7CEADE6D6BCCA23FC /* FMCollectionLayout */;
-			targetProxy = 89C1533F6393466B4EF22B3509F0DE8B /* PBXContainerItemProxy */;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = ECB54A3CBB5F9A281E771DA5E2F996B5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		03247511560BFB4C7D3D5EC6E4504A88 /* Release */ = {
+		0B7A79A76486C7603415A36D7E640CEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F1AE82EAB8812535FB83C44262DC41C /* FMCollectionLayout.release.xcconfig */;
+			baseConfigurationReference = AF35FD710DADFAF857B3BD4A96B2DF4A /* Pods-FMCollectionLayout_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FMCollectionLayout_Example/Pods-FMCollectionLayout_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FMCollectionLayout_Example/Pods-FMCollectionLayout_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		43D31C4065788E2E4EA0BC884BB439D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 693AC36300FC9C4EB0A9F4ACB3D5A87B /* FMCollectionLayout.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -587,44 +850,14 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		4D4C346A201E22FA99C0E441B4BFC575 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E85315B7E2E8DF14667B1C3DA0ED0974 /* FMCollectionLayout.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FMCollectionLayout/FMCollectionLayout-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FMCollectionLayout/FMCollectionLayout-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FMCollectionLayout/FMCollectionLayout.modulemap";
-				PRODUCT_MODULE_NAME = FMCollectionLayout;
-				PRODUCT_NAME = FMCollectionLayout;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		554A2A22651309D046D16CD76230D53C /* Debug */ = {
+		5325A6C36B76A3A2FC45DAABCDF1A9EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0EE419B8804140CC8554287BD1ADFE48 /* Pods-FMCollectionLayout_Example.debug.xcconfig */;
 			buildSettings = {
@@ -656,6 +889,38 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		6937BDCA511479ACC614AF0793FFC06E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 419A961AD957E23BAB6A998ED7623134 /* Masonry.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Masonry/Masonry-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Masonry/Masonry.modulemap";
+				PRODUCT_MODULE_NAME = Masonry;
+				PRODUCT_NAME = Masonry;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		78E4E9F81538A27FEBE81A9A9DDFF8C6 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -755,11 +1020,10 @@
 			};
 			name = Debug;
 		};
-		8DB494367F45F8814222CF8AE55D7E2E /* Release */ = {
+		D45B0094A457EE4A52D5D84A8A18BEA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF35FD710DADFAF857B3BD4A96B2DF4A /* Pods-FMCollectionLayout_Example.release.xcconfig */;
+			baseConfigurationReference = F287598D192FA586BD4AECCD85B988A4 /* Masonry.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -769,25 +1033,23 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-FMCollectionLayout_Example/Pods-FMCollectionLayout_Example-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Masonry/Masonry-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FMCollectionLayout_Example/Pods-FMCollectionLayout_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/Masonry/Masonry.modulemap";
+				PRODUCT_MODULE_NAME = Masonry;
+				PRODUCT_NAME = Masonry;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		D6ABEB82A5081BE929009759AC2179AD /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -822,6 +1084,37 @@
 			};
 			name = Debug;
 		};
+		FAE08241BFC266D4806F53CC8D005062 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BAE63666B2ED4179761D33AC9DB789E /* FMCollectionLayout.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FMCollectionLayout/FMCollectionLayout-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FMCollectionLayout/FMCollectionLayout-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FMCollectionLayout/FMCollectionLayout.modulemap";
+				PRODUCT_MODULE_NAME = FMCollectionLayout;
+				PRODUCT_NAME = FMCollectionLayout;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -834,11 +1127,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97212403B54DC3406151A6673A597384 /* Build configuration list for PBXNativeTarget "Pods-FMCollectionLayout_Example" */ = {
+		58257332335C14F80F852667E29E470C /* Build configuration list for PBXNativeTarget "FMCollectionLayout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				554A2A22651309D046D16CD76230D53C /* Debug */,
-				8DB494367F45F8814222CF8AE55D7E2E /* Release */,
+				FAE08241BFC266D4806F53CC8D005062 /* Debug */,
+				43D31C4065788E2E4EA0BC884BB439D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87FD40BD683E3BD044AA4D1B5CA58652 /* Build configuration list for PBXNativeTarget "Masonry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D45B0094A457EE4A52D5D84A8A18BEA5 /* Debug */,
+				6937BDCA511479ACC614AF0793FFC06E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		957C77CBBBDEE355E6A0CB7573ADC799 /* Build configuration list for PBXNativeTarget "Pods-FMCollectionLayout_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5325A6C36B76A3A2FC45DAABCDF1A9EA /* Debug */,
+				0B7A79A76486C7603415A36D7E640CEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -848,15 +1159,6 @@
 			buildConfigurations = (
 				D6ABEB82A5081BE929009759AC2179AD /* Debug */,
 				78E4E9F81538A27FEBE81A9A9DDFF8C6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DF263CA99D3D2FFCEF138830F4BD70DF /* Build configuration list for PBXNativeTarget "FMCollectionLayout" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4D4C346A201E22FA99C0E441B4BFC575 /* Debug */,
-				03247511560BFB4C7D3D5EC6E4504A88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

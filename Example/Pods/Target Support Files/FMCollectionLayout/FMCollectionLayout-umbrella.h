@@ -10,6 +10,21 @@
 #endif
 #endif
 
+#import "FMCollectionHorizontalLayout.h"
+#import "FMCollectionLayoutAttributes.h"
+#import "FMCollectionLayoutBaseSection.h"
+#import "FMCollectionLayoutKit.h"
+#import "FMCollectionLayoutView.h"
+#import "FMCollectionSupplementary.h"
+#import "FMCollectionViewElement.h"
+#import "FMCollectionViewLayout.h"
+#import "FMHorizontalScrollCollCell.h"
+#import "FMLayoutDynamicSection.h"
+#import "FMLayoutHorizontalSection.h"
+#import "FMLayoutSingleFixedSizeSection.h"
+#import "FMSupplementaryBackground.h"
+#import "FMSupplementaryFooter.h"
+#import "FMSupplementaryHeader.h"
 
 FOUNDATION_EXPORT double FMCollectionLayoutVersionNumber;
 FOUNDATION_EXPORT const unsigned char FMCollectionLayoutVersionString[];

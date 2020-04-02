@@ -1,16 +1,23 @@
 PODS:
   - FMCollectionLayout (0.1.0)
+  - Masonry (1.1.0)
 
 DEPENDENCIES:
   - FMCollectionLayout (from `../`)
+  - Masonry
+
+SPEC REPOS:
+  trunk:
+    - Masonry
 
 EXTERNAL SOURCES:
   FMCollectionLayout:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FMCollectionLayout: 97cddbc2007467ff5719a8e24e1d67c9fe17dfe6
+  FMCollectionLayout: d537fd2c639352a98ede116c1495878ec090f07b
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
-PODFILE CHECKSUM: 911e01377a67ec57c323e2c4fe0f1356c7ada0e5
+PODFILE CHECKSUM: e6251340f70c5b0e1a0c896d963b4444e73970c1
 
 COCOAPODS: 1.9.0
