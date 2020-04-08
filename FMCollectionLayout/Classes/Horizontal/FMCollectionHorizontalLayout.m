@@ -22,7 +22,7 @@
     [self handleSection];
 }
 
-- (void)setSection:(FMLayoutSingleFixedSizeSection *)section{
+- (void)setSection:(FMLayoutFixedSection *)section{
     _section = section;
     [self invalidateLayout];
 }

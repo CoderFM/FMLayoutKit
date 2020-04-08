@@ -40,6 +40,7 @@
 
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource{
     if (dataSource == self) {
+        self.externalDataSource = nil;
         [super setDataSource:dataSource];
     } else {
         self.externalDataSource = dataSource;
@@ -68,14 +69,14 @@
     if ([self.externalDataSource respondsToSelector:@selector(collectionView:cellForItemAtIndexPath:)]) {
         return [self.externalDataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
     }
-    FMCollectionLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
+    FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
     UICollectionViewCell *cell = [sectionM dequeueReusableCellForIndexPath:indexPath];
     if ([cell isKindOfClass:[FMHorizontalScrollCollCell class]]) {
         FMHorizontalScrollCollCell *hCell = (FMHorizontalScrollCollCell *)cell;
         __weak typeof(self) weakSelf = self;
         [hCell setConfigurationBlock:^(UICollectionViewCell * _Nonnull hItemCell, NSInteger item) {
-            if (weakSelf.configuration && [weakSelf.configuration respondsToSelector:@selector(configurationCell:indexPath:)]) {
-                [weakSelf.configuration configurationCell:hItemCell indexPath:[NSIndexPath indexPathForItem:item inSection:indexPath.section]];
+            if (weakSelf.configuration && [weakSelf.configuration respondsToSelector:@selector(layoutView:configurationCell:indexPath:)]) {
+                [weakSelf.configuration layoutView:weakSelf configurationCell:hItemCell indexPath:[NSIndexPath indexPathForItem:item inSection:indexPath.section]];
             }
         }];
         [hCell setSelectCellBlock:^(NSInteger item) {
@@ -83,10 +84,11 @@
                 [weakSelf.delegate collectionView:collectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:indexPath.section]];
             }
         }];
-        hCell.section = (FMLayoutSingleFixedSizeSection *)sectionM;
-    }
-    if (self.configuration && [self.configuration respondsToSelector:@selector(configurationCell:indexPath:)]) {
-        [self.configuration configurationCell:cell indexPath:indexPath];
+        hCell.section = (FMLayoutFixedSection *)sectionM;
+    } else {
+        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationCell:indexPath:)]) {
+            [self.configuration layoutView:self configurationCell:cell indexPath:indexPath];
+        }
     }
     return cell;
 }
@@ -95,25 +97,25 @@
     if (self.externalDataSource && [self.externalDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
         return [self.externalDataSource collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
     }
-    FMCollectionLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
+    FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
     if (sectionM.header && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.header.elementKind withReuseIdentifier:NSStringFromClass(sectionM.header.viewClass) forIndexPath:indexPath];
-        if (self.configuration && [self.configuration respondsToSelector:@selector(configurationHeader:indexPath:)]) {
-            [self.configuration configurationHeader:header indexPath:indexPath];
+        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationHeader:indexPath:)]) {
+            [self.configuration layoutView:self configurationHeader:header indexPath:indexPath];
         }
         return header;
     }
     if (sectionM.footer && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
         UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.footer.elementKind withReuseIdentifier:NSStringFromClass(sectionM.footer.viewClass) forIndexPath:indexPath];
-        if (self.configuration && [self.configuration respondsToSelector:@selector(configurationFooter:indexPath:)]) {
-            [self.configuration configurationFooter:footer indexPath:indexPath];
+        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationFooter:indexPath:)]) {
+            [self.configuration layoutView:self configurationFooter:footer indexPath:indexPath];
         }
         return footer;
     }
     if (sectionM.background && [kind isEqualToString:UICollectionElementKindSectionBackground]) {
         UICollectionReusableView *bg = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.background.elementKind withReuseIdentifier:NSStringFromClass(sectionM.background.viewClass) forIndexPath:indexPath];
-        if (self.configuration && [self.configuration respondsToSelector:@selector(configurationSectionBg:indexPath:)]) {
-            [self.configuration configurationSectionBg:bg indexPath:indexPath];
+        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationSectionBg:indexPath:)]) {
+            [self.configuration layoutView:self configurationSectionBg:bg indexPath:indexPath];
         }
         return bg;
     }

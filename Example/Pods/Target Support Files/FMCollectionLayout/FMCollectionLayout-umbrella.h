@@ -21,7 +21,7 @@
 #import "FMHorizontalScrollCollCell.h"
 #import "FMLayoutDynamicSection.h"
 #import "FMLayoutHorizontalSection.h"
-#import "FMLayoutSingleFixedSizeSection.h"
+#import "FMLayoutFixedSection.h"
 #import "FMSupplementaryBackground.h"
 #import "FMSupplementaryFooter.h"
 #import "FMSupplementaryHeader.h"

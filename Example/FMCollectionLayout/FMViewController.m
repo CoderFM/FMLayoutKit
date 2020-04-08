@@ -10,96 +10,37 @@
 #import <FMCollectionLayoutKit.h>
 #import <Masonry/Masonry.h>
 
+#import "FMCollectionCustomDecoration.h"
+#import "FMCollectionCustomCell.h"
 
-@interface FMCollectionCustomCell : UICollectionViewCell
+@interface FMViewController ()<FMTeslaLayoutViewDataSource>
 
-@property(nonatomic, weak)UILabel *label;
+@property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
+@property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *sections;
 
-@end
-
-@implementation FMCollectionCustomCell
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-//        NSInteger aRedValue =arc4random() %255;
-//        NSInteger aGreenValue =arc4random() %255;
-//        NSInteger aBlueValue =arc4random() %255;
-//        UIColor*randColor = [UIColor colorWithRed:aRedValue /255.0f green:aGreenValue /255.0f blue:aBlueValue /255.0f alpha:1.0f];
-//        self.contentView.backgroundColor = randColor;
-        
-        self.contentView.backgroundColor = [UIColor cyanColor];
-        
-        UILabel *label = [[UILabel alloc] init];
-        label.numberOfLines = 0;
-        label.textAlignment = NSTextAlignmentCenter;
-        label.text = NSStringFromClass(self.class);
-        [self.contentView addSubview:label];
-        [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.bottom.mas_equalTo(0);
-        }];
-        self.label = label;
-    }
-    return self;
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-//    self.label.frame = self.contentView.bounds;
-}
-
-@end
-
-@interface FMCollectionCustomDecoration : UICollectionReusableView
-
-@end
-
-@implementation FMCollectionCustomDecoration
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        NSInteger aRedValue =arc4random() %255;
-        NSInteger aGreenValue =arc4random() %255;
-        NSInteger aBlueValue =arc4random() %255;
-        UIColor*randColor = [UIColor colorWithRed:aRedValue /255.0f green:aGreenValue /255.0f blue:aBlueValue /255.0f alpha:1.0f];
-        self.backgroundColor = randColor;
-    }
-    return self;
-}
-
-@end
-
-@interface FMViewController ()<FMCollectionLayoutViewConfigurationDelegate>
-
-@property(nonatomic, strong)NSMutableArray<FMCollectionLayoutBaseSection *> *sections;
-@property(nonatomic, weak)FMCollectionLayoutView *collectionView;
+@property(nonatomic, weak)FMTeslaLayoutView *multiScreen;
 
 @end
 
 @implementation FMViewController
 
-- (FMCollectionLayoutView *)collectionView{
-    if (_collectionView == nil) {
-        FMCollectionLayoutView *collectionView = [[FMCollectionLayoutView alloc] initWithFrame:CGRectZero];
-        collectionView.configuration = self;
-        collectionView.backgroundColor = [UIColor whiteColor];
-        collectionView.bounces = YES;
-        collectionView.alwaysBounceVertical = YES;
-        [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
-        [self.view addSubview:collectionView];
-        _collectionView = collectionView;
+- (FMTeslaLayoutView *)multiScreen{
+    if (_multiScreen == nil) {
+        FMTeslaLayoutView *multi = [[FMTeslaLayoutView alloc] init];
+        multi.dataSource = self;
+        [self.view addSubview:multi];
+        _multiScreen = multi;
     }
-    return _collectionView;
+    return _multiScreen;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.shareSections = [NSMutableArray array];
     self.sections = [NSMutableArray array];
+    
     {
-        FMLayoutSingleFixedSizeSection *section = [FMLayoutSingleFixedSizeSection sectionWithSectionInset:UIEdgeInsetsMake(15, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(15, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
         
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
@@ -111,10 +52,10 @@
         section.itemSize = CGSizeMake(100, 100);
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [self.sections addObject:section];
+        [self.shareSections addObject:section];
     }
     {
-        FMLayoutSingleFixedSizeSection *section = [FMLayoutSingleFixedSizeSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
         
         section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
         section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
@@ -125,22 +66,26 @@
         section.itemSize = CGSizeMake(150, 100);
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [self.sections addObject:section];
+        [self.shareSections addObject:section];
     }
+    
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
-        
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.bottomMargin = 10;
         section.header.type = FMSupplementaryTypeSuspensionAlways;
         section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        [self.shareSections addObject:section];
+    }
+    self.multiScreen.shareSections = self.shareSections;
+    {
+        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
         
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
         
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        section.cellFixedWidth = self.view.bounds.size.width;
+        section.cellFixedWidth = [UIScreen mainScreen].bounds.size.width;
         [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
             return 100 + item * 100;
         }];
@@ -162,7 +107,7 @@
         
         section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
         section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        section.cellFixedWidth = (self.view.bounds.size.width - 10) * 0.5;
+        section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
         [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
             return 100 + item * 30;
         }];
@@ -183,7 +128,7 @@
         
         section.itemDatas = [@[@"1\n1", @"2\n2\n2", @"3", @"2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2\n2\n2", @"2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2"] mutableCopy];
         section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        section.cellFixedWidth = (self.view.bounds.size.width - 10) * 0.5;
+        section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
         [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
             return [section.cellElements firstObject].reuseIdentifier;
         }];
@@ -191,24 +136,45 @@
         section.autoHeightFixedWidth = YES;
         __weak typeof(self) weakSelf = self;
         [section setConfigurationCell:^(FMLayoutDynamicSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger index) {
-            [weakSelf configurationCell:cell indexPath:[NSIndexPath indexPathForItem:index inSection:section.indexPath.section]];
+//            [weakSelf tesla:nil configurationCell:cell indexPath:[NSIndexPath indexPathForItem:index inSection:section.indexPath.section] isShare:NO multiIndex:0 layoutView:nil];
         }];
         [self.sections addObject:section];
     }
     
-    [self.collectionView.layout setSections:self.sections];
-    [self.collectionView reloadData];
+    {
+        FMLayoutLabelSection *section = [FMLayoutLabelSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+        
+        section.header = [FMSupplementaryHeader supplementaryHeight:30 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
+        section.header.type = FMSupplementaryTypeFixed;
+        section.header.bottomMargin = 10;
+        
+        section.maxLine = 6;
+        section.cellFixedHeight = 40;
+        [section setWidthBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+            return item * 20 + 100;
+        }];
+        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
+        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [self.sections addObject:section];
+    }
+    
+    self.view.backgroundColor = [UIColor cyanColor];
+    
+    self.multiScreen.shareSections = self.shareSections;
+    self.multiScreen.multiSections = @[[self.sections mutableCopy], [self.sections mutableCopy], [self.sections mutableCopy], [self.sections mutableCopy]];
 }
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    self.collectionView.frame = self.view.bounds;
+    self.multiScreen.frame = CGRectMake(0, 100, self.view.bounds.size.width, self.view.bounds.size.height - 100);
 }
 
-- (void)configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 4) {
-        FMCollectionCustomCell *customCell = (FMCollectionCustomCell *)cell;
-        customCell.label.text = self.sections[indexPath.section].itemDatas[indexPath.item];
+///配置cell
+- (void)tesla:(FMTeslaLayoutView *)tesla configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
+    if ([cell isKindOfClass:[FMCollectionCustomCell class]]) {
+        FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
+        custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
     }
 }
 

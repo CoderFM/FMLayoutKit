@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMCollectionLayoutBaseSection.h"
+#import "FMLayoutBaseSection.h"
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryFooter.h"
 #import "FMSupplementaryBackground.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @interface FMCollectionViewLayout : UICollectionViewLayout
-@property(nonatomic, strong)NSArray<FMCollectionLayoutBaseSection *> *sections;
+@property(nonatomic, strong)NSArray<FMLayoutBaseSection *> *sections;
+- (void)handleSections;
 @end
 
 NS_ASSUME_NONNULL_END

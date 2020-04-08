@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class FMLayoutSingleFixedSizeSection;
+@class FMLayoutFixedSection;
 @interface FMHorizontalScrollCollCell : UICollectionViewCell
-@property(nonatomic, strong)FMLayoutSingleFixedSizeSection *section;
+@property(nonatomic, strong)FMLayoutFixedSection *section;
 @property(nonatomic, copy)void(^configurationBlock)(UICollectionViewCell *cell, NSInteger item);
 @property(nonatomic, copy)void(^selectCellBlock)(NSInteger item);
 @end

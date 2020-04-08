@@ -1,5 +1,5 @@
 //
-//  FMCollectionLayoutBaseSection.h
+//  FMLayoutBaseSection.h
 //  LiangXinApp
 //
 //  Created by 郑桂华 on 2020/3/20.
@@ -11,10 +11,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class FMSupplementaryHeader, FMSupplementaryFooter, FMSupplementaryBackground, FMCollectionLayoutAttributes;
-@interface FMCollectionLayoutBaseSection : NSObject
+@interface FMLayoutBaseSection : NSObject
 
 @property(nonatomic, weak)UICollectionView *collectionView;
 @property(nonatomic, strong)NSIndexPath *indexPath;
+
+@property(nonatomic, assign)BOOL hasHanble;
 
 @property(nonatomic, strong)FMCollectionLayoutAttributes *bgAttribute;
 @property(nonatomic, strong)FMCollectionLayoutAttributes *headerAttribute;
@@ -31,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)CGFloat lineSpace;///cell行间距
 @property(nonatomic, assign)CGFloat itemSpace;///cell间距
-@property(nonatomic, assign)NSInteger column;///cell列数
+@property(nonatomic, assign)NSInteger column;///cell列数   如果是子类横向可滚动的  则该参数是最大行数
 
 @property(nonatomic, strong)NSMutableDictionary *columnHeights;///每一列的高度缓存
 

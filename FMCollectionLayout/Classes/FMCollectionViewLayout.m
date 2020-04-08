@@ -7,7 +7,7 @@
 //
 
 #import "FMCollectionViewLayout.h"
-#import "FMCollectionLayoutBaseSection.h"
+#import "FMLayoutBaseSection.h"
 #import "FMCollectionSupplementary.h"
 #import "FMCollectionLayoutAttributes.h"
 
@@ -23,7 +23,7 @@
     [self handleSections];
 }
 
-- (void)setSections:(NSArray<FMCollectionLayoutBaseSection *> *)sections{
+- (void)setSections:(NSArray<FMLayoutBaseSection *> *)sections{
     _sections = sections;
     [self invalidateLayout];
 }
@@ -32,8 +32,11 @@
     [self registerSections];
     CGFloat sectionOffset = 0;
     for (int i = 0; i < self.sections.count; i++) {
-        FMCollectionLayoutBaseSection *section = self.sections[i];
-        
+        FMLayoutBaseSection *section = self.sections[i];
+        if (section.hasHanble) {
+            sectionOffset += section.sectionHeight;
+            continue;
+        }
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
         section.indexPath = sectionIndexPath;
         
@@ -54,11 +57,12 @@
             sectionOffset = section.sectionOffset + section.sectionHeight;
         }
         [section prepareBackground];
+        section.hasHanble = YES;
     }
 }
 
 - (void)registerSections{
-    for (FMCollectionLayoutBaseSection *section in self.sections) {
+    for (FMLayoutBaseSection *section in self.sections) {
         section.collectionView = self.collectionView;
         
         if (section.header) {
@@ -76,7 +80,7 @@
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{
     NSMutableArray<UICollectionViewLayoutAttributes *> *attrs = [NSMutableArray array];
-    for (FMCollectionLayoutBaseSection *section in self.sections) {
+    for (FMLayoutBaseSection *section in self.sections) {
         if ([section intersectsRect:rect]) {
             if (section.headerAttribute) {
                 UICollectionViewLayoutAttributes *showHeaderAttr = [section showHeaderLayout];
@@ -99,18 +103,27 @@
                     [attrs addObject:item];
                 }
             }
+        } else {
+            if (section.header.type == FMSupplementaryTypeSuspensionAlways) {
+                if (section.headerAttribute) {
+                    UICollectionViewLayoutAttributes *showHeaderAttr = [section showHeaderLayout];
+                    if (CGRectIntersectsRect(rect, showHeaderAttr.frame)) {
+                        [attrs addObject:showHeaderAttr];
+                    }
+                }
+            }
         }
     }
     return attrs;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
-    FMCollectionLayoutBaseSection *section = self.sections[indexPath.section];
+    FMLayoutBaseSection *section = self.sections[indexPath.section];
     return section.itemsAttribute[indexPath.item];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
-    FMCollectionLayoutBaseSection *section = self.sections[indexPath.section];
+    FMLayoutBaseSection *section = self.sections[indexPath.section];
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [section showHeaderLayout];
     } else if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]){
@@ -128,7 +141,7 @@
     BOOL change = !CGRectEqualToRect(self.collectionView.bounds, newBounds);
     NSMutableArray *headerIndexPaths = [NSMutableArray array];
     NSMutableArray *itemIndexPaths = [NSMutableArray array];
-    for (FMCollectionLayoutBaseSection *section in self.sections) {
+    for (FMLayoutBaseSection *section in self.sections) {
         if ([section intersectsRect:newBounds]) {
             if (section.header.type == FMSupplementaryTypeSuspension) {
                 [headerIndexPaths addObject:section.indexPath];
@@ -155,7 +168,7 @@
 }
 
 - (CGSize)collectionViewContentSize{
-    FMCollectionLayoutBaseSection *section = [self.sections lastObject];
+    FMLayoutBaseSection *section = [self.sections lastObject];
     return CGSizeMake(self.collectionView.bounds.size.width, section.sectionOffset + section.sectionHeight);
 }
 

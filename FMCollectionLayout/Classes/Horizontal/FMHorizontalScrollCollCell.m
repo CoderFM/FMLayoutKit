@@ -7,7 +7,7 @@
 //
 
 #import "FMHorizontalScrollCollCell.h"
-#import "FMLayoutSingleFixedSizeSection.h"
+#import "FMLayoutFixedSection.h"
 #import "FMSupplementaryFooter.h"
 #import "FMSupplementaryHeader.h"
 #import "FMCollectionHorizontalLayout.h"
@@ -52,15 +52,10 @@
     self.collectionView.frame = self.contentView.bounds;
 }
 
-- (void)setSection:(FMLayoutSingleFixedSizeSection *)section{
+- (void)setSection:(FMLayoutFixedSection *)section{
     _section = section;
     [self.collectionView registerClass:section.cellElement.viewClass forCellWithReuseIdentifier:section.cellElement.reuseIdentifier];
     self.layout.section = section;
-    
-//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-//    layout.itemSize = section.itemSize;
-//    layout.sectionInset = UIEdgeInsetsMake(section.header.bottomMargin, section.sectionInset.left, section.footer.topMargin, section.sectionInset.right);
-//    layout.minimumInteritemSpacing = section.itemSpace;
     [self.collectionView reloadData];
 }
 

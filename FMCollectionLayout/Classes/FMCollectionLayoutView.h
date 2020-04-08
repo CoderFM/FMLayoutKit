@@ -10,13 +10,13 @@
 #import "FMCollectionViewLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class FMCollectionLayoutView;
 @protocol FMCollectionLayoutViewConfigurationDelegate <NSObject>
 @optional
-- (void)configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath;
-- (void)configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath;
-- (void)configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath;
-- (void)configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath;
+- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath;
+- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath;
+- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath;
+- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath;
 @end
 
 @interface FMCollectionLayoutView : UICollectionView

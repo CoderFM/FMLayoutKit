@@ -1,18 +1,18 @@
 //
-//  FMLayoutSingleFixedSizeSection.m
+//  FMLayoutFixedSection.m
 //  FMLayoutKit
 //
 //  Created by 郑桂华 on 2020/4/1.
 //  Copyright © 2020 ZhouFaMing. All rights reserved.
 //
 
-#import "FMLayoutSingleFixedSizeSection.h"
+#import "FMLayoutFixedSection.h"
 #import "FMCollectionLayoutAttributes.h"
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryFooter.h"
 #import "FMHorizontalScrollCollCell.h"
 
-@implementation FMLayoutSingleFixedSizeSection
+@implementation FMLayoutFixedSection
 
 - (void)prepareItems{
     if (self.isHorizontalCanScroll) {

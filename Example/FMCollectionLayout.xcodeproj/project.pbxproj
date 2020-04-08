@@ -23,6 +23,8 @@
 		65505F4F4E3E60C6AAB9F202 /* Pods_FMCollectionLayout_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7678793EBD835BAAC2280D /* Pods_FMCollectionLayout_Example.framework */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */; };
+		C3D9F411243DDD7C001468AC /* FMCollectionCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */; };
 		CBAFBCD534CE3E52C7B2FB3B /* Pods_FMCollectionLayout_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8EED13D9C636902F07B9F2 /* Pods_FMCollectionLayout_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,10 @@
 		814C1CFE11B651653505FCBC /* Pods-FMCollectionLayout_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FMCollectionLayout_Tests.release.xcconfig"; path = "Target Support Files/Pods-FMCollectionLayout_Tests/Pods-FMCollectionLayout_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8ECAB7196EC7D29871C3F8BD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C3D9F40C243DDD49001468AC /* FMCollectionCustomDecoration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomDecoration.h; sourceTree = "<group>"; };
+		C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCollectionCustomDecoration.m; sourceTree = "<group>"; };
+		C3D9F40F243DDD7C001468AC /* FMCollectionCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomCell.h; sourceTree = "<group>"; };
+		C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCollectionCustomCell.m; sourceTree = "<group>"; };
 		D1DC6BFEF2497216B40161A5 /* Pods-FMCollectionLayout_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FMCollectionLayout_Tests.debug.xcconfig"; path = "Target Support Files/Pods-FMCollectionLayout_Tests/Pods-FMCollectionLayout_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAD8D4C8B539F812A3BC9AF8 /* Pods-FMCollectionLayout_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FMCollectionLayout_Example.release.xcconfig"; path = "Target Support Files/Pods-FMCollectionLayout_Example/Pods-FMCollectionLayout_Example.release.xcconfig"; sourceTree = "<group>"; };
 		FD8EED13D9C636902F07B9F2 /* Pods_FMCollectionLayout_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FMCollectionLayout_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +143,10 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* FMViewController.h */,
 				6003F5A6195388D20070C39A /* FMViewController.m */,
+				C3D9F40C243DDD49001468AC /* FMCollectionCustomDecoration.h */,
+				C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */,
+				C3D9F40F243DDD7C001468AC /* FMCollectionCustomCell.h */,
+				C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -372,6 +382,8 @@
 				6003F59E195388D20070C39A /* FMAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* FMViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */,
+				C3D9F411243DDD7C001468AC /* FMCollectionCustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,11 +9,13 @@
 #ifndef FMCollectionLayoutKit_h
 #define FMCollectionLayoutKit_h
 
+#import "FMTeslaLayoutView.h"
 #import "FMCollectionLayoutView.h"
 #import "FMCollectionViewLayout.h"
 #import "FMCollectionLayoutAttributes.h"
-#import "FMLayoutSingleFixedSizeSection.h"
+#import "FMLayoutFixedSection.h"
 #import "FMLayoutDynamicSection.h"
+#import "FMLayoutLabelSection.h"
 #import "FMCollectionSupplementary.h"
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryFooter.h"

@@ -6,13 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FMLayoutSingleFixedSizeSection.h"
+#import "FMLayoutFixedSection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FMCollectionHorizontalLayout : UICollectionViewLayout
 
-@property(nonatomic, weak)FMLayoutSingleFixedSizeSection *section;
+@property(nonatomic, weak)FMLayoutFixedSection *section;
 
 @end
 

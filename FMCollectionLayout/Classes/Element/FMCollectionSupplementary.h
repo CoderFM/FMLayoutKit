@@ -10,17 +10,25 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, FMSupplementaryType) {/// 目前仅支持header悬浮
-    FMSupplementaryTypeFixed, ///跟着滚动
-    FMSupplementaryTypeSuspension,///悬浮在顶部  跟着section动
-    FMSupplementaryTypeSuspensionAlways///悬浮在顶部  不跟随section动   如果出现多个可能会被覆盖
+    ///跟着滚动
+    FMSupplementaryTypeFixed,
+    ///悬浮在顶部  跟着section动
+    FMSupplementaryTypeSuspension,
+    ///悬浮在顶部  不跟随section动   如果出现多个可能会被覆盖
+    FMSupplementaryTypeSuspensionAlways
 };
 
 typedef NS_ENUM(NSInteger, FMSupplementaryZIndex) {
-    FMSupplementaryZIndexBg = -9999, ///最底层   头部  底部   Item的下方
-    FMSupplementaryZIndexBackOfItem = -1,///Item的下方
-    FMSupplementaryZIndexAuto = 0,/// 自动悬浮可能会被覆盖
-    FMSupplementaryZIndexFrontOfItem = 1, /// Item的上方
-    FMSupplementaryZIndexFrontAlways = 9999 /// 最最上方
+    ///最底层   头部  底部   Item的下方
+    FMSupplementaryZIndexBg = -9999,
+    ///Item的下方
+    FMSupplementaryZIndexBackOfItem = -1,
+    /// 自动悬浮可能会被覆盖
+    FMSupplementaryZIndexAuto = 0,
+    /// Item的上方
+    FMSupplementaryZIndexFrontOfItem = 1,
+    /// 最最上方
+    FMSupplementaryZIndexFrontAlways = 9999
 };
 
 NS_ASSUME_NONNULL_BEGIN

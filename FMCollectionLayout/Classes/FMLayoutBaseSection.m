@@ -1,31 +1,40 @@
 //
-//  FMCollectionLayoutBaseSection.m
+//  FMLayoutBaseSection.m
 //  LiangXinApp
 //
 //  Created by 郑桂华 on 2020/3/20.
 //  Copyright © 2020 ZhouFaMing. All rights reserved.
 //
 
-#import "FMCollectionLayoutBaseSection.h"
+#import "FMLayoutBaseSection.h"
 #import "FMSupplementaryFooter.h"
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryBackground.h"
 #import "FMCollectionLayoutAttributes.h"
 
-@interface FMCollectionLayoutBaseSection ()
+@interface FMLayoutBaseSection ()
 
 @end
 
-@implementation FMCollectionLayoutBaseSection
+@implementation FMLayoutBaseSection
 
 + (instancetype)sectionWithSectionInset:(UIEdgeInsets)inset itemSpace:(CGFloat)itemSpace lineSpace:(CGFloat)lineSpace column:(NSInteger)column{
-    FMCollectionLayoutBaseSection *section = [[self alloc] init];
+    FMLayoutBaseSection *section = [[self alloc] init];
     section.sectionInset = inset;
     section.itemSpace = itemSpace;
     section.lineSpace = lineSpace;
     section.column = column;
     [section resetColumnHeights];
     return section;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.itemDatas = [NSMutableArray array];
+    }
+    return self;
 }
 
 - (BOOL)intersectsRect:(CGRect)rect{
@@ -133,7 +142,7 @@
 }
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath{
-    @throw [NSException exceptionWithName:@"child class must implementation this method" reason:@"FMCollectionLayoutBaseSection" userInfo:nil];
+    @throw [NSException exceptionWithName:@"child class must implementation this method" reason:@"FMLayoutBaseSection" userInfo:nil];
 }
 - (void)registerCells{
     
