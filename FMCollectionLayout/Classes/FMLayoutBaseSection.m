@@ -43,14 +43,14 @@
 
 - (void)prepareHeader{
     FMCollectionLayoutAttributes *header = [FMCollectionLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:self.indexPath];
-    header.frame = CGRectMake(self.sectionInset.left, self.sectionInset.top + self.sectionOffset, self.collectionView.bounds.size.width - self.sectionInset.left - self.sectionInset.right, self.header.height);
+    header.frame = CGRectMake(self.sectionInset.left + self.header.inset.left, self.sectionInset.top + self.header.inset.top + self.sectionOffset, self.collectionView.bounds.size.width - self.sectionInset.left- self.header.inset.left - self.sectionInset.right - self.header.inset.right, self.header.height);
     header.zIndex = self.header.zIndex;
     self.headerAttribute = header;
 }
 
 - (void)prepareFooter{
     FMCollectionLayoutAttributes *footer = [FMCollectionLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:self.indexPath];
-    footer.frame = CGRectMake(self.sectionInset.left, self.sectionOffset + self.sectionInset.top + self.header.height + self.header.bottomMargin + [self getColumnMaxHeight] + self.footer.topMargin, self.collectionView.bounds.size.width - self.sectionInset.left - self.sectionInset.right, self.footer.height);
+    footer.frame = CGRectMake(self.sectionInset.left + self.footer.inset.left, self.sectionOffset + self.sectionInset.top + self.footer.inset.top + self.header.height + self.header.bottomMargin + [self getColumnMaxHeight] + self.footer.topMargin, self.collectionView.bounds.size.width - self.sectionInset.left - self.footer.inset.left - self.sectionInset.right - self.footer.inset.right, self.footer.height);
     footer.zIndex = self.footer.zIndex;
     self.footerAttribute = footer;
 }

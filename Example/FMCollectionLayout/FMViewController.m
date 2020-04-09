@@ -12,14 +12,15 @@
 
 #import "FMCollectionCustomDecoration.h"
 #import "FMCollectionCustomCell.h"
+#import "FMCollectionNavTitleView.h"
 
-@interface FMViewController ()<FMTeslaLayoutViewDataSource>
+@interface FMViewController ()<FMTeslaLayoutViewDataSource, FMTeslaLayoutViewDelegate>
 
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *sections;
 
 @property(nonatomic, weak)FMTeslaLayoutView *multiScreen;
-
+@property(nonatomic, weak)FMCollectionNavTitleView *navTitleView;
 @end
 
 @implementation FMViewController
@@ -28,10 +29,18 @@
     if (_multiScreen == nil) {
         FMTeslaLayoutView *multi = [[FMTeslaLayoutView alloc] init];
         multi.dataSource = self;
+        multi.delegate = self;
         [self.view addSubview:multi];
         _multiScreen = multi;
     }
     return _multiScreen;
+}
+
+- (void)setNavTitleView:(FMCollectionNavTitleView *)navTitleView{
+    _navTitleView = navTitleView;
+    [navTitleView setClickBlock:^(NSInteger tag) {
+        [self.multiScreen scrollToIndex:tag animated:YES];
+    }];
 }
 
 - (void)viewDidLoad {
@@ -45,6 +54,7 @@
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
         section.header.type = FMSupplementaryTypeSuspension;
+        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
@@ -71,12 +81,14 @@
     
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
-        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionNavTitleView class]];
         section.header.type = FMSupplementaryTypeSuspensionAlways;
         section.header.zIndex = FMSupplementaryZIndexFrontAlways;
         [self.shareSections addObject:section];
     }
     self.multiScreen.shareSections = self.shareSections;
+    
+    
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
         
@@ -136,6 +148,8 @@
         section.autoHeightFixedWidth = YES;
         __weak typeof(self) weakSelf = self;
         [section setConfigurationCell:^(FMLayoutDynamicSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger index) {
+            FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
+            custom.label.text = section.itemDatas[index];
 //            [weakSelf tesla:nil configurationCell:cell indexPath:[NSIndexPath indexPathForItem:index inSection:section.indexPath.section] isShare:NO multiIndex:0 layoutView:nil];
         }];
         [self.sections addObject:section];
@@ -172,10 +186,20 @@
 
 ///配置cell
 - (void)tesla:(FMTeslaLayoutView *)tesla configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
-    if ([cell isKindOfClass:[FMCollectionCustomCell class]]) {
-        FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
-        custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+//    if ([cell isKindOfClass:[FMCollectionCustomCell class]]) {
+//        FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
+//        custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+//    }
+}
+
+- (void)tesla:(FMTeslaLayoutView *)tesla configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
+    if ([header isKindOfClass:[FMCollectionNavTitleView class]]) {
+        self.navTitleView = header;
     }
+}
+
+- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index{
+    [self.navTitleView selectWithIndex:index];
 }
 
 @end

@@ -14,8 +14,6 @@ static NSString *const UICollectionElementKindSectionBackground = @"UICollection
 
 @interface FMSupplementaryBackground : FMCollectionSupplementary
 
-@property(nonatomic, assign)UIEdgeInsets inset;
-
 + (instancetype)bgWithViewClass:(Class)viewClass;
 
 @end

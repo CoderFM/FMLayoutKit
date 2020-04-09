@@ -94,6 +94,7 @@
 - (FMCollectionLayoutView *)shareLayoutView{
     if (_shareLayoutView == nil) {
         _shareLayoutView = [[FMCollectionLayoutView alloc] init];
+        _shareLayoutView.backgroundColor = [UIColor clearColor];
         _shareLayoutView.delegate = self;
         _shareLayoutView.configuration = self;
     }
@@ -152,7 +153,7 @@
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
         [self.scrollView addSubview:collectionView];
         
-        NSMutableArray *sections = self.multiSections[i];
+        NSMutableArray *sections = [self.multiSections[i] mutableCopy];
         FMLayoutBaseSection *section = [[FMLayoutBaseSection alloc] init];
         section.hasHanble = YES;
         section.sectionHeight = shareHeight;
@@ -182,6 +183,9 @@
 }
 
 - (void)scrollStart{
+    if (!self.scrollView.tracking) {
+        self.userInteractionEnabled = NO;
+    }
     [self.shareLayoutView removeFromSuperview];
     CGRect frame = self.shareLayoutView.frame;
     frame.origin.y =  - self.currentLayoutView.contentOffset.y;
@@ -194,9 +198,14 @@
 }
 
 - (void)scrollEnd{
+    self.userInteractionEnabled = YES;
     NSInteger index = self.scrollView.contentOffset.x / self.scrollView.bounds.size.width;
     self.currentLayoutView = self.layoutViews[index];
     [self.shareLayoutView removeFromSuperview];
+    
+    if ([self.delegate respondsToSelector:@selector(tesla:didScrollEnd:)]) {
+        [self.delegate tesla:self didScrollEnd:index];
+    }
     
     CGFloat y = self.currentLayoutView.contentOffset.y;
     if (y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionHeight) {
@@ -218,7 +227,7 @@
     if ([self.dataSource respondsToSelector:@selector(tesla:configurationCell:indexPath:isShare:multiIndex:layoutView:)]) {
         BOOL share;
         NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex;
+        NSInteger multiIndex = 0;
         if (layoutView == self.shareLayoutView) {
             share = YES;
         } else {
@@ -233,7 +242,7 @@
     if ([self.dataSource respondsToSelector:@selector(tesla:configurationHeader:indexPath:isShare:multiIndex:layoutView:)]) {
         BOOL share;
         NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex;
+        NSInteger multiIndex = 0;
         if (layoutView == self.shareLayoutView) {
             share = YES;
         } else {
@@ -248,7 +257,7 @@
     if ([self.dataSource respondsToSelector:@selector(tesla:configurationFooter:indexPath:isShare:multiIndex:layoutView:)]) {
         BOOL share;
         NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex;
+        NSInteger multiIndex = 0;
         if (layoutView == self.shareLayoutView) {
             share = YES;
         } else {
@@ -263,7 +272,7 @@
     if ([self.dataSource respondsToSelector:@selector(tesla:configurationBg:indexPath:isShare:multiIndex:layoutView:)]) {
         BOOL share;
         NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex;
+        NSInteger multiIndex = 0;
         if (layoutView == self.shareLayoutView) {
             share = YES;
         } else {
@@ -279,7 +288,7 @@
     if ([self.delegate respondsToSelector:@selector(tesla:didSelectIndexPath:isShare:multiIndex:layoutView:)]) {
         BOOL share;
         NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex;
+        NSInteger multiIndex = 0;
         if (collectionView == self.shareLayoutView) {
             share = YES;
         } else {
@@ -287,7 +296,7 @@
             multiIndex = [self.layoutViews indexOfObject:collectionView];
             lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section - 1];
         }
-        [self.delegate tesla:self didSelectIndexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:collectionView];
+        [self.delegate tesla:self didSelectIndexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:(FMCollectionLayoutView *)collectionView];
     }
 }
 
@@ -321,6 +330,14 @@
 }
 
 #pragma mark -------  scrollView  delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == self.scrollView) {
+        if ([self.delegate respondsToSelector:@selector(tesla:scrollViewDidScroll:)]) {
+            [self.delegate tesla:self scrollViewDidScroll:scrollView];
+        }
+    }
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if (scrollView == self.scrollView) {
         [self scrollStart];
@@ -329,6 +346,12 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     if (scrollView == self.scrollView) {
+        [self scrollEnd];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (!decelerate) {
         [self scrollEnd];
     }
 }

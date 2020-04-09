@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 ///点击事件
 - (void)tesla:(FMTeslaLayoutView *)tesla didSelectIndexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
+///滚动结束事件
+- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index;
+///滚动事件
+- (void)tesla:(FMTeslaLayoutView *)tesla scrollViewDidScroll:(UIScrollView *)scrollView;
 @end
 
 @protocol FMTeslaLayoutViewDataSource <NSObject>
@@ -21,11 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///配置cell
 - (void)tesla:(FMTeslaLayoutView *)tesla configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
 ///配置header
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationHeader:(UICollectionReusableView *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
+- (void)tesla:(FMTeslaLayoutView *)tesla configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
 ///配置footer
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationFooter:(UICollectionReusableView *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
+- (void)tesla:(FMTeslaLayoutView *)tesla configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
 ///配置bg
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationBg:(UICollectionReusableView *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
+- (void)tesla:(FMTeslaLayoutView *)tesla configurationBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
 @end
 
 

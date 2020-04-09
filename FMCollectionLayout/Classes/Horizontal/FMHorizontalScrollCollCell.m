@@ -78,4 +78,10 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (self.section.scrollDidScrollBlock) {
+        self.section.scrollDidScrollBlock(scrollView.contentOffset.x, scrollView.contentSize.width);
+    }
+}
+
 @end

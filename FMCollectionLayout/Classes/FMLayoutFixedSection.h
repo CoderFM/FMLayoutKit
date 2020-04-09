@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)FMCollectionViewElement *cellElement;///固定分组
 
 @property(nonatomic, assign)BOOL isHorizontalCanScroll;///横向布局可滚动   插入一个cell+collection方式
+@property(nonatomic, copy)void(^scrollDidScrollBlock)(CGFloat offsetX, CGFloat contentWidth);///内嵌collectionView横向滚动的偏移以及大小
 @end
 
 NS_ASSUME_NONNULL_END

@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)FMSupplementaryType type;/// 显示方式  是悬浮  还是跟着滚动   默认跟着滚动
 @property(nonatomic, assign)FMSupplementaryZIndex zIndex;///视图层级   最上方还是最下方等
+@property(nonatomic, assign)UIEdgeInsets inset;///内边距
 
 @property(nonatomic, copy, readonly)NSString *elementKind; // UICollectionElementKindSectionFooter
 

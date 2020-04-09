@@ -8,6 +8,8 @@
 
 #import "FMAppDelegate.h"
 
+/// pod trunk push FMCollectionLayout.podspec --allow-warnings
+
 @implementation FMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
