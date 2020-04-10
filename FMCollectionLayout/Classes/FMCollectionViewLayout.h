@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FMCollectionViewLayout : UICollectionViewLayout
 @property(nonatomic, strong)NSArray<FMLayoutBaseSection *> *sections;
 - (void)handleSections;
+- (void)setFirstSectionOffsetY:(CGFloat)offsetY;
 @end
 
 NS_ASSUME_NONNULL_END

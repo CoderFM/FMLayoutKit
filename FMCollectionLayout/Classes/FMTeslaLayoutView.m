@@ -154,11 +154,7 @@
         [self.scrollView addSubview:collectionView];
         
         NSMutableArray *sections = [self.multiSections[i] mutableCopy];
-        FMLayoutBaseSection *section = [[FMLayoutBaseSection alloc] init];
-        section.hasHanble = YES;
-        section.sectionHeight = shareHeight;
-        [sections insertObject:section atIndex:0];
-        
+        [collectionView.layout setFirstSectionOffsetY:shareHeight];
         [collectionView.layout setSections:sections];
         [collectionView reloadData];
         if (self.currentLayoutView == nil) {
@@ -233,7 +229,7 @@
         } else {
             share = NO;
             multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section - 1];
+            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
         }
         [self.dataSource tesla:self configurationCell:cell indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
     }
@@ -248,7 +244,7 @@
         } else {
             share = NO;
             multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section - 1];
+            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
         }
         [self.dataSource tesla:self configurationHeader:header indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
     }
@@ -263,7 +259,7 @@
         } else {
             share = NO;
             multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section - 1];
+            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
         }
         [self.dataSource tesla:self configurationFooter:footer indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
     }
@@ -278,7 +274,7 @@
         } else {
             share = NO;
             multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section - 1];
+            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
         }
         [self.dataSource tesla:self configurationBg:bg indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
     }
@@ -294,7 +290,7 @@
         } else {
             share = NO;
             multiIndex = [self.layoutViews indexOfObject:collectionView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section - 1];
+            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
         }
         [self.delegate tesla:self didSelectIndexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:(FMCollectionLayoutView *)collectionView];
     }

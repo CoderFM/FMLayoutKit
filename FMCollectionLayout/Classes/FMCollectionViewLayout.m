@@ -11,7 +11,17 @@
 #import "FMCollectionSupplementary.h"
 #import "FMCollectionLayoutAttributes.h"
 
+@interface FMCollectionViewLayout ()
+
+@property(nonatomic, assign)CGFloat firstSectionOffsetY;
+
+@end
+
 @implementation FMCollectionViewLayout
+
+- (void)setFirstSectionOffsetY:(CGFloat)offsetY{
+    _firstSectionOffsetY = offsetY;
+}
 
 - (instancetype)init{
     if (self = [super init]) {
@@ -30,7 +40,7 @@
 
 - (void)handleSections{
     [self registerSections];
-    CGFloat sectionOffset = 0;
+    CGFloat sectionOffset = self.firstSectionOffsetY;
     for (int i = 0; i < self.sections.count; i++) {
         FMLayoutBaseSection *section = self.sections[i];
         if (section.hasHanble) {
