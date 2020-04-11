@@ -69,6 +69,8 @@
 		C3D9F404243D5C5B001468AC /* FMLayoutLabelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F402243D5C5B001468AC /* FMLayoutLabelSection.m */; };
 		C3D9F40A243DD64D001468AC /* FMTeslaLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = C3D9F408243DD64D001468AC /* FMTeslaLayoutView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3D9F40B243DD64D001468AC /* FMTeslaLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F409243DD64D001468AC /* FMTeslaLayoutView.m */; };
+		C3FFC1462441763C0033E038 /* FMLayoutFillSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C3FFC1442441763C0033E038 /* FMLayoutFillSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3FFC1472441763C0033E038 /* FMLayoutFillSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC1452441763C0033E038 /* FMLayoutFillSection.m */; };
 		CE93C54413259B4AC3683B6EB874D466 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312B988EF117AE4DE76A268D970131FE /* UIKit.framework */; };
 		DBD1BF875978A7A2776BF4E1B9BC6285 /* FMCollectionLayout-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EA353929142CADBC733A9FB4D5CA77CA /* FMCollectionLayout-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E230BA7FFD6D97381A214E426B3F9AA9 /* FMLayoutDynamicSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE33EE98EE82C249A4F92A79E675E66 /* FMLayoutDynamicSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -189,6 +191,8 @@
 		C3D9F402243D5C5B001468AC /* FMLayoutLabelSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMLayoutLabelSection.m; path = FMCollectionLayout/Classes/FMLayoutLabelSection.m; sourceTree = "<group>"; };
 		C3D9F408243DD64D001468AC /* FMTeslaLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMTeslaLayoutView.h; path = FMCollectionLayout/Classes/FMTeslaLayoutView.h; sourceTree = "<group>"; };
 		C3D9F409243DD64D001468AC /* FMTeslaLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMTeslaLayoutView.m; path = FMCollectionLayout/Classes/FMTeslaLayoutView.m; sourceTree = "<group>"; };
+		C3FFC1442441763C0033E038 /* FMLayoutFillSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMLayoutFillSection.h; path = FMCollectionLayout/Classes/FMLayoutFillSection.h; sourceTree = "<group>"; };
+		C3FFC1452441763C0033E038 /* FMLayoutFillSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FMLayoutFillSection.m; path = FMCollectionLayout/Classes/FMLayoutFillSection.m; sourceTree = "<group>"; };
 		CC1AC5E99478C267192D9E5C1D82E657 /* FMCollectionLayoutAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutAttributes.h; path = FMCollectionLayout/Classes/FMCollectionLayoutAttributes.h; sourceTree = "<group>"; };
 		D12E9F350C1C8076BE92719B89951AD8 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
 		D2E332A74698A8799CB9FB11309EC080 /* FMCollectionLayout.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = FMCollectionLayout.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -448,6 +452,8 @@
 				C3D9F402243D5C5B001468AC /* FMLayoutLabelSection.m */,
 				4CE33EE98EE82C249A4F92A79E675E66 /* FMLayoutDynamicSection.h */,
 				D39CE0C22AF6F9D36CC6ACD7173F0086 /* FMLayoutDynamicSection.m */,
+				C3FFC1442441763C0033E038 /* FMLayoutFillSection.h */,
+				C3FFC1452441763C0033E038 /* FMLayoutFillSection.m */,
 				C3D9F3DB243D5A5F001468AC /* Element */,
 				C3D9F3E6243D5A5F001468AC /* Horizontal */,
 				0AB93882805A601EC55794DF55261721 /* Pod */,
@@ -498,6 +504,7 @@
 				5DD3F265233A65F4716307E367FADD01 /* FMCollectionLayoutView.h in Headers */,
 				5A73A1C4E63DED4F965E08078F3447E9 /* FMCollectionViewLayout.h in Headers */,
 				E230BA7FFD6D97381A214E426B3F9AA9 /* FMLayoutDynamicSection.h in Headers */,
+				C3FFC1462441763C0033E038 /* FMLayoutFillSection.h in Headers */,
 				C3D9F40A243DD64D001468AC /* FMTeslaLayoutView.h in Headers */,
 				99CD327F93D6ADFB1CAB6BC4CFC7F10A /* FMLayoutFixedSection.h in Headers */,
 			);
@@ -727,6 +734,7 @@
 				C3D9F3F2243D5A5F001468AC /* FMSupplementaryBackground.m in Sources */,
 				C3D9F40B243DD64D001468AC /* FMTeslaLayoutView.m in Sources */,
 				C3D9F3F3243D5A5F001468AC /* FMCollectionSupplementary.m in Sources */,
+				C3FFC1472441763C0033E038 /* FMLayoutFillSection.m in Sources */,
 				C3D9F3F8243D5A5F001468AC /* FMLayoutHorizontalSection.m in Sources */,
 				C3D9F404243D5C5B001468AC /* FMLayoutLabelSection.m in Sources */,
 				8D5ECA4F9DCB7D04A16D585F4AABBEEE /* FMLayoutBaseSection.m in Sources */,

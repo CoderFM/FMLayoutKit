@@ -14,6 +14,8 @@
 #import "FMCollectionCustomCell.h"
 #import "FMCollectionNavTitleView.h"
 
+#import "FMCollViewController.h"
+
 @interface FMViewController ()<FMTeslaLayoutViewDataSource, FMTeslaLayoutViewDelegate>
 
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
@@ -200,6 +202,11 @@
 
 - (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index{
     [self.navTitleView selectWithIndex:index];
+}
+
+- (void)tesla:(FMTeslaLayoutView *)tesla didSelectIndexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
+    FMCollViewController *coll = [[FMCollViewController alloc] init];
+    [self.navigationController pushViewController:coll animated:YES];
 }
 
 @end
