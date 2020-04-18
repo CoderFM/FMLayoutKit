@@ -165,6 +165,7 @@
         section.header.type = FMSupplementaryTypeFixed;
         section.header.bottomMargin = 10;
         
+        section.isSingleLineCanScroll = YES;
         section.maxLine = 6;
         section.cellFixedHeight = 40;
         [section setWidthBlock:^CGFloat(id  _Nonnull section, NSInteger item) {

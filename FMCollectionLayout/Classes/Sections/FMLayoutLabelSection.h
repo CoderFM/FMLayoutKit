@@ -25,6 +25,11 @@ typedef CGFloat(^FMLayoutOverItemBlock)(id section, NSInteger item);
 @property(nonatomic, assign)CGFloat cellMaxWidth;///cell最大宽度  不设置的话  就是collection的宽度减去左右分组内边距
 @property(nonatomic, copy)FMLayoutItemWidthBlock widthBlock;///block返回手动计算的宽度
 @property(nonatomic, copy)FMLayoutOverItemBlock overItemBlock;///block返回手动计算的宽度
+
+
+@property(nonatomic, assign)BOOL isSingleLineCanScroll;
+@property(nonatomic, copy)void(^scrollDidScrollBlock)(CGFloat offsetX, CGFloat contentWidth);///内嵌collectionView横向滚动的偏移以及大小
+
 @end
 
 NS_ASSUME_NONNULL_END

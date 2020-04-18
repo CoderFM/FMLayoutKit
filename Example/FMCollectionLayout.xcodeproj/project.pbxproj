@@ -24,6 +24,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		C32C902A243EB957004B9FAF /* FMCollectionNavTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C9029243EB957004B9FAF /* FMCollectionNavTitleView.m */; };
+		C37D290124495680006530E1 /* FMAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37D290024495680006530E1 /* FMAddViewController.m */; };
 		C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */; };
 		C3D9F411243DDD7C001468AC /* FMCollectionCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */; };
 		C3FFC143244173A10033E038 /* FMCollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC142244173A10033E038 /* FMCollViewController.m */; };
@@ -44,7 +45,7 @@
 		1F7678793EBD835BAAC2280D /* Pods_FMCollectionLayout_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FMCollectionLayout_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2080CE8655BFC608019B5239 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3961E42D1CC3091FC54B1A06 /* FMCollectionLayout.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FMCollectionLayout.podspec; path = ../FMCollectionLayout.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6003F58A195388D20070C39A /* FMCollectionLayout_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FMCollectionLayout_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* FMLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FMLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -70,6 +71,8 @@
 		8ECAB7196EC7D29871C3F8BD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C32C9028243EB957004B9FAF /* FMCollectionNavTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionNavTitleView.h; sourceTree = "<group>"; };
 		C32C9029243EB957004B9FAF /* FMCollectionNavTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCollectionNavTitleView.m; sourceTree = "<group>"; };
+		C37D28FF24495680006530E1 /* FMAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAddViewController.h; sourceTree = "<group>"; };
+		C37D290024495680006530E1 /* FMAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAddViewController.m; sourceTree = "<group>"; };
 		C3D9F40C243DDD49001468AC /* FMCollectionCustomDecoration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomDecoration.h; sourceTree = "<group>"; };
 		C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCollectionCustomDecoration.m; sourceTree = "<group>"; };
 		C3D9F40F243DDD7C001468AC /* FMCollectionCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomCell.h; sourceTree = "<group>"; };
@@ -122,7 +125,7 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* FMCollectionLayout_Example.app */,
+				6003F58A195388D20070C39A /* FMLayout.app */,
 				6003F5AE195388D20070C39A /* FMCollectionLayout_Tests.xctest */,
 			);
 			name = Products;
@@ -151,6 +154,8 @@
 				6003F5A6195388D20070C39A /* FMViewController.m */,
 				C3FFC141244173A10033E038 /* FMCollViewController.h */,
 				C3FFC142244173A10033E038 /* FMCollViewController.m */,
+				C37D28FF24495680006530E1 /* FMAddViewController.h */,
+				C37D290024495680006530E1 /* FMAddViewController.m */,
 				C3D9F40C243DDD49001468AC /* FMCollectionCustomDecoration.h */,
 				C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */,
 				C3D9F40F243DDD7C001468AC /* FMCollectionCustomCell.h */,
@@ -235,7 +240,7 @@
 			);
 			name = FMCollectionLayout_Example;
 			productName = FMCollectionLayout;
-			productReference = 6003F58A195388D20070C39A /* FMCollectionLayout_Example.app */;
+			productReference = 6003F58A195388D20070C39A /* FMLayout.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* FMCollectionLayout_Tests */ = {
@@ -392,6 +397,7 @@
 				C32C902A243EB957004B9FAF /* FMCollectionNavTitleView.m in Sources */,
 				C3FFC143244173A10033E038 /* FMCollViewController.m in Sources */,
 				6003F59E195388D20070C39A /* FMAppDelegate.m in Sources */,
+				C37D290124495680006530E1 /* FMAddViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* FMViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */,
@@ -529,7 +535,7 @@
 				INFOPLIST_FILE = "FMCollectionLayout/FMCollectionLayout-Info.plist";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FMLayout;
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -546,7 +552,7 @@
 				INFOPLIST_FILE = "FMCollectionLayout/FMCollectionLayout-Info.plist";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FMLayout;
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
 			};

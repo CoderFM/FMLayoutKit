@@ -43,11 +43,17 @@
     CGFloat sectionOffset = self.firstSectionOffsetY;
     for (int i = 0; i < self.sections.count; i++) {
         FMLayoutBaseSection *section = self.sections[i];
-        if (section.hasHanble) {
-            sectionOffset += section.sectionHeight;
-            continue;
-        }
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
+        
+        if (self.reLayoutOlnyChanged) {// 只改变变过的
+            if (section.hasHanble) {
+                section.indexPath = sectionIndexPath;
+                section.sectionOffset = sectionOffset;
+                sectionOffset += section.sectionHeight;
+                continue;
+            }
+        }
+        
         section.indexPath = sectionIndexPath;
         
         section.sectionOffset = sectionOffset;
@@ -58,12 +64,12 @@
         if (section.footer) {
             {
                 [section prepareFooter];
-                section.sectionHeight = section.sectionInset.top + section.header.height + section.header.bottomMargin + [section getColumnMaxHeight] + section.footer.height + section.footer.topMargin + section.sectionInset.bottom;
+                section.sectionHeight = section.sectionInset.top + section.header.inset.top +section.header.height + section.header.inset.bottom + section.header.bottomMargin + [section getColumnMaxHeight] + section.footer.inset.top + section.footer.height +  section.footer.topMargin + section.footer.inset.bottom + section.sectionInset.bottom;
                 sectionOffset = CGRectGetMaxY(section.footerAttribute.frame) + section.sectionInset.bottom;
             }
         } else {
             CGFloat itemMaxHeight = [section getColumnMaxHeight];
-            section.sectionHeight = section.sectionInset.top + section.header.height + section.header.bottomMargin + itemMaxHeight + section.sectionInset.bottom;
+            section.sectionHeight = section.sectionInset.top + section.header.inset.top + section.header.height + section.header.inset.bottom + section.header.bottomMargin + itemMaxHeight + section.sectionInset.bottom;
             sectionOffset = section.sectionOffset + section.sectionHeight;
         }
         [section prepareBackground];
@@ -179,7 +185,7 @@
 
 - (CGSize)collectionViewContentSize{
     FMLayoutBaseSection *section = [self.sections lastObject];
-    return CGSizeMake(self.collectionView.bounds.size.width, section.sectionOffset + section.sectionHeight);
+    return CGSizeMake(self.collectionView.bounds.size.width, section.sectionOffset + section.sectionHeight + self.fixedBottomMargin);
 }
 
 - (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath{

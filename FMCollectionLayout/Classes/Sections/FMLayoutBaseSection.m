@@ -11,6 +11,7 @@
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryBackground.h"
 #import "FMCollectionLayoutAttributes.h"
+#import "NSMutableArray+FM.h"
 
 @interface FMLayoutBaseSection ()
 
@@ -26,6 +27,31 @@
     section.column = column;
     [section resetColumnHeights];
     return section;
+}
+
+- (void)setItemDatas:(NSMutableArray *)itemDatas{
+    if (_itemDatas == itemDatas) {
+        return;
+    }
+    _itemDatas = itemDatas;
+    __weak typeof(self) weakSelf = self;
+    [itemDatas listenDidChange:^(NSIndexSet *set, FMSafetyMutableArrayChangeType type) {
+        weakSelf.hasHanble = NO;
+        if (type == FMSafetyMutableArrayChangeAddType) {
+            weakSelf.hanbleItemStart = weakSelf.itemDatas.count - set.count;
+        } else {
+            weakSelf.hanbleItemStart = 0;
+        }
+    }];
+}
+
+- (void)setSectionOffset:(CGFloat)sectionOffset{
+    _sectionOffset = sectionOffset;
+    
+}
+
+- (CGFloat)firstItemStartY{
+    return self.sectionOffset + self.sectionInset.top + self.header.inset.top + self.header.height + self.header.inset.bottom + self.header.bottomMargin;
 }
 
 - (instancetype)init
@@ -108,7 +134,7 @@
 }
 ///获取最小高度的列
 - (NSInteger)getMinHeightColumn{
-    if (self.column == 1) {
+    if (self.columnHeights.allKeys.count == 0) {
         return 0;
     }
     NSInteger column = 0;
@@ -124,6 +150,9 @@
 }
 ///获取最所有列的最大高度
 - (CGFloat)getColumnMaxHeight{
+    if (self.columnHeights.allKeys.count == 0) {
+        return 0;
+    }
     CGFloat maxHeight = [self.columnHeights[@0] floatValue];
     for (int i = 1; i<self.column; i++) {
         CGFloat height = [self.columnHeights[@(i)] integerValue];

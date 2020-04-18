@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak)UICollectionView *collectionView;
 @property(nonatomic, strong)NSIndexPath *indexPath;
 
-@property(nonatomic, assign)BOOL hasHanble;
+@property(nonatomic, assign)BOOL hasHanble;///是否需要重新计算
+@property(nonatomic, assign)NSInteger hanbleItemStart;///重新计算哪一个开始
 
 @property(nonatomic, strong)FMCollectionLayoutAttributes *bgAttribute;
 @property(nonatomic, strong)FMCollectionLayoutAttributes *headerAttribute;
@@ -38,6 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSMutableDictionary *columnHeights;///每一列的高度缓存
 
 @property(nonatomic, strong)NSMutableArray *itemDatas;///cell数据数组
+
+
+@property(nonatomic, assign, readonly)CGFloat firstItemStartY;
+
 
 + (instancetype)sectionWithSectionInset:(UIEdgeInsets)inset itemSpace:(CGFloat)itemSpace lineSpace:(CGFloat)lineSpace column:(NSInteger)column;
 

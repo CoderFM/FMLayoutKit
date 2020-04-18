@@ -27,9 +27,11 @@
         CGFloat itemWidth =  self.cellFixedWidth;
         CGFloat itemHeight = 0;
         if (self.autoHeightFixedWidth) {
-            if (self.deqCellReturnReuseId && self.configurationCell) {
+            if (self.deqCellReturnReuseId) {
                 UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, j) forIndexPath:indexPath];
-                self.configurationCell(self ,cell, j);
+                if (self.configurationCell) {
+                    self.configurationCell(self ,cell, j);
+                }
                 itemHeight = [cell systemLayoutSizeFittingSize:CGSizeMake(itemWidth, MAXFLOAT)].height;
             }
         } else {
@@ -39,7 +41,7 @@
         NSInteger column = [self getMinHeightColumn];
         CGFloat x = self.sectionInset.left + column * (self.itemSpace + itemSize.width);
         CGFloat height = [self.columnHeights[@(column)] floatValue];
-        CGFloat y = self.sectionOffset + self.sectionInset.top + self.header.height + self.header.bottomMargin + (height > 0 ? (height + self.lineSpace) : height);
+        CGFloat y = self.firstItemStartY + (height > 0 ? (height + self.lineSpace) : height);
         itemAttr.frame = CGRectMake(x, y, itemSize.width, itemSize.height);
         [attrs addObject:itemAttr];
         self.columnHeights[@(column)] = @(height + itemSize.height + (height > 0 ? self.lineSpace : 0));

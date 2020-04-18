@@ -9,21 +9,38 @@
 #import "FMCollViewController.h"
 #import <FMCollectionLayoutKit.h>
 #import <Masonry/Masonry.h>
+#import "FMAddViewController.h"
 
 #import "FMCollectionCustomDecoration.h"
 #import "FMCollectionCustomCell.h"
 #import "FMCollectionNavTitleView.h"
 
-@interface FMCollViewController ()<FMCollectionLayoutViewConfigurationDelegate>
+@interface FMCollViewController ()<FMCollectionLayoutViewConfigurationDelegate, UICollectionViewDelegate>
 
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
-
+@property(nonatomic, weak)FMCollectionLayoutView  *collectionView;
 @end
 
 @implementation FMCollViewController
 
+- (void)reloadSection{
+    [self.collectionView reloadSections:[[NSIndexSet alloc] initWithIndex:1]];
+}
+- (void)reloadItem{
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+}
+- (void)reloadAll{
+    [self.collectionView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"刷新分组" style:UIBarButtonItemStyleDone target:self action:@selector(reloadSection)];
+    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"刷新单个" style:UIBarButtonItemStyleDone target:self action:@selector(reloadItem)];
+    UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithTitle:@"刷新全部" style:UIBarButtonItemStyleDone target:self action:@selector(reloadAll)];
+    self.navigationItem.rightBarButtonItems = @[item2, item1, item3];
+    
     self.shareSections = [NSMutableArray array];
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(15, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
@@ -59,6 +76,8 @@
     {
         FMLayoutFillSection *section = [[FMLayoutFillSection alloc] init];
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3",] mutableCopy];
+        
+        section.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
         
         section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
         [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
@@ -113,18 +132,25 @@
     
     FMCollectionLayoutView *view = [[FMCollectionLayoutView alloc] init];
     view.configuration = self;
+    view.delegate = self;
     [view.layout setSections:self.shareSections];
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(0);
     }];
+    self.collectionView = view;
 }
 
 ///配置cell
 - (void)layoutView:(FMCollectionLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath{
     FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
     custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    FMAddViewController *vc = [[FMAddViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

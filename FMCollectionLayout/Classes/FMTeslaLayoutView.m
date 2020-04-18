@@ -7,7 +7,7 @@
 //
 
 #import "FMTeslaLayoutView.h"
-#import <FMCollectionLayoutKit.h>
+#import "FMCollectionLayoutView.h"
 
 @interface FM_ScrollView : UIScrollView
 
@@ -142,7 +142,7 @@
     self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
     
     NSInteger nums = self.multiSections.count;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * nums, self.scrollView.bounds.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * nums, 0);
     for (int i = 0; i<nums; i++) {
         FMCollectionLayoutView *collectionView = [[FMCollectionLayoutView alloc] initWithFrame:CGRectMake(self.scrollView.bounds.size.width * i, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height)];
         collectionView.configuration = self;
@@ -154,6 +154,10 @@
         [self.scrollView addSubview:collectionView];
         
         NSMutableArray *sections = [self.multiSections[i] mutableCopy];
+//        FMLayoutBaseSection *section = [[FMLayoutBaseSection alloc] init];
+//        section.hasHanble = YES;
+//        section.sectionHeight = shareHeight;
+//        [sections insertObject:section atIndex:0];
         [collectionView.layout setFirstSectionOffsetY:shareHeight];
         [collectionView.layout setSections:sections];
         [collectionView reloadData];

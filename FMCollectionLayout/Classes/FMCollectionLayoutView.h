@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FMCollectionLayoutView : UICollectionView
 @property(nonatomic, weak)id<FMCollectionLayoutViewConfigurationDelegate> configuration;
 @property(nonatomic, strong)FMCollectionViewLayout *layout;
-
+@property(nonatomic, assign)BOOL reloaOlnyChanged;
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_UNAVAILABLE;
 
 @end

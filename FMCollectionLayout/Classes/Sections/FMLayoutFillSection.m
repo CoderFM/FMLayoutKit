@@ -24,7 +24,7 @@
         CGSize itemSize = !self.sizeBlock?CGSizeZero:self.sizeBlock(self, j);
         if (attrs.count == 0) {
             CGFloat x = self.sectionInset.left;
-            CGFloat y = self.sectionOffset + self.sectionInset.top + self.header.height + self.header.bottomMargin;
+            CGFloat y = self.firstItemStartY;
             itemAttr.frame = CGRectMake(x, y, itemSize.width, itemSize.height);
 
             maxHeight = itemSize.height;
@@ -32,11 +32,12 @@
             
             CGFloat lastX = 0;
             CGFloat lastY = 0;
-            
+    
             /// 放在右侧寻找最适合
             for (FMCollectionLayoutAttributes *attr in attrs) {
                 CGFloat thisX = CGRectGetMaxX(attr.frame);
                 CGFloat thisY = CGRectGetMinY(attr.frame);
+                
                 if (thisX + itemSize.width > self.collectionView.bounds.size.width) {
                     continue;
                 } else {
@@ -64,6 +65,7 @@
             for (FMCollectionLayoutAttributes *attr in attrs) {
                 CGFloat thisX = CGRectGetMinX(attr.frame);
                 CGFloat thisY = CGRectGetMaxY(attr.frame);
+
                 if (thisX + itemSize.width > self.collectionView.bounds.size.width) {
                     continue;
                 } else {
@@ -88,7 +90,6 @@
                     }
                 }
             }
-            
             CGRect frame = CGRectMake(lastX, lastY, itemSize.width, itemSize.height);
             CGFloat height = CGRectGetMaxY(frame) - self.sectionOffset - self.sectionInset.top - self.header.height - self.header.bottomMargin;
             if (height > maxHeight) {

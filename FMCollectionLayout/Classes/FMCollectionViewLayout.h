@@ -15,6 +15,9 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface FMCollectionViewLayout : UICollectionViewLayout
 @property(nonatomic, strong)NSArray<FMLayoutBaseSection *> *sections;
+///底部固定边距   跟section的inset无关  contentSize会自动加上去
+@property(nonatomic, assign)CGFloat fixedBottomMargin;
+@property(nonatomic, assign)BOOL reLayoutOlnyChanged;
 - (void)handleSections;
 - (void)setFirstSectionOffsetY:(CGFloat)offsetY;
 @end

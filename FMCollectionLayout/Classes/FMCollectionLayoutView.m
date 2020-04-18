@@ -8,6 +8,8 @@
 
 #import "FMCollectionLayoutView.h"
 #import "FMHorizontalScrollCollCell.h"
+#import "FMLayoutFixedSection.h"
+#import "FMLayoutLabelSection.h"
 
 @interface FMCollectionLayoutView ()<UICollectionViewDataSource>
 
@@ -34,6 +36,7 @@
     self = [super initWithFrame:frame collectionViewLayout:self.layout];
     if (self) {
         self.dataSource = self;
+        self.reloaOlnyChanged = YES;
     }
     return self;
 }
@@ -41,14 +44,43 @@
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource{
     if (dataSource == self) {
         self.externalDataSource = nil;
-        [super setDataSource:dataSource];
     } else {
         self.externalDataSource = dataSource;
-        [super setDataSource:dataSource];
     }
+    [super setDataSource:self];
 }
 
+- (void)setReloaOlnyChanged:(BOOL)reloaOlnyChanged{
+    _reloaOlnyChanged = reloaOlnyChanged;
+    self.layout.reLayoutOlnyChanged = reloaOlnyChanged;
+}
 
+- (void)reloadData{
+    [super reloadData];
+}
+
+- (void)reloadSections:(NSIndexSet *)sections{
+    NSArray *layoutSections = [self.layout.sections objectsAtIndexes:sections];
+    for (FMLayoutBaseSection *section in layoutSections) {
+        section.hasHanble = NO;
+        section.hanbleItemStart = 0;
+    }
+    [super reloadSections:sections];
+}
+
+- (void)reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
+    for (NSIndexPath *indexPath in indexPaths) {
+        NSInteger section = indexPath.section;
+        if (section < self.layout.sections.count) {
+            FMLayoutBaseSection *layoutSection = self.layout.sections[section];
+            layoutSection.hasHanble = NO;
+            if (indexPath.item < layoutSection.hanbleItemStart) {
+                layoutSection.hanbleItemStart = indexPath.item;
+            }
+        }
+    }
+    [super reloadItemsAtIndexPaths:indexPaths];
+}
 
 #pragma mark ----- dataSource
 
@@ -61,6 +93,19 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if ([self.externalDataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]) {
         return [self.externalDataSource collectionView:collectionView numberOfItemsInSection:section];
+    }
+    FMLayoutBaseSection *sectionM = self.layout.sections[section];
+    if ([sectionM isKindOfClass:[FMLayoutFixedSection class]]) {
+        FMLayoutFixedSection *fixed = (FMLayoutFixedSection *)sectionM;
+        if (fixed.isHorizontalCanScroll) {
+            return 1;
+        }
+    }
+    if ([sectionM isKindOfClass:[FMLayoutLabelSection class]]) {
+        FMLayoutLabelSection *label = (FMLayoutLabelSection *)sectionM;
+        if (label.isSingleLineCanScroll) {
+            return 1;
+        }
     }
     return self.layout.sections[section].itemDatas.count;
 }

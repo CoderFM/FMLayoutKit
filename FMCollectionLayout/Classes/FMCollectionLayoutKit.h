@@ -13,10 +13,15 @@
 #import "FMCollectionLayoutView.h"
 #import "FMCollectionViewLayout.h"
 #import "FMCollectionLayoutAttributes.h"
+
 #import "FMLayoutFixedSection.h"
 #import "FMLayoutDynamicSection.h"
 #import "FMLayoutLabelSection.h"
+#import "FMLayoutSingleDynamicSection.h"
 #import "FMLayoutFillSection.h"
+#import "FMLayoutFixedAddSection.h"
+#import "FMLayoutSingleDynamicAddSection.h"
+
 #import "FMCollectionSupplementary.h"
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryFooter.h"
