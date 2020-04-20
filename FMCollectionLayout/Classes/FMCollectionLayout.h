@@ -6,8 +6,8 @@
 //  Copyright © 2020 ZhouFaMing. All rights reserved.
 //
 
-#ifndef FMCollectionLayoutKit_h
-#define FMCollectionLayoutKit_h
+#ifndef FMCollectionLayout_h
+#define FMCollectionLayout_h
 
 #import "FMTeslaLayoutView.h"
 #import "FMCollectionLayoutView.h"
@@ -28,4 +28,4 @@
 #import "FMSupplementaryBackground.h"
 #import "FMHorizontalScrollCollCell.h"
 
-#endif /* FMCollectionLayoutKit_h */
+#endif /* FMCollectionLayout_h */
