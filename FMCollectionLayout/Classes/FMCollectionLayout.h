@@ -21,6 +21,7 @@
 #import "FMLayoutFillSection.h"
 #import "FMLayoutFixedAddSection.h"
 #import "FMLayoutSingleDynamicAddSection.h"
+#import "FMLayoutBaseSection+ConfigureBlock.h"
 
 #import "FMCollectionSupplementary.h"
 #import "FMSupplementaryHeader.h"

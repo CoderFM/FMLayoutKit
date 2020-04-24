@@ -7,8 +7,9 @@
 //
 
 #import "FMAddViewController.h"
-#import <FMCollectionLayoutKit.h>
+#import <FMCollectionLayout.h>
 #import <Masonry/Masonry.h>
+#import "LS_HomeActivityCell.h"
 
 #import "FMCollectionCustomDecoration.h"
 #import "FMCollectionCustomCell.h"
@@ -50,12 +51,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"一添加" style:UIBarButtonItemStyleDone target:self action:@selector(firstAdd)];
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"一删除" style:UIBarButtonItemStyleDone target:self action:@selector(firstDelete)];
-    UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithTitle:@"二替换" style:UIBarButtonItemStyleDone target:self action:@selector(secondsReplace)];
-    UIBarButtonItem *item4 = [[UIBarButtonItem alloc] initWithTitle:@"二添加" style:UIBarButtonItemStyleDone target:self action:@selector(secondsAdd)];
-    UIBarButtonItem *item5 = [[UIBarButtonItem alloc] initWithTitle:@"二删除" style:UIBarButtonItemStyleDone target:self action:@selector(secondsDelete)];
-    self.navigationItem.rightBarButtonItems = @[item2, item1, item3, item4, item5];
+//    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"一添加" style:UIBarButtonItemStyleDone target:self action:@selector(firstAdd)];
+//    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"一删除" style:UIBarButtonItemStyleDone target:self action:@selector(firstDelete)];
+//    UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithTitle:@"二替换" style:UIBarButtonItemStyleDone target:self action:@selector(secondsReplace)];
+//    UIBarButtonItem *item4 = [[UIBarButtonItem alloc] initWithTitle:@"二添加" style:UIBarButtonItemStyleDone target:self action:@selector(secondsAdd)];
+//    UIBarButtonItem *item5 = [[UIBarButtonItem alloc] initWithTitle:@"二删除" style:UIBarButtonItemStyleDone target:self action:@selector(secondsDelete)];
+//    self.navigationItem.rightBarButtonItems = @[item2, item1, item3, item4, item5];
     
     self.shareSections = [NSMutableArray array];
     {
@@ -113,6 +114,35 @@
 //        self.secondSection = section;
 //    }
     
+    {
+        FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:0 column:2];
+        
+        section.cellFixedWidth = 166;
+        section.autoHeightFixedWidth = YES;
+        section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
+        section.cellElement = [FMCollectionViewElement elementWithViewClass:[LS_HomeActivityCell class]];
+        [section setConfigurationCell:^(FMLayoutDynamicSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger index) {
+//            [((LS_HomeActivityCell *)cell).leftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.height.mas_equalTo(50 + index * 20);
+//            }];
+            
+            if (index == 0) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+            }
+            if (index == 1) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+            }
+            if (index == 2) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
+            }
+            if (index == 3) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+            }
+//            [cell layoutIfNeeded];
+        }];
+        [self.shareSections addObject:section];
+    }
+    
     FMCollectionLayoutView *view = [[FMCollectionLayoutView alloc] init];
     view.configuration = self;
     view.delegate = self;
@@ -127,8 +157,24 @@
 
 ///配置cell
 - (void)layoutView:(FMCollectionLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath{
-    FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
-    custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+    if ([cell isKindOfClass:[FMCollectionCustomCell class]]) {
+        FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
+        custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
+    } else {
+        NSInteger index = indexPath.item;
+        if (index == 0) {
+            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+        }
+        if (index == 1) {
+            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+        }
+        if (index == 2) {
+            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
+        }
+        if (index == 3) {
+            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+        }
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

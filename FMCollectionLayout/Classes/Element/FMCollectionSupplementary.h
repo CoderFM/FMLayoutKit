@@ -15,7 +15,9 @@ typedef NS_ENUM(NSInteger, FMSupplementaryType) {/// 目前仅支持header悬浮
     ///悬浮在顶部  跟着section动
     FMSupplementaryTypeSuspension,
     ///悬浮在顶部  不跟随section动   如果出现多个可能会被覆盖
-    FMSupplementaryTypeSuspensionAlways
+    FMSupplementaryTypeSuspensionAlways,
+    ///仅支持在第一个头部   下拉放大效果
+    FMSupplementaryTypeSuspensionBigger
 };
 
 typedef NS_ENUM(NSInteger, FMSupplementaryZIndex) {

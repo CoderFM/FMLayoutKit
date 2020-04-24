@@ -128,9 +128,30 @@
         } else {
             return self.headerAttribute;
         }
-    } else {
-        return self.headerAttribute;
     }
+    if (self.header.type == FMSupplementaryTypeSuspensionBigger && self.indexPath.section == 0) {
+        UICollectionViewLayoutAttributes *show = [self.headerAttribute copy];
+        CGFloat offsetY = self.collectionView.contentOffset.y;
+        if (offsetY < CGRectGetHeight(show.frame)) {
+            CGRect frame = show.frame;
+            
+            frame.origin.y += offsetY;
+            frame.size.height -= offsetY;
+            
+            show.frame = frame;
+            
+            return show;
+        } else {
+            CGRect frame = show.frame;
+            
+            frame.origin.y += CGRectGetHeight(show.frame);
+            frame.size.height -= CGRectGetHeight(show.frame);
+            
+            show.frame = frame;
+            return show;
+        }
+    }
+    return self.headerAttribute;
 }
 ///获取最小高度的列
 - (NSInteger)getMinHeightColumn{

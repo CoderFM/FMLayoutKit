@@ -43,6 +43,9 @@
 @property(nonatomic, assign)BOOL isLayoutSubView;
 @property(nonatomic, assign)BOOL isLoadSubView;
 
+
+@property(nonatomic, assign)CGRect shareOriginalFrame;
+
 @end
 
 @implementation FMTeslaLayoutView

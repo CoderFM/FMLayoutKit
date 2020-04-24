@@ -7,6 +7,7 @@
 //
 
 #import "FMCollectionCustomDecoration.h"
+#import <Masonry/Masonry.h>
 
 @implementation FMCollectionCustomDecoration
 
@@ -19,6 +20,14 @@
         NSInteger aBlueValue =arc4random() %255;
         UIColor*randColor = [UIColor colorWithRed:aRedValue /255.0f green:aGreenValue /255.0f blue:aBlueValue /255.0f alpha:1.0f];
         self.backgroundColor = randColor;
+        
+        UIImageView *imageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timg"]];
+        imageV.contentMode = UIViewContentModeScaleAspectFill;
+        imageV.clipsToBounds = YES;
+        [self addSubview:imageV];
+        [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(0);
+        }];
     }
     return self;
 }

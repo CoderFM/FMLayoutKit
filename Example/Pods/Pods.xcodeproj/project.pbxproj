@@ -79,6 +79,8 @@
 		C31315C124495192006328DF /* FMLayoutFillSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C313159824495191006328DF /* FMLayoutFillSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C31315C224495192006328DF /* FMLayoutLabelSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C313159924495191006328DF /* FMLayoutLabelSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C31315C324495192006328DF /* FMCollectionLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = C313159A24495191006328DF /* FMCollectionLayoutView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C314DDF2245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = C314DDF0245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C314DDF3245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C314DDF1245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.m */; };
 		C37D29042449577E006530E1 /* FMLayoutFixedAddSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C37D29022449577E006530E1 /* FMLayoutFixedAddSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C37D29052449577E006530E1 /* FMLayoutFixedAddSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C37D29032449577E006530E1 /* FMLayoutFixedAddSection.m */; };
 		C37D2908244959BD006530E1 /* FMLayoutSingleDynamicAddSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C37D2906244959BD006530E1 /* FMLayoutSingleDynamicAddSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -212,6 +214,8 @@
 		C313159824495191006328DF /* FMLayoutFillSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutFillSection.h; sourceTree = "<group>"; };
 		C313159924495191006328DF /* FMLayoutLabelSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMLayoutLabelSection.h; sourceTree = "<group>"; };
 		C313159A24495191006328DF /* FMCollectionLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCollectionLayoutView.h; path = FMCollectionLayout/Classes/FMCollectionLayoutView.h; sourceTree = "<group>"; };
+		C314DDF0245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMLayoutBaseSection+ConfigureBlock.h"; sourceTree = "<group>"; };
+		C314DDF1245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMLayoutBaseSection+ConfigureBlock.m"; sourceTree = "<group>"; };
 		C37D29022449577E006530E1 /* FMLayoutFixedAddSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutFixedAddSection.h; sourceTree = "<group>"; };
 		C37D29032449577E006530E1 /* FMLayoutFixedAddSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutFixedAddSection.m; sourceTree = "<group>"; };
 		C37D2906244959BD006530E1 /* FMLayoutSingleDynamicAddSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutSingleDynamicAddSection.h; sourceTree = "<group>"; };
@@ -442,6 +446,8 @@
 			children = (
 				C313159624495191006328DF /* FMLayoutBaseSection.h */,
 				C313158F24495191006328DF /* FMLayoutBaseSection.m */,
+				C314DDF0245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.h */,
+				C314DDF1245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.m */,
 				C313159024495191006328DF /* FMLayoutFixedSection.h */,
 				C313159524495191006328DF /* FMLayoutFixedSection.m */,
 				C37D29022449577E006530E1 /* FMLayoutFixedAddSection.h */,
@@ -545,6 +551,7 @@
 				C31315BD24495192006328DF /* FMLayoutSingleDynamicSection.h in Headers */,
 				C31315A624495192006328DF /* FMLayoutHorizontalSection.h in Headers */,
 				C31315B524495192006328DF /* FMCollectionViewLayout.h in Headers */,
+				C314DDF2245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.h in Headers */,
 				C31315BF24495192006328DF /* FMLayoutBaseSection.h in Headers */,
 				C37D2908244959BD006530E1 /* FMLayoutSingleDynamicAddSection.h in Headers */,
 				C37D29042449577E006530E1 /* FMLayoutFixedAddSection.h in Headers */,
@@ -801,6 +808,7 @@
 				C31315B024495192006328DF /* FMSupplementaryHeader.m in Sources */,
 				C31315B124495192006328DF /* FMSupplementaryFooter.m in Sources */,
 				C37D2909244959BD006530E1 /* FMLayoutSingleDynamicAddSection.m in Sources */,
+				C314DDF3245273ED00E86E8E /* FMLayoutBaseSection+ConfigureBlock.m in Sources */,
 				C31315BE24495192006328DF /* FMLayoutFixedSection.m in Sources */,
 				C31315BA24495192006328DF /* FMLayoutLabelSection.m in Sources */,
 			);

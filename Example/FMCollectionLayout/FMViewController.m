@@ -7,7 +7,7 @@
 //
 
 #import "FMViewController.h"
-#import <FMCollectionLayoutKit.h>
+#import <FMCollectionLayout.h>
 #import <Masonry/Masonry.h>
 
 #import "FMCollectionCustomDecoration.h"
@@ -55,32 +55,32 @@
         
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
-        section.header.type = FMSupplementaryTypeSuspension;
+        section.header.type = FMSupplementaryTypeSuspensionBigger;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         
-        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
-        section.footer.topMargin = 10;
+//        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+//        section.footer.topMargin = 10;
         
         section.itemSize = CGSizeMake(100, 100);
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
         [self.shareSections addObject:section];
     }
-    {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-        
-        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
-        section.header.type = FMSupplementaryTypeFixed;
-        section.header.bottomMargin = 10;
-        
-        section.isHorizontalCanScroll = YES;
-        section.itemSize = CGSizeMake(150, 100);
-        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
-        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [self.shareSections addObject:section];
-    }
-    
+//    {
+//        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+//
+//        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
+//        section.header.type = FMSupplementaryTypeFixed;
+//        section.header.bottomMargin = 10;
+//
+//        section.isHorizontalCanScroll = YES;
+//        section.itemSize = CGSizeMake(150, 100);
+//        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
+//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+//        [self.shareSections addObject:section];
+//    }
+//
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionNavTitleView class]];

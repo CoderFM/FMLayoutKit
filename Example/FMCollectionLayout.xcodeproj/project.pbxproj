@@ -24,7 +24,9 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		C32C902A243EB957004B9FAF /* FMCollectionNavTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C9029243EB957004B9FAF /* FMCollectionNavTitleView.m */; };
+		C35283232450682000BE7CEE /* LS_HomeActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C35283212450682000BE7CEE /* LS_HomeActivityCell.m */; };
 		C37D290124495680006530E1 /* FMAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37D290024495680006530E1 /* FMAddViewController.m */; };
+		C3A8476D2451467400012E24 /* FMLayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8476C2451467400012E24 /* FMLayoutLabel.m */; };
 		C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */; };
 		C3D9F411243DDD7C001468AC /* FMCollectionCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */; };
 		C3FFC143244173A10033E038 /* FMCollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC142244173A10033E038 /* FMCollViewController.m */; };
@@ -71,8 +73,12 @@
 		8ECAB7196EC7D29871C3F8BD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C32C9028243EB957004B9FAF /* FMCollectionNavTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionNavTitleView.h; sourceTree = "<group>"; };
 		C32C9029243EB957004B9FAF /* FMCollectionNavTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCollectionNavTitleView.m; sourceTree = "<group>"; };
+		C35283212450682000BE7CEE /* LS_HomeActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LS_HomeActivityCell.m; sourceTree = "<group>"; };
+		C35283222450682000BE7CEE /* LS_HomeActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LS_HomeActivityCell.h; sourceTree = "<group>"; };
 		C37D28FF24495680006530E1 /* FMAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAddViewController.h; sourceTree = "<group>"; };
 		C37D290024495680006530E1 /* FMAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAddViewController.m; sourceTree = "<group>"; };
+		C3A8476B2451467400012E24 /* FMLayoutLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutLabel.h; sourceTree = "<group>"; };
+		C3A8476C2451467400012E24 /* FMLayoutLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutLabel.m; sourceTree = "<group>"; };
 		C3D9F40C243DDD49001468AC /* FMCollectionCustomDecoration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomDecoration.h; sourceTree = "<group>"; };
 		C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCollectionCustomDecoration.m; sourceTree = "<group>"; };
 		C3D9F40F243DDD7C001468AC /* FMCollectionCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomCell.h; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 				C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */,
 				C32C9028243EB957004B9FAF /* FMCollectionNavTitleView.h */,
 				C32C9029243EB957004B9FAF /* FMCollectionNavTitleView.m */,
+				C35283222450682000BE7CEE /* LS_HomeActivityCell.h */,
+				C35283212450682000BE7CEE /* LS_HomeActivityCell.m */,
+				C3A8476B2451467400012E24 /* FMLayoutLabel.h */,
+				C3A8476C2451467400012E24 /* FMLayoutLabel.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -396,6 +406,8 @@
 			files = (
 				C32C902A243EB957004B9FAF /* FMCollectionNavTitleView.m in Sources */,
 				C3FFC143244173A10033E038 /* FMCollViewController.m in Sources */,
+				C35283232450682000BE7CEE /* LS_HomeActivityCell.m in Sources */,
+				C3A8476D2451467400012E24 /* FMLayoutLabel.m in Sources */,
 				6003F59E195388D20070C39A /* FMAppDelegate.m in Sources */,
 				C37D290124495680006530E1 /* FMAddViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* FMViewController.m in Sources */,

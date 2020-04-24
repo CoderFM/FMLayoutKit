@@ -7,7 +7,7 @@
 //
 
 #import "FMCollViewController.h"
-#import <FMCollectionLayoutKit.h>
+#import <FMCollectionLayout.h>
 #import <Masonry/Masonry.h>
 #import "FMAddViewController.h"
 
@@ -36,6 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor redColor];
+    
     UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"刷新分组" style:UIBarButtonItemStyleDone target:self action:@selector(reloadSection)];
     UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"刷新单个" style:UIBarButtonItemStyleDone target:self action:@selector(reloadItem)];
     UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithTitle:@"刷新全部" style:UIBarButtonItemStyleDone target:self action:@selector(reloadAll)];
@@ -43,11 +45,11 @@
     
     self.shareSections = [NSMutableArray array];
     {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(15, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
 
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
-        section.header.type = FMSupplementaryTypeSuspension;
+        section.header.type = FMSupplementaryTypeSuspensionBigger;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
 
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
@@ -137,7 +139,8 @@
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(0);
+        make.left.right.bottom.mas_equalTo(0);
+        make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
 }

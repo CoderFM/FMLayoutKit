@@ -168,7 +168,7 @@
                 }
             }
         }
-        if (section.header.type == FMSupplementaryTypeSuspensionAlways) {
+        if (section.header.type == FMSupplementaryTypeSuspensionAlways || section.header.type == FMSupplementaryTypeSuspensionBigger) {
             [headerIndexPaths addObject:section.indexPath];
         }
     }
