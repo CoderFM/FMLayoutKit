@@ -16,6 +16,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentView.backgroundColor = [UIColor cyanColor];
+        
         UILabel *title = [[UILabel alloc] init];
         title.text = @"大标题";
         title.font = [UIFont systemFontOfSize:18];

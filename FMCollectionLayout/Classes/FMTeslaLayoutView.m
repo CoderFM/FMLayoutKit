@@ -82,12 +82,18 @@
         FM_ScrollView *scroll = [[FM_ScrollView alloc] init];
         scroll.pagingEnabled = YES;
         scroll.delegate = self;
-        scroll.bounces = NO;
+        scroll.bounces = YES;
+        scroll.alwaysBounceHorizontal = YES;
+        scroll.showsHorizontalScrollIndicator = NO;
         [self addSubview:scroll];
         __weak typeof(self) weakSelf = self;
         [scroll setPanGesCanBegin:^BOOL(CGPoint panPoint) {
             CGFloat offsetY = weakSelf.currentLayoutView.contentOffset.y;
-            return panPoint.y > -offsetY;
+            CGFloat topCanPanY = weakSelf.shareLayoutView.frame.size.height + weakSelf.shareLayoutView.frame.origin.y - offsetY;
+            if (topCanPanY < weakSelf.suspensionAlwaysHeader.header.height) {
+                topCanPanY = weakSelf.suspensionAlwaysHeader.header.height;
+            }
+            return panPoint.y > topCanPanY;
         }];
         _scrollView = scroll;
     }
@@ -131,6 +137,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.clipsToBounds = YES;
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -150,9 +157,10 @@
         FMCollectionLayoutView *collectionView = [[FMCollectionLayoutView alloc] initWithFrame:CGRectMake(self.scrollView.bounds.size.width * i, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height)];
         collectionView.configuration = self;
         collectionView.delegate = self;
-        collectionView.backgroundColor = [UIColor whiteColor];
+        collectionView.backgroundColor = [UIColor clearColor];
         collectionView.bounces = YES;
         collectionView.alwaysBounceVertical = YES;
+        collectionView.showsVerticalScrollIndicator = NO;
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
         [self.scrollView addSubview:collectionView];
         
@@ -314,6 +322,14 @@
                 CGRect frame = self.shareLayoutView.frame;
                 frame.origin.y = 0;
                 self.shareLayoutView.frame = frame;
+                
+                if (contentOffset.y < 0) {
+                    CGRect frame = self.shareLayoutView.frame;
+                    frame.origin.y = contentOffset.y;
+                    frame.size.height = self.shareLayoutView.contentSize.height - contentOffset.y;
+                    self.shareLayoutView.frame = frame;
+                    self.shareLayoutView.contentOffset = CGPointMake(0, contentOffset.y);
+                }
             }
         }
     } else {
@@ -354,8 +370,12 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (!decelerate) {
-        [self scrollEnd];
+    if (scrollView == self.scrollView) {
+        if (!decelerate) {
+            [self scrollEnd];
+        } else {
+            self.userInteractionEnabled = NO;
+        }
     }
 }
 

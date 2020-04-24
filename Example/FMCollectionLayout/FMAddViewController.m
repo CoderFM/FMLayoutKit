@@ -115,7 +115,7 @@
 //    }
     
     {
-        FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:0 column:2];
+        FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
         
         section.cellFixedWidth = 166;
         section.autoHeightFixedWidth = YES;
