@@ -16,7 +16,7 @@
 
 #import "FMCollViewController.h"
 
-@interface FMViewController ()<FMTeslaLayoutViewDataSource, FMTeslaLayoutViewDelegate>
+@interface FMViewController ()<FMTeslaLayoutViewDelegate, FMTeslaLayoutViewDataSource>
 
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *sections;
@@ -30,8 +30,8 @@
 - (FMTeslaLayoutView *)multiScreen{
     if (_multiScreen == nil) {
         FMTeslaLayoutView *multi = [[FMTeslaLayoutView alloc] init];
-        multi.dataSource = self;
         multi.delegate = self;
+        multi.dataSource = self;
         [self.view addSubview:multi];
         _multiScreen = multi;
     }
@@ -64,35 +64,49 @@
         section.itemSize = CGSizeMake(100, 100);
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            FMCollectionCustomCell *customCell = (FMCollectionCustomCell *)cell;
+            customCell.contentView.backgroundColor = [UIColor yellowColor];
+        }];
+        
         [self.shareSections addObject:section];
     }
-//    {
-//        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-//
-//        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
-//        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
-//        section.header.type = FMSupplementaryTypeFixed;
-//        section.header.bottomMargin = 10;
-//
-//        section.isHorizontalCanScroll = YES;
-//        section.itemSize = CGSizeMake(150, 100);
-//        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
-//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-//        [self.shareSections addObject:section];
-//    }
+    {
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+
+        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
+        section.header.type = FMSupplementaryTypeFixed;
+        section.header.bottomMargin = 10;
+
+        section.isHorizontalCanScroll = YES;
+        section.itemSize = CGSizeMake(150, 100);
+        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
+        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [self.shareSections addObject:section];
+    }
 //
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionNavTitleView class]];
         section.header.type = FMSupplementaryTypeSuspensionAlways;
         section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
+            self.navTitleView = (FMCollectionNavTitleView *)header;
+        }];
         [self.shareSections addObject:section];
     }
-    self.multiScreen.shareSections = self.shareSections;
+//    self.multiScreen.shareSections = self.shareSections;
     
     
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
+        
+//        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.bottomMargin = 10;
+//        section.header.type = FMSupplementaryTypeSuspensionBigger;
+//        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
@@ -178,27 +192,12 @@
     
     self.view.backgroundColor = [UIColor cyanColor];
     
-    self.multiScreen.shareSections = self.shareSections;
-    self.multiScreen.multiSections = @[[self.sections mutableCopy], [self.sections mutableCopy], [self.sections mutableCopy], [self.sections mutableCopy]];
+    [self.multiScreen reLoadSubViews];
 }
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     self.multiScreen.frame = CGRectMake(0, 100, self.view.bounds.size.width, self.view.bounds.size.height - 100);
-}
-
-///配置cell
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
-//    if ([cell isKindOfClass:[FMCollectionCustomCell class]]) {
-//        FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
-//        custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
-//    }
-}
-
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
-    if ([header isKindOfClass:[FMCollectionNavTitleView class]]) {
-        self.navTitleView = header;
-    }
 }
 
 - (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index{
@@ -208,6 +207,18 @@
 - (void)tesla:(FMTeslaLayoutView *)tesla didSelectIndexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView{
     FMCollViewController *coll = [[FMCollViewController alloc] init];
     [self.navigationController pushViewController:coll animated:YES];
+}
+
+- (NSInteger)numberOfScreenInTesla:(nonnull FMTeslaLayoutView *)tesla {
+    return 4;
+}
+
+- (nonnull NSMutableArray<FMLayoutBaseSection *> *)tesla:(nonnull FMTeslaLayoutView *)tesla sectionsInScreenIndex:(NSInteger)screenIndex {
+    return [self.sections mutableCopy];
+}
+
+- (NSArray<FMLayoutBaseSection *> *)shareSectionsInTesla:(FMTeslaLayoutView *)tesla{
+    return self.shareSections;
 }
 
 @end

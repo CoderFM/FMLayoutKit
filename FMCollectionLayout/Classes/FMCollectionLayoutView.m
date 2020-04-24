@@ -10,8 +10,9 @@
 #import "FMHorizontalScrollCollCell.h"
 #import "FMLayoutFixedSection.h"
 #import "FMLayoutLabelSection.h"
+#import "FMLayoutBaseSection+ConfigureBlock.h"
 
-@interface FMCollectionLayoutView ()<UICollectionViewDataSource>
+@interface FMCollectionLayoutView ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(nonatomic, weak)id<UICollectionViewDataSource> externalDataSource;
 
@@ -36,6 +37,7 @@
     self = [super initWithFrame:frame collectionViewLayout:self.layout];
     if (self) {
         self.dataSource = self;
+        self.delegate = self;
         self.reloaOlnyChanged = YES;
     }
     return self;
@@ -122,17 +124,29 @@
         [hCell setConfigurationBlock:^(UICollectionViewCell * _Nonnull hItemCell, NSInteger item) {
             if (weakSelf.configuration && [weakSelf.configuration respondsToSelector:@selector(layoutView:configurationCell:indexPath:)]) {
                 [weakSelf.configuration layoutView:weakSelf configurationCell:hItemCell indexPath:[NSIndexPath indexPathForItem:item inSection:indexPath.section]];
+            } else {
+                if (sectionM.configureCellData) {
+                    sectionM.configureCellData(sectionM, cell, item);
+                }
             }
         }];
         [hCell setSelectCellBlock:^(NSInteger item) {
             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
                 [weakSelf.delegate collectionView:collectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:indexPath.section]];
+            } else {
+                if (sectionM.clickCellBlock) {
+                    sectionM.clickCellBlock(sectionM, item);
+                }
             }
         }];
         hCell.section = (FMLayoutFixedSection *)sectionM;
     } else {
         if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationCell:indexPath:)]) {
             [self.configuration layoutView:self configurationCell:cell indexPath:indexPath];
+        } else {
+            if (sectionM.configureCellData) {
+                sectionM.configureCellData(sectionM, cell, indexPath.item);
+            }
         }
     }
     return cell;
@@ -147,6 +161,10 @@
         UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.header.elementKind withReuseIdentifier:NSStringFromClass(sectionM.header.viewClass) forIndexPath:indexPath];
         if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationHeader:indexPath:)]) {
             [self.configuration layoutView:self configurationHeader:header indexPath:indexPath];
+        } else {
+            if (sectionM.configureHeaderData) {
+                sectionM.configureHeaderData(sectionM, header);
+            }
         }
         return header;
     }
@@ -154,6 +172,10 @@
         UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.footer.elementKind withReuseIdentifier:NSStringFromClass(sectionM.footer.viewClass) forIndexPath:indexPath];
         if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationFooter:indexPath:)]) {
             [self.configuration layoutView:self configurationFooter:footer indexPath:indexPath];
+        } else {
+            if (sectionM.configureFooterData) {
+                sectionM.configureFooterData(sectionM, footer);
+            }
         }
         return footer;
     }
@@ -161,6 +183,10 @@
         UICollectionReusableView *bg = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.background.elementKind withReuseIdentifier:NSStringFromClass(sectionM.background.viewClass) forIndexPath:indexPath];
         if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationSectionBg:indexPath:)]) {
             [self.configuration layoutView:self configurationSectionBg:bg indexPath:indexPath];
+        } else {
+            if (sectionM.configureBg) {
+                sectionM.configureBg(sectionM, bg);
+            }
         }
         return bg;
     }
@@ -188,6 +214,15 @@
         return [self.externalDataSource collectionView:collectionView indexPathForIndexTitle:title atIndex:index];
     }
     return nil;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section < self.layout.sections) {
+        FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
+        if (sectionM.clickCellBlock) {
+            sectionM.clickCellBlock(sectionM, indexPath.item);
+        }
+    }
 }
 
 @end

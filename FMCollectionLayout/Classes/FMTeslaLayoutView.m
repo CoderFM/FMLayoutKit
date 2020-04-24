@@ -38,7 +38,7 @@
 @property(nonatomic, strong)FMCollectionLayoutView *shareLayoutView;
 @property(nonatomic, weak)FMCollectionLayoutView *currentLayoutView;
 
-@property(nonatomic, strong)NSArray *layoutViews;
+@property(nonatomic, strong)NSMutableArray<FMCollectionLayoutView *> *layoutViews;
 
 @property(nonatomic, assign)BOOL isLayoutSubView;
 @property(nonatomic, assign)BOOL isLoadSubView;
@@ -120,38 +120,32 @@
     }
 }
 
-- (void)setShareSections:(NSMutableArray<FMLayoutBaseSection *> *)shareSections{
-    _shareSections = shareSections;
-    self.suspensionAlwaysHeader = shareSections.count > 0 ? ([shareSections lastObject].header.type == FMSupplementaryTypeSuspensionAlways ? [shareSections lastObject] :nil) : nil;
-}
-
-- (void)setMultiSections:(NSArray<NSMutableArray<FMLayoutBaseSection *> *> *)multiSections{
-    _multiSections = multiSections;
-    if (self.isLayoutSubView) {
-        [self loadSubViews];
-    }
-}
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
+        self.layoutViews = [NSMutableArray array];
     }
     return self;
 }
 
 - (void)loadSubViews{
-    NSMutableArray *arrM = [NSMutableArray array];
-    self.shareLayoutView.frame = self.bounds;
-    [self addSubview:self.shareLayoutView];
-    [self.shareLayoutView.layout setSections:self.shareSections];
-    [self.shareLayoutView.layout handleSections];
-    CGFloat shareHeight = [self.shareSections lastObject].sectionHeight + [self.shareSections lastObject].sectionOffset;
-    self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
+    [self.layoutViews removeAllObjects];
+    CGFloat shareHeight = 0;
+    if ([self.dataSource respondsToSelector:@selector(shareSectionsInTesla:)]) {
+        self.shareLayoutView.frame = self.bounds;
+        NSArray<FMLayoutBaseSection *> *sections = [self.dataSource shareSectionsInTesla:self];
+        [self addSubview:self.shareLayoutView];
+        [self.shareLayoutView.layout setSections:sections];
+        [self.shareLayoutView.layout handleSections];
+        shareHeight = [sections lastObject].sectionHeight + [sections lastObject].sectionOffset;
+        self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
+        self.suspensionAlwaysHeader = sections.count > 0 ? ([sections lastObject].header.type == FMSupplementaryTypeSuspensionAlways ? [sections lastObject] :nil) : nil;
+    }
     
-    NSInteger nums = self.multiSections.count;
+    NSInteger nums = [self.dataSource numberOfScreenInTesla:self];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * nums, 0);
     for (int i = 0; i<nums; i++) {
         FMCollectionLayoutView *collectionView = [[FMCollectionLayoutView alloc] initWithFrame:CGRectMake(self.scrollView.bounds.size.width * i, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height)];
@@ -163,21 +157,14 @@
         collectionView.showsVerticalScrollIndicator = NO;
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
         [self.scrollView addSubview:collectionView];
-        
-        NSMutableArray *sections = [self.multiSections[i] mutableCopy];
-//        FMLayoutBaseSection *section = [[FMLayoutBaseSection alloc] init];
-//        section.hasHanble = YES;
-//        section.sectionHeight = shareHeight;
-//        [sections insertObject:section atIndex:0];
         [collectionView.layout setFirstSectionOffsetY:shareHeight];
-        [collectionView.layout setSections:sections];
+        [collectionView.layout setSections:[self.dataSource tesla:self sectionsInScreenIndex:i]];
         [collectionView reloadData];
         if (self.currentLayoutView == nil) {
             self.currentLayoutView = collectionView;
         }
-        [arrM addObject:collectionView];
+        [self.layoutViews addObject:collectionView];
     }
-    self.layoutViews = [arrM copy];
     [self.shareLayoutView removeFromSuperview];
     [self.currentLayoutView addSubview:self.shareLayoutView];
     [self.shareLayoutView reloadData];
@@ -214,8 +201,8 @@
     self.currentLayoutView = self.layoutViews[index];
     [self.shareLayoutView removeFromSuperview];
     
-    if ([self.delegate respondsToSelector:@selector(tesla:didScrollEnd:)]) {
-        [self.delegate tesla:self didScrollEnd:index];
+    if ([self.delegate respondsToSelector:@selector(tesla:didScrollEnd:currentLayoutView:)]) {
+        [self.delegate tesla:self didScrollEnd:index currentLayoutView:self.currentLayoutView];
     }
     
     CGFloat y = self.currentLayoutView.contentOffset.y;
@@ -231,84 +218,6 @@
         self.shareLayoutView.frame = frame;
     }
     [self.currentLayoutView addSubview:self.shareLayoutView];
-}
-
-#pragma mark -------  FMCollectionLayoutView configuration  delegate
-- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath{
-    if ([self.dataSource respondsToSelector:@selector(tesla:configurationCell:indexPath:isShare:multiIndex:layoutView:)]) {
-        BOOL share;
-        NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex = 0;
-        if (layoutView == self.shareLayoutView) {
-            share = YES;
-        } else {
-            share = NO;
-            multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
-        }
-        [self.dataSource tesla:self configurationCell:cell indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
-    }
-}
-- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath{
-    if ([self.dataSource respondsToSelector:@selector(tesla:configurationHeader:indexPath:isShare:multiIndex:layoutView:)]) {
-        BOOL share;
-        NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex = 0;
-        if (layoutView == self.shareLayoutView) {
-            share = YES;
-        } else {
-            share = NO;
-            multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
-        }
-        [self.dataSource tesla:self configurationHeader:header indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
-    }
-}
-- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath{
-    if ([self.dataSource respondsToSelector:@selector(tesla:configurationFooter:indexPath:isShare:multiIndex:layoutView:)]) {
-        BOOL share;
-        NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex = 0;
-        if (layoutView == self.shareLayoutView) {
-            share = YES;
-        } else {
-            share = NO;
-            multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
-        }
-        [self.dataSource tesla:self configurationFooter:footer indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
-    }
-}
-- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath{
-    if ([self.dataSource respondsToSelector:@selector(tesla:configurationBg:indexPath:isShare:multiIndex:layoutView:)]) {
-        BOOL share;
-        NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex = 0;
-        if (layoutView == self.shareLayoutView) {
-            share = YES;
-        } else {
-            share = NO;
-            multiIndex = [self.layoutViews indexOfObject:layoutView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
-        }
-        [self.dataSource tesla:self configurationBg:bg indexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:layoutView];
-    }
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.delegate respondsToSelector:@selector(tesla:didSelectIndexPath:isShare:multiIndex:layoutView:)]) {
-        BOOL share;
-        NSIndexPath *lastIndexPath = indexPath;
-        NSInteger multiIndex = 0;
-        if (collectionView == self.shareLayoutView) {
-            share = YES;
-        } else {
-            share = NO;
-            multiIndex = [self.layoutViews indexOfObject:collectionView];
-            lastIndexPath = [NSIndexPath indexPathForItem:indexPath.item inSection:indexPath.section];
-        }
-        [self.delegate tesla:self didSelectIndexPath:lastIndexPath isShare:share multiIndex:multiIndex layoutView:(FMCollectionLayoutView *)collectionView];
-    }
 }
 
 #pragma mark -------  observeValueForKeyPath

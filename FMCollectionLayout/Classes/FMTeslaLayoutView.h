@@ -9,36 +9,31 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class FMCollectionLayoutView, FMTeslaLayoutView;
+@class FMCollectionLayoutView, FMTeslaLayoutView, FMLayoutBaseSection;
 @protocol FMTeslaLayoutViewDelegate <NSObject>
 @optional
-///点击事件
-- (void)tesla:(FMTeslaLayoutView *)tesla didSelectIndexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
 ///滚动结束事件
-- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index;
+- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentLayoutView:(FMCollectionLayoutView *)layoutView;
 ///滚动事件
 - (void)tesla:(FMTeslaLayoutView *)tesla scrollViewDidScroll:(UIScrollView *)scrollView;
+
+- (void)tesla:(FMTeslaLayoutView *)tesla willShowLayoutView:(FMCollectionLayoutView *)layoutView index:(NSInteger)index;
+
 @end
 
 @protocol FMTeslaLayoutViewDataSource <NSObject>
+@required
+- (NSInteger)numberOfScreenInTesla:(FMTeslaLayoutView *)tesla;
+- (NSMutableArray<FMLayoutBaseSection *> *)tesla:(FMTeslaLayoutView *)tesla sectionsInScreenIndex:(NSInteger)screenIndex;
 @optional
-///配置cell
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
-///配置header
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
-///配置footer
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
-///配置bg
-- (void)tesla:(FMTeslaLayoutView *)tesla configurationBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMCollectionLayoutView *)layoutView;
+- (NSArray<FMLayoutBaseSection *> *)shareSectionsInTesla:(FMTeslaLayoutView *)tesla;
 @end
-
 
 @class FMLayoutBaseSection;
 @interface FMTeslaLayoutView : UIView
-@property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
-@property(nonatomic, strong)NSArray<NSMutableArray<FMLayoutBaseSection *> *> *multiSections;
-@property(nonatomic, weak)id<FMTeslaLayoutViewDataSource> dataSource;
+//@property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, weak)id<FMTeslaLayoutViewDelegate> delegate;
+@property(nonatomic, weak)id<FMTeslaLayoutViewDataSource> dataSource;
 - (void)reLoadSubViews;
 - (void)reloadData;
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
