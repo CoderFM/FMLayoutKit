@@ -135,11 +135,17 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
     FMLayoutBaseSection *section = self.sections[indexPath.section];
+    if (!section.hasHanble) {
+        return nil;
+    }
     return section.itemsAttribute[indexPath.item];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
     FMLayoutBaseSection *section = self.sections[indexPath.section];
+    if (!section.hasHanble) {
+        return nil;
+    }
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
         return [section showHeaderLayout];
     } else if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]){
