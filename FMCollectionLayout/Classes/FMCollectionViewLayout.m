@@ -191,7 +191,11 @@
 
 - (CGSize)collectionViewContentSize{
     FMLayoutBaseSection *section = [self.sections lastObject];
-    return CGSizeMake(self.collectionView.bounds.size.width, section.sectionOffset + section.sectionHeight + self.fixedBottomMargin);
+    CGSize contentSize = CGSizeMake(self.collectionView.bounds.size.width, section.sectionOffset + section.sectionHeight + self.fixedBottomMargin);
+    if (contentSize.height < self.minContentSizeHeight) {
+        contentSize.height = self.minContentSizeHeight;
+    }
+    return contentSize;
 }
 
 - (UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath{

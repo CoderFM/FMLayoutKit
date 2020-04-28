@@ -73,4 +73,9 @@
     self.selectBtn = sender;
 }
 
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    
+}
+
 @end

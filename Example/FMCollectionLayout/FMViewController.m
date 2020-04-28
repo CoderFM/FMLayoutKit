@@ -70,22 +70,27 @@
             customCell.contentView.backgroundColor = [UIColor yellowColor];
         }];
         
+        [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
+            FMCollViewController *vc = [[FMCollViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        
         [self.shareSections addObject:section];
     }
-    {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-
-        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
-        section.header.type = FMSupplementaryTypeFixed;
-        section.header.bottomMargin = 10;
-
-        section.isHorizontalCanScroll = YES;
-        section.itemSize = CGSizeMake(150, 100);
-        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
-        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [self.shareSections addObject:section];
-    }
+//    {
+//        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+//
+//        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
+//        section.header.type = FMSupplementaryTypeFixed;
+//        section.header.bottomMargin = 10;
+//
+//        section.isHorizontalCanScroll = YES;
+//        section.itemSize = CGSizeMake(150, 100);
+//        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
+//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+//        [self.shareSections addObject:section];
+//    }
 //
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
@@ -200,7 +205,19 @@
     self.multiScreen.frame = CGRectMake(0, 100, self.view.bounds.size.width, self.view.bounds.size.height - 100);
 }
 
-- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index{
+- (CGFloat)shareSuspensionMinHeightWithTesla:(FMTeslaLayoutView *)tesla{
+    return 70;
+}
+
+- (void)tesla:(FMTeslaLayoutView *)tesla willCreateLayoutViewWithIndex:(NSInteger)index{
+    NSLog(@"willCreateLayoutViewWithIndex %ld", (long)index);
+}
+
+- (void)tesla:(FMTeslaLayoutView *)tesla didCreatedLayoutViewWithIndex:(NSInteger)index layoutView:(FMCollectionLayoutView *)layoutView{
+    NSLog(@"didCreatedLayoutViewWithIndex %ld", (long)index);
+}
+
+- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentLayoutView:(nonnull FMCollectionLayoutView *)layoutView{
     [self.navTitleView selectWithIndex:index];
 }
 
