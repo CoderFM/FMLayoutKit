@@ -33,10 +33,16 @@
     if (_itemDatas == itemDatas) {
         return;
     }
-    _itemDatas = itemDatas;
+    if (![itemDatas isKindOfClass:[NSMutableArray class]]) {
+        _itemDatas = [itemDatas mutableCopy];
+    } else {
+        _itemDatas = itemDatas;
+    }
+    _itemDatas = [_itemDatas convertSafety];
     __weak typeof(self) weakSelf = self;
-    [itemDatas listenDidChange:^(NSIndexSet *set, FMSafetyMutableArrayChangeType type) {
+    [_itemDatas listenDidChange:^(NSIndexSet *set, FMSafetyMutableArrayChangeType type) {
         weakSelf.hasHanble = NO;
+        !weakSelf.itemsLayoutChanged?:weakSelf.itemsLayoutChanged(weakSelf.indexPath);
         if (type == FMSafetyMutableArrayChangeAddType) {
             weakSelf.hanbleItemStart = weakSelf.itemDatas.count - set.count;
         } else {
@@ -62,6 +68,20 @@
     }
     return self;
 }
+
+- (void)handleLayout{
+    if (self.header) {
+        [self prepareHeader];
+    }
+    [self prepareItems];
+    if (self.footer) {
+        [self prepareFooter];
+    }
+    self.sectionHeight = self.sectionInset.top + self.header.inset.top +self.header.height + self.header.inset.bottom + self.header.bottomMargin + [self getColumnMaxHeight] + self.footer.inset.top + self.footer.height +  self.footer.topMargin + self.footer.inset.bottom + self.sectionInset.bottom;
+
+    [self prepareBackground];
+}
+
 
 - (BOOL)intersectsRect:(CGRect)rect{
     return CGRectIntersectsRect(CGRectMake(0, self.sectionOffset, self.collectionView.bounds.size.width, self.sectionHeight), rect);

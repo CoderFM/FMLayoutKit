@@ -34,21 +34,21 @@
     [self handleSections];
 }
 
+- (void)setMinSectionChangeOffsetYIndex:(NSInteger)minSectionChangeOffsetYIndex{
+    if (minSectionChangeOffsetYIndex < _minSectionChangeOffsetYIndex) {
+        _minSectionChangeOffsetYIndex = minSectionChangeOffsetYIndex;
+    }
+}
+
 - (void)setSections:(NSMutableArray<FMLayoutBaseSection *> *)sections{
-    if ([sections isKindOfClass:[NSArray class]]) {
+    if (_sections == sections) {
+        return;
+    }
+    if (![sections isKindOfClass:[NSMutableArray class]]) {
         _sections = [sections mutableCopy];
     } else {
         _sections = sections;
     }
-//    [_sections convertSafety];
-//    __weak typeof(self) weakSelf = self;
-//    [_sections listenDidChange:^(NSIndexSet *indexSet, FMSafetyMutableArrayChangeType type) {
-//        NSInteger min = [indexSet firstIndex];
-//        NSInteger max = [indexSet lastIndex];
-//        for (int i = min; i < weakSelf.sections.count; i++) {
-//            weakSelf.sections[i].hasHanble = NO;
-//        }
-//    }];
     [self invalidateLayout];
 }
 
@@ -58,38 +58,39 @@
     NSInteger sections = [self.collectionView numberOfSections];
     sections = MIN(sections, self.sections.count);
     for (int i = 0; i < sections; i++) {
+        
         FMLayoutBaseSection *section = self.sections[i];
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
+        section.indexPath = sectionIndexPath;
+        section.sectionOffset = sectionOffset;
+        
+        __weak typeof(self) weakSelf = self;
+        [section setItemsLayoutChanged:^(NSIndexPath * _Nonnull indexPath) {
+            if (weakSelf.minSectionChangeOffsetYIndex > indexPath.section) {
+                weakSelf.minSectionChangeOffsetYIndex  = indexPath.section;
+            }
+        }];
         
         if (self.reLayoutOlnyChanged) {// 只改变变过的
-            if (section.hasHanble) {
-                section.indexPath = sectionIndexPath;
+            if (i < self.minSectionChangeOffsetYIndex && section.hasHanble) {
                 section.sectionOffset = sectionOffset;
                 sectionOffset += section.sectionHeight;
                 continue;
             }
         }
         
-        section.indexPath = sectionIndexPath;
-        
         section.sectionOffset = sectionOffset;
-        if (section.header) {
-            [section prepareHeader];
-        }
-        [section prepareItems];
-        if (section.footer) {
-            {
-                [section prepareFooter];
-                section.sectionHeight = section.sectionInset.top + section.header.inset.top +section.header.height + section.header.inset.bottom + section.header.bottomMargin + [section getColumnMaxHeight] + section.footer.inset.top + section.footer.height +  section.footer.topMargin + section.footer.inset.bottom + section.sectionInset.bottom;
-                sectionOffset = CGRectGetMaxY(section.footerAttribute.frame) + section.sectionInset.bottom;
-            }
-        } else {
-            CGFloat itemMaxHeight = [section getColumnMaxHeight];
-            section.sectionHeight = section.sectionInset.top + section.header.inset.top + section.header.height + section.header.inset.bottom + section.header.bottomMargin + itemMaxHeight + section.sectionInset.bottom;
-            sectionOffset = section.sectionOffset + section.sectionHeight;
-        }
-        [section prepareBackground];
+        [section handleLayout];
+        
+        sectionOffset = section.sectionOffset + section.sectionHeight;
+        
         section.hasHanble = YES;
+    }
+    
+    if (self.sections.count > 0) {
+        _minSectionChangeOffsetYIndex = self.sections.count - 1;
+    } else {
+        _minSectionChangeOffsetYIndex = 0;
     }
 }
 

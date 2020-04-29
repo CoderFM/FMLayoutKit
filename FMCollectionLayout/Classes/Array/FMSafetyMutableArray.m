@@ -20,6 +20,12 @@
 
 @implementation FMSafetyMutableArray
 
++ (instancetype)arrayWithArray:(NSArray *)array{
+    FMSafetyMutableArray *safeArray = [[self alloc] init];
+    [safeArray.inwardArrM addObjectsFromArray:array];
+    return safeArray;
+}
+
 - (void)addTarget:(id)target{
     self.target = target;
     __weak typeof(self) weakSelf =  self;
@@ -31,6 +37,15 @@
 }
 
 - (void)addObject:(id)anObject{
+    if (self.isSync) {
+        if (anObject == nil) {
+            return;
+        }
+        [self.inwardArrM addObject:anObject];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:self.inwardArrM.count - 1];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeAddType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (anObject == nil) {
             return;
@@ -42,6 +57,15 @@
 }
 
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index{
+    if (self.isSync) {
+        if (index > self.inwardArrM.count - 1 || anObject == nil) {
+            return;
+        }
+        [self.inwardArrM insertObject:anObject atIndex:index];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeAddType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (index > self.inwardArrM.count - 1 || anObject == nil) {
             return;
@@ -53,6 +77,15 @@
 }
 
 - (void)removeLastObject{
+    if (self.isSync) {
+        if (self.inwardArrM.count == 0) {
+            return;
+        }
+        [self.inwardArrM removeLastObject];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:self.inwardArrM.count];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (self.inwardArrM.count == 0) {
             return;
@@ -64,6 +97,15 @@
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
+    if (self.isSync) {
+        if (index > self.inwardArrM.count - 1) {
+            return;
+        }
+        [self.inwardArrM removeObjectAtIndex:index];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (index > self.inwardArrM.count - 1) {
             return;
@@ -75,6 +117,15 @@
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject{
+    if (self.isSync) {
+        if (index > self.inwardArrM.count - 1 || anObject == nil) {
+            return;
+        }
+        [self.inwardArrM replaceObjectAtIndex:index withObject:anObject];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeReplaceType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (index > self.inwardArrM.count - 1 || anObject == nil) {
             return;
@@ -97,6 +148,12 @@
 }
 
 - (void)addObjectsFromArray:(NSArray *)otherArray{
+    if (self.isSync) {
+        [self.inwardArrM addObjectsFromArray:otherArray];
+        NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.inwardArrM.count - otherArray.count, otherArray.count)];
+        [self syncChangeBlock:indexs type:FMSafetyMutableArrayChangeAddType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         [self.inwardArrM addObjectsFromArray:otherArray];
         NSIndexSet *indexs = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.inwardArrM.count - otherArray.count, otherArray.count)];
@@ -105,6 +162,17 @@
 }
 
 - (void)exchangeObjectAtIndex:(NSUInteger)idx1 withObjectAtIndex:(NSUInteger)idx2{
+    if (self.isSync) {
+        if (idx1 >= self.inwardArrM.count || idx2 >= self.inwardArrM.count) {
+            return;
+        }
+        [self.inwardArrM exchangeObjectAtIndex:idx1 withObjectAtIndex:idx2];
+        NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+        [set addIndex:idx1];
+        [set addIndex:idx2];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeReplaceType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (idx1 >= self.inwardArrM.count || idx2 >= self.inwardArrM.count) {
             return;
@@ -117,6 +185,16 @@
     });
 }
 - (void)removeAllObjects{
+    if (self.isSync) {
+        if (self.inwardArrM.count == 0) {
+            return;
+        }
+        NSUInteger count = self.inwardArrM.count;
+        [self.inwardArrM removeAllObjects];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, count)];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (self.inwardArrM.count == 0) {
             return;
@@ -128,6 +206,19 @@
     });
 }
 - (void)removeObject:(id)anObject inRange:(NSRange)range{
+    if (self.isSync) {
+        if (![self.inwardArrM containsObject:anObject]) {
+            return;
+        }
+        NSInteger index = [self.inwardArrM indexOfObject:anObject];
+        if (index < range.location || index > range.location + range.length) {
+            return;
+        }
+        [self.inwardArrM removeObjectAtIndex:index];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (![self.inwardArrM containsObject:anObject]) {
             return;
@@ -143,6 +234,16 @@
 }
 
 - (void)removeObject:(id)anObject{
+    if (self.isSync) {
+        if (![self.inwardArrM containsObject:anObject]) {
+            return;
+        }
+        NSInteger index = [self.inwardArrM indexOfObject:anObject];
+        [self.inwardArrM removeObjectAtIndex:index];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (![self.inwardArrM containsObject:anObject]) {
             return;
@@ -156,6 +257,19 @@
 
 - (void)removeObjectsInArray:(NSArray<id> *)otherArray{
     if (otherArray == nil || otherArray.count == 0) {
+        return;
+    }
+    if (self.isSync) {
+        for (int i = 0; i < otherArray.count; i++) {
+            id obj = otherArray[i];
+            if (![self.inwardArrM containsObject:obj]) {
+                    continue;
+            }
+            NSUInteger index = [self.inwardArrM indexOfObject:obj];
+            [self.inwardArrM removeObjectAtIndex:index];
+            NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+            [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        }
         return;
     }
     dispatch_async(self.safetyQueue, ^{
@@ -173,6 +287,20 @@
 }
 
 - (void)removeObjectsInRange:(NSRange)range{
+    if (self.isSync) {
+        if (range.location >= self.inwardArrM.count) {
+            return;
+        }
+        NSInteger lastLength = self.inwardArrM.count-1-range.location;
+        if (lastLength > range.length) {
+            lastLength = range.length;
+        }
+        NSRange lastRange = NSMakeRange(range.location, lastLength);
+        [self.inwardArrM removeObjectsInRange:lastRange];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:lastRange];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (range.location >= self.inwardArrM.count) {
             return;
@@ -188,6 +316,25 @@
     });
 }
 - (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray<id> *)otherArray range:(NSRange)otherRange{
+    if (self.isSync) {
+        if (range.location >= self.inwardArrM.count || otherRange.location >= otherArray.count) {
+            return;
+        }
+        NSInteger lastLength = self.inwardArrM.count-1-range.location;
+        if (lastLength > range.length) {
+            lastLength = range.length;
+        }
+        NSRange lastRange = NSMakeRange(range.location, lastLength);
+        if (otherArray == nil) {
+            [self.inwardArrM removeObjectsInRange:lastRange];
+            NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:lastRange];
+            [self asyncMianChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        } else {
+            [self.inwardArrM replaceObjectsInRange:range withObjectsFromArray:otherArray range:otherRange];
+            [self syncChangeBlock:nil type:FMSafetyMutableArrayChangeOtherType];
+        }
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (range.location >= self.inwardArrM.count || otherRange.location >= otherArray.count) {
             return;
@@ -208,6 +355,20 @@
     });
 }
 - (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray<id> *)otherArray{
+    if (self.isSync) {
+        if (range.location >= self.inwardArrM.count || otherArray == nil || otherArray.count == 0) {
+            return;
+        }
+        NSInteger lastLength = self.inwardArrM.count-1-range.location;
+        if (lastLength > range.length) {
+            lastLength = range.length;
+        }
+        NSRange lastRange = NSMakeRange(range.location, lastLength);
+        [self.inwardArrM removeObjectsInRange:lastRange];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:lastRange];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (range.location >= self.inwardArrM.count || otherArray == nil || otherArray.count == 0) {
             return;
@@ -223,6 +384,16 @@
     });
 }
 - (void)setArray:(NSArray<id> *)otherArray{
+    if (self.isSync) {
+        if (otherArray == nil) {
+            return;
+        }
+        [self.inwardArrM removeAllObjects];
+        [self.inwardArrM addObjectsFromArray:otherArray];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.inwardArrM.count)];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         if (otherArray == nil) {
             return;
@@ -235,6 +406,12 @@
 }
 
 - (void)sortUsingFunction:(NSInteger (NS_NOESCAPE *)(id,  id, void * _Nullable))compare context:(nullable void *)context{
+    if (self.isSync) {
+        [self.inwardArrM sortUsingFunction:compare context:context];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.inwardArrM.count)];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         [self.inwardArrM sortUsingFunction:compare context:context];
         NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.inwardArrM.count)];
@@ -243,6 +420,12 @@
 }
 
 - (void)sortUsingSelector:(SEL)comparator{
+    if (self.isSync) {
+        [self.inwardArrM sortUsingSelector:comparator];
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.inwardArrM.count)];
+        [self syncChangeBlock:set type:FMSafetyMutableArrayChangeDeleteType];
+        return;
+    }
     dispatch_async(self.safetyQueue, ^{
         [self.inwardArrM sortUsingSelector:comparator];
         NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.inwardArrM.count)];
@@ -251,6 +434,9 @@
 }
 
 - (void)insertObjects:(NSArray<id> *)objects atIndexes:(NSIndexSet *)indexes{
+    if (self.isSync) {
+        
+    }
     dispatch_async(self.safetyQueue, ^{
         __block NSInteger index = 0;
         NSInteger minIndex = MIN(objects.count, indexes.count);
@@ -331,6 +517,12 @@
             self.changeBlock(set, type);
         }
     });
+}
+
+- (void)syncChangeBlock:(NSIndexSet *)set type:(FMSafetyMutableArrayChangeType)type{
+    if (self.changeBlock) {
+        self.changeBlock(set, type);
+    }
 }
 
 - (dispatch_queue_t)safetyQueue{

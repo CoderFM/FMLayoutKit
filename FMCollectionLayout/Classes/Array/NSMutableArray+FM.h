@@ -11,9 +11,10 @@
 
 @interface NSMutableArray (FM)
 
-- (void)convertSafety;
+- (NSMutableArray *)convertSafety;
 
 - (void)listenDidChange:(FMSafetyMutableArrayChangeBlock)changeBlock;
+- (void)listenSyncDidChange:(FMSafetyMutableArrayChangeBlock)changeBlock;
 
 - (void)addTargetView:(id)target;
 

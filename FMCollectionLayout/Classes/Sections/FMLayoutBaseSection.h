@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, FMLayoutSectionHandleType) {
+    /// 重新计算 重新布局该分组
+    FMLayoutSectionHandleTypeReLayout,
+    /// 只是分组偏移高度改变
+    FMLayoutSectionHandleTypeOlnyChangeOffsetY,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 @class FMSupplementaryHeader, FMSupplementaryFooter, FMSupplementaryBackground, FMCollectionLayoutAttributes;
 @interface FMLayoutBaseSection : NSObject
@@ -18,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)BOOL hasHanble;///是否需要重新计算
 @property(nonatomic, assign)NSInteger hanbleItemStart;///重新计算哪一个开始
+@property(nonatomic, copy)void(^itemsLayoutChanged)(NSIndexPath *indexPath);
 
 @property(nonatomic, strong)FMCollectionLayoutAttributes *bgAttribute;
 @property(nonatomic, strong)FMCollectionLayoutAttributes *headerAttribute;
@@ -45,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 + (instancetype)sectionWithSectionInset:(UIEdgeInsets)inset itemSpace:(CGFloat)itemSpace lineSpace:(CGFloat)lineSpace column:(NSInteger)column;
+
+- (void)handleLayout;
 
 - (BOOL)intersectsRect:(CGRect)rect;
 

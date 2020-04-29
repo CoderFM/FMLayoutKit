@@ -20,17 +20,14 @@
 
 @implementation FMCollectionLayoutView
 
-#pragma mark ----- Publick
+#pragma mark ----- Public
 - (void)appendSections:(NSArray<FMLayoutBaseSection *> *)sections{
     [self.layout.sections addObjectsFromArray:sections];
 }
 - (void)insertSections:(NSArray<FMLayoutBaseSection *> *)sections atIndexSet:(NSIndexSet *)indexSet{
     [self.layout.sections insertObjects:sections atIndexes:indexSet];
     NSUInteger min = [indexSet firstIndex];
-    for (NSUInteger i = min; i < self.layout.sections.count; i++) {
-        self.layout.sections[i].hasHanble = NO;
-    }
-//    [self.layout invalidateLayout];
+    self.layout.minSectionChangeOffsetYIndex = min;
 }
 - (void)insertSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index{
     if (index > self.layout.sections.count) {
@@ -38,17 +35,13 @@
     } else {
         [self.layout.sections insertObject:section atIndex:index];
     }
-    for (NSUInteger i = index; i < self.layout.sections.count; i++) {
-        self.layout.sections[i].hasHanble = NO;
-    }
-//    [self.layout invalidateLayout];
+    self.layout.minSectionChangeOffsetYIndex = index;
 }
 - (void)deleteSections:(NSArray<FMLayoutBaseSection *> *)sections{
     [self.layout.sections removeObjectsInArray:sections];
     for (FMLayoutBaseSection *section in self.layout.sections) {
         section.hasHanble = NO;
     }
-//    [self.layout invalidateLayout];
 }
 
 - (FMCollectionViewLayout *)layout{
@@ -89,6 +82,7 @@
 }
 
 - (void)reloadData{
+    self.layout.minSectionChangeOffsetYIndex = 0;
     [super reloadData];
 }
 

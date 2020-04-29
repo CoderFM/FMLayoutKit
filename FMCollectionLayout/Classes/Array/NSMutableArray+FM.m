@@ -11,19 +11,22 @@
 
 @implementation NSMutableArray (FM)
 
-- (void)convertSafety{
+- (NSMutableArray *)convertSafety{
     if (![NSStringFromClass(self.class) isEqualToString:NSStringFromClass([FMSafetyMutableArray class])]) {
-        NSMutableArray *arr = [self mutableCopy];
-        [self removeAllObjects];
-        object_setClass(self, [FMSafetyMutableArray class]);
-        FMSafetyMutableArray *arrM = (FMSafetyMutableArray *)self;
-        [arrM addObjectsFromArray:arr];
+        return [FMSafetyMutableArray arrayWithArray:self];
+    } else {
+        return self;
     }
 }
 
 - (void)listenDidChange:(FMSafetyMutableArrayChangeBlock)changeBlock{
-    [self convertSafety];
     FMSafetyMutableArray *arrM = (FMSafetyMutableArray *)self;
+    arrM.changeBlock = changeBlock;
+}
+
+- (void)listenSyncDidChange:(FMSafetyMutableArrayChangeBlock)changeBlock{
+    FMSafetyMutableArray *arrM = (FMSafetyMutableArray *)self;
+    arrM.isSync = YES;
     arrM.changeBlock = changeBlock;
 }
 

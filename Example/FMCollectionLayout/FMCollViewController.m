@@ -43,21 +43,57 @@
     [self.collectionView reloadData];
 }
 - (void)reloadItem{
-    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
-}
-- (void)reloadAll{
+    [[self.shareSections firstObject].itemDatas addObject:@"1"];
     [self.collectionView reloadData];
 }
+
+- (void)deleteSection{
+    [self.shareSections removeObjectAtIndex:1];
+    [self.collectionView reloadData];
+}
+
+- (void)deleteItem{
+    [[self.shareSections firstObject].itemDatas removeObjectAtIndex:1];
+    [self.collectionView reloadData];
+}
+
+- (void)addSection{
+    {
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:3];
+
+        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.bottomMargin = 10;
+        section.header.type = FMSupplementaryTypeSuspension;
+        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
+
+        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+        section.footer.topMargin = 10;
+
+        section.itemSize = CGSizeMake(100, 100);
+        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3"] mutableCopy];
+        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [self.shareSections addObject:section];
+    }
+    [self.collectionView reloadData];
+}
+
+//- (void)addItem{
+//    [[self.shareSections firstObject].itemDatas removeObjectAtIndex:1];
+//    [self.collectionView reloadData];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor redColor];
     
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"插入分组" style:UIBarButtonItemStyleDone target:self action:@selector(reloadSection)];
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"刷新单个" style:UIBarButtonItemStyleDone target:self action:@selector(reloadItem)];
-    UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithTitle:@"刷新全部" style:UIBarButtonItemStyleDone target:self action:@selector(reloadAll)];
-    self.navigationItem.rightBarButtonItems = @[item2, item1, item3];
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"插-组" style:UIBarButtonItemStyleDone target:self action:@selector(reloadSection)];
+    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"插-单" style:UIBarButtonItemStyleDone target:self action:@selector(reloadItem)];
+    UIBarButtonItem *item11 = [[UIBarButtonItem alloc] initWithTitle:@"删-组" style:UIBarButtonItemStyleDone target:self action:@selector(deleteSection)];
+    UIBarButtonItem *item22 = [[UIBarButtonItem alloc] initWithTitle:@"删-单" style:UIBarButtonItemStyleDone target:self action:@selector(deleteItem)];
+    UIBarButtonItem *item111 = [[UIBarButtonItem alloc] initWithTitle:@"加-组" style:UIBarButtonItemStyleDone target:self action:@selector(addSection)];
+//    UIBarButtonItem *item222 = [[UIBarButtonItem alloc] initWithTitle:@"加-单" style:UIBarButtonItemStyleDone target:self action:@selector(addItem)];
+    self.navigationItem.rightBarButtonItems = @[item2, item1, item22, item11, item111];
     
     self.shareSections = [NSMutableArray array];
     {

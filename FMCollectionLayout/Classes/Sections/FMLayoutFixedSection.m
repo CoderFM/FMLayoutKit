@@ -31,11 +31,6 @@
         self.columnHeights[@(0)] = @(itemSize.height - self.header.bottomMargin);
     } else {
         [self resetColumnHeights];
-//        if (self.itemsAttribute == nil) {
-//            self.hanbleItemStart = 0;
-//        }
-//        NSMutableArray *originalAttrs = self.itemsAttribute && self.hanbleItemStart < self.itemsAttribute.count ? [[self.itemsAttribute subarrayWithRange:NSMakeRange(0, self.hanbleItemStart)] mutableCopy] : [NSMutableArray array];
-        
         NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
         NSMutableArray *attrs = [NSMutableArray array];
         for (int j = 0; j < items; j++) {
@@ -46,11 +41,9 @@
             CGFloat height = [self.columnHeights[@(column)] floatValue];
             CGFloat y = self.sectionOffset + self.sectionInset.top + self.header.inset.top + self.header.height + self.header.inset.bottom + self.header.bottomMargin + (height > 0 ? (height + self.lineSpace) : height);
             itemAttr.frame = CGRectMake(x, y, itemSize.width, itemSize.height);
-//            [originalAttrs addObject:itemAttr];
             [attrs addObject:itemAttr];
             self.columnHeights[@(column)] = @(height + itemSize.height + (height > 0 ? self.lineSpace : 0));
         }
-//        self.itemsAttribute = [originalAttrs copy];
         self.itemsAttribute = [attrs copy];
     }
 }

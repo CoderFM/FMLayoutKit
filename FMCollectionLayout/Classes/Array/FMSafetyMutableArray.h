@@ -21,7 +21,7 @@ typedef void(^FMSafetyMutableArrayChangeBlock)(NSIndexSet *, FMSafetyMutableArra
 @interface FMSafetyMutableArray : NSMutableArray
 
 @property(nonatomic, copy)FMSafetyMutableArrayChangeBlock changeBlock;
-
+@property(nonatomic, assign)BOOL isSync;
 - (void)addTarget:(id)target;
 
 @end
