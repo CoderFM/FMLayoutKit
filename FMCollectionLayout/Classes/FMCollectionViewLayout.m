@@ -10,6 +10,7 @@
 #import "FMLayoutBaseSection.h"
 #import "FMCollectionSupplementary.h"
 #import "FMCollectionLayoutAttributes.h"
+#import "NSMutableArray+FM.h"
 
 @interface FMCollectionViewLayout ()
 
@@ -33,15 +34,30 @@
     [self handleSections];
 }
 
-- (void)setSections:(NSArray<FMLayoutBaseSection *> *)sections{
-    _sections = sections;
+- (void)setSections:(NSMutableArray<FMLayoutBaseSection *> *)sections{
+    if ([sections isKindOfClass:[NSArray class]]) {
+        _sections = [sections mutableCopy];
+    } else {
+        _sections = sections;
+    }
+//    [_sections convertSafety];
+//    __weak typeof(self) weakSelf = self;
+//    [_sections listenDidChange:^(NSIndexSet *indexSet, FMSafetyMutableArrayChangeType type) {
+//        NSInteger min = [indexSet firstIndex];
+//        NSInteger max = [indexSet lastIndex];
+//        for (int i = min; i < weakSelf.sections.count; i++) {
+//            weakSelf.sections[i].hasHanble = NO;
+//        }
+//    }];
     [self invalidateLayout];
 }
 
 - (void)handleSections{
     [self registerSections];
     CGFloat sectionOffset = self.firstSectionOffsetY;
-    for (int i = 0; i < self.sections.count; i++) {
+    NSInteger sections = [self.collectionView numberOfSections];
+    sections = MIN(sections, self.sections.count);
+    for (int i = 0; i < sections; i++) {
         FMLayoutBaseSection *section = self.sections[i];
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
         

@@ -12,6 +12,7 @@
 @interface FMCollectionNavTitleView ()
 
 @property(nonatomic, weak)UIButton *selectBtn;
+@property(nonatomic, strong)NSMutableArray *btns;
 @end
 
 @implementation FMCollectionNavTitleView
@@ -25,6 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor greenColor];
+        self.btns = [NSMutableArray array];
         [self reCreateBtns];
     }
     return self;
@@ -60,6 +62,7 @@
             make.top.bottom.mas_equalTo(0);
             make.width.mas_equalTo(self.mas_width).multipliedBy(multiplied);
         }];
+        [self.btns addObject:btn];
         left = btn;
         if (i == 0) {
             self.selectBtn = btn;
@@ -75,7 +78,9 @@
 
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
-    
+    for (UIButton *btn in self.btns) {
+        btn.titleLabel.font = [UIFont systemFontOfSize:16 + (100 - frame.size.height) / 40.0 * 10];
+    }
 }
 
 @end

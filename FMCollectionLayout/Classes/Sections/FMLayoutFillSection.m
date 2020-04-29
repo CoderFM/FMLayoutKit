@@ -79,7 +79,7 @@
                                 if (thisY < lastY) { /// 如果找到的合适的y值小于之前的找到的y值  则设置为现在
                                     lastY = thisY;
                                     lastX = thisX;
-                                } else if(thisY == lastY) {
+                                } else if([self roundFloat:thisY] == [self roundFloat:lastY]) {///会有精度比较问题
                                     if (thisX < lastX) {
                                         lastY = thisY;
                                         lastX = thisX;
@@ -111,6 +111,10 @@
         }
     }
     return NO;
+}
+
+-(CGFloat)roundFloat:(CGFloat)value{
+    return roundf(value*100)/100;
 }
 
 @end

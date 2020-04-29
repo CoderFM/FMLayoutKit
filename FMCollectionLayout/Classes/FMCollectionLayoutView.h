@@ -25,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL reloaOlnyChanged;
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_UNAVAILABLE;
 
+- (void)appendSections:(NSArray<FMLayoutBaseSection *> *)sections;
+- (void)insertSections:(NSArray<FMLayoutBaseSection *> *)sections atIndexSet:(NSIndexSet *)indexSet;
+- (void)insertSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index;
+- (void)deleteSections:(NSArray<FMLayoutBaseSection *> *)sections;
+
 @end
 
 NS_ASSUME_NONNULL_END

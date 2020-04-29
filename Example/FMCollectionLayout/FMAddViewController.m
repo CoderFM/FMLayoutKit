@@ -121,24 +121,19 @@
         section.autoHeightFixedWidth = YES;
         section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[LS_HomeActivityCell class]];
-        [section setConfigurationCell:^(FMLayoutDynamicSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger index) {
-//            [((LS_HomeActivityCell *)cell).leftImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.height.mas_equalTo(50 + index * 20);
-//            }];
-            
-            if (index == 0) {
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            if (item == 0) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
             }
-            if (index == 1) {
+            if (item == 1) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
             }
-            if (index == 2) {
+            if (item == 2) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
             }
-            if (index == 3) {
-                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+            if (item == 3) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
             }
-//            [cell layoutIfNeeded];
         }];
         [self.shareSections addObject:section];
     }
@@ -153,33 +148,6 @@
         make.left.right.top.bottom.mas_equalTo(0);
     }];
     self.collectionView = view;
-}
-
-///配置cell
-- (void)layoutView:(FMCollectionLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath{
-    if ([cell isKindOfClass:[FMCollectionCustomCell class]]) {
-        FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
-        custom.label.text = [NSString stringWithFormat:@"%ld", indexPath.item];
-    } else {
-        NSInteger index = indexPath.item;
-        if (index == 0) {
-            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
-        }
-        if (index == 1) {
-            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
-        }
-        if (index == 2) {
-            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
-        }
-        if (index == 3) {
-            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
-        }
-    }
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    FMAddViewController *vc = [[FMAddViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
