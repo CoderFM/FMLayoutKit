@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FMCollectionCustomDecoration : UICollectionReusableView
-
+@property(nonatomic, weak)UILabel *textLabel;
 @end
 
 NS_ASSUME_NONNULL_END
