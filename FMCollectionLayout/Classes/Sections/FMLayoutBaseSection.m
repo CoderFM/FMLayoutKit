@@ -11,7 +11,6 @@
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryBackground.h"
 #import "FMCollectionLayoutAttributes.h"
-#import "NSMutableArray+FM.h"
 
 @interface FMLayoutBaseSection ()
 
@@ -38,17 +37,6 @@
     } else {
         _itemDatas = itemDatas;
     }
-    _itemDatas = [_itemDatas convertSafety];
-    __weak typeof(self) weakSelf = self;
-    [_itemDatas listenDidChange:^(NSIndexSet *set, FMSafetyMutableArrayChangeType type) {
-        weakSelf.hasHanble = NO;
-        !weakSelf.itemsLayoutChanged?:weakSelf.itemsLayoutChanged(weakSelf.indexPath);
-        if (type == FMSafetyMutableArrayChangeAddType) {
-            weakSelf.hanbleItemStart = weakSelf.itemDatas.count - set.count;
-        } else {
-            weakSelf.hanbleItemStart = 0;
-        }
-    }];
 }
 
 - (void)setSectionOffset:(CGFloat)sectionOffset{

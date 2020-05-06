@@ -10,7 +10,6 @@
 #import "FMLayoutBaseSection.h"
 #import "FMCollectionSupplementary.h"
 #import "FMCollectionLayoutAttributes.h"
-#import "NSMutableArray+FM.h"
 
 @interface FMCollectionViewLayout ()
 
@@ -155,7 +154,10 @@
     if (!section.hasHanble) {
         return nil;
     }
-    return section.itemsAttribute[indexPath.item];
+    if (indexPath.item < section.itemsAttribute.count) {
+        return section.itemsAttribute[indexPath.item];
+    }
+    return nil;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
