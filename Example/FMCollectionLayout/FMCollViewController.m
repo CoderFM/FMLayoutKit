@@ -25,6 +25,7 @@
 @implementation FMCollViewController
 
 - (void)reloadSection{
+ 
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:3];
 
@@ -115,7 +116,9 @@
         section.itemSize = CGSizeMake(100, 100);
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            
+        }];
         [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
             FMAddViewController *add = [[FMAddViewController alloc] init];
             [self.navigationController pushViewController:add animated:YES];
