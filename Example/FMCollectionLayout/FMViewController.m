@@ -108,10 +108,12 @@
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
         
-//        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
-//        section.header.bottomMargin = 10;
-//        section.header.type = FMSupplementaryTypeSuspensionBigger;
-//        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
+        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.bottomMargin = 10;
+        section.header.suspensionTopHeight = 70;
+        section.header.type = FMSupplementaryTypeSuspensionAlways;
+        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;

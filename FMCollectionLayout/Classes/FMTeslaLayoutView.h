@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentLayoutView:(FMCollectionLayoutView *)layoutView;
 ///滚动事件
 - (void)tesla:(FMTeslaLayoutView *)tesla scrollViewDidScroll:(UIScrollView *)scrollView;
+/// 当前上下滚动的事件
+- (void)tesla:(FMTeslaLayoutView *)tesla currentLayoutViewScrollDidScroll:(FMCollectionLayoutView *)currentLayoutView contentOffset:(CGPoint)contentOffset;
 
 /// 配置FMCollectionLayoutView
 ///2
@@ -47,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, weak)id<FMTeslaLayoutViewDelegate> delegate;
 @property(nonatomic, weak)id<FMTeslaLayoutViewDataSource> dataSource;
+@property(nonatomic, assign)BOOL horizontalCanScroll;
 @property(nonatomic, assign)NSInteger selectIndex;
 - (void)reLoadSubViews;
 - (void)reloadData;

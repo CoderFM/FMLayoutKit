@@ -130,8 +130,8 @@
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
 
         section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
-        section.header.type = FMSupplementaryTypeSuspension;
+        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        section.header.type = FMSupplementaryTypeSuspensionAlways;
         section.header.bottomMargin = 10;
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
@@ -152,6 +152,7 @@
         section.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
 
         section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.suspensionTopHeight = 150;
         section.header.zIndex = FMSupplementaryZIndexFrontAlways;
         section.header.type = FMSupplementaryTypeSuspensionAlways;
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {

@@ -127,10 +127,10 @@
         }
     }
     if (self.header.type == FMSupplementaryTypeSuspensionAlways) {
-        if (self.collectionView.contentOffset.y > self.sectionOffset + self.sectionInset.top) {
+        if (self.collectionView.contentOffset.y > self.sectionOffset + self.sectionInset.top - self.header.suspensionTopHeight) {
             UICollectionViewLayoutAttributes *show = [self.headerAttribute copy];
             CGRect frame = show.frame;
-            frame.origin.y = self.collectionView.contentOffset.y;
+            frame.origin.y = self.collectionView.contentOffset.y + self.header.suspensionTopHeight;
             show.frame = frame;
             return show;
         } else {

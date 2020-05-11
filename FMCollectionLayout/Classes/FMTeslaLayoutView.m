@@ -135,12 +135,18 @@
     }
 }
 
+- (void)setHorizontalCanScroll:(BOOL)horizontalCanScroll{
+    _horizontalCanScroll = horizontalCanScroll;
+    self.scrollView.scrollEnabled = horizontalCanScroll;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
+        self.horizontalCanScroll = YES;
         self.layoutViews = [NSMutableDictionary dictionary];
     }
     return self;
@@ -275,6 +281,9 @@
 #pragma mark -------  observeValueForKeyPath
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     CGPoint contentOffset = [change[NSKeyValueChangeNewKey] CGPointValue];
+    if ([self.delegate respondsToSelector:@selector(tesla:currentLayoutViewScrollDidScroll:contentOffset:)]) {
+        [self.delegate tesla:self currentLayoutViewScrollDidScroll:self.currentLayoutView contentOffset:contentOffset];
+    }
     if (contentOffset.y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionHeight+self.shareSuspensionDifferHeight) {
         for (FMCollectionLayoutView *coll in self.layoutViews.allValues) {
             if (coll != self.currentLayoutView) {

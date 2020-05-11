@@ -7,12 +7,11 @@
 //
 
 #import "FMCollectionSupplementary.h"
-
-
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FMSupplementaryHeader : FMCollectionSupplementary
+/// 悬浮模式  具体顶部的高度  可以来设置两个悬浮的方式
+@property(nonatomic, assign)CGFloat suspensionTopHeight;
 
 @property(nonatomic, assign)CGFloat bottomMargin;
 
