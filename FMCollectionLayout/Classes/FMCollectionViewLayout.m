@@ -25,6 +25,7 @@
 
 - (instancetype)init{
     if (self = [super init]) {
+//        self.headersType = FMLayoutHeadersSuspensionTypeSort;
     }
     return self;
 }

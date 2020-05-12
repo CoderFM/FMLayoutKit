@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)CGFloat bottomMargin;
 
+///是否黏在顶部 目前仅支持FMSupplementaryTypeSuspensionAlways悬浮模式
+@property(nonatomic, assign)BOOL isStickTop;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,11 @@
 #import "FMSupplementaryFooter.h"
 #import "FMSupplementaryBackground.h"
 
+typedef NS_ENUM(NSUInteger, FMLayoutHeadersSuspensionType) {
+    FMLayoutHeadersSuspensionTypeOverlap,
+    FMLayoutHeadersSuspensionTypeSort
+};
+
 NS_ASSUME_NONNULL_BEGIN
 @interface FMCollectionViewLayout : UICollectionViewLayout
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *sections;
@@ -20,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL reLayoutOlnyChanged;
 @property(nonatomic, assign)CGFloat minContentSizeHeight;
 @property(nonatomic, assign)NSInteger minSectionChangeOffsetYIndex;
+//@property(nonatomic, assign)FMLayoutHeadersSuspensionType headersType;
 - (void)handleSections;
 - (void)setFirstSectionOffsetY:(CGFloat)offsetY;
 @end

@@ -134,7 +134,15 @@
             show.frame = frame;
             return show;
         } else {
-            return self.headerAttribute;
+            if (self.header.isStickTop && self.collectionView.contentOffset.y < 0) { ///黏在顶部
+                UICollectionViewLayoutAttributes *show = [self.headerAttribute copy];
+                CGRect frame = show.frame;
+                frame.origin.y = self.collectionView.contentOffset.y + frame.origin.y;
+                show.frame = frame;
+                return show;
+            } else {
+                return self.headerAttribute;
+            }
         }
     }
     if (self.header.type == FMSupplementaryTypeSuspensionBigger && self.indexPath.section == 0) {

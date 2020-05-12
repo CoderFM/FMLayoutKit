@@ -60,12 +60,34 @@
     
     self.shareSections = [NSMutableArray array];
     {
-        FMLayoutFixedAddSection *section = [FMLayoutFixedAddSection sectionWithSectionInset:UIEdgeInsetsMake(15, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
+        FMLayoutFixedAddSection *section = [FMLayoutFixedAddSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 0, 15) itemSpace:10 lineSpace:10 column:2];
+
+        section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.type = FMSupplementaryTypeSuspensionAlways;
+        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        section.header.isStickTop = YES;
+        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
+        [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
+            FMCollectionCustomDecoration *custom = (FMCollectionCustomDecoration *)header;
+            custom.textLabel.text = @"第一个悬浮的顶部视图, 黏在顶部";
+        }];
+        [self.shareSections addObject:section];
+    }
+    
+    {
+        FMLayoutFixedAddSection *section = [FMLayoutFixedAddSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
 
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
-        section.header.type = FMSupplementaryTypeSuspension;
+        section.header.type = FMSupplementaryTypeSuspensionAlways;
+        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        section.header.isStickTop = NO;
+        section.header.suspensionTopHeight = 50;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
+        [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
+            FMCollectionCustomDecoration *custom = (FMCollectionCustomDecoration *)header;
+            custom.textLabel.text = @"第二个悬浮的顶部视图, 不黏在顶部";
+        }];
 
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
@@ -145,7 +167,8 @@
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(0);
+        make.left.right.bottom.mas_equalTo(0);
+        make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
 }
