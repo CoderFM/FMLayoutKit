@@ -8,6 +8,7 @@
 
 #import "FMTeslaLayoutView.h"
 #import "FMCollectionLayoutView.h"
+#import "FMTeslaSuspensionHeightChangeDelegate.h"
 
 @interface FM_ScrollView : UIScrollView
 
@@ -307,10 +308,14 @@
                     if (@available(iOS 9.0, *)) {
                         UICollectionReusableView *header = [self.shareLayoutView supplementaryViewForElementKind:self.suspensionAlwaysHeader.header.elementKind atIndexPath:self.suspensionAlwaysHeader.indexPath];
                         CGFloat diff = (contentOffset.y - self.shareLayoutView.frame.size.height+self.suspensionAlwaysHeader.sectionHeight);
-                        CGRect headerFrame = header.frame;
-                        headerFrame.size.height = self.suspensionAlwaysHeader.header.height - diff;
-                        headerFrame.origin.y = self.suspensionAlwaysHeader.sectionOffset + diff;
-                        header.frame = headerFrame;
+                        CGFloat showHeight = self.suspensionAlwaysHeader.header.height - diff;
+                        if ([header conformsToProtocol:@protocol(FMTeslaSuspensionHeightChangeDelegate)] && [header respondsToSelector:@selector(teslaSuspensionHeaderShouldShowHeight:)]) {
+                            [header performSelector:@selector(teslaSuspensionHeaderShouldShowHeight:) withObject:@(showHeight)];
+                        }
+//                        CGRect headerFrame = header.frame;
+//                        headerFrame.size.height = self.suspensionAlwaysHeader.header.height - diff;
+//                        headerFrame.origin.y = self.suspensionAlwaysHeader.sectionOffset + diff;
+//                        header.frame = headerFrame;
                     } else {
                         // Fallback on earlier versions
                     }
@@ -318,10 +323,10 @@
                     if (@available(iOS 9.0, *)) {
                         UICollectionReusableView *header = [self.shareLayoutView supplementaryViewForElementKind:self.suspensionAlwaysHeader.header.elementKind atIndexPath:self.suspensionAlwaysHeader.indexPath];
                         CGFloat diff = 0;
-                        CGRect headerFrame = header.frame;
-                        headerFrame.size.height = self.suspensionAlwaysHeader.header.height - diff;
-                        headerFrame.origin.y = self.suspensionAlwaysHeader.sectionOffset + diff;
-                        header.frame = headerFrame;
+                        CGFloat showHeight = self.suspensionAlwaysHeader.header.height - diff;
+                        if ([header conformsToProtocol:@protocol(FMTeslaSuspensionHeightChangeDelegate)] && [header respondsToSelector:@selector(teslaSuspensionHeaderShouldShowHeight:)]) {
+                            [header performSelector:@selector(teslaSuspensionHeaderShouldShowHeight:) withObject:@(showHeight)];
+                        }
                     } else {
                         // Fallback on earlier versions
                     }
@@ -344,10 +349,10 @@
                 if (@available(iOS 9.0, *)) {
                     UICollectionReusableView *header = [self.shareLayoutView supplementaryViewForElementKind:self.suspensionAlwaysHeader.header.elementKind atIndexPath:self.suspensionAlwaysHeader.indexPath];
                     CGFloat diff = self.shareSuspensionDifferHeight;
-                    CGRect headerFrame = header.frame;
-                    headerFrame.size.height = self.suspensionAlwaysHeader.header.height - diff;
-                    headerFrame.origin.y = self.suspensionAlwaysHeader.sectionOffset + diff;
-                    header.frame = headerFrame;
+                    CGFloat showHeight = self.suspensionAlwaysHeader.header.height - diff;
+                    if ([header conformsToProtocol:@protocol(FMTeslaSuspensionHeightChangeDelegate)] && [header respondsToSelector:@selector(teslaSuspensionHeaderShouldShowHeight:)]) {
+                        [header performSelector:@selector(teslaSuspensionHeaderShouldShowHeight:) withObject:@(showHeight)];
+                    }
                 } else {
                    
                 }

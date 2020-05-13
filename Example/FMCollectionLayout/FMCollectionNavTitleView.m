@@ -11,6 +11,8 @@
 
 @interface FMCollectionNavTitleView ()
 
+@property(nonatomic, weak)UIView *contentView;
+
 @property(nonatomic, weak)UIButton *selectBtn;
 @property(nonatomic, strong)NSMutableArray *btns;
 @end
@@ -25,7 +27,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor greenColor];
+        UIView *contentView = [[UIView alloc] init];
+        [self addSubview:contentView];
+        [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(100);
+        }];
+        self.contentView = contentView;
+        self.contentView.backgroundColor = [UIColor greenColor];
         self.btns = [NSMutableArray array];
         [self reCreateBtns];
     }
@@ -52,7 +61,7 @@
        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
        [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btn];
+        [self.contentView addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             if (left) {
                 make.left.mas_equalTo(left.mas_right);
@@ -76,10 +85,12 @@
     self.selectBtn = sender;
 }
 
-- (void)setFrame:(CGRect)frame{
-    [super setFrame:frame];
+- (void)teslaSuspensionHeaderShouldShowHeight:(CGFloat)showHeight{
+    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(showHeight);
+    }];
     for (UIButton *btn in self.btns) {
-        btn.titleLabel.font = [UIFont systemFontOfSize:16 + (100 - frame.size.height) / 40.0 * 10];
+        btn.titleLabel.font = [UIFont systemFontOfSize:16 + (100 - showHeight) / 40.0 * 10];
     }
 }
 

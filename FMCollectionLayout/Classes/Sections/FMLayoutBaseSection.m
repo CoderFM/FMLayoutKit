@@ -134,7 +134,7 @@
             show.frame = frame;
             return show;
         } else {
-            if (self.header.isStickTop && self.collectionView.contentOffset.y < 0) { ///黏在顶部
+            if (self.header.isStickTop) {///黏在顶部
                 UICollectionViewLayoutAttributes *show = [self.headerAttribute copy];
                 CGRect frame = show.frame;
                 frame.origin.y = self.collectionView.contentOffset.y + frame.origin.y;

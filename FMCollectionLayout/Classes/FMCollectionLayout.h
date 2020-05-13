@@ -14,6 +14,8 @@
 #import "FMCollectionViewLayout.h"
 #import "FMCollectionLayoutAttributes.h"
 
+#import "FMTeslaSuspensionHeightChangeDelegate.h"
+
 #import "FMLayoutFixedSection.h"
 #import "FMLayoutDynamicSection.h"
 #import "FMLayoutLabelSection.h"

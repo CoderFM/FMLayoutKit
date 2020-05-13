@@ -52,29 +52,30 @@
     
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
-        
+
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
-        section.header.type = FMSupplementaryTypeSuspensionBigger;
+        section.header.type = FMSupplementaryTypeSuspensionAlways;
+        section.header.isStickTop = YES;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
-        
+
 //        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
 //        section.footer.topMargin = 10;
-        
+
         section.itemSize = CGSizeMake(100, 100);
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        
+
         [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
             FMCollectionCustomCell *customCell = (FMCollectionCustomCell *)cell;
             customCell.contentView.backgroundColor = [UIColor yellowColor];
         }];
-        
+
         [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
             FMCollViewController *vc = [[FMCollViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }];
-        
+
         [self.shareSections addObject:section];
     }
 //    {
@@ -97,6 +98,7 @@
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionNavTitleView class]];
         section.header.type = FMSupplementaryTypeSuspensionAlways;
         section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+        section.header.isStickTop = YES;
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
             self.navTitleView = (FMCollectionNavTitleView *)header;
         }];
@@ -111,8 +113,8 @@
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
         section.header.suspensionTopHeight = 70;
-        section.header.type = FMSupplementaryTypeSuspensionAlways;
-        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+//        section.header.type = FMSupplementaryTypeSuspensionAlways;
+//        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];

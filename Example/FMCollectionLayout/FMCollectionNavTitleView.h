@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <FMCollectionLayout.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FMCollectionNavTitleView : UICollectionReusableView
+@interface FMCollectionNavTitleView : UICollectionReusableView<FMTeslaSuspensionHeightChangeDelegate>
 @property(nonatomic, copy)NSArray *titles;
 @property(nonatomic, copy)void(^clickBlock)(NSInteger tag);
 - (void)selectWithIndex:(NSInteger)index;
