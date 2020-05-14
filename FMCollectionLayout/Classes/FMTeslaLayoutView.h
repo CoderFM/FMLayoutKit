@@ -50,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak)id<FMTeslaLayoutViewDelegate> delegate;
 @property(nonatomic, weak)id<FMTeslaLayoutViewDataSource> dataSource;
 @property(nonatomic, assign)BOOL horizontalCanScroll;
+@property(nonatomic, assign)BOOL allShareStickTop;
 @property(nonatomic, assign)NSInteger selectIndex;
 - (void)reLoadSubViews;
 - (void)reloadData;

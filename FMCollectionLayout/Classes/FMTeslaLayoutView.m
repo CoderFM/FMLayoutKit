@@ -300,7 +300,9 @@
                     frame.origin.y = contentOffset.y;
                     frame.size.height = self.shareHeight - contentOffset.y;
                     self.shareLayoutView.frame = frame;
-                    self.shareLayoutView.contentOffset = CGPointMake(0, contentOffset.y);
+                    if (!self.allShareStickTop) {
+                        self.shareLayoutView.contentOffset = CGPointMake(0, contentOffset.y);
+                    }
                 }
                 
                 if (contentOffset.y > self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionHeight) {
@@ -312,10 +314,6 @@
                         if ([header conformsToProtocol:@protocol(FMTeslaSuspensionHeightChangeDelegate)] && [header respondsToSelector:@selector(teslaSuspensionHeaderShouldShowHeight:)]) {
                             [header performSelector:@selector(teslaSuspensionHeaderShouldShowHeight:) withObject:@(showHeight)];
                         }
-//                        CGRect headerFrame = header.frame;
-//                        headerFrame.size.height = self.suspensionAlwaysHeader.header.height - diff;
-//                        headerFrame.origin.y = self.suspensionAlwaysHeader.sectionOffset + diff;
-//                        header.frame = headerFrame;
                     } else {
                         // Fallback on earlier versions
                     }

@@ -32,6 +32,7 @@
         FMTeslaLayoutView *multi = [[FMTeslaLayoutView alloc] init];
         multi.delegate = self;
         multi.dataSource = self;
+        multi.allShareStickTop = NO;
         [self.view addSubview:multi];
         _multiScreen = multi;
     }
@@ -55,8 +56,8 @@
 
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
-        section.header.type = FMSupplementaryTypeSuspensionAlways;
-        section.header.isStickTop = YES;
+//        section.header.type = FMSupplementaryTypeSuspensionAlways;
+//        section.header.isStickTop = YES;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
 
 //        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
@@ -98,7 +99,7 @@
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionNavTitleView class]];
         section.header.type = FMSupplementaryTypeSuspensionAlways;
         section.header.zIndex = FMSupplementaryZIndexFrontAlways;
-        section.header.isStickTop = YES;
+//        section.header.isStickTop = YES;
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
             self.navTitleView = (FMCollectionNavTitleView *)header;
         }];
@@ -108,13 +109,14 @@
     
     
     {
-        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
+        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
         
         section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.bottomMargin = 10;
-        section.header.suspensionTopHeight = 70;
+//        section.header.suspensionTopHeight = 70;
 //        section.header.type = FMSupplementaryTypeSuspensionAlways;
 //        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+//        section.header.isStickTop = YES;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
