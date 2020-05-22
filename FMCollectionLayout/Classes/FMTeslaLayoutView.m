@@ -75,6 +75,7 @@
 }
 
 - (void)dealloc{
+    NSLog(@"tesla  dealloc");
     self.currentLayoutView = nil;
 }
 
@@ -178,6 +179,7 @@
     [self.currentLayoutView addSubview:self.shareLayoutView];
     [self.shareLayoutView reloadData];
     self.isLoadSubView = YES;
+    [self scrollToIndex:self.selectIndex animated:NO];
 }
 
 - (void)setCurrentLayoutViewWithIndex:(NSInteger)index{
@@ -335,8 +337,7 @@
         for (FMCollectionLayoutView *coll in self.layoutViews.allValues) {
             if (coll != self.currentLayoutView) {
                 if (coll.contentOffset.y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionHeight + self.shareSuspensionDifferHeight) {
-                    contentOffset.y = self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionHeight + self.shareSuspensionDifferHeight;
-                    coll.contentOffset = contentOffset;
+                    coll.contentOffset = CGPointMake(0, self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionHeight + self.shareSuspensionDifferHeight);
                 }
             } else {
                 CGRect frame = self.shareLayoutView.frame;

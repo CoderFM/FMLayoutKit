@@ -30,9 +30,10 @@
 - (FMTeslaLayoutView *)multiScreen{
     if (_multiScreen == nil) {
         FMTeslaLayoutView *multi = [[FMTeslaLayoutView alloc] init];
+        multi.selectIndex = 2;
         multi.delegate = self;
         multi.dataSource = self;
-        multi.allShareStickTop = NO;
+        multi.allShareStickTop = YES;
         [self.view addSubview:multi];
         _multiScreen = multi;
     }
