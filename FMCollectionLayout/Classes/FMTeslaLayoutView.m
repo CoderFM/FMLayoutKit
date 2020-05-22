@@ -76,6 +76,7 @@
 
 - (void)dealloc{
     NSLog(@"tesla  dealloc");
+    [self.currentLayoutView removeObserver:self forKeyPath:@"contentOffset"];
     self.currentLayoutView = nil;
 }
 
