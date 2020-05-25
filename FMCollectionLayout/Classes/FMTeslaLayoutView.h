@@ -54,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)NSInteger selectIndex;
 - (void)reLoadSubViews;
 - (void)reloadData;
+- (void)reloadDataWithIndex:(NSInteger)index;
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated;
 @end
 

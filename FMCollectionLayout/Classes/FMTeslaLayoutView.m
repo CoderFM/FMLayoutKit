@@ -62,7 +62,15 @@
 }
 
 - (void)reloadData{
+    [self.shareLayoutView reloadData];
     [self.currentLayoutView reloadData];
+}
+
+- (void)reloadDataWithIndex:(NSInteger)index{
+    FMCollectionLayoutView *layoutView = self.layoutViews[@(index)];
+    if (layoutView) {
+        [layoutView reloadData];
+    }
 }
 
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated{
@@ -77,7 +85,6 @@
 - (void)dealloc{
     NSLog(@"tesla  dealloc");
     [self.currentLayoutView removeObserver:self forKeyPath:@"contentOffset"];
-    self.currentLayoutView = nil;
 }
 
 - (CGFloat)shareSuspensionDifferHeight{
