@@ -325,6 +325,7 @@
     }
     
     FMCollectionLayoutView *view = [[FMCollectionLayoutView alloc] init];
+    view.delegate = self;
     [view.layout setSections:self.shareSections];
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
@@ -333,6 +334,14 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"collectionView:didSelectItemAtIndexPath");
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"scrollViewDidScroll");
 }
 
 @end

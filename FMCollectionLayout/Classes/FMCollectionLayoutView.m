@@ -15,7 +15,7 @@
 @interface FMCollectionLayoutView ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(nonatomic, weak)id<UICollectionViewDataSource> externalDataSource;
-
+@property(nonatomic, weak)id<UICollectionViewDelegate> externalDelegate;
 @end
 
 @implementation FMCollectionLayoutView
@@ -74,6 +74,15 @@
         self.externalDataSource = dataSource;
     }
     [super setDataSource:self];
+}
+
+- (void)setDelegate:(id<UICollectionViewDelegate>)delegate{
+    if (delegate == self) {
+        self.externalDelegate = nil;
+    } else {
+        self.externalDelegate = delegate;
+    }
+    [super setDelegate:self];
 }
 
 - (void)setReloaOlnyChanged:(BOOL)reloaOlnyChanged{
@@ -241,12 +250,100 @@
     return nil;
 }
 
+#pragma mark ----- delegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section < self.layout.sections) {
+    if (indexPath.section < self.layout.sections.count) {
         FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
         if (sectionM.clickCellBlock) {
             sectionM.clickCellBlock(sectionM, indexPath.item);
         }
+    }
+    if ([self.externalDelegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
+        [self.externalDelegate collectionView:collectionView didSelectItemAtIndexPath:indexPath];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.externalDelegate respondsToSelector:@selector(collectionView:willDisplayCell:forItemAtIndexPath:)]) {
+        [self.externalDelegate collectionView:collectionView willDisplayCell:cell forItemAtIndexPath:indexPath];
+    }
+}
+- (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
+    if ([self.externalDelegate respondsToSelector:@selector(collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:)]) {
+        [self.externalDelegate collectionView:collectionView willDisplaySupplementaryView:view forElementKind:elementKind atIndexPath:indexPath];
+    }
+}
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.externalDelegate respondsToSelector:@selector(collectionView:didEndDisplayingCell:forItemAtIndexPath:)]) {
+        [self.externalDelegate collectionView:collectionView didEndDisplayingCell:cell forItemAtIndexPath:indexPath];
+    }
+}
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingSupplementaryView:(UICollectionReusableView *)view forElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
+    if ([self.externalDelegate respondsToSelector:@selector(collectionView:didEndDisplayingSupplementaryView:forElementOfKind:atIndexPath:)]) {
+        [self.externalDelegate collectionView:collectionView didEndDisplayingSupplementaryView:view forElementOfKind:elementKind atIndexPath:indexPath];
+    }
+}
+
+#pragma mark ----- scroll delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [self.externalDelegate scrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
+        [self.externalDelegate scrollViewWillBeginDragging:scrollView];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)]) {
+        [self.externalDelegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
+        [self.externalDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)]) {
+        [self.externalDelegate scrollViewWillBeginDecelerating:scrollView];
+    }
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
+        [self.externalDelegate scrollViewDidEndDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]) {
+        [self.externalDelegate scrollViewDidEndScrollingAnimation:scrollView];
+    }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewShouldScrollToTop:)]) {
+        return [self.externalDelegate scrollViewShouldScrollToTop:scrollView];
+    }
+    return YES;
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView{
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewDidScrollToTop:)]) {
+        [self.externalDelegate scrollViewDidScrollToTop:scrollView];
+    }
+}
+
+- (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView API_AVAILABLE(ios(11.0), tvos(11.0)){
+    if ([self.externalDelegate respondsToSelector:@selector(scrollViewDidChangeAdjustedContentInset:)]) {
+        [self.externalDelegate scrollViewDidChangeAdjustedContentInset:scrollView];
     }
 }
 

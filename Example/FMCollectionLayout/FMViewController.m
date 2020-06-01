@@ -80,20 +80,20 @@
 
         [self.shareSections addObject:section];
     }
-//    {
-//        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-//
-//        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
-//        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
-//        section.header.type = FMSupplementaryTypeFixed;
-//        section.header.bottomMargin = 10;
-//
-//        section.isHorizontalCanScroll = YES;
-//        section.itemSize = CGSizeMake(150, 100);
-//        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
-//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-//        [self.shareSections addObject:section];
-//    }
+    {
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+
+        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
+        section.header.type = FMSupplementaryTypeFixed;
+        section.header.bottomMargin = 10;
+
+        section.isHorizontalCanScroll = YES;
+        section.itemSize = CGSizeMake(150, 100);
+        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
+        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [self.shareSections addObject:section];
+    }
 //
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
