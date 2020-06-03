@@ -160,7 +160,7 @@
                 [weakSelf.configuration layoutView:weakSelf configurationCell:hItemCell indexPath:[NSIndexPath indexPathForItem:item inSection:indexPath.section]];
             } else {
                 if (sectionM.configureCellData) {
-                    sectionM.configureCellData(sectionM, cell, item);
+                    sectionM.configureCellData(sectionM, hItemCell, item);
                 }
             }
         }];

@@ -33,7 +33,7 @@
         multi.selectIndex = 2;
         multi.delegate = self;
         multi.dataSource = self;
-        multi.allShareStickTop = YES;
+//        multi.allShareStickTop = YES;
         [self.view addSubview:multi];
         _multiScreen = multi;
     }
@@ -92,6 +92,9 @@
         section.itemSize = CGSizeMake(150, 100);
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            
+        }];
         [self.shareSections addObject:section];
     }
 //
