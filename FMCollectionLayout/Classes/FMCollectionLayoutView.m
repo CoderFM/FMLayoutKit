@@ -77,6 +77,9 @@
 }
 
 - (void)setDelegate:(id<UICollectionViewDelegate>)delegate{
+    if (delegate == nil) {
+        return;
+    }
     if (delegate == self) {
         self.externalDelegate = nil;
     } else {
