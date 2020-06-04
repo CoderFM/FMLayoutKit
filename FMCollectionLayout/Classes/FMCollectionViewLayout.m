@@ -70,7 +70,7 @@
 //                weakSelf.minSectionChangeOffsetYIndex  = indexPath.section;
 //            }
 //        }];
-//        
+//
 //        if (self.reLayoutOlnyChanged) {// 只改变变过的
 //            if (i < self.minSectionChangeOffsetYIndex && section.hasHanble) {
 //                section.sectionOffset = sectionOffset;
@@ -87,11 +87,11 @@
         section.hasHanble = YES;
     }
     
-    if (self.sections.count > 0) {
-        _minSectionChangeOffsetYIndex = self.sections.count - 1;
-    } else {
-        _minSectionChangeOffsetYIndex = 0;
-    }
+//    if (self.sections.count > 0) {
+//        _minSectionChangeOffsetYIndex = self.sections.count - 1;
+//    } else {
+//        _minSectionChangeOffsetYIndex = 0;
+//    }
 }
 
 - (void)registerSections{

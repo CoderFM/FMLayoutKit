@@ -176,10 +176,8 @@
             self.shareLayoutView.frame = self.bounds;
         }
         [self.shareLayoutView.layout setSections:sections];
-        [self.shareLayoutView.layout handleSections];
-//        [self.shareLayoutView layoutIfNeeded];
-        shareHeight = [self.shareLayoutView.layout collectionViewContentSize].height;
-        self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
+        [self.shareLayoutView reloadData];
+        [self.shareLayoutView layoutIfNeeded];
         shareHeight = [self.shareLayoutView.layout collectionViewContentSize].height;
         self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
         self.suspensionAlwaysHeader = sections.count > 0 ? ([sections lastObject].header.type == FMSupplementaryTypeSuspensionAlways ? [sections lastObject] :nil) : nil;

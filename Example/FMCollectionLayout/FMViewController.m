@@ -56,75 +56,80 @@
     self.shareSections = [NSMutableArray array];
     self.sections = [NSMutableArray array];
     
+    {
+        FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
+
+        section.cellFixedWidth = 166;
+        section.autoHeightFixedWidth = YES;
+        section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
+        section.cellElement = [FMCollectionViewElement elementWithViewClass:[LS_HomeActivityCell class]];
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            if (item == 0) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+                return;
+            }
+            if (item == 1) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+                return;
+            }
+            if (item == 2) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
+                return;
+            }
+            if (item == 3) {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+            } else {
+                ((LS_HomeActivityCell *)cell).introLabel.text = @"asdjlakjdlaksjdlakjdlask";
+            }
+        }];
+        [self.shareSections addObject:section];
+    }
+    
 //    {
-//        FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
+//        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
 //
-//        section.cellFixedWidth = 166;
-//        section.autoHeightFixedWidth = YES;
-//        section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
-//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[LS_HomeActivityCell class]];
+//        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.bottomMargin = 10;
+////        section.header.type = FMSupplementaryTypeSuspensionAlways;
+////        section.header.isStickTop = YES;
+//        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
+//
+////        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+////        section.footer.topMargin = 10;
+//
+//        section.itemSize = CGSizeMake(100, 100);
+//        section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+//
 //        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-//            if (item == 0) {
-//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
-//            }
-//            if (item == 1) {
-//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
-//            }
-//            if (item == 2) {
-//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
-//            }
-//            if (item == 3) {
-//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
-//            }
+//            FMCollectionCustomCell *customCell = (FMCollectionCustomCell *)cell;
+//            customCell.contentView.backgroundColor = [UIColor yellowColor];
+//        }];
+//
+//        [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
+//            FMCollViewController *vc = [[FMCollViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }];
+//
+//        [self.shareSections addObject:section];
+//    }
+//    {
+//        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
+//
+//        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
+//        section.header.type = FMSupplementaryTypeFixed;
+//        section.header.bottomMargin = 10;
+//
+//        section.isHorizontalCanScroll = YES;
+//        section.itemSize = CGSizeMake(150, 100);
+//        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
+//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+//        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+//
 //        }];
 //        [self.shareSections addObject:section];
 //    }
-    
-    {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
-
-        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.bottomMargin = 10;
-//        section.header.type = FMSupplementaryTypeSuspensionAlways;
-//        section.header.isStickTop = YES;
-        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
-
-//        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
-//        section.footer.topMargin = 10;
-
-        section.itemSize = CGSizeMake(100, 100);
-        section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
-        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-
-        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-            FMCollectionCustomCell *customCell = (FMCollectionCustomCell *)cell;
-            customCell.contentView.backgroundColor = [UIColor yellowColor];
-        }];
-
-        [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
-            FMCollViewController *vc = [[FMCollViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }];
-
-        [self.shareSections addObject:section];
-    }
-    {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-
-        section.header = [FMSupplementaryHeader supplementaryHeight:150 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
-        section.header.type = FMSupplementaryTypeFixed;
-        section.header.bottomMargin = 10;
-
-        section.isHorizontalCanScroll = YES;
-        section.itemSize = CGSizeMake(150, 100);
-        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
-        section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-
-        }];
-        [self.shareSections addObject:section];
-    }
 //
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
