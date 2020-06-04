@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FMCollectionLayout'
-  s.version          = '1.1.5'
+  s.version          = '1.1.6'
   s.summary          = '一个CollectionView自定义布局框架, 支持多种布局方式, 让你专心处理业务逻辑'
 
 # This description is used to generate tags and improve search results.

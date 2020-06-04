@@ -169,12 +169,18 @@
     [self.layoutViews removeAllObjects];
     CGFloat shareHeight = 0;
     if ([self.dataSource respondsToSelector:@selector(shareSectionsInTesla:)]) {
-        self.shareLayoutView.frame = self.bounds;
-        NSArray<FMLayoutBaseSection *> *sections = [self.dataSource shareSectionsInTesla:self];
-        [self addSubview:self.shareLayoutView];
+        NSMutableArray<FMLayoutBaseSection *> *sections = [[self.dataSource shareSectionsInTesla:self] mutableCopy];
+        if (self.shareLayoutView.superview != self) {
+            [self.shareLayoutView removeFromSuperview];
+            [self addSubview:self.shareLayoutView];
+            self.shareLayoutView.frame = self.bounds;
+        }
         [self.shareLayoutView.layout setSections:sections];
         [self.shareLayoutView.layout handleSections];
-        shareHeight = [sections lastObject].sectionHeight + [sections lastObject].sectionOffset;
+//        [self.shareLayoutView layoutIfNeeded];
+        shareHeight = [self.shareLayoutView.layout collectionViewContentSize].height;
+        self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
+        shareHeight = [self.shareLayoutView.layout collectionViewContentSize].height;
         self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
         self.suspensionAlwaysHeader = sections.count > 0 ? ([sections lastObject].header.type == FMSupplementaryTypeSuspensionAlways ? [sections lastObject] :nil) : nil;
     }

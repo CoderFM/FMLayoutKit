@@ -64,20 +64,20 @@
         section.indexPath = sectionIndexPath;
         section.sectionOffset = sectionOffset;
         
-        __weak typeof(self) weakSelf = self;
-        [section setItemsLayoutChanged:^(NSIndexPath * _Nonnull indexPath) {
-            if (weakSelf.minSectionChangeOffsetYIndex > indexPath.section) {
-                weakSelf.minSectionChangeOffsetYIndex  = indexPath.section;
-            }
-        }];
-        
-        if (self.reLayoutOlnyChanged) {// 只改变变过的
-            if (i < self.minSectionChangeOffsetYIndex && section.hasHanble) {
-                section.sectionOffset = sectionOffset;
-                sectionOffset += section.sectionHeight;
-                continue;
-            }
-        }
+//        __weak typeof(self) weakSelf = self;
+//        [section setItemsLayoutChanged:^(NSIndexPath * _Nonnull indexPath) {
+//            if (weakSelf.minSectionChangeOffsetYIndex > indexPath.section) {
+//                weakSelf.minSectionChangeOffsetYIndex  = indexPath.section;
+//            }
+//        }];
+//        
+//        if (self.reLayoutOlnyChanged) {// 只改变变过的
+//            if (i < self.minSectionChangeOffsetYIndex && section.hasHanble) {
+//                section.sectionOffset = sectionOffset;
+//                sectionOffset += section.sectionHeight;
+//                continue;
+//            }
+//        }
         
         section.sectionOffset = sectionOffset;
         [section handleLayout];

@@ -15,6 +15,7 @@
 #import "FMCollectionNavTitleView.h"
 
 #import "FMCollViewController.h"
+#import "LS_HomeActivityCell.h"
 
 @interface FMViewController ()<FMTeslaLayoutViewDelegate, FMTeslaLayoutViewDataSource>
 
@@ -41,6 +42,9 @@
 }
 
 - (void)setNavTitleView:(FMCollectionNavTitleView *)navTitleView{
+    if (_navTitleView == nil) {
+        [navTitleView selectWithIndex:self.multiScreen.selectIndex];
+    }
     _navTitleView = navTitleView;
     [navTitleView setClickBlock:^(NSInteger tag) {
         [self.multiScreen scrollToIndex:tag animated:YES];
@@ -51,6 +55,30 @@
     [super viewDidLoad];
     self.shareSections = [NSMutableArray array];
     self.sections = [NSMutableArray array];
+    
+//    {
+//        FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
+//
+//        section.cellFixedWidth = 166;
+//        section.autoHeightFixedWidth = YES;
+//        section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
+//        section.cellElement = [FMCollectionViewElement elementWithViewClass:[LS_HomeActivityCell class]];
+//        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+//            if (item == 0) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+//            }
+//            if (item == 1) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+//            }
+//            if (item == 2) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
+//            }
+//            if (item == 3) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+//            }
+//        }];
+//        [self.shareSections addObject:section];
+//    }
     
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
@@ -93,7 +121,7 @@
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
         [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-            
+
         }];
         [self.shareSections addObject:section];
     }
@@ -112,88 +140,88 @@
 //    self.multiScreen.shareSections = self.shareSections;
     
     
-    {
-        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
-        
-        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.bottomMargin = 10;
-//        section.header.suspensionTopHeight = 70;
-//        section.header.type = FMSupplementaryTypeSuspensionAlways;
-//        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
-//        section.header.isStickTop = YES;
-        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
-        
-        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
-        section.footer.topMargin = 10;
-        
-        section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        section.cellFixedWidth = [UIScreen mainScreen].bounds.size.width;
-        [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
-            return 100 + item * 100;
-        }];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
-        
-        [self.sections addObject:section];
-    }
+//    {
+//        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
+//
+//        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.bottomMargin = 10;
+////        section.header.suspensionTopHeight = 70;
+////        section.header.type = FMSupplementaryTypeSuspensionAlways;
+////        section.header.zIndex = FMSupplementaryZIndexFrontAlways;
+////        section.header.isStickTop = YES;
+//        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
+//
+//        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+//        section.footer.topMargin = 10;
+//
+//        section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+//        section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
+//        section.cellFixedWidth = [UIScreen mainScreen].bounds.size.width;
+//        [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+//            return 100 + item * 100;
+//        }];
+//        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
+//            return [section.cellElements firstObject].reuseIdentifier;
+//        }];
+//
+//        [self.sections addObject:section];
+//    }
     
-    {
-        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:10 lineSpace:10 column:2];
-        
-        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.bottomMargin = 10;
-        
-        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
-        section.footer.topMargin = 10;
-        
-        section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
-        [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
-            return 100 + item * 30;
-        }];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
-        [self.sections addObject:section];
-    }
-    
-    {
-        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:10 lineSpace:10 column:2];
-        
-        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.bottomMargin = 10;
-        
-        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
-        section.footer.topMargin = 10;
-        
-        section.itemDatas = [@[@"1\n1", @"2\n2\n2", @"3", @"2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2\n2\n2", @"2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2"] mutableCopy];
-        section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
-        
-        section.autoHeightFixedWidth = YES;
-        __weak typeof(self) weakSelf = self;
-        [section setConfigurationCell:^(FMLayoutDynamicSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger index) {
-            FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
-            custom.label.text = section.itemDatas[index];
-//            [weakSelf tesla:nil configurationCell:cell indexPath:[NSIndexPath indexPathForItem:index inSection:section.indexPath.section] isShare:NO multiIndex:0 layoutView:nil];
-        }];
-        [self.sections addObject:section];
-    }
-    
+//    {
+//        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:10 lineSpace:10 column:2];
+//
+//        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.bottomMargin = 10;
+//
+//        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+//        section.footer.topMargin = 10;
+//
+//        section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
+//        section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
+//        section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
+//        [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+//            return 100 + item * 30;
+//        }];
+//        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
+//            return [section.cellElements firstObject].reuseIdentifier;
+//        }];
+//        [self.sections addObject:section];
+//    }
+//
+//    {
+//        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:10 lineSpace:10 column:2];
+//
+//        section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+//        section.header.bottomMargin = 10;
+//
+//        section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+//        section.footer.topMargin = 10;
+//
+//        section.itemDatas = [@[@"1\n1", @"2\n2\n2", @"3", @"2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2\n2\n2", @"2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2"] mutableCopy];
+//        section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
+//        section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
+//        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
+//            return [section.cellElements firstObject].reuseIdentifier;
+//        }];
+//
+//        section.autoHeightFixedWidth = YES;
+//        __weak typeof(self) weakSelf = self;
+//        [section setConfigurationCell:^(FMLayoutDynamicSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger index) {
+//            FMCollectionCustomCell *custom = (FMCollectionCustomCell *)cell;
+//            custom.label.text = section.itemDatas[index];
+////            [weakSelf tesla:nil configurationCell:cell indexPath:[NSIndexPath indexPathForItem:index inSection:section.indexPath.section] isShare:NO multiIndex:0 layoutView:nil];
+//        }];
+//        [self.sections addObject:section];
+//    }
+//
     {
         FMLayoutLabelSection *section = [FMLayoutLabelSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-        
+
         section.header = [FMSupplementaryHeader supplementaryHeight:30 viewClass:[FMCollectionCustomDecoration class]];
         section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
         section.header.type = FMSupplementaryTypeFixed;
         section.header.bottomMargin = 10;
-        
+
         section.isSingleLineCanScroll = YES;
         section.maxLine = 6;
         section.cellFixedHeight = 40;
@@ -204,10 +232,11 @@
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
         [self.sections addObject:section];
     }
-    
+//
     self.view.backgroundColor = [UIColor cyanColor];
     
     [self.multiScreen reLoadSubViews];
+    [self.multiScreen reloadData];
 }
 
 - (void)viewWillLayoutSubviews{

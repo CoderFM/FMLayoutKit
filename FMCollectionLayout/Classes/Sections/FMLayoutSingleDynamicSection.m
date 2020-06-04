@@ -27,4 +27,9 @@
     self.cellElements = @[cellElement];
 }
 
+- (void)setSectionHeight:(CGFloat)sectionHeight{
+    
+    [super setSectionHeight:sectionHeight];
+}
+
 @end
