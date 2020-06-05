@@ -47,6 +47,7 @@
 
 @property(nonatomic, assign)CGFloat shareHeight;
 @property(nonatomic, assign, readonly)CGFloat shareSuspensionDifferHeight;
+
 @end
 
 @implementation FMTeslaLayoutView
@@ -75,6 +76,12 @@
 
 - (void)scrollToIndex:(NSInteger)index animated:(BOOL)animated{
     CGFloat offsetX = index * self.scrollView.bounds.size.width;
+    if (offsetX == self.scrollView.contentOffset.x) {
+        return;
+    }
+    if (animated) {
+        self.userInteractionEnabled = NO;
+    }
     [self scrollStart];
     [self.scrollView setContentOffset:CGPointMake(offsetX, 0) animated:animated];
     if (!animated) {
@@ -150,12 +157,28 @@
     self.scrollView.scrollEnabled = horizontalCanScroll;
 }
 
+- (void)setClipsToBounds:(BOOL)clipsToBounds{
+    self.scrollView.clipsToBounds = clipsToBounds;
+    self.shareLayoutView.clipsToBounds = clipsToBounds;
+    [self.layoutViews.allValues enumerateObjectsUsingBlock:^(FMCollectionLayoutView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.clipsToBounds = clipsToBounds;
+    }];
+    [super setClipsToBounds:clipsToBounds];
+}
+
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled{
+    if (!userInteractionEnabled) {
+        
+    }
+    [super setUserInteractionEnabled:userInteractionEnabled];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
+        self.clipsToBounds = YES;
         self.horizontalCanScroll = YES;
         self.layoutViews = [NSMutableDictionary dictionary];
     }
@@ -181,6 +204,8 @@
         shareHeight = [self.shareLayoutView.layout collectionViewContentSize].height;
         self.shareLayoutView.frame = CGRectMake(0, 0, self.bounds.size.width, shareHeight);
         self.suspensionAlwaysHeader = sections.count > 0 ? ([sections lastObject].header.type == FMSupplementaryTypeSuspensionAlways ? [sections lastObject] :nil) : nil;
+    } else {
+        self.shareLayoutView.frame = CGRectZero;
     }
     self.shareHeight = shareHeight;
     
@@ -212,7 +237,8 @@
             collectionView.bounces = YES;
             collectionView.alwaysBounceVertical = YES;
             collectionView.showsVerticalScrollIndicator = NO;
-            collectionView.layout.minContentSizeHeight = self.scrollView.bounds.size.height;
+            collectionView.clipsToBounds = self.clipsToBounds;
+            collectionView.layout.minContentSizeHeight = self.shareHeight - self.suspensionAlwaysHeader.header.height + self.scrollView.bounds.size.height;
             [collectionView.layout setFirstSectionOffsetY:self.shareHeight];
             [collectionView.layout setSections:[self.dataSource tesla:self sectionsInScreenIndex:index]];
         }
@@ -257,7 +283,9 @@
     if (!self.scrollView.tracking) {
         self.userInteractionEnabled = NO;
     }
-    [self.shareLayoutView removeFromSuperview];
+    if (self.shareLayoutView.superview != self) {
+        [self.shareLayoutView removeFromSuperview];
+    }
     CGRect frame = self.shareLayoutView.frame;
     frame.origin.y =  - self.currentLayoutView.contentOffset.y;
     CGFloat minY = self.suspensionAlwaysHeader.sectionHeight - self.shareLayoutView.frame.size.height - self.shareSuspensionDifferHeight;
@@ -271,8 +299,12 @@
 - (void)scrollEnd{
     self.userInteractionEnabled = YES;
     NSInteger index = self.scrollView.contentOffset.x / self.scrollView.bounds.size.width;
+    
     [self setCurrentLayoutViewWithIndex:index];
-    [self.shareLayoutView removeFromSuperview];
+    
+    if (self.shareLayoutView.superview != self.currentLayoutView) {
+        [self.shareLayoutView removeFromSuperview];
+    }
     
     if ([self.delegate respondsToSelector:@selector(tesla:didScrollEnd:currentLayoutView:)]) {
         [self.delegate tesla:self didScrollEnd:index currentLayoutView:self.currentLayoutView];

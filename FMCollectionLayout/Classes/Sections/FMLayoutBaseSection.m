@@ -11,12 +11,20 @@
 #import "FMSupplementaryHeader.h"
 #import "FMSupplementaryBackground.h"
 #import "FMCollectionLayoutAttributes.h"
+#import "FMKVOArrayObject.h"
 
 @interface FMLayoutBaseSection ()
+
+@property(nonatomic, strong)FMKVOArrayObject *kvoArray;
 
 @end
 
 @implementation FMLayoutBaseSection
+
+- (void)dealloc{
+    NSLog(@"%@ dealloc", NSStringFromClass([self class]));
+    [self.kvoArray removeObserver:self forKeyPath:@"targetArray" context:nil];
+}
 
 + (instancetype)sectionWithSectionInset:(UIEdgeInsets)inset itemSpace:(CGFloat)itemSpace lineSpace:(CGFloat)lineSpace column:(NSInteger)column{
     FMLayoutBaseSection *section = [[self alloc] init];
@@ -28,33 +36,76 @@
     return section;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.kvoArray = [[FMKVOArrayObject alloc] init];
+        [self.kvoArray addObserver:self forKeyPath:@"targetArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    }
+    return self;
+}
+
+- (void)setHandleItemStart:(NSInteger)handleItemStart{
+    if (handleItemStart < _handleItemStart) {
+        _handleItemStart = handleItemStart;
+    }
+}
+
+- (NSMutableArray *)itemDatas{
+    return [self.kvoArray mutableArrayValueForKey:@"targetArray"];
+}
+
 - (void)setItemDatas:(NSMutableArray *)itemDatas{
-    if (_itemDatas == itemDatas) {
+
+    if (self.kvoArray.targetArray == itemDatas) {
         return;
     }
-    if (![itemDatas isKindOfClass:[NSMutableArray class]]) {
-        _itemDatas = [itemDatas mutableCopy];
-    } else {
-        _itemDatas = itemDatas;
+
+    if (self.kvoArray.targetArray) {
+        [self.kvoArray removeObserver:self forKeyPath:@"targetArray" context:nil];
     }
+
+    if (![itemDatas isKindOfClass:[NSMutableArray class]]) {
+        self.kvoArray.targetArray = [itemDatas mutableCopy];
+        [self.kvoArray addObserver:self forKeyPath:@"targetArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    } else {
+        self.kvoArray.targetArray = itemDatas;
+        [self.kvoArray addObserver:self forKeyPath:@"targetArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"targetArray"]) {
+        self.hasHandle = NO;
+//        NSInteger kind = [change[@"kind"] integerValue];
+        NSIndexSet *set = change[@"indexes"];
+        self.handleItemStart = set.firstIndex;
+//        if (kind == 2) { //增加 需判断是插入 还是
+//
+//        }
+//        /*
+//         NSKeyValueChangeSetting = 1,
+//         NSKeyValueChangeInsertion = 2,  //插入
+//         NSKeyValueChangeRemoval = 3, // 移除
+//         NSKeyValueChangeReplacement = 4, // 替换
+//         */
+//
+    }
+    NSLog(@"base section itemDatas changeed %@", change);
 }
 
 - (void)setSectionOffset:(CGFloat)sectionOffset{
     _sectionOffset = sectionOffset;
-    
 }
 
 - (CGFloat)firstItemStartY{
     return self.sectionOffset + self.sectionInset.top + self.header.inset.top + self.header.height + self.header.inset.bottom + self.header.bottomMargin;
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.itemDatas = [NSMutableArray array];
-    }
-    return self;
+- (void)markChangeAt:(NSInteger)index{
+    self.hasHandle = NO;
+    self.handleItemStart = index;
 }
 
 - (void)handleLayout{

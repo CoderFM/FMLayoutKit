@@ -21,14 +21,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FMCollectionLayoutView : UICollectionView
 @property(nonatomic, weak)id<FMCollectionLayoutViewConfigurationDelegate> configuration;
-@property(nonatomic, strong)FMCollectionViewLayout *layout;
-@property(nonatomic, assign)BOOL reloaOlnyChanged;
+@property(nonatomic, weak)FMCollectionViewLayout *layout;
+@property(nonatomic, assign)BOOL reloadOlnyChanged;
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_UNAVAILABLE;
 
-- (void)appendSections:(NSArray<FMLayoutBaseSection *> *)sections;
-- (void)insertSections:(NSArray<FMLayoutBaseSection *> *)sections atIndexSet:(NSIndexSet *)indexSet;
-- (void)insertSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index;
-- (void)deleteSections:(NSArray<FMLayoutBaseSection *> *)sections;
+/// 添加插入数组
+- (void)appendLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections;
+- (void)insertLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections atIndexSet:(NSIndexSet *)indexSet;
+- (void)insertLayoutSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index;
+
+/// 删除分组
+- (void)deleteLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections;
+- (void)deleteLayoutSectionAt:(NSUInteger)index;
+- (void)deleteLayoutSectionSet:(NSIndexSet *)set;
+
+/// 交换分组
+- (void)exchangeLayoutSection:(NSUInteger)index to:(NSUInteger)to;
 
 @end
 

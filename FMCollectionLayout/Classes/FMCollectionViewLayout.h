@@ -24,10 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)CGFloat fixedBottomMargin;
 @property(nonatomic, assign)BOOL reLayoutOlnyChanged;
 @property(nonatomic, assign)CGFloat minContentSizeHeight;
-@property(nonatomic, assign)NSInteger minSectionChangeOffsetYIndex;
-//@property(nonatomic, assign)FMLayoutHeadersSuspensionType headersType;
+@property(nonatomic, assign)CGFloat firstSectionOffsetY;
 - (void)handleSections;
-- (void)setFirstSectionOffsetY:(CGFloat)offsetY;
 @end
 
 NS_ASSUME_NONNULL_END

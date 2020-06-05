@@ -13,19 +13,17 @@
 
 @interface FMCollectionViewLayout ()
 
-@property(nonatomic, assign)CGFloat firstSectionOffsetY;
-
 @end
 
 @implementation FMCollectionViewLayout
 
-- (void)setFirstSectionOffsetY:(CGFloat)offsetY{
-    _firstSectionOffsetY = offsetY;
+- (void)dealloc{
+    NSLog(@"FMCollectionViewLayout dealloc");
 }
 
 - (instancetype)init{
     if (self = [super init]) {
-//        self.headersType = FMLayoutHeadersSuspensionTypeSort;
+        
     }
     return self;
 }
@@ -34,26 +32,26 @@
     [self handleSections];
 }
 
-- (void)setMinSectionChangeOffsetYIndex:(NSInteger)minSectionChangeOffsetYIndex{
-    if (minSectionChangeOffsetYIndex < _minSectionChangeOffsetYIndex) {
-        _minSectionChangeOffsetYIndex = minSectionChangeOffsetYIndex;
-    }
-}
-
 - (void)setSections:(NSMutableArray<FMLayoutBaseSection *> *)sections{
+    
     if (_sections == sections) {
         return;
     }
+    
     if (![sections isKindOfClass:[NSMutableArray class]]) {
         _sections = [sections mutableCopy];
     } else {
         _sections = sections;
     }
+    
     [self invalidateLayout];
 }
 
 - (void)handleSections{
     [self registerSections];
+    
+    CFAbsoluteTime startTime =CFAbsoluteTimeGetCurrent();
+    
     CGFloat sectionOffset = self.firstSectionOffsetY;
     NSInteger sections = [self.collectionView numberOfSections];
     sections = MIN(sections, self.sections.count);
@@ -62,36 +60,27 @@
         FMLayoutBaseSection *section = self.sections[i];
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
         section.indexPath = sectionIndexPath;
-        section.sectionOffset = sectionOffset;
         
-//        __weak typeof(self) weakSelf = self;
-//        [section setItemsLayoutChanged:^(NSIndexPath * _Nonnull indexPath) {
-//            if (weakSelf.minSectionChangeOffsetYIndex > indexPath.section) {
-//                weakSelf.minSectionChangeOffsetYIndex  = indexPath.section;
-//            }
-//        }];
-//
-//        if (self.reLayoutOlnyChanged) {// 只改变变过的
-//            if (i < self.minSectionChangeOffsetYIndex && section.hasHanble) {
-//                section.sectionOffset = sectionOffset;
-//                sectionOffset += section.sectionHeight;
-//                continue;
-//            }
-//        }
+        if (self.reLayoutOlnyChanged) {
+            if (section.sectionOffset != sectionOffset) {
+                section.hasHandle = NO;
+            }
+        } else {
+            section.hasHandle = NO;
+        }
         
-        section.sectionOffset = sectionOffset;
-        [section handleLayout];
+        if (!section.hasHandle) {
+            section.sectionOffset = sectionOffset;
+            [section handleLayout];
+        }
         
         sectionOffset = section.sectionOffset + section.sectionHeight;
         
-        section.hasHanble = YES;
+        section.hasHandle = YES;
     }
     
-//    if (self.sections.count > 0) {
-//        _minSectionChangeOffsetYIndex = self.sections.count - 1;
-//    } else {
-//        _minSectionChangeOffsetYIndex = 0;
-//    }
+    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+    NSLog(@"布局计算耗时 %f ms", linkTime *1000.0);
 }
 
 - (void)registerSections{
@@ -152,7 +141,7 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
     FMLayoutBaseSection *section = self.sections[indexPath.section];
-    if (!section.hasHanble) {
+    if (!section.hasHandle) {
         return nil;
     }
     if (indexPath.item < section.itemsAttribute.count) {
@@ -163,7 +152,7 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
     FMLayoutBaseSection *section = self.sections[indexPath.section];
-    if (!section.hasHanble) {
+    if (!section.hasHandle) {
         return nil;
     }
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {

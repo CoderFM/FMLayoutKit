@@ -19,9 +19,9 @@
 
 @implementation FMLayoutSingleDynamicAddSection
 
-- (void)setHanbleItemStart:(NSInteger)hanbleItemStart{
-    [super setHanbleItemStart:hanbleItemStart];
-    if (hanbleItemStart == self.itemsAttribute.count) {
+- (void)setHandleItemStart:(NSInteger)handleItemStart{
+    [super setHandleItemStart:handleItemStart];
+    if (self.handleItemStart == self.itemsAttribute.count) {
         self.isAppend = YES;
     } else {
         self.isAppend = NO;
@@ -34,7 +34,7 @@
     } else {
         NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
         NSMutableArray *attrs = [self.itemsAttribute mutableCopy];
-        for (int j = self.hanbleItemStart; j < items; j++) {
+        for (int j = self.handleItemStart; j < items; j++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:j inSection:self.indexPath.section];
             FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             CGFloat itemWidth =  self.cellFixedWidth;

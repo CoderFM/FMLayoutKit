@@ -103,7 +103,6 @@
     self.itemsAttribute = [attrs copy];
 }
 
-
 - (BOOL)intersectsRectInExsitAttributes:(NSArray<FMCollectionLayoutAttributes *> *)attributes frame:(CGRect)frame{
     for (FMCollectionLayoutAttributes *attr in attributes) {
         if (CGRectIntersectsRect(attr.frame, frame)) {

@@ -14,6 +14,8 @@ typedef NS_ENUM(NSUInteger, FMLayoutSectionHandleType) {
     FMLayoutSectionHandleTypeReLayout,
     /// 只是分组偏移高度改变
     FMLayoutSectionHandleTypeOlnyChangeOffsetY,
+    /// 追加
+    FMLayoutSectionHandleTypeAppend
 };
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,9 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak)UICollectionView *collectionView;
 @property(nonatomic, strong)NSIndexPath *indexPath;
 
-@property(nonatomic, assign)BOOL hasHanble;///是否需要重新计算
-@property(nonatomic, assign)NSInteger hanbleItemStart;///重新计算哪一个开始
-@property(nonatomic, copy)void(^itemsLayoutChanged)(NSIndexPath *indexPath);
+///是否需要重新计算 设置为NO  布局会重新计算
+@property(nonatomic, assign)BOOL hasHandle;
+@property(nonatomic, assign)NSInteger handleItemStart;///重新计算哪一个开始
+@property(nonatomic, assign)FMLayoutSectionHandleType handleType;
 
 @property(nonatomic, strong)FMCollectionLayoutAttributes *bgAttribute;
 @property(nonatomic, strong)FMCollectionLayoutAttributes *headerAttribute;
@@ -54,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sectionWithSectionInset:(UIEdgeInsets)inset itemSpace:(CGFloat)itemSpace lineSpace:(CGFloat)lineSpace column:(NSInteger)column;
 
+- (void)markChangeAt:(NSInteger)index;
 - (void)handleLayout;
 
 - (BOOL)intersectsRect:(CGRect)rect;

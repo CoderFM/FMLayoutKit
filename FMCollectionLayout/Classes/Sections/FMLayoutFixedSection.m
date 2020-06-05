@@ -14,6 +14,11 @@
 
 @implementation FMLayoutFixedSection
 
+- (void)setItemSize:(CGSize)itemSize{
+    _itemSize = itemSize;
+    self.hasHandle = NO;
+}
+
 - (void)prepareItems{
     if (self.isHorizontalCanScroll) {
         FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:self.indexPath];
