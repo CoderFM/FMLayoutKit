@@ -26,6 +26,7 @@
 		C32C902A243EB957004B9FAF /* FMCollectionNavTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C9029243EB957004B9FAF /* FMCollectionNavTitleView.m */; };
 		C35283232450682000BE7CEE /* LS_HomeActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C35283212450682000BE7CEE /* LS_HomeActivityCell.m */; };
 		C37D290124495680006530E1 /* FMAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37D290024495680006530E1 /* FMAddViewController.m */; };
+		C38D3882248BA82F00F0670A /* FMExcuteTimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C38D3881248BA82F00F0670A /* FMExcuteTimeTool.m */; };
 		C3A8476D2451467400012E24 /* FMLayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8476C2451467400012E24 /* FMLayoutLabel.m */; };
 		C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F40D243DDD49001468AC /* FMCollectionCustomDecoration.m */; };
 		C3D9F411243DDD7C001468AC /* FMCollectionCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D9F410243DDD7C001468AC /* FMCollectionCustomCell.m */; };
@@ -77,6 +78,8 @@
 		C35283222450682000BE7CEE /* LS_HomeActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LS_HomeActivityCell.h; sourceTree = "<group>"; };
 		C37D28FF24495680006530E1 /* FMAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAddViewController.h; sourceTree = "<group>"; };
 		C37D290024495680006530E1 /* FMAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAddViewController.m; sourceTree = "<group>"; };
+		C38D3880248BA82F00F0670A /* FMExcuteTimeTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMExcuteTimeTool.h; sourceTree = "<group>"; };
+		C38D3881248BA82F00F0670A /* FMExcuteTimeTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMExcuteTimeTool.m; sourceTree = "<group>"; };
 		C3A8476B2451467400012E24 /* FMLayoutLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutLabel.h; sourceTree = "<group>"; };
 		C3A8476C2451467400012E24 /* FMLayoutLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutLabel.m; sourceTree = "<group>"; };
 		C3D9F40C243DDD49001468AC /* FMCollectionCustomDecoration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomDecoration.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				C35283212450682000BE7CEE /* LS_HomeActivityCell.m */,
 				C3A8476B2451467400012E24 /* FMLayoutLabel.h */,
 				C3A8476C2451467400012E24 /* FMLayoutLabel.m */,
+				C38D3880248BA82F00F0670A /* FMExcuteTimeTool.h */,
+				C38D3881248BA82F00F0670A /* FMExcuteTimeTool.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -411,6 +416,7 @@
 				6003F59E195388D20070C39A /* FMAppDelegate.m in Sources */,
 				C37D290124495680006530E1 /* FMAddViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* FMViewController.m in Sources */,
+				C38D3882248BA82F00F0670A /* FMExcuteTimeTool.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				C3D9F40E243DDD49001468AC /* FMCollectionCustomDecoration.m in Sources */,
 				C3D9F411243DDD7C001468AC /* FMCollectionCustomCell.m in Sources */,

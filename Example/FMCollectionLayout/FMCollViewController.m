@@ -162,16 +162,21 @@
         [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
             if (item == 0) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+                return;
             }
             if (item == 1) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+                return;
             }
             if (item == 2) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
+                return;
             }
             if (item == 3) {
                 ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+                return;
             }
+            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n一些描述";
         }];
         [self.shareSections addObject:section];
     }

@@ -15,7 +15,7 @@
 
 - (void)prepareItems{
     if (self.isSingleLineCanScroll) {
-        FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:self.indexPath];
+        FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:0 inSection:self.indexPath.section]];
         CGSize itemSize = CGSizeMake(self.collectionView.bounds.size.width, self.header.bottomMargin + self.cellFixedHeight + self.footer.topMargin);
         CGFloat x = 0;
         CGFloat y = self.firstItemStartY - self.header.bottomMargin;
@@ -23,6 +23,7 @@
         self.itemsAttribute = @[itemAttr];
         self.columnHeights[@(0)] = @(itemSize.height - self.header.bottomMargin);
     } else {
+        if ([self prepareLayoutItemsIsOlnyChangeY]) return;
         [self resetColumnHeights];
         NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
         NSMutableArray *attrs = [NSMutableArray array];

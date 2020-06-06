@@ -128,6 +128,7 @@
 
 - (void)prepareHeader{
     if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY && self.headerAttribute) {
+        self.headerAttribute.indexPath = self.indexPath;
         CGRect frame = self.headerAttribute.frame;
         frame.origin.y += self.changeOffsetY;
         self.headerAttribute.frame = frame;
@@ -141,6 +142,7 @@
 
 - (void)prepareFooter{
     if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY && self.footerAttribute) {
+        self.footerAttribute.indexPath = self.indexPath;
         CGRect frame = self.footerAttribute.frame;
         frame.origin.y += self.changeOffsetY;
         self.footerAttribute.frame = frame;
@@ -158,6 +160,7 @@
 
 - (void)prepareBackground{
     if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY && self.bgAttribute) {
+        self.bgAttribute.indexPath = self.indexPath;
         CGRect frame = self.bgAttribute.frame;
         frame.origin.y += self.changeOffsetY;
         self.bgAttribute.frame = frame;
@@ -245,6 +248,7 @@
 - (BOOL)prepareLayoutItemsIsOlnyChangeY{
     if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY) {
         [self.itemsAttribute enumerateObjectsUsingBlock:^(FMCollectionLayoutAttributes * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.indexPath = [NSIndexPath indexPathForItem:idx inSection:self.indexPath.section];
             CGRect frame = obj.frame;
             frame.origin.y += self.changeOffsetY;
             obj.frame = frame;
