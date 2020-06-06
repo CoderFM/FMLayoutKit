@@ -57,12 +57,16 @@
     sections = MIN(sections, self.sections.count);
     for (int i = 0; i < sections; i++) {
         
+        CFAbsoluteTime oneTime =CFAbsoluteTimeGetCurrent();
+        
         FMLayoutBaseSection *section = self.sections[i];
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
         section.indexPath = sectionIndexPath;
         
         if (self.reLayoutOlnyChanged) {
-            if (section.sectionOffset != sectionOffset) {
+            if (section.sectionOffset != sectionOffset && section.hasHandle == YES) {
+                section.handleType = FMLayoutSectionHandleTypeOlnyChangeOffsetY;
+                section.changeOffsetY = sectionOffset - section.sectionOffset;
                 section.hasHandle = NO;
             }
         } else {
@@ -76,11 +80,16 @@
         
         sectionOffset = section.sectionOffset + section.sectionHeight;
         
+        section.changeOffsetY = 0;
+        section.handleType = FMLayoutSectionHandleTypeReLayout;
         section.hasHandle = YES;
+        
+        CFAbsoluteTime oneEnd = (CFAbsoluteTimeGetCurrent() - oneTime);
+        NSLog(@"单个Section%@布局计算耗时 %f ms", section,oneEnd *1000.0);
     }
     
     CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
-    NSLog(@"布局计算耗时 %f ms", linkTime *1000.0);
+    NSLog(@"布局计算总耗时 %f ms", linkTime *1000.0);
 }
 
 - (void)registerSections{

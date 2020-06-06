@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL hasHandle;
 @property(nonatomic, assign)NSInteger handleItemStart;///重新计算哪一个开始
 @property(nonatomic, assign)FMLayoutSectionHandleType handleType;
+@property(nonatomic, assign)CGFloat changeOffsetY;
 
 @property(nonatomic, strong)FMCollectionLayoutAttributes *bgAttribute;
 @property(nonatomic, strong)FMCollectionLayoutAttributes *headerAttribute;
@@ -68,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)prepareBackground;
 
 - (UICollectionViewLayoutAttributes *)showHeaderLayout;
+
+- (BOOL)prepareLayoutItemsIsOlnyChangeY;
 
 ///获取最小高度的列
 - (NSInteger)getMinHeightColumn;

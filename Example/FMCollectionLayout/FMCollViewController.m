@@ -125,7 +125,7 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"固定大小, 从左往右从上往下排的分组, 头部放大缩放效果";
         }];
-        
+
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
 
@@ -133,20 +133,20 @@
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
         [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-            
+
         }];
-        
+
         [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
             FMAddViewController *add = [[FMAddViewController alloc] init];
             [weakSelf.navigationController pushViewController:add animated:YES];
         }];
-        
+
         [self.shareSections addObject:section];
     }
     
     {
         FMLayoutSingleDynamicSection *section = [FMLayoutSingleDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
-        
+
         section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
         section.header.type = FMSupplementaryTypeFixed;
@@ -154,7 +154,7 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"自动适应高度布局, 续固定宽度";
         }];
-        
+
         section.cellFixedWidth = 166;
         section.autoHeightFixedWidth = YES;
         section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
@@ -209,7 +209,7 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"填充布局,寻找合适的空档,支持多种cell, header样式一直悬停在顶部";
         }];
-        
+
         section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
         [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
             return [section.cellElements firstObject].reuseIdentifier;
@@ -248,7 +248,7 @@
     
     {
             FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
-            
+
             section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
             section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
             section.header.type = FMSupplementaryTypeFixed;
@@ -256,10 +256,10 @@
                 FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
                 customHeader.textLabel.text = @"列表的样式, 支持多种cell, 当前手动返回计算返回高度";
             }];
-            
+
             section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
             section.footer.topMargin = 10;
-            
+
             section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
             section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
             section.cellFixedWidth = [UIScreen mainScreen].bounds.size.width;
@@ -269,13 +269,13 @@
             [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
                 return [section.cellElements firstObject].reuseIdentifier;
             }];
-            
+
             [self.shareSections addObject:section];
         }
-    
+
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:10 lineSpace:10 column:2];
-        
+
         section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
         section.header.type = FMSupplementaryTypeFixed;
@@ -283,10 +283,10 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"瀑布流, 列表也就是单列, 列数可设置";
         }];
-        
+
         section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
-        
+
         section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
         section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
         section.cellFixedWidth = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
@@ -298,10 +298,10 @@
         }];
         [self.shareSections addObject:section];
     }
-    
+
     {
         FMLayoutLabelSection *section = [FMLayoutLabelSection sectionWithSectionInset:UIEdgeInsetsMake(10, 10, 10, 10) itemSpace:10 lineSpace:10 column:3];
-        
+
         section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
         section.header.type = FMSupplementaryTypeFixed;
@@ -310,7 +310,7 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"标签式布局, 单行横向滚动模式";
         }];
-        
+
         section.isSingleLineCanScroll = YES;
         section.maxLine = 6;
         section.cellFixedHeight = 40;
@@ -321,10 +321,10 @@
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
         [self.shareSections addObject:section];
     }
-    
+
     {
         FMLayoutLabelSection *section = [FMLayoutLabelSection sectionWithSectionInset:UIEdgeInsetsMake(0, 10, 0, 10) itemSpace:10 lineSpace:10 column:3];
-        
+
         section.header = [FMSupplementaryHeader supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.zIndex = FMSupplementaryZIndexFrontOfItem;
         section.header.type = FMSupplementaryTypeFixed;
@@ -333,7 +333,7 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"标签式布局, 多行模式";
         }];
-        
+
         section.maxLine = 6;
         section.cellFixedHeight = 40;
         [section setWidthBlock:^CGFloat(id  _Nonnull section, NSInteger item) {

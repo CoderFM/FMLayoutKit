@@ -127,6 +127,12 @@
 }
 
 - (void)prepareHeader{
+    if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY && self.headerAttribute) {
+        CGRect frame = self.headerAttribute.frame;
+        frame.origin.y += self.changeOffsetY;
+        self.headerAttribute.frame = frame;
+        return;
+    }
     FMCollectionLayoutAttributes *header = [FMCollectionLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:self.indexPath];
     header.frame = CGRectMake(self.sectionInset.left + self.header.inset.left, self.sectionInset.top + self.header.inset.top + self.sectionOffset, self.collectionView.bounds.size.width - self.sectionInset.left- self.header.inset.left - self.sectionInset.right - self.header.inset.right, self.header.height);
     header.zIndex = self.header.zIndex;
@@ -134,6 +140,12 @@
 }
 
 - (void)prepareFooter{
+    if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY && self.footerAttribute) {
+        CGRect frame = self.footerAttribute.frame;
+        frame.origin.y += self.changeOffsetY;
+        self.footerAttribute.frame = frame;
+        return;
+    }
     FMCollectionLayoutAttributes *footer = [FMCollectionLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:self.indexPath];
     footer.frame = CGRectMake(self.sectionInset.left + self.footer.inset.left, self.sectionOffset + self.sectionInset.top + self.footer.inset.top + self.header.height + self.header.bottomMargin + [self getColumnMaxHeight] + self.footer.topMargin, self.collectionView.bounds.size.width - self.sectionInset.left - self.footer.inset.left - self.sectionInset.right - self.footer.inset.right, self.footer.height);
     footer.zIndex = self.footer.zIndex;
@@ -145,6 +157,12 @@
 }
 
 - (void)prepareBackground{
+    if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY && self.bgAttribute) {
+        CGRect frame = self.bgAttribute.frame;
+        frame.origin.y += self.changeOffsetY;
+        self.bgAttribute.frame = frame;
+        return;
+    }
     if (self.background) {
         FMCollectionLayoutAttributes *bgAttr = [FMCollectionLayoutAttributes layoutAttributesForSupplementaryViewOfKind:self.background.elementKind withIndexPath:self.indexPath];
         bgAttr.frame = CGRectMake(self.background.inset.left, self.sectionOffset + self.background.inset.top, self.collectionView.bounds.size.width - (self.background.inset.left + self.background.inset.right), self.sectionHeight - (self.background.inset.top + self.background.inset.bottom));
@@ -223,6 +241,20 @@
     }
     return self.headerAttribute;
 }
+/// 判断是否只改变Y值
+- (BOOL)prepareLayoutItemsIsOlnyChangeY{
+    if (self.handleType == FMLayoutSectionHandleTypeOlnyChangeOffsetY) {
+        [self.itemsAttribute enumerateObjectsUsingBlock:^(FMCollectionLayoutAttributes * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CGRect frame = obj.frame;
+            frame.origin.y += self.changeOffsetY;
+            obj.frame = frame;
+        }];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 ///获取最小高度的列
 - (NSInteger)getMinHeightColumn{
     if (self.columnHeights.allKeys.count == 0) {

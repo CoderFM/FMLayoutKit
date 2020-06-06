@@ -15,7 +15,7 @@ typedef CGFloat(^FMLayoutItemHeightBlock)(id section, NSInteger item);
 
 ///动态  可以注册多种cell  宽度固定   高度可以自适应 但需要用block填充数据  需要设置deqCellReturnReuseId该block值以获取cell    高度亦可以通过手动计算heightBlock返回   手动计算优先级要高
 @interface FMLayoutDynamicSection : FMLayoutBaseSection
-
+/// yes时   布局耗时比较长
 @property(nonatomic, assign)BOOL autoHeightFixedWidth;/// 是否自动计算高度 需设置configurationCell方法  填充数据
 @property(nonatomic, assign)CGFloat cellFixedWidth;///目前仅支持纵向布局  cell固定宽度
 

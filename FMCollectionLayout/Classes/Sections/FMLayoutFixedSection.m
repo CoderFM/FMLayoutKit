@@ -35,6 +35,7 @@
         self.itemsAttribute = @[itemAttr];
         self.columnHeights[@(0)] = @(itemSize.height - self.header.bottomMargin);
     } else {
+        if ([self prepareLayoutItemsIsOlnyChangeY]) return;
         [self resetColumnHeights];
         NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
         NSMutableArray *attrs = [NSMutableArray array];

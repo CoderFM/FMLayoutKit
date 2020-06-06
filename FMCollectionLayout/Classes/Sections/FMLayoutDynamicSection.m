@@ -18,6 +18,7 @@
 @implementation FMLayoutDynamicSection
 
 - (void)prepareItems{
+    if ([self prepareLayoutItemsIsOlnyChangeY]) return;
     [self resetColumnHeights];
     NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
     NSMutableArray *attrs = [NSMutableArray array];
@@ -28,11 +29,17 @@
         CGFloat itemHeight = 0;
         if (self.autoHeightFixedWidth) {
             if (self.deqCellReturnReuseId) {
+                CFAbsoluteTime oneTime = CFAbsoluteTimeGetCurrent();
                 UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, j) forIndexPath:indexPath];
                 if (self.configurationCell) {
                     self.configurationCell(self ,cell, j);
                 }
+                CFAbsoluteTime oneEnd = (CFAbsoluteTimeGetCurrent() - oneTime);
+                NSLog(@"动态布局获取cell耗时 %f ms",oneEnd *1000.0);
+                CFAbsoluteTime sysStart = CFAbsoluteTimeGetCurrent();
                 itemHeight = [cell systemLayoutSizeFittingSize:CGSizeMake(itemWidth, MAXFLOAT)].height;
+                CFAbsoluteTime sysEnd = (CFAbsoluteTimeGetCurrent() - sysStart);
+                NSLog(@"动态布局获取systemLayoutSizeFittingSize耗时 %f ms",sysEnd *1000.0);
             }
         } else {
             itemHeight = !self.heightBlock?0:self.heightBlock(self, j);
