@@ -38,7 +38,7 @@
     } else {
         NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
         NSMutableArray *attrs = [self.itemsAttribute mutableCopy];
-        for (int j = self.handleItemStart; j < items; j++) {
+        for (int j = (int)self.handleItemStart; j < items; j++) {
             FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:j inSection:self.indexPath.section]];
             CGSize itemSize = self.itemSize;
             NSInteger column = [self getMinHeightColumn];

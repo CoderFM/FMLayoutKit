@@ -13,9 +13,18 @@
 
 @interface FMLayoutDynamicSection ()
 
+@property(nonatomic, strong)NSMapTable *reuseCells;
+
 @end
 
 @implementation FMLayoutDynamicSection
+
+- (NSMapTable *)reuseCells{
+    if (_reuseCells == nil) {
+        _reuseCells = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsWeakMemory];
+    }
+    return _reuseCells;
+}
 
 - (void)prepareItems{
     if ([self prepareLayoutItemsIsOlnyChangeY]) return;
@@ -30,7 +39,12 @@
         if (self.autoHeightFixedWidth) {
             if (self.deqCellReturnReuseId) {
                 CFAbsoluteTime oneTime = CFAbsoluteTimeGetCurrent();
-                UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, j) forIndexPath:indexPath];
+                NSString *reuseId = self.deqCellReturnReuseId(self, j);
+                UICollectionViewCell *cell = [self.reuseCells objectForKey:reuseId];
+                if (cell == nil) {
+                    cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, j) forIndexPath:indexPath];
+                    [self.reuseCells setObject:cell forKey:reuseId];
+                }
                 if (self.configurationCell) {
                     self.configurationCell(self ,cell, j);
                 }
