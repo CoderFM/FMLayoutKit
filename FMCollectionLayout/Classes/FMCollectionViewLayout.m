@@ -204,7 +204,7 @@
         [context invalidateItemsAtIndexPaths:itemIndexPaths];
         [self invalidateLayoutWithContext:context];
     }
-    return result;
+    return NO;
 }
 
 - (CGSize)collectionViewContentSize{
