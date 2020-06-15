@@ -197,6 +197,10 @@
         section.itemSize = CGSizeMake(150, 100);
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
         section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
+            FMAddViewController *add = [[FMAddViewController alloc] init];
+            [weakSelf.navigationController pushViewController:add animated:YES];
+        }];
         [self.shareSections addObject:section];
     }
     

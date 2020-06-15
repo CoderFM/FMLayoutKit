@@ -168,9 +168,6 @@
             }
         }];
         [hCell setSelectCellBlock:^(NSInteger item) {
-            if (weakSectionM.clickCellBlock) {
-                weakSectionM.clickCellBlock(weakSectionM, item);
-            }
             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
                 [weakSelf.delegate collectionView:weakSelf didSelectItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:weakIndexPath.section]];
             }
