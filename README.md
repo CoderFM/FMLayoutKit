@@ -1,3 +1,5 @@
+当前版本不再做重大更新，可以使用功能更全的[FMLayoutKit](https://github.com/CoderFM/FMLayoutKit)
+
 
 # FMCollectionLayout
 
