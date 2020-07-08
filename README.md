@@ -1,11 +1,9 @@
-当前版本不再做重大更新，可以使用功能更全的[FMLayoutKit](https://github.com/CoderFM/FMLayoutKit)
 
+# FMLayoutKit
 
-# FMCollectionLayout
-
-[![CI Status](https://img.shields.io/travis/周发明/FMCollectionLayout.svg?style=flat)](https://travis-ci.org/周发明/FMCollectionLayout)
-[![Version](https://img.shields.io/cocoapods/v/FMCollectionLayout.svg?style=flat)](https://cocoapods.org/pods/FMCollectionLayout)
-[![License](https://img.shields.io/cocoapods/l/FMCollectionLayout.svg?style=flat)](https://cocoapods.org/pods/FMCollectionLayout)
+[![CI Status](https://img.shields.io/travis/周发明/FMLayoutKit.svg?style=flat)](https://travis-ci.org/周发明/FMLayoutKit)
+[![Version](https://img.shields.io/cocoapods/v/FMLayoutKit.svg?style=flat)](https://cocoapods.org/pods/FMLayoutKit)
+[![License](https://img.shields.io/cocoapods/l/FMLayoutKit.svg?style=flat)](https://cocoapods.org/pods/FMLayoutKit)
 [![Platform](https://img.shields.io/cocoapods/p/FMCollectionLayout.svg?style=flat)](https://cocoapods.org/pods/FMCollectionLayout)
 
 ## 简介
@@ -17,7 +15,7 @@
 已发布到CocoaPods. podfile中添加以下代码:
 
 ```ruby
-pod 'FMCollectionLayout'
+pod 'FMLayoutKit'
 ```
 
 Spec的官方源实在拉取不下来的话，可以用我自己的一个Spec仓：

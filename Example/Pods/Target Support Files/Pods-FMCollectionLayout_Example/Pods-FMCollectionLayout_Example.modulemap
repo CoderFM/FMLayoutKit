@@ -1,6 +1,0 @@
-framework module Pods_FMCollectionLayout_Example {
-  umbrella header "Pods-FMCollectionLayout_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

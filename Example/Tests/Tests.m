@@ -1,9 +1,9 @@
 //
-//  FMCollectionLayoutTests.m
-//  FMCollectionLayoutTests
+//  FMLayoutKitTests.m
+//  FMLayoutKitTests
 //
-//  Created by 周发明 on 04/01/2020.
-//  Copyright (c) 2020 周发明. All rights reserved.
+//  Created by zhoufaming251@163.com on 06/09/2020.
+//  Copyright (c) 2020 zhoufaming251@163.com. All rights reserved.
 //
 
 @import XCTest;

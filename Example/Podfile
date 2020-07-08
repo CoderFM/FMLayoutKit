@@ -2,13 +2,13 @@ use_frameworks!
 
 platform :ios, '8.0'
 
-target 'FMCollectionLayout_Example' do
-  pod 'FMCollectionLayout', :path => '../'
+target 'FMLayoutKit_Example' do
+  pod 'FMLayoutKit', :path => '../'
   pod 'Masonry'
-  pod 'MJRefresh'
-  target 'FMCollectionLayout_Tests' do
+#  pod 'MJRefresh'
+  target 'FMLayoutKit_Tests' do
     inherit! :search_paths
-    
+
     
   end
 end

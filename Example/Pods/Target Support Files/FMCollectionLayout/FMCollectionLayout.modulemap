@@ -1,6 +1,0 @@
-framework module FMCollectionLayout {
-  umbrella header "FMCollectionLayout-umbrella.h"
-
-  export *
-  module * { export * }
-}
