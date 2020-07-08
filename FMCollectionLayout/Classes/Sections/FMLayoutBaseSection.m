@@ -73,6 +73,8 @@
         self.kvoArray.targetArray = itemDatas;
         [self.kvoArray addObserver:self forKeyPath:@"targetArray" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     }
+    self.hasHandle = NO;
+    self.handleType = FMLayoutSectionHandleTypeReLayout;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
