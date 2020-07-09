@@ -107,6 +107,51 @@
     [super setDelegate:self];
 }
 
+- (void)scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition animated:(BOOL)animated{
+    if (CGSizeEqualToSize(CGSizeZero, self.contentSize)) {
+        [self layoutIfNeeded];
+    }
+    UICollectionViewLayoutAttributes *layoutAttr = [self.layout layoutAttributesForItemAtIndexPath:indexPath];
+    CGPoint offset = self.contentOffset;
+    if (self.layout.direction == FMLayoutDirectionVertical) {
+        switch (scrollPosition) {
+            case UICollectionViewScrollPositionTop:
+                offset.y = CGRectGetMinY(layoutAttr.frame);
+                break;
+            case UICollectionViewScrollPositionCenteredVertically:
+                offset.y = CGRectGetMinY(layoutAttr.frame) - self.frame.size.height * 0.5 - layoutAttr.frame.size.height * 0.5;
+                break;
+            case UICollectionViewScrollPositionBottom:
+                offset.y = CGRectGetMinY(layoutAttr.frame) - self.frame.size.height - layoutAttr.frame.size.height;
+                break;
+            default:
+                break;
+        }
+        if (offset.y < 0) {
+            offset.y = 0;
+        }
+        [self setContentOffset:offset animated:animated];
+    } else {
+        switch (scrollPosition) {
+            case UICollectionViewScrollPositionLeft:
+                offset.x = CGRectGetMinX(layoutAttr.frame);
+                break;
+            case UICollectionViewScrollPositionCenteredHorizontally:
+                offset.x = CGRectGetMinX(layoutAttr.frame) - self.frame.size.width * 0.5 - layoutAttr.frame.size.width * 0.5;
+                break;
+            case UICollectionViewScrollPositionRight:
+                offset.x = CGRectGetMinX(layoutAttr.frame) - self.frame.size.width - layoutAttr.frame.size.width;
+                break;
+            default:
+                break;
+        }
+        if (offset.x < 0) {
+            offset.x = 0;
+        }
+        [self setContentOffset:offset animated:animated];
+    }
+}
+
 - (void)setReloadOlnyChanged:(BOOL)reloadOlnyChanged{
     _reloadOlnyChanged = reloadOlnyChanged;
     self.layout.reLayoutOlnyChanged = reloadOlnyChanged;

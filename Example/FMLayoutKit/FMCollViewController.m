@@ -33,7 +33,8 @@
 }
 
 - (void)reloadSection{
- 
+ [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:4] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    return;
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:3];
 
@@ -378,6 +379,8 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
+//    [self.collectionView layoutIfNeeded];
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
