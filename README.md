@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/cocoapods/l/FMLayoutKit.svg?style=flat)](https://cocoapods.org/pods/FMLayoutKit)
 [![Platform](https://img.shields.io/cocoapods/p/FMCollectionLayout.svg?style=flat)](https://cocoapods.org/pods/FMCollectionLayout)
 
+
 ## 简介
 ### 一个可以让你更快的搞定复杂页面（电商首页，方格+列表多样式布局）的CollectionView自定义布局，目前仅支持纵向布局，可以穿插横向布局，动态cell高度做一些适配可以做到自动计算高度，也可以手动计算通过block返回，代码可以高度集中在一块，效果下面有演示，有什么问题随时issue我，感谢Star
 
@@ -34,6 +35,7 @@ FMCollectionLayout is available under the MIT license. See the LICENSE file for 
 ## 提示
 
 ### 使用动态自动计算高度的时候  label的preferredMaxLayoutWidth属性请给一个准确的值  否则计算label布局的高度不准确
+穿插其他方向的布局 请使用FMLayoutCrossSection将所需要显示的section包裹进去, 可以包裹多个分组布局, 该分组也可以增加头部底部以及背景等
 
 ## 支持的Cell布局样式以及头部悬停效果
 ![效果图片](Jietu20200430-154528@2x.jpg)
@@ -70,12 +72,12 @@ FMCollectionLayout is available under the MIT license. See the LICENSE file for 
 
 每一个分组都可以设置头部，底部，背景，这三个都有inset可以设置内边距，灵活多变
 
-特斯拉滚动视图是基于FMCollectionLayoutView的，共享的头部是一个FMCollectionLayoutView，横向每一屏都是FMCollectionLayoutView，最底部可以横向滚动是一个ScrollView，当触摸到头部的时候，ScrollView的pan手势会失效，横向滚动时，会将共享的头部移到最顶部视图上，滚动结束静止下来的时候，会将共享头部加到当前上下滚动的FMCollectionLayoutView，以达到效果
+特斯拉滚动视图是基于FMLayoutView的，共享的头部是一个FMLayoutView，横向每一屏都是FMLayoutView，最底部可以横向滚动是一个ScrollView，当触摸到头部的时候，ScrollView的pan手势会失效，横向滚动时，会将共享的头部移到最顶部视图上，滚动结束静止下来的时候，会将共享头部加到当前上下滚动的FMLayoutView，以达到效果
 
 ### 使用示例
 ``` objc
 /// 创建CollectionView  delegate以及dataSource默认自己已遵守实现了一些方法
-FMCollectionLayoutView *view = [[FMCollectionLayoutView alloc] init];
+FMLayoutView *view = [[FMLayoutView alloc] init];
 /// 需要布局的分组
 [view.layout setSections:self.shareSections];
 view.backgroundColor = [UIColor whiteColor];
@@ -89,11 +91,11 @@ self.collectionView = view;
 /// 固定大小 单一cell样式的分组
  FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
 /// 配置分组头部  高度以及view类
-section.header = [FMSupplementaryHeader supplementaryHeight:100 viewClass:[FMCollectionCustomDecoration class]];
+section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class]];
 /// 头部最底距离item的间距
 section.header.bottomMargin = 10;
 /// 头部样式是否悬停
-section.header.type = FMSupplementaryTypeSuspensionBigger;
+section.header.type = FMHeaderTypeSuspensionBigger;
 /// 头部内边距
 section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
 /// 
@@ -102,16 +104,14 @@ section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
     customHeader.textLabel.text = @"固定大小, 从左往右从上往下排的分组, 头部放大缩放效果";
 }];
 /// 配置分组底部
-section.footer = [FMSupplementaryFooter supplementaryHeight:50 viewClass:[FMCollectionCustomDecoration class]];
+section.footer = [FMLayoutFooter elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
 section.footer.topMargin = 10;
 
 /// 配置Item样式
-/// 是否可以横向滚动
-section.isHorizontalCanScroll = YES;
 section.itemSize = CGSizeMake(100, 100);
 section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
 /// cell的类 可以纯代码也可以Xib
-section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]];
+section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
 /// cell赋值数据
 [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
     
@@ -124,11 +124,11 @@ section.cellElement = [FMCollectionViewElement elementWithViewClass:[FMCollectio
 
 #pragma mark --- 动态分组
 /// cell类的数组
-section.cellElements = @[[FMCollectionViewElement elementWithViewClass:[FMCollectionCustomCell class]]];
+section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
 /// 需固定宽度
-section.cellFixedWidth = [UIScreen mainScreen].bounds.size.width;
+section.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
 /// 手动计算高度
-[section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+[section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
     return 100 + item * 100;
 }];
 /// 或者可以自动计算高度  布局约束好  数据填充完
@@ -140,8 +140,6 @@ section.autoHeightFixedWidth = YES;
 }];
 
 #pragma mark --- 标签分组
-/// 是否是单行滚动
-section.isSingleLineCanScroll = YES;
 /// 不是单行的话  可以限制最大行数
 section.maxLine = 6;
 /// 固定每一个高度
@@ -213,4 +211,16 @@ multi.dataSource = self;
 }
 
 ```
+#### 版本更新
+
+2020-07-09
+新增可复制分组, 以便于快读创建分组
+
+2020-07-09
+重写滚动到某一行的方法, 计算出偏移量
+
+2020-07-08
+由老版本FMCollectionLayout优化更改名字FMLayoutKit重新上传
+
+#### 感谢观看
 有使用问题，欢迎联系我随时交流，QQ:847881570, 能Star一下的话，感激不尽
