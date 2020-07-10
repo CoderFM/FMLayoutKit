@@ -18,6 +18,16 @@
 
 @implementation FMLayoutLabelSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutLabelSection *label = [super copyWithZone:zone];
+    label.maxLine = self.maxLine;
+    label.cellFixedHeight =  self.cellFixedHeight;
+    label.cellMaxWidth = self.cellMaxWidth;
+    label.widthBlock = [self.widthBlock copy];
+    label.overItemBlock = [self.overItemBlock copy];
+    return label;
+}
+
 - (void)prepareItems{
     if ([self prepareLayoutItemsIsOlnyChangeOffset]) return;
     if (self.direction == FMLayoutDirectionVertical) {

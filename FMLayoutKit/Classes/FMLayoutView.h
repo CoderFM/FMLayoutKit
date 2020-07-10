@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FMLayoutView : UICollectionView
 @property(nonatomic, weak)id<FMCollectionLayoutViewConfigurationDelegate> configuration;
 @property(nonatomic, weak)FMLayout *layout;
+///重写了set get 目标指向->layout.sections
+@property(nonatomic)NSMutableArray<FMLayoutBaseSection *> *sections;
 @property(nonatomic, assign)BOOL reloadOlnyChanged;
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_UNAVAILABLE;
 - (instancetype)initHorizontal;
@@ -38,8 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 交换分组
 - (void)exchangeLayoutSection:(NSUInteger)index to:(NSUInteger)to;
-
+/// 循环遍历出更改过的sections   如果有过增删分组 请使用原有的reloadData方法
 - (void)reloadChangedSectionsData;
+///获取到滚动到indexPath位置偏移量   如果获取到的不准确  请先调用layoutIfNeeded方法
+- (CGPoint)contentOffsetScrollToIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition;
 
 @end
 

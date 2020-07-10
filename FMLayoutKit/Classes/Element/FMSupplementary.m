@@ -14,6 +14,15 @@
 
 @implementation FMSupplementary
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMSupplementary *supp = [super copyWithZone:zone];
+    supp.size = self.size;
+    supp.zIndex = self.zIndex;
+    supp.autoHeight = self.autoHeight;
+    supp.configureDataAutoHeight = [self.configureDataAutoHeight copy];
+    return supp;
+}
+
 + (instancetype)elementSize:(CGFloat)size viewClass:(Class)vClass{
     return [self elementSize:size viewClass:vClass isNib:NO];
 }

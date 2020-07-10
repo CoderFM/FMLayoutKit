@@ -11,11 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FMLayoutElement : NSObject
+@interface FMLayoutElement : NSObject<NSCopying>
 
 @property(nonatomic, copy)NSString *reuseIdentifier;
 @property(nonatomic, assign)BOOL isNib;
-@property(nonatomic, assign)Class viewClass;///视图的类
+@property(nonatomic, weak)Class viewClass;///视图的类
 
 + (instancetype)elementWithViewClass:(Class)vCalss;
 + (instancetype)elementWithViewClass:(Class)vCalss isNib:(BOOL)isNib;

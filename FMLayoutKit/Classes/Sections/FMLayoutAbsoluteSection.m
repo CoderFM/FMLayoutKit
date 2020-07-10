@@ -16,6 +16,12 @@
 
 @implementation FMLayoutAbsoluteSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutAbsoluteSection *section = [super copyWithZone:zone];
+    section.frameBlock = [self.frameBlock copy];
+    return section;
+}
+
 - (void)prepareItems{
     self.maxSize = self.handleType == FMLayoutHandleTypeOlnyChangeOffset ? [self.columnSizes[@0] floatValue]:0;
     [super prepareItems];

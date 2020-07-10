@@ -14,4 +14,10 @@
     return UICollectionElementKindSectionFooter;
 }
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutFooter *footer = [super copyWithZone:zone];
+    footer.topMargin = self.topMargin;
+    return footer;
+}
+
 @end

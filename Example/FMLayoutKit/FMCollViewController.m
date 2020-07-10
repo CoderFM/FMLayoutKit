@@ -33,7 +33,9 @@
 }
 
 - (void)reloadSection{
- [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:4] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    FMLayoutBaseSection *section = [self.shareSections[2] copy];
+    [self.collectionView insertLayoutSection:section atIndex:1];
+    [self.collectionView reloadData];
     return;
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:3];
@@ -51,7 +53,10 @@
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         [self.collectionView insertLayoutSection:section atIndex:1];
     }
-    [self.collectionView reloadData];
+//    [self.collectionView.layout invalidateLayout];
+//    [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:1]];
+    
+//    [self.collectionView reloadData];
 }
 
 - (void)addItem{
@@ -66,7 +71,7 @@
 
 - (void)deleteSection{
     [self.collectionView deleteLayoutSectionAt:1];
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 }
 
 - (void)deleteItem{
@@ -76,7 +81,7 @@
 
 - (void)reloadItem{
     [[self.shareSections firstObject] markChangeAt:3];
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 }
 
 - (void)addSection{
@@ -94,7 +99,8 @@
         section.itemSize = CGSizeMake(100, 100);
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [self.shareSections addObject:section];
+//        [self.shareSections addObject:section];
+        [self.collectionView appendLayoutSections:@[section]];
     }
     [self.collectionView reloadData];
 }

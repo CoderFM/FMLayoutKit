@@ -11,6 +11,23 @@
 #import "FMLayoutLabelSection.h"
 #import "FMLayoutBaseSection+ConfigureBlock.h"
 
+@interface _FMLayoutSussEmptyView : UICollectionReusableView
+
+@end
+
+@implementation _FMLayoutSussEmptyView
+ 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.hidden = YES;
+    }
+    return self;
+}
+
+@end
+
 @interface FMLayoutView ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property(nonatomic, weak)id<UICollectionViewDataSource> externalDataSource;
@@ -49,6 +66,14 @@
     [self.layout.sections exchangeObjectAtIndex:index withObjectAtIndex:to];
 }
 
+- (NSMutableArray<FMLayoutBaseSection *> *)sections{
+    return self.layout.sections;
+}
+
+- (void)setSections:(NSMutableArray<FMLayoutBaseSection *> *)sections{
+    self.layout.sections = sections;
+}
+
 - (void)dealloc{
     FMLayoutLog(@"FMLayoutView dealloc");
 }
@@ -57,13 +82,8 @@
     return [self initHorizontalWithFrame:CGRectZero];
 }
 - (instancetype)initHorizontalWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame collectionViewLayout:[[FMLayout alloc] init]];
-    if (self) {
-        self.layout = (FMLayout *)self.collectionViewLayout;
+    if (self = [self initWithFrame:frame]) {
         self.layout.direction = FMLayoutDirectionHorizontal;
-        self.dataSource = self;
-        self.delegate = self;
-        self.reloadOlnyChanged = YES;
     }
     return self;
 }
@@ -82,6 +102,10 @@
         self.delegate = self;
         self.reloadOlnyChanged = YES;
         self.directionalLockEnabled = YES;
+        
+        [self registerClass:[_FMLayoutSussEmptyView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([_FMLayoutSussEmptyView class])];
+        [self registerClass:[_FMLayoutSussEmptyView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:NSStringFromClass([_FMLayoutSussEmptyView class])];
+        [self registerClass:[_FMLayoutSussEmptyView class] forSupplementaryViewOfKind:UICollectionElementKindSectionBackground withReuseIdentifier:NSStringFromClass([_FMLayoutSussEmptyView class])];
     }
     return self;
 }
@@ -108,48 +132,8 @@
 }
 
 - (void)scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition animated:(BOOL)animated{
-    if (CGSizeEqualToSize(CGSizeZero, self.contentSize)) {
-        [self layoutIfNeeded];
-    }
-    UICollectionViewLayoutAttributes *layoutAttr = [self.layout layoutAttributesForItemAtIndexPath:indexPath];
-    CGPoint offset = self.contentOffset;
-    if (self.layout.direction == FMLayoutDirectionVertical) {
-        switch (scrollPosition) {
-            case UICollectionViewScrollPositionTop:
-                offset.y = CGRectGetMinY(layoutAttr.frame);
-                break;
-            case UICollectionViewScrollPositionCenteredVertically:
-                offset.y = CGRectGetMinY(layoutAttr.frame) - self.frame.size.height * 0.5 - layoutAttr.frame.size.height * 0.5;
-                break;
-            case UICollectionViewScrollPositionBottom:
-                offset.y = CGRectGetMinY(layoutAttr.frame) - self.frame.size.height - layoutAttr.frame.size.height;
-                break;
-            default:
-                break;
-        }
-        if (offset.y < 0) {
-            offset.y = 0;
-        }
-        [self setContentOffset:offset animated:animated];
-    } else {
-        switch (scrollPosition) {
-            case UICollectionViewScrollPositionLeft:
-                offset.x = CGRectGetMinX(layoutAttr.frame);
-                break;
-            case UICollectionViewScrollPositionCenteredHorizontally:
-                offset.x = CGRectGetMinX(layoutAttr.frame) - self.frame.size.width * 0.5 - layoutAttr.frame.size.width * 0.5;
-                break;
-            case UICollectionViewScrollPositionRight:
-                offset.x = CGRectGetMinX(layoutAttr.frame) - self.frame.size.width - layoutAttr.frame.size.width;
-                break;
-            default:
-                break;
-        }
-        if (offset.x < 0) {
-            offset.x = 0;
-        }
-        [self setContentOffset:offset animated:animated];
-    }
+    CGPoint offset = [self contentOffsetScrollToIndexPath:indexPath atScrollPosition:scrollPosition];
+    [self setContentOffset:offset animated:animated];
 }
 
 - (void)setReloadOlnyChanged:(BOOL)reloadOlnyChanged{
@@ -175,8 +159,56 @@
         } else {
             [super reloadData];
         }
+    } else {
+        [super reloadData];
     }
-    [super reloadData];
+}
+
+- (CGPoint)contentOffsetScrollToIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition{
+    if (CGSizeEqualToSize(CGSizeZero, self.contentSize)) {
+        [self layoutIfNeeded];
+    }
+    UICollectionViewLayoutAttributes *layoutAttr = [self.layout layoutAttributesForItemAtIndexPath:indexPath];
+    CGPoint offset = self.contentOffset;
+    if (!layoutAttr) {
+        return offset;
+    }
+    if (self.layout.direction == FMLayoutDirectionVertical) {
+        switch (scrollPosition) {
+            case UICollectionViewScrollPositionTop:
+                offset.y = CGRectGetMinY(layoutAttr.frame);
+                break;
+            case UICollectionViewScrollPositionCenteredVertically:
+                offset.y = CGRectGetMinY(layoutAttr.frame) - self.frame.size.height * 0.5 + layoutAttr.frame.size.height * 0.5;
+                break;
+            case UICollectionViewScrollPositionBottom:
+                offset.y = CGRectGetMinY(layoutAttr.frame) - self.frame.size.height + layoutAttr.frame.size.height;
+                break;
+            default:
+                break;
+        }
+        if (offset.y < 0) {
+            offset.y = 0;
+        }
+    } else {
+        switch (scrollPosition) {
+            case UICollectionViewScrollPositionLeft:
+                offset.x = CGRectGetMinX(layoutAttr.frame);
+                break;
+            case UICollectionViewScrollPositionCenteredHorizontally:
+                offset.x = CGRectGetMinX(layoutAttr.frame) - self.frame.size.width * 0.5 + layoutAttr.frame.size.width * 0.5;
+                break;
+            case UICollectionViewScrollPositionRight:
+                offset.x = CGRectGetMinX(layoutAttr.frame) - self.frame.size.width + layoutAttr.frame.size.width;
+                break;
+            default:
+                break;
+        }
+        if (offset.x < 0) {
+            offset.x = 0;
+        }
+    }
+    return offset;
 }
 
 - (void)reloadSections:(NSIndexSet *)sections{
@@ -263,7 +295,7 @@
         }
         return bg;
     }
-    return nil;
+    return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass([_FMLayoutSussEmptyView class]) forIndexPath:indexPath];
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(9.0)){

@@ -14,6 +14,9 @@
 @implementation FMCollectionLayoutAttributes
 
 + (instancetype)headerAttributesWithSection:(FMLayoutBaseSection *)section{
+    if (!section.header) {
+        return nil;
+    }
     FMCollectionLayoutAttributes *header = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:section.indexPath];
     header.direction = section.direction;
     if (header.direction == FMLayoutDirectionVertical) {
@@ -197,6 +200,9 @@
 
 
 + (instancetype)footerAttributesWithSection:(FMLayoutBaseSection *)section{
+    if (!section.footer) {
+        return nil;
+    }
     FMCollectionLayoutAttributes *footer = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:section.indexPath];
     footer.direction = section.direction;
     if (footer.direction == FMLayoutDirectionVertical) {
@@ -221,6 +227,9 @@
 }
 
 + (instancetype)bgAttributesWithSection:(FMLayoutBaseSection *)section{
+    if (!section.background) {
+        return nil;
+    }
     FMCollectionLayoutAttributes *bgAttr = [self layoutAttributesForSupplementaryViewOfKind:section.background.elementKind withIndexPath:section.indexPath];
     bgAttr.direction = section.direction;
     if (bgAttr.direction == FMLayoutDirectionVertical) {

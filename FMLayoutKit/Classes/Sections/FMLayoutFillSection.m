@@ -17,6 +17,12 @@
 
 @implementation FMLayoutFillSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutFillSection *section = [super copyWithZone:zone];
+    section.sizeBlock = [self.sizeBlock copy];
+    return section;
+}
+
 - (void)prepareItems{
     if ([self prepareLayoutItemsIsOlnyChangeOffset]) return;
     [self resetcolumnSizes];

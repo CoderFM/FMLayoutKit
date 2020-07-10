@@ -13,6 +13,13 @@
 
 @implementation FMLayoutFixedSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutFixedSection *section = [super copyWithZone:zone];
+    section.itemSize = self.itemSize;
+    section.cellElement = [self.cellElement copy];
+    return section;
+}
+
 - (void)setItemSize:(CGSize)itemSize{
     _itemSize = itemSize;
     self.hasHandle = NO;

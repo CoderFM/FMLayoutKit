@@ -19,6 +19,27 @@
 
 @implementation FMLayoutCrossSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutCrossSection *section = [super copyWithZone:zone];
+    
+    section.cellElement = [self.cellElement copy];
+    section.configureCellData = self.configureCellData;
+    
+    section.autoMaxSize = self.autoMaxSize;
+    section.size = self.size;
+    section.canReuseCell = self.canReuseCell;
+    
+    NSMutableArray *sections = [NSMutableArray array];
+    for (FMLayoutBaseSection *s in self.sections) {
+        [sections addObject:[s copy]];
+    }
+    section.sections = sections;
+    section.scrollDidScroll = [self.scrollDidScroll copy];
+    section.configureCollectionView = [self.configureCollectionView copy];
+    
+    return section;
+}
+
 - (FMLayoutDirection)crossDirection{
     return self.direction == FMLayoutDirectionVertical ? FMLayoutDirectionHorizontal : FMLayoutDirectionVertical;
 }
@@ -48,7 +69,7 @@
     self = [super init];
     if (self) {
         self.cellElement = [FMLayoutElement elementWithViewClass:[FMLayoutCrossCell class]];
-        self.canReuseCell = YES;
+        self.canReuseCell = NO;
         [self setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
             FMLayoutCrossCell *hCell = (FMLayoutCrossCell *)cell;
             hCell.crossSection = (FMLayoutCrossSection *)section;

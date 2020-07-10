@@ -30,11 +30,6 @@
     [self handleSections];
 }
 
-- (void)invalidateLayout{
-    
-    [super invalidateLayout];
-}
-
 - (void)setSections:(NSMutableArray<FMLayoutBaseSection *> *)sections{
     
     if (_sections == sections) {

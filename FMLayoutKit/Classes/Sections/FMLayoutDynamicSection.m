@@ -19,6 +19,21 @@
 
 @implementation FMLayoutDynamicSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutDynamicSection *section = [super copyWithZone:zone];
+    section.autoHeightFixedWidth = self.autoHeightFixedWidth;
+    section.cellFixedSize = self.cellFixedSize;
+    NSMutableArray *arrM = [NSMutableArray array];
+    for (FMLayoutElement *element in self.cellElements) {
+        [arrM addObject:[element copy]];
+    }
+    section.cellElements = arrM;
+    section.deqCellReturnReuseId = [self.deqCellReturnReuseId copy];
+    section.configurationCell = [self.configurationCell copy];
+    section.otherBlock = [self.otherBlock copy];
+    return section;
+}
+
 - (NSMapTable *)reuseCells{
     if (_reuseCells == nil) {
         _reuseCells = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsWeakMemory];

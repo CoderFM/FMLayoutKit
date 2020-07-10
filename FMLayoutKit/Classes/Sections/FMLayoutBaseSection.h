@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, FMLayoutDirection) {
 NS_ASSUME_NONNULL_BEGIN
 @class FMLayoutHeader, FMLayoutFooter, FMLayoutBackground, FMCollectionLayoutAttributes;
 
-@interface FMLayoutBaseSection : NSObject
+@interface FMLayoutBaseSection : NSObject<NSCopying>
 
 @property(nonatomic, weak)UICollectionView *collectionView;
 @property(nonatomic, strong)NSIndexPath *indexPath;

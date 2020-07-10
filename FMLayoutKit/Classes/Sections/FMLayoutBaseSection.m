@@ -21,6 +21,29 @@
 
 @implementation FMLayoutBaseSection
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutBaseSection *section = [[[self class] allocWithZone:zone] init];
+    
+    section.hasHandle = NO;
+    section.handleItemStart = 0;
+    section.handleType = FMLayoutHandleTypeReLayout;
+    section.changeOffset = 0;
+    
+    section.sectionInset = self.sectionInset;
+    section.header = [self.header copy];
+    section.footer = [self.footer copy];
+    section.background = [self.background copy];
+    
+    section.column = self.column;
+    section.lineSpace = self.lineSpace;
+    section.itemSpace = self.itemSpace;
+    section.configureCellLayoutAttributes = [self.configureCellLayoutAttributes copy];
+    
+    section.itemDatas = [self.itemDatas copy];
+    
+    return section;
+}
+
 - (void)dealloc{
     FMLayoutLog([NSString stringWithFormat:@"%@ dealloc", NSStringFromClass([self class])]);
     [self.kvoArray removeObserver:self forKeyPath:@"targetArray" context:nil];

@@ -16,6 +16,14 @@
 
 @implementation FMLayoutElement
 
+- (id)copyWithZone:(NSZone *)zone{
+    FMLayoutElement *element = [[[self class] allocWithZone:zone] init];
+    element.reuseIdentifier = self.reuseIdentifier;
+    element.isNib = self.isNib;
+    element.viewClass = self.viewClass;
+    return element;
+}
+
 + (instancetype)elementWithViewClass:(Class)vCalss{
     return [self elementWithViewClass:vCalss isNib:NO];
 }
