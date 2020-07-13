@@ -133,29 +133,6 @@
     return [collectionView dequeueReusableCellWithReuseIdentifier:self.cellElement.reuseIdentifier forIndexPath:indexPath];
 }
 
-- (NSArray<FMCollectionLayoutAttributes *> *)horizontalItemAttributesWith:(UICollectionView *)collectionView needParam:(nonnull NSDictionary *)needParam{
-    NSInteger items = [collectionView numberOfItemsInSection:0];
-    NSMutableArray *itemAttrs = [NSMutableArray array];
-    CGFloat startX = self.sectionInset.left;
-    for (int i = 0; i<items; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        FMCollectionLayoutAttributes *attr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-        if (i > 0) {
-            startX += self.itemSpace;
-        }
-        CGFloat width = self.widthBlock(self, i);
-        CGFloat x = startX;
-        CGFloat y = self.header.lastMargin;
-        attr.frame = CGRectMake(x, y, width, self.cellFixedHeight);
-        [itemAttrs addObject:attr];
-        startX += width;
-        if (self.configureCellLayoutAttributes) {
-            self.configureCellLayoutAttributes(self, attr, i);
-        }
-    }
-    return itemAttrs;
-}
-
 - (CGFloat)crossSingleSectionSize{
     if (self.direction == FMLayoutDirectionHorizontal) {
         if (self.itemCount > self.maxLine) {

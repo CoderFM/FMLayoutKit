@@ -8,8 +8,8 @@
 
 #import "FMSupplementary.h"
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, FMLayoutHeaderType) {/// 目前仅支持header悬浮
+/// 悬浮方式
+typedef NS_ENUM(NSInteger, FMLayoutHeaderType) {
     ///跟着滚动
     FMLayoutHeaderTypeFixed,
     ///悬浮在顶部  跟着section动
