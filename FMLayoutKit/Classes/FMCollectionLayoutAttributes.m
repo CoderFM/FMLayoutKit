@@ -83,35 +83,37 @@
         if (section.header.type == FMLayoutHeaderTypeSuspensionBigger && section.indexPath.section == 0) {
             FMCollectionLayoutAttributes *show = [section.headerAttribute copy];
             CGFloat offsetY = section.collectionView.contentOffset.y;
-            if (offsetY < CGRectGetHeight(show.frame)) {
+            if (offsetY <= 0) { //放大
                 CGRect frame = show.frame;
-                
                 frame.origin.y += offsetY;
                 frame.size.height -= offsetY;
-                if (section.header.minSize > 0) {
-                    if (frame.size.height < section.header.minSize) {
-                        frame.size.height = section.header.minSize;
-                    }
-                }
                 show.frame = frame;
-                
                 return show;
-            } else {
+            } else { //缩小
                 CGRect frame = show.frame;
-                
-                if (section.header.minSize > 0) {
-                    frame.origin.y += offsetY;
-                    frame.size.height -= CGRectGetHeight(show.frame);
-                    if (section.header.minSize > 0) {
-                        if (frame.size.height < section.header.minSize) {
-                            frame.size.height = section.header.minSize;
-                        }
-                    }
-                } else {
-                    frame.origin.y += CGRectGetHeight(show.frame);
-                    frame.size.height -= CGRectGetHeight(show.frame);
+                CGRect originalFrame = section.headerAttribute.frame;
+                CGFloat minHeight = section.header.minSize;
+                if (offsetY <= frame.origin.y) {//顶部有间距  先移动到顶部
+                    return show;
+                }
+                if (offsetY <= frame.origin.y + section.header.size - minHeight) {//缩小至最小过程
+                    frame.origin.y = offsetY;
+                    frame.size.height -=  (offsetY - originalFrame.origin.y);
+                    show.frame = frame;
+                    return show;
                 }
                 
+                //缩小的最小之后大小固定
+                frame.origin.y = offsetY;
+                frame.size.height = minHeight;
+                
+                //如果不是固定在顶固的  将偏移量重置
+                if (!section.header.isStickTop) {
+                    CGFloat minOffsetY = originalFrame.origin.y + (section.header.size - minHeight);
+                    if (offsetY >  minOffsetY) {
+                        frame.origin.y = minOffsetY;
+                    }
+                }
                 show.frame = frame;
                 return show;
             }
@@ -161,35 +163,37 @@
         if (section.header.type == FMLayoutHeaderTypeSuspensionBigger && section.indexPath.section == 0) {
             FMCollectionLayoutAttributes *show = [section.headerAttribute copy];
             CGFloat offsetX = section.collectionView.contentOffset.x;
-            if (offsetX < CGRectGetWidth(show.frame)) {
+            if (offsetX <= 0) { //放大
                 CGRect frame = show.frame;
-                
                 frame.origin.x += offsetX;
                 frame.size.width -= offsetX;
-                if (section.header.minSize > 0) {
-                    if (frame.size.width < section.header.minSize) {
-                        frame.size.width = section.header.minSize;
-                    }
-                }
                 show.frame = frame;
-                
                 return show;
-            } else {
+            } else { //缩小
                 CGRect frame = show.frame;
-                
-                if (section.header.minSize > 0) {
-                    frame.origin.x += offsetX;
-                    frame.size.width -= CGRectGetWidth(show.frame);
-                    if (section.header.minSize > 0) {
-                        if (frame.size.width < section.header.minSize) {
-                            frame.size.width = section.header.minSize;
-                        }
-                    }
-                } else {
-                    frame.origin.x += CGRectGetWidth(show.frame);
-                    frame.size.width -= CGRectGetWidth(show.frame);
+                CGRect originalFrame = section.headerAttribute.frame;
+                CGFloat minHeight = section.header.minSize;
+                if (offsetX <= frame.origin.x) {//顶部有间距  先移动到顶部
+                    return show;
+                }
+                if (offsetX <= frame.origin.x + section.header.size - minHeight) {//缩小至最小过程
+                    frame.origin.x = offsetX;
+                    frame.size.width -=  (offsetX - originalFrame.origin.x);
+                    show.frame = frame;
+                    return show;
                 }
                 
+                //缩小的最小之后大小固定
+                frame.origin.x = offsetX;
+                frame.size.height = minHeight;
+                
+                //如果不是固定在顶固的  将偏移量重置
+                if (!section.header.isStickTop) {
+                    CGFloat minOffsetX = originalFrame.origin.x + (section.header.size - minHeight);
+                    if (offsetX >  minOffsetX) {
+                        frame.origin.x = minOffsetX;
+                    }
+                }
                 show.frame = frame;
                 return show;
             }

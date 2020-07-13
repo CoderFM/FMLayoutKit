@@ -126,12 +126,15 @@
     self.navigationItem.rightBarButtonItems = @[item2, item1, item22, item11, item111, item222, item2222];
     
     self.shareSections = [NSMutableArray array];
+    
     {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(20, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
 
         section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.lastMargin = 10;
         section.header.type = FMLayoutHeaderTypeSuspensionBigger;
+//        section.header.minSize = 50;
+        section.header.isStickTop = YES;
         section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
@@ -156,6 +159,7 @@
         [self.shareSections addObject:section];
     }
     
+    
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
 
@@ -169,7 +173,8 @@
 
         section.cellFixedSize = 166;
         section.autoHeightFixedWidth = YES;
-        section.itemDatas = [@[@1, @1, @1, @1, @1, @1] mutableCopy];
+        //, @1, @1, @1, @1
+        section.itemDatas = [@[@1, @1] mutableCopy];
         section.cellElement = [FMLayoutElement elementWithViewClass:[LS_HomeActivityCell class]];
         [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
             if (item == 0) {
@@ -190,8 +195,9 @@
             }
             ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n一些描述";
         }];
-        [self.shareSections addObject:section];
+//        [self.shareSections addObject:section];
     }
+    
     
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
@@ -374,7 +380,7 @@
         [self.shareSections addObject:section];
     }
     
-    FMLayoutView *view = [[FMLayoutView alloc] init];
+    FMLayoutView *view = [[FMLayoutView alloc] initHorizontal];
     view.delegate = self;
 //    view.reloadOlnyChanged = NO;
     [view.layout setSections:self.shareSections];
