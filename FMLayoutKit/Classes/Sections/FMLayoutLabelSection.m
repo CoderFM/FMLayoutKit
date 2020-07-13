@@ -33,7 +33,7 @@
     if (self.direction == FMLayoutDirectionVertical) {
         self.column = 1;
         [self resetcolumnSizes];
-        NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
+        NSInteger items = MIN([self.collectionView numberOfItemsInSection:self.indexPath.section], self.itemCount);
         NSMutableArray<FMCollectionLayoutAttributes *> *attrs = [NSMutableArray array];
         int first = 0;
         NSInteger lines = 0;
@@ -102,7 +102,7 @@
     } else {
         self.column = self.maxLine;
         [self resetcolumnSizes];
-        NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
+        NSInteger items = MIN([self.collectionView numberOfItemsInSection:self.indexPath.section], self.itemCount);
         NSMutableArray *attrs = [NSMutableArray array];
         int first = 0;
         if (self.handleType == FMLayoutHandleTypeAppend) {

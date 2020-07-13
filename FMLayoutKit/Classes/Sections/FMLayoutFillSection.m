@@ -26,7 +26,7 @@
 - (void)prepareItems{
     if ([self prepareLayoutItemsIsOlnyChangeOffset]) return;
     [self resetcolumnSizes];
-    NSInteger items = [self.collectionView numberOfItemsInSection:self.indexPath.section];
+    NSInteger items = MIN([self.collectionView numberOfItemsInSection:self.indexPath.section], self.itemCount);
     NSMutableArray *attrs = [NSMutableArray array];
     int first = 0;
     if (self.handleType == FMLayoutHandleTypeAppend) {

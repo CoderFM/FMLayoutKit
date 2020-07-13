@@ -40,9 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)FMLayoutHandleType handleType;
 @property(nonatomic, assign)CGFloat changeOffset;
 
-@property(nonatomic, strong)FMCollectionLayoutAttributes *bgAttribute;
-@property(nonatomic, strong)FMCollectionLayoutAttributes *headerAttribute;
-@property(nonatomic, strong)FMCollectionLayoutAttributes *footerAttribute;
+@property(nonatomic, strong)FMCollectionLayoutAttributes * __nullable bgAttribute;
+@property(nonatomic, strong)FMCollectionLayoutAttributes * __nullable headerAttribute;
+@property(nonatomic, strong)FMCollectionLayoutAttributes * __nullable footerAttribute;
 @property(nonatomic, strong)NSArray<FMCollectionLayoutAttributes *> *itemsAttribute;
 /// 分组偏移高度
 @property(nonatomic, assign)CGFloat sectionOffset;
@@ -51,11 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 分组内边距
 @property(nonatomic, assign)UIEdgeInsets sectionInset;
 ///分组头部
-@property(nonatomic, strong)FMLayoutHeader *header;
+@property(nonatomic, strong)FMLayoutHeader * __nullable header;
 ///分组底部
-@property(nonatomic, strong)FMLayoutFooter *footer;
+@property(nonatomic, strong)FMLayoutFooter * __nullable footer;
 ///分组背景
-@property(nonatomic, strong)FMLayoutBackground *background;
+@property(nonatomic, strong)FMLayoutBackground * __nullable background;
 ///cell行间距
 @property(nonatomic, assign)CGFloat lineSpace;
 ///cell间距
@@ -88,6 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)prepareFooter;
 - (void)prepareItems;
 - (void)prepareBackground;
+
+- (NSArray *)showLayoutAttributesInRect:(CGRect)rect;
 ///即将显示的头部布局
 - (UICollectionViewLayoutAttributes *)showHeaderLayout;
 ///根据index计算出该布局对象

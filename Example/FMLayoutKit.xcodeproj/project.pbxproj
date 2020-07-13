@@ -37,6 +37,7 @@
 		C397387D248F705000A7A2C2 /* FMLayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3973874248F705000A7A2C2 /* FMLayoutLabel.m */; };
 		C397387E248F705000A7A2C2 /* LS_HomeActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3973875248F705000A7A2C2 /* LS_HomeActivityCell.m */; };
 		C399E9A324AEC11D00353B76 /* FMAotuSizeReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C399E9A224AEC11D00353B76 /* FMAotuSizeReusableView.m */; };
+		C3C47B9F24BAC2810020C071 /* FMCombineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C47B9E24BAC2810020C071 /* FMCombineViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,8 @@
 		C3973876248F705000A7A2C2 /* FMCollectionCustomDecoration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCollectionCustomDecoration.h; sourceTree = "<group>"; };
 		C399E9A124AEC11D00353B76 /* FMAotuSizeReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMAotuSizeReusableView.h; sourceTree = "<group>"; };
 		C399E9A224AEC11D00353B76 /* FMAotuSizeReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMAotuSizeReusableView.m; sourceTree = "<group>"; };
+		C3C47B9D24BAC2810020C071 /* FMCombineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCombineViewController.h; sourceTree = "<group>"; };
+		C3C47B9E24BAC2810020C071 /* FMCombineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCombineViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,8 @@
 				C3973870248F704F00A7A2C2 /* FMAddViewController.m */,
 				C34E98512497ABE600E8EC44 /* FMHorizontalLayoutController.h */,
 				C34E98522497ABE600E8EC44 /* FMHorizontalLayoutController.m */,
+				C3C47B9D24BAC2810020C071 /* FMCombineViewController.h */,
+				C3C47B9E24BAC2810020C071 /* FMCombineViewController.m */,
 				C3973869248F704F00A7A2C2 /* FMCollectionCustomCell.h */,
 				C3973873248F704F00A7A2C2 /* FMCollectionCustomCell.m */,
 				C3973876248F705000A7A2C2 /* FMCollectionCustomDecoration.h */,
@@ -436,6 +441,7 @@
 				6003F59E195388D20070C39A /* FMAppDelegate.m in Sources */,
 				C3973878248F705000A7A2C2 /* FMCollViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* FMViewController.m in Sources */,
+				C3C47B9F24BAC2810020C071 /* FMCombineViewController.m in Sources */,
 				C385261024AC6AAE00386DBB /* FMFPSLabel.m in Sources */,
 				C397387D248F705000A7A2C2 /* FMLayoutLabel.m in Sources */,
 				C34E98532497ABE600E8EC44 /* FMHorizontalLayoutController.m in Sources */,

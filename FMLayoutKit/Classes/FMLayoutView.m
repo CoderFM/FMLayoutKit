@@ -38,32 +38,32 @@
 
 #pragma mark ----- Public
 - (void)appendLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections{
-    [self.layout.sections addObjectsFromArray:sections];
+    [self.sections addObjectsFromArray:sections];
 }
 - (void)insertLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections atIndexSet:(NSIndexSet *)indexSet{
-    [self.layout.sections insertObjects:sections atIndexes:indexSet];
+    [self.sections insertObjects:sections atIndexes:indexSet];
 }
 - (void)insertLayoutSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index{
-    if (index > self.layout.sections.count) {
-        [self.layout.sections addObject:section];
+    if (index > self.sections.count) {
+        [self.sections addObject:section];
     } else {
-        [self.layout.sections insertObject:section atIndex:index];
+        [self.sections insertObject:section atIndex:index];
     }
 }
 - (void)deleteLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections{
-    [self.layout.sections removeObjectsInArray:sections];
+    [self.sections removeObjectsInArray:sections];
 }
 
 - (void)deleteLayoutSectionAt:(NSUInteger)index{
-    [self.layout.sections removeObjectAtIndex:index];
+    [self.sections removeObjectAtIndex:index];
 }
 
 - (void)deleteLayoutSectionSet:(NSIndexSet *)set{
-    [self.layout.sections removeObjectsAtIndexes:set];
+    [self.sections removeObjectsAtIndexes:set];
 }
 
 - (void)exchangeLayoutSection:(NSUInteger)index to:(NSUInteger)to{
-    [self.layout.sections exchangeObjectAtIndex:index withObjectAtIndex:to];
+    [self.sections exchangeObjectAtIndex:index withObjectAtIndex:to];
 }
 
 - (NSMutableArray<FMLayoutBaseSection *> *)sections{
@@ -143,13 +143,13 @@
 
 - (void)reloadChangedSectionsData{
     if (self.reloadOlnyChanged) {
-        if (self.layout.sections == nil || self.layout.sections.count == 0) {
+        if (self.sections == nil || self.sections.count == 0) {
             [super reloadData];
             return;
         }
         NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
-        for (int i = 0; i<self.layout.sections.count; i++) {
-            FMLayoutBaseSection *section = self.layout.sections[i];
+        for (int i = 0; i<self.sections.count; i++) {
+            FMLayoutBaseSection *section = self.sections[i];
             if (section.hasHandle == NO) {
                 [set addIndex:i];
             }
@@ -212,7 +212,7 @@
 }
 
 - (void)reloadSections:(NSIndexSet *)sections{
-    NSArray *layoutSections = [self.layout.sections objectsAtIndexes:sections];
+    NSArray *layoutSections = [self.sections objectsAtIndexes:sections];
     for (FMLayoutBaseSection *section in layoutSections) {
         section.hasHandle = NO;
     }
@@ -222,8 +222,8 @@
 - (void)reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths{
     for (NSIndexPath *indexPath in indexPaths) {
         NSInteger section = indexPath.section;
-        if (section < self.layout.sections.count) {
-            FMLayoutBaseSection *layoutSection = self.layout.sections[section];
+        if (section < self.sections.count) {
+            FMLayoutBaseSection *layoutSection = self.sections[section];
             layoutSection.hasHandle = NO;
         }
     }
@@ -236,20 +236,20 @@
     if (self.externalDataSource && [self.externalDataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) {
         return [self.externalDataSource numberOfSectionsInCollectionView:collectionView];
     }
-    return self.layout.sections.count;
+    return self.sections.count;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if ([self.externalDataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]) {
         return [self.externalDataSource collectionView:collectionView numberOfItemsInSection:section];
     }
-    return self.layout.sections[section].itemCount;
+    return self.sections[section].itemCount;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if ([self.externalDataSource respondsToSelector:@selector(collectionView:cellForItemAtIndexPath:)]) {
         return [self.externalDataSource collectionView:collectionView cellForItemAtIndexPath:indexPath];
     }
-    FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
+    FMLayoutBaseSection *sectionM = self.sections[indexPath.section];
     UICollectionViewCell *cell = [sectionM dequeueReusableCellForIndexPath:indexPath];
     if (sectionM.configureCellData) {
         sectionM.configureCellData(sectionM, cell, indexPath.item);
@@ -264,7 +264,7 @@
     if (self.externalDataSource && [self.externalDataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
         return [self.externalDataSource collectionView:collectionView viewForSupplementaryElementOfKind:kind atIndexPath:indexPath];
     }
-    FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
+    FMLayoutBaseSection *sectionM = self.sections[indexPath.section];
     if (sectionM.header && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
         UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.header.elementKind withReuseIdentifier:NSStringFromClass(sectionM.header.viewClass) forIndexPath:indexPath];
         if (sectionM.configureHeaderData) {
@@ -324,8 +324,8 @@
 #pragma mark ----- delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section < self.layout.sections.count) {
-        FMLayoutBaseSection *sectionM = self.layout.sections[indexPath.section];
+    if (indexPath.section < self.sections.count) {
+        FMLayoutBaseSection *sectionM = self.sections[indexPath.section];
         if (sectionM.clickCellBlock) {
             sectionM.clickCellBlock(sectionM, indexPath.item);
         }

@@ -70,6 +70,8 @@
 		C3973880248F716E00A7A2C2 /* FMLayoutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C397387F248F716E00A7A2C2 /* FMLayoutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3A262922499EC06000A269D /* FMLayoutDebugLog.h in Headers */ = {isa = PBXBuildFile; fileRef = C3A262902499EC06000A269D /* FMLayoutDebugLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3A262932499EC06000A269D /* FMLayoutDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A262912499EC06000A269D /* FMLayoutDebugLog.m */; };
+		C3C47B9B24BAB5B00020C071 /* FMLayoutCombineSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C3C47B9924BAB5B00020C071 /* FMLayoutCombineSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3C47B9C24BAB5B00020C071 /* FMLayoutCombineSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C47B9A24BAB5B00020C071 /* FMLayoutCombineSection.m */; };
 		CA9FF2872811CDA655E6C77C620BCD05 /* Pods-FMLayoutKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A04BFBA339CDD9A004F61900B12E32 /* Pods-FMLayoutKit_Tests-dummy.m */; };
 		CE93C54413259B4AC3683B6EB874D466 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 312B988EF117AE4DE76A268D970131FE /* UIKit.framework */; };
 		D240D2B05DDD6EABBFDF67F8E42921A4 /* FMLayoutAbsoluteSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1FF779F9051E7EBED1D90B22E54DBE /* FMLayoutAbsoluteSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -199,6 +201,8 @@
 		C397387F248F716E00A7A2C2 /* FMLayoutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMLayoutKit.h; path = FMLayoutKit/Classes/FMLayoutKit.h; sourceTree = "<group>"; };
 		C3A262902499EC06000A269D /* FMLayoutDebugLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMLayoutDebugLog.h; path = FMLayoutKit/Classes/FMLayoutDebugLog.h; sourceTree = "<group>"; };
 		C3A262912499EC06000A269D /* FMLayoutDebugLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FMLayoutDebugLog.m; path = FMLayoutKit/Classes/FMLayoutDebugLog.m; sourceTree = "<group>"; };
+		C3C47B9924BAB5B00020C071 /* FMLayoutCombineSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutCombineSection.h; sourceTree = "<group>"; };
+		C3C47B9A24BAB5B00020C071 /* FMLayoutCombineSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCombineSection.m; sourceTree = "<group>"; };
 		C88C69EDAC1D1808A8CBEADA2477ABC8 /* FMLayoutBackground.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBackground.m; sourceTree = "<group>"; };
 		CA6102B5FF7D583B8C2C690205DE20A4 /* FMTeslaSuspensionHeightChangeDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMTeslaSuspensionHeightChangeDelegate.h; path = FMLayoutKit/Classes/FMTeslaSuspensionHeightChangeDelegate.h; sourceTree = "<group>"; };
 		CBBED27DA45B26B520D460A4665F4D78 /* FMLayoutLabelSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FMLayoutLabelSection.m; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 				AB29189261D660E85FDE41FE16816ECD /* FMLayoutFixedSection.m */,
 				B76709D281AC0B27965A319D31A49399 /* FMLayoutLabelSection.h */,
 				CBBED27DA45B26B520D460A4665F4D78 /* FMLayoutLabelSection.m */,
+				C3C47B9924BAB5B00020C071 /* FMLayoutCombineSection.h */,
+				C3C47B9A24BAB5B00020C071 /* FMLayoutCombineSection.m */,
 			);
 			name = Sections;
 			path = FMLayoutKit/Classes/Sections;
@@ -550,6 +556,7 @@
 				1D02BDC76EBE6C218E5DCF6DE7312674 /* FMLayoutDynamicSection.h in Headers */,
 				B9EB397E56BC70BDD925430719BC6329 /* FMLayoutElement.h in Headers */,
 				03480CAA966B43707E614B04EF182226 /* FMLayoutFillSection.h in Headers */,
+				C3C47B9B24BAB5B00020C071 /* FMLayoutCombineSection.h in Headers */,
 				A65EAC754DF091EB22BCC40FFF0F1D35 /* FMLayoutFixedSection.h in Headers */,
 				82F24F7CB465BA0393889419603DE536 /* FMLayoutFooter.h in Headers */,
 				3E6BAAA0B701F41E9E589822F97BF3AF /* FMLayoutHeader.h in Headers */,
@@ -757,6 +764,7 @@
 				C30625882498CABA000243D4 /* FMLayoutCrossCell.m in Sources */,
 				4F5212C040672D2776544CAA39A4FCCE /* FMKVOArrayObject.m in Sources */,
 				3EABA5C42467DAD253F1AF5ADA7EB3F3 /* FMLayoutAbsoluteSection.m in Sources */,
+				C3C47B9C24BAB5B00020C071 /* FMLayoutCombineSection.m in Sources */,
 				EAEF0BFE8D36DCB4694B7D396DD97AAE /* FMLayoutBackground.m in Sources */,
 				C306258424986E6A000243D4 /* FMLayout.m in Sources */,
 				C3A262932499EC06000A269D /* FMLayoutDebugLog.m in Sources */,
