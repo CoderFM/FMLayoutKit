@@ -42,7 +42,7 @@
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(20, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
         
-        section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class]];
+        section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class] isNib:NO reuseIdentifier:@"按实际大嫂家打卡机塑料袋卡死来得快"];
         section.header.lastMargin = 10;
         section.header.type = FMLayoutHeaderTypeSuspensionBigger;
         section.header.minSize = 50;

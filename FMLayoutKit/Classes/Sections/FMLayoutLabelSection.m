@@ -129,10 +129,6 @@
     }
 }
 
-- (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath collectionView:(nonnull UICollectionView *)collectionView{
-    return [collectionView dequeueReusableCellWithReuseIdentifier:self.cellElement.reuseIdentifier forIndexPath:indexPath];
-}
-
 - (CGFloat)crossSingleSectionSize{
     if (self.direction == FMLayoutDirectionHorizontal) {
         if (self.itemCount > self.maxLine) {
