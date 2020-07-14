@@ -266,7 +266,7 @@
     }
     FMLayoutBaseSection *sectionM = self.sections[indexPath.section];
     if (sectionM.header && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.header.elementKind withReuseIdentifier:NSStringFromClass(sectionM.header.viewClass) forIndexPath:indexPath];
+        UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.header.elementKind withReuseIdentifier:NSStringFromClass(sectionM.header.reuseIdentifier) forIndexPath:indexPath];
         if (sectionM.configureHeaderData) {
             sectionM.configureHeaderData(sectionM, header);
         }
@@ -276,7 +276,7 @@
         return header;
     }
     if (sectionM.footer && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
-        UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.footer.elementKind withReuseIdentifier:NSStringFromClass(sectionM.footer.viewClass) forIndexPath:indexPath];
+        UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.footer.elementKind withReuseIdentifier:NSStringFromClass(sectionM.footer.reuseIdentifier) forIndexPath:indexPath];
         if (sectionM.configureFooterData) {
             sectionM.configureFooterData(sectionM, footer);
         }
@@ -286,7 +286,7 @@
         return footer;
     }
     if (sectionM.background && [kind isEqualToString:UICollectionElementKindSectionBackground]) {
-        UICollectionReusableView *bg = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.background.elementKind withReuseIdentifier:NSStringFromClass(sectionM.background.viewClass) forIndexPath:indexPath];
+        UICollectionReusableView *bg = [collectionView dequeueReusableSupplementaryViewOfKind:sectionM.background.elementKind withReuseIdentifier:NSStringFromClass(sectionM.background.reuseIdentifier) forIndexPath:indexPath];
         if (sectionM.configureBg) {
             sectionM.configureBg(sectionM, bg);
         }
