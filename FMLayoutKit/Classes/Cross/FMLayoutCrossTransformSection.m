@@ -13,7 +13,7 @@ FMLayoutCrossTransformBlock FMLayoutCrossTransformFromType(FMLayoutCrossTransfor
     dispatch_once(&onceToken, ^{
         __FMLayoutCrossTransforms = [NSMutableDictionary dictionary];
         FMLayoutCrossTransformAdd(FMLayoutCrossTransformScale, ^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
-            cell.layer.affineTransform = CGAffineTransformMakeScale(0.8 + (1 - (fabs(progress))) * 0.2, 0.8 + (1 - (fabs(progress))) * 0.2);
+            cell.layer.affineTransform = CGAffineTransformMakeScale(0.9 + (1 - (fabs(progress))) * 0.1, 0.9 + (1 - (fabs(progress))) * 0.1);
         });
         FMLayoutCrossTransformAdd(FMLayoutCrossTransformCrooked, ^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
             CATransform3D transform;
@@ -21,6 +21,8 @@ FMLayoutCrossTransformBlock FMLayoutCrossTransformFromType(FMLayoutCrossTransfor
                 transform = CATransform3DMakeRotation(M_PI_4 * 0.5 * (fabs(progress)), 1, 1, 0);
             } else if (progress > 0) {
                 transform = CATransform3DMakeRotation(M_PI_4 * 0.5 * (fabs(progress)), -1, 1, 0);
+            } else {
+                transform = CATransform3DIdentity;
             }
             transform.m34 = 1/500.0;
             cell.layer.allowsEdgeAntialiasing = YES;
@@ -36,25 +38,33 @@ void FMLayoutCrossTransformAdd(FMLayoutCrossTransformType type, FMLayoutCrossTra
 
 @implementation FMLayoutCrossTransformSection
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setConfigureCollectionView:^(UICollectionView * _Nonnull collectionView, FMLayoutCrossSection * _Nonnull hSection) {
+            collectionView.decelerationRate = 0;
+            collectionView.alwaysBounceHorizontal = YES;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [collectionView layoutIfNeeded];
+                [collectionView.delegate scrollViewDidScroll:collectionView];
+            });
+        }];
+    }
+    return self;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [super scrollViewDidScroll:scrollView];
-    if (self.transformType == FMLayoutCrossTransformNone) {
+    if (self.transformType == FMLayoutCrossTransformNone && self.transformBlock == nil) {
         return;
     }
-    FMLayoutCrossTransformBlock block = FMLayoutCrossTransformFromType(self.transformType);
+    FMLayoutCrossTransformBlock block = self.transformBlock ?: FMLayoutCrossTransformFromType(self.transformType);
     if (block) {
-        CGPoint globalCenter = scrollView.window.center;
+        
         NSArray *cells = [(UICollectionView *)scrollView visibleCells];
         for (UICollectionViewCell *cell in cells) {
-            CGPoint cellGlobalCenter = [cell convertPoint:cell.center toView:cell.window];
-            CGFloat progress = (cellGlobalCenter.x - cell.frame.origin.x - globalCenter.x) / globalCenter.x;
-            if (progress < -1) {
-                progress = -1;
-            }
-            if (progress > 1) {
-                progress = 1;
-            }
-            block(cell, progress);
+            block(cell, [self progressCell:cell scrollView:scrollView]);
         }
     }
 }
@@ -75,21 +85,36 @@ void FMLayoutCrossTransformAdd(FMLayoutCrossTransformType type, FMLayoutCrossTra
 }
 
 - (void)scrollToCenter:(UIScrollView *)scrollView{
-    CGPoint globalCenter = scrollView.window.center;
     UICollectionViewCell *lastCell = nil;
-    CGFloat minProgress = 1;
+    CGFloat minProgress = 1.01;
     NSArray *cells = [(UICollectionView *)scrollView visibleCells];
     for (UICollectionViewCell *cell in cells) {
-        CGPoint cellGlobalCenter = [cell convertPoint:cell.center toView:cell.window];
-        CGFloat progress = (cellGlobalCenter.x - cell.frame.origin.x - globalCenter.x) / globalCenter.x;
+        if (lastCell == nil) {
+            lastCell = cell;
+        }
+        CGFloat progress = [self progressCell:cell scrollView:scrollView];
         if (fabs(progress) < minProgress) {
             minProgress = fabs(progress);
             lastCell = cell;
         }
     }
     NSIndexPath *indexPath = [(UICollectionView *)scrollView indexPathForCell:lastCell];
-    [(UICollectionView *)scrollView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    if (indexPath) {
+        [(UICollectionView *)scrollView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
 }
 
+- (CGFloat)progressCell:(UICollectionViewCell *)cell scrollView:(UIScrollView *)scrollView{
+    CGPoint globalCenter = scrollView.center;
+    CGPoint cellGlobalCenter = cell.center;
+    CGFloat progress = (cellGlobalCenter.x - scrollView.contentOffset.x - globalCenter.x) / globalCenter.x;
+    if (progress < -1) {
+        progress = -1;
+    }
+    if (progress > 1) {
+        progress = 1;
+    }
+    return progress;
+}
 
 @end

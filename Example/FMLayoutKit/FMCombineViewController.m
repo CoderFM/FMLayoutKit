@@ -37,10 +37,10 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
-    [self addSections];
-//    [self addCrossFixedSections];
+//    [self addSections];
+    [self addCrossFixedSections];
     
-    self.collectionView.enableLongPressDrag = YES;
+//    self.collectionView.enableLongPressDrag = YES;
 //    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
 //        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
 //        source.backgroundColor = [UIColor purpleColor];
@@ -192,11 +192,7 @@
         section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
         
         FMLayoutCrossTransformSection *cSection = [FMLayoutCrossTransformSection sectionAutoWithSection:section];
-        cSection.transformType = FMLayoutCrossTransformCrooked;
-        [cSection setConfigureCollectionView:^(UICollectionView * _Nonnull collectionView, FMLayoutCrossSection * _Nonnull hSection) {
-            collectionView.decelerationRate = 0;
-            collectionView.alwaysBounceHorizontal = YES;
-        }];
+        cSection.transformType = FMLayoutCrossTransformScale;
         [sections addObject:cSection];
     }
     self.collectionView.sections  = sections;

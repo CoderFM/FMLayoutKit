@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, FMLayoutCrossTransformType) {
     ///什么都不做
     FMLayoutCrossTransformNone,
-    ///缩小0.8 + 进度
+    ///缩小0.9 + 0.1*进度
     FMLayoutCrossTransformScale,
     ///简拼App首页样式  M_PI_4 * 0.5 * 进度
     FMLayoutCrossTransformCrooked,
@@ -24,8 +24,10 @@ extern void FMLayoutCrossTransformAdd(FMLayoutCrossTransformType type, FMLayoutC
 
 ///当前仅针对横向做适配  更多的动画  可以自己通过FMLayoutCrossTransformAdd增加
 @interface FMLayoutCrossTransformSection : FMLayoutCrossSection
-///形变block
+///形变类型
 @property(nonatomic, assign)FMLayoutCrossTransformType transformType;
+///如果有该Block  则优先执行此block
+@property(nonatomic, copy)FMLayoutCrossTransformBlock transformBlock;
 
 @end
 
