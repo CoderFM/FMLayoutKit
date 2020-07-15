@@ -17,6 +17,11 @@
 
 @interface FMCombineViewController ()
 @property(nonatomic, weak)FMLayoutView  *collectionView;
+
+@property(nonatomic, strong)NSIndexPath *sourceIndexPath;
+
+@property(nonatomic, strong)UIView *sourceCellView;
+
 @end
 
 @implementation FMCombineViewController
@@ -33,6 +38,14 @@
     }];
     self.collectionView = view;
     [self addSections];
+//    [self addCrossFixedSections];
+    
+    self.collectionView.enableLongPressDrag = YES;
+//    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
+//        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
+//        source.backgroundColor = [UIColor purpleColor];
+//        return source;
+//    }];
 }
 
 - (void)addSections{
@@ -112,7 +125,7 @@
         }
         
         FMLayoutCombineSection *section = [FMLayoutCombineSection combineSections:subSections];
-        
+        section.canLongPressExchange = YES;
         section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.type = FMLayoutHeaderTypeSuspensionAlways;
         section.header.zIndex = FMLayoutZIndexFrontAlways;
@@ -133,19 +146,61 @@
             bg.backgroundColor = [UIColor yellowColor];
         }];
         [sections addObject:section];
+        
     }
+    
+    {
+        FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
+        section.canLongPressExchange = YES;
+        section.moveType = FMLayoutLongMoveTable;
+        section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
+        section.header.zIndex = FMLayoutZIndexFrontOfItem;
+        section.header.type = FMLayoutHeaderTypeFixed;
+        [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
+            FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
+            customHeader.textLabel.text = @"列表的样式, 支持多种cell, 当前手动返回计算返回高度";
+        }];
+
+        section.footer = [FMLayoutFooter elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
+        section.footer.topMargin = 10;
+
+        section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+        section.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
+        [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+            return 100 + item * 100;
+        }];
+        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
+            return [section.cellElements firstObject].reuseIdentifier;
+        }];
+
+        [sections addObject:section];
+    }
+    
     self.collectionView.sections  = sections;
     [self.collectionView reloadData];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)addCrossFixedSections{
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    {
+        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(50, 50, 50, 50) itemSpace:20 lineSpace:0 column:1];
+        section.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 100, 600);
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+        //
+        section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
+        
+        FMLayoutCrossTransformSection *cSection = [FMLayoutCrossTransformSection sectionAutoWithSection:section];
+        cSection.transformType = FMLayoutCrossTransformCrooked;
+        [cSection setConfigureCollectionView:^(UICollectionView * _Nonnull collectionView, FMLayoutCrossSection * _Nonnull hSection) {
+            collectionView.decelerationRate = 0;
+            collectionView.alwaysBounceHorizontal = YES;
+        }];
+        [sections addObject:cSection];
+    }
+    self.collectionView.sections  = sections;
+    [self.collectionView reloadData];
+}
 
 @end

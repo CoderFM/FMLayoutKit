@@ -118,11 +118,18 @@
     if (self.itemCount == 0 || self.column == 0) {
         return 0;
     }
+    CGFloat maxSize = 0;
     if (self.itemCount > self.column) {
-        return self.column * self.cellFixedSize + (self.column - 1) * self.lineSpace;
+        maxSize = self.column * self.cellFixedSize + (self.column - 1) * self.lineSpace;
     } else {
-        return self.itemCount * self.cellFixedSize + (self.itemCount - 1) * self.lineSpace;
+        maxSize = self.itemCount * self.cellFixedSize + (self.itemCount - 1) * self.lineSpace;
     }
+    if (self.direction == FMLayoutDirectionHorizontal) {
+        maxSize += self.sectionInset.top + self.sectionInset.bottom;
+    } else {
+        maxSize += self.sectionInset.left + self.sectionInset.right;
+    }
+    return maxSize;
 }
 
 @end

@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///重写了set get 目标指向->layout.sections
 @property(nonatomic)NSMutableArray<FMLayoutBaseSection *> *sections;
 @property(nonatomic, assign)BOOL reloadOlnyChanged;
+///是否允许长按拖拽排序  不支持夸分组   分组需要开启canLongPressExchange才可以移动拖拽排序
+@property(nonatomic, assign)BOOL enableLongPressDrag;
+///长按拖拽开始时配置cell显示的样式
+@property(nonatomic, copy)UIView *(^configureSourceView)(UICollectionViewCell *sourceCell);
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_UNAVAILABLE;
 - (instancetype)initHorizontal;
 - (instancetype)initHorizontalWithFrame:(CGRect)frame;

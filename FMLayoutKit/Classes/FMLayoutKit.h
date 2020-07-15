@@ -21,6 +21,7 @@
 #import "FMLayoutFillSection.h"
 #import "FMLayoutAbsoluteSection.h"
 #import "FMLayoutCrossSection.h"
+#import "FMLayoutCrossTransformSection.h"
 #import "FMLayoutCombineSection.h"
 #import "FMLayoutBaseSection+ConfigureBlock.h"
 

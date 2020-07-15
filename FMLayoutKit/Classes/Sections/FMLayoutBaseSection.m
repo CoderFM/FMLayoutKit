@@ -358,6 +358,10 @@
     return 0;
 }
 
+- (void)exchangeObjectAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex{
+    [self.itemDatas exchangeObjectAtIndex:index withObjectAtIndex:toIndex];
+}
+
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath{
     return [self dequeueReusableCellForIndexPath:indexPath collectionView:self.collectionView];
 }

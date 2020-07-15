@@ -25,6 +25,14 @@ typedef NS_ENUM(NSUInteger, FMLayoutDirection) {
     ///水平布局
     FMLayoutDirectionHorizontal
 };
+///长按移动的方式
+typedef NS_ENUM(NSUInteger, FMLayoutLongMoveType) {
+    ///方格布局时  长按哪里  该cell的中心点就会跟着移动
+    FMLayoutLongMoveItem,
+    ///列表布局时  上下移动  X不动
+    FMLayoutLongMoveTable,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 @class FMLayoutHeader, FMLayoutFooter, FMLayoutBackground, FMCollectionLayoutAttributes;
 
@@ -68,7 +76,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)NSInteger itemCount;
 ///cell数据数组
 @property(nonatomic, strong)NSMutableArray *itemDatas;
-
+///是否可以长按移动排序该分组  默认No  需配合FMLayoutView的enableLongPressDrag使用
+@property(nonatomic, assign)BOOL canLongPressExchange;
+///长按移动的方式
+@property(nonatomic, assign)FMLayoutLongMoveType moveType;
 ///第一个Item的Y值  横向纵向有区别
 @property(nonatomic, assign, readonly)CGFloat firstItemStartY;
 ///第一个Item的X值  横向纵向有区别
@@ -105,6 +116,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///交叉布局时单一sention的大小
 - (CGFloat)crossSingleSectionSize;
+
+- (void)exchangeObjectAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex;
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath;
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath collectionView:(UICollectionView *)collectionView;

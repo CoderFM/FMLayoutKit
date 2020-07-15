@@ -44,7 +44,7 @@
     } else {
         CGFloat height = [self.columnSizes[@(column)] floatValue];
         CGFloat x = self.firstItemStartX + (height > 0 ? (height + self.itemSpace) : height);
-        CGFloat y = self.firstItemStartY + self.sectionInset.top + column * (self.lineSpace + itemSize.height);
+        CGFloat y = self.firstItemStartY + column * (self.lineSpace + itemSize.height);
         itemAttr.frame = CGRectMake(x, y, itemSize.width, itemSize.height);
         self.columnSizes[@(column)] = @(height + itemSize.width + (height > 0 ? self.itemSpace : 0));
     }
@@ -72,10 +72,10 @@
             singleCount = itemCount % self.column == 0 ? itemCount / self.column : (itemCount / self.column + 1);
         }
         NSInteger realLines = itemCount % singleCount == 0 ? itemCount / singleCount : (itemCount / singleCount + 1);
-        return self.itemSize.height * realLines + (realLines - 1) * self.lineSpace;
+        return self.itemSize.height * realLines + (realLines - 1) * self.lineSpace + self.sectionInset.top + self.sectionInset.bottom;
     } else {
         NSInteger realLines = self.column;
-        return self.itemSize.width * realLines + (realLines - 1) * self.itemSpace;
+        return self.itemSize.width * realLines + (realLines - 1) * self.itemSpace + self.sectionInset.left + self.sectionInset.right;
     }
 }
 

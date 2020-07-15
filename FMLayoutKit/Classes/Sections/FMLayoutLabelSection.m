@@ -132,15 +132,15 @@
 - (CGFloat)crossSingleSectionSize{
     if (self.direction == FMLayoutDirectionHorizontal) {
         if (self.itemCount > self.maxLine) {
-            return self.maxLine * self.cellFixedHeight + (self.maxLine - 1) * self.lineSpace;
+            return self.maxLine * self.cellFixedHeight + (self.maxLine - 1) * self.lineSpace + self.sectionInset.top + self.sectionInset.bottom;
         } else {
-            return self.itemCount * self.cellFixedHeight + (self.itemCount - 1) * self.lineSpace;
+            return self.itemCount * self.cellFixedHeight + (self.itemCount - 1) * self.lineSpace + self.sectionInset.top + self.sectionInset.bottom;
         }
     } else {
         if (self.itemCount > self.maxLine) {
-            return self.maxLine * self.cellFixedHeight + (self.maxLine - 1) * self.itemSpace;
+            return self.maxLine * self.cellFixedHeight + (self.maxLine - 1) * self.itemSpace + self.sectionInset.left + self.sectionInset.right;
         } else {
-            return self.itemCount * self.cellFixedHeight + (self.itemCount - 1) * self.itemSpace;
+            return self.itemCount * self.cellFixedHeight + (self.itemCount - 1) * self.itemSpace + self.sectionInset.left + self.sectionInset.right;
         }
     }
 }

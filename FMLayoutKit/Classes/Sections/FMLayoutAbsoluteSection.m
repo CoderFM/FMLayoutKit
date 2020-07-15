@@ -58,7 +58,7 @@
                 maxSize = frame.origin.y + frame.size.height;
             }
         }
-        return maxSize;
+        return maxSize + self.sectionInset.top + self.sectionInset.bottom;
     } else {
         CGFloat maxSize = 0;
         for (int j = 0; j < self.itemCount; j++) {
@@ -67,7 +67,7 @@
                 maxSize = frame.origin.x + frame.size.width;
             }
         }
-        return maxSize;
+        return maxSize + self.sectionInset.left + self.sectionInset.right;
     }
 }
 
