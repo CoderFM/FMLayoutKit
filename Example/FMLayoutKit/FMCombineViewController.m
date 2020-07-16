@@ -15,13 +15,86 @@
 #import "FMAddViewController.h"
 #import "FMCollectionViewCell.h"
 
+@interface FMDeletePanGestureRecognizer : UIPanGestureRecognizer
+
+@property(nonatomic, assign)BOOL isLeft;
+
+@end
+
+@implementation FMDeletePanGestureRecognizer
+
+@end
+
+@interface FMCollectionDeleteCell : UICollectionViewCell<UIGestureRecognizerDelegate>
+
+@property(nonatomic, assign)CGFloat handleViewWidth;
+
+@end
+
+@implementation FMCollectionDeleteCell
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.handleViewWidth = 100;
+        
+        NSInteger aRedValue =arc4random() %255;
+        NSInteger aGreenValue =arc4random() %255;
+        NSInteger aBlueValue =arc4random() %255;
+        UIColor*randColor = [UIColor colorWithRed:aRedValue /255.0f green:aGreenValue /255.0f blue:aBlueValue /255.0f alpha:1.0f];
+        self.contentView.backgroundColor = randColor;
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+        pan.delegate = self;
+        [self addGestureRecognizer:pan];
+    }
+    return self;
+}
+
+- (void)panGesture:(UIPanGestureRecognizer *)pan{
+    CGPoint translate = [pan translationInView:self];
+    NSLog(@"translate: %@", [NSValue valueWithCGPoint:translate]);
+    switch (pan.state) {
+        case UIGestureRecognizerStateBegan:
+            
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            if (-translate.x < self.handleViewWidth) {
+                self.transform = CGAffineTransformMakeTranslation(translate.x, 0);
+            }
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            if (-translate.x < self.handleViewWidth * 0.5) {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.transform = CGAffineTransformIdentity;
+                }];
+            } else {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.transform = CGAffineTransformMakeTranslation(-self.handleViewWidth, 0);;
+                }];
+            }
+        }
+        default:
+            break;
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    CGPoint vel = [(UIPanGestureRecognizer *)gestureRecognizer velocityInView:self];
+    if (fabs(vel.y) < 20 && vel.x < 0) {
+        return YES;
+    }
+    return NO;
+}
+
+@end
+
 @interface FMCombineViewController ()
 @property(nonatomic, weak)FMLayoutView  *collectionView;
-
-@property(nonatomic, strong)NSIndexPath *sourceIndexPath;
-
-@property(nonatomic, strong)UIView *sourceCellView;
-
 @end
 
 @implementation FMCombineViewController
@@ -37,8 +110,8 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
-//    [self addSections];
-    [self addCrossFixedSections];
+    [self addSections];
+//    [self addCrossFixedSections];
     
 //    self.collectionView.enableLongPressDrag = YES;
 //    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
@@ -165,7 +238,7 @@
         section.footer.topMargin = 10;
 
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionDeleteCell class]]];
         section.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
         [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
             return 100 + item * 100;

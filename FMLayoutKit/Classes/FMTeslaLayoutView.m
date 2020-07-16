@@ -37,9 +37,9 @@
 @property(nonatomic, weak)FM_ScrollView *scrollView;
 
 @property(nonatomic, strong)FMLayoutView *shareLayoutView;
-@property(nonatomic, weak)FMLayoutView *currentLayoutView;
+@property(nonatomic, weak)UIScrollView *currentScrollView;
 
-@property(nonatomic, strong)NSMutableDictionary<NSNumber *, FMLayoutView *> *layoutViews;
+@property(nonatomic, strong)NSMutableDictionary<NSNumber *, UIScrollView *> *layoutViews;
 
 @property(nonatomic, assign)BOOL isLayoutSubView;
 @property(nonatomic, assign)BOOL isLoadSubView;
@@ -64,13 +64,17 @@
 
 - (void)reloadData{
     [self.shareLayoutView reloadData];
-    [self.currentLayoutView reloadData];
+    if ([self.currentScrollView respondsToSelector:@selector(reloadData)]) {
+        [self.currentScrollView performSelector:@selector(reloadData)];
+    }
 }
 
 - (void)reloadDataWithIndex:(NSInteger)index{
-    FMLayoutView *layoutView = self.layoutViews[@(index)];
-    if (layoutView) {
-        [layoutView reloadData];
+    UIScrollView *scrollView = self.layoutViews[@(index)];
+    if (scrollView) {
+        if ([scrollView respondsToSelector:@selector(reloadData)]) {
+            [scrollView performSelector:@selector(reloadData)];
+        }
     }
 }
 
@@ -91,7 +95,7 @@
 
 - (void)dealloc{
     FMLayoutLog(@"FMTeslaLayoutView  dealloc");
-    [self.currentLayoutView removeObserver:self forKeyPath:@"contentOffset"];
+    [self.currentScrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 - (CGFloat)shareSuspensionDifferHeight{
@@ -122,7 +126,7 @@
         [self addSubview:scroll];
         __weak typeof(self) weakSelf = self;
         [scroll setPanGesCanBegin:^BOOL(CGPoint panPoint) {
-            CGFloat offsetY = weakSelf.currentLayoutView.contentOffset.y;
+            CGFloat offsetY = weakSelf.currentScrollView.contentOffset.y;
             CGFloat topCanPanY = weakSelf.shareLayoutView.frame.size.height + weakSelf.shareLayoutView.frame.origin.y - offsetY;
             if (topCanPanY < weakSelf.suspensionAlwaysHeader.header.size) {
                 topCanPanY = weakSelf.suspensionAlwaysHeader.header.size;
@@ -142,13 +146,13 @@
     return _shareLayoutView;
 }
 
-- (void)setCurrentLayoutView:(FMLayoutView *)currentLayoutView{
-    if (_currentLayoutView) {
-        [_currentLayoutView removeObserver:self forKeyPath:@"contentOffset"];
+- (void)setCurrentScrollView:(UIScrollView *)currentScrollView{
+    if (_currentScrollView) {
+        [_currentScrollView removeObserver:self forKeyPath:@"contentOffset"];
     }
-    _currentLayoutView = currentLayoutView;
-    if (currentLayoutView) {
-        [currentLayoutView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    _currentScrollView = currentScrollView;
+    if (currentScrollView) {
+        [currentScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     }
 }
 
@@ -160,7 +164,7 @@
 - (void)setClipsToBounds:(BOOL)clipsToBounds{
     self.scrollView.clipsToBounds = clipsToBounds;
     self.shareLayoutView.clipsToBounds = clipsToBounds;
-    [self.layoutViews.allValues enumerateObjectsUsingBlock:^(FMLayoutView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.layoutViews.allValues enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.clipsToBounds = clipsToBounds;
     }];
     [super setClipsToBounds:clipsToBounds];
@@ -186,7 +190,7 @@
 }
 
 - (void)loadSubViews{
-    [self.layoutViews.allValues enumerateObjectsUsingBlock:^(FMLayoutView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.layoutViews.allValues enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj removeFromSuperview];
     }];
     [self.layoutViews removeAllObjects];
@@ -213,61 +217,65 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width * nums, 0);
     [self setCurrentLayoutViewWithIndex:self.selectIndex];
     [self.shareLayoutView removeFromSuperview];
-    [self.currentLayoutView addSubview:self.shareLayoutView];
+    [self.currentScrollView addSubview:self.shareLayoutView];
     [self.shareLayoutView reloadData];
     self.isLoadSubView = YES;
     [self scrollToIndex:self.selectIndex animated:NO];
 }
 
 - (void)setCurrentLayoutViewWithIndex:(NSInteger)index{
-    FMLayoutView *layoutView = self.layoutViews[@(index)];
+    UIScrollView *layoutView = self.layoutViews[@(index)];
     if (layoutView == nil) {
         
-        if ([self.delegate respondsToSelector:@selector(tesla:willCreateLayoutViewWithIndex:)]) {
-            [self.delegate tesla:self willCreateLayoutViewWithIndex:index];
+        if ([self.delegate respondsToSelector:@selector(tesla:willCreateScrollViewWithIndex:)]) {
+            [self.delegate tesla:self willCreateScrollViewWithIndex:index];
         }
         
-        FMLayoutView *collectionView;
+        UIScrollView *scollView;
         
-        if ([self.delegate respondsToSelector:@selector(tesla:customCreateWithIndex:)]) {
-            collectionView = [self.delegate tesla:self customCreateWithIndex:index];
-        } else {
-            collectionView = [[FMLayoutView alloc] initWithFrame:CGRectMake(self.scrollView.bounds.size.width * index, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height)];
-            collectionView.backgroundColor = [UIColor clearColor];
-            collectionView.bounces = YES;
-            collectionView.alwaysBounceVertical = YES;
-            collectionView.showsVerticalScrollIndicator = NO;
-            collectionView.clipsToBounds = self.clipsToBounds;
-            collectionView.layout.minContentSize = self.shareHeight - self.suspensionAlwaysHeader.header.size + self.scrollView.bounds.size.height;
-            [collectionView.layout setFirstSectionOffset:self.shareHeight];
-            [collectionView.layout setSections:[self.dataSource tesla:self sectionsInScreenIndex:index]];
+        if ([self.delegate respondsToSelector:@selector(tesla:customCreateWithIndex:shareHeight:)]) {
+            scollView = [self.delegate tesla:self customCreateWithIndex:index shareHeight:self.shareHeight];
         }
         
-        if ([self.delegate respondsToSelector:@selector(tesla:didCreatedLayoutViewWithIndex:layoutView:)]) {
-            [self.delegate tesla:self didCreatedLayoutViewWithIndex:index layoutView:collectionView];
+        if (scollView == nil) {
+            FMLayoutView *layoutView = [[FMLayoutView alloc] init];
+            layoutView.backgroundColor = [UIColor clearColor];
+            layoutView.bounces = YES;
+            layoutView.alwaysBounceVertical = YES;
+            layoutView.showsVerticalScrollIndicator = NO;
+            layoutView.clipsToBounds = self.clipsToBounds;
+            layoutView.layout.minContentSize = self.shareHeight - self.suspensionAlwaysHeader.header.size + self.scrollView.bounds.size.height;
+            [layoutView.layout setFirstSectionOffset:self.shareHeight];
+            scollView = layoutView;
         }
         
-        [self.scrollView addSubview:collectionView];
+        if ([self.delegate respondsToSelector:@selector(tesla:didCreatedScrollViewWithIndex:scrollView:)]) {
+            [self.delegate tesla:self didCreatedScrollViewWithIndex:index scrollView:scollView];
+        }
         
-        [collectionView reloadData];
-        self.layoutViews[@(index)] = collectionView;
-        layoutView = collectionView;
+        scollView.frame = CGRectMake(self.scrollView.bounds.size.width * index, 0, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height);
+        [self.scrollView addSubview:scollView];
+        if ([scollView respondsToSelector:@selector(reloadData)]) {
+            [scollView performSelector:@selector(reloadData)];
+        }
+        self.layoutViews[@(index)] = scollView;
+        layoutView = scollView;
         
-        if (self.currentLayoutView) {
-            CGPoint contentOffset = self.currentLayoutView.contentOffset;
+        if (self.currentScrollView) {
+            CGPoint contentOffset = self.currentScrollView.contentOffset;
             if (contentOffset.y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize+self.shareSuspensionDifferHeight) {
-                collectionView.contentOffset = contentOffset;
+                scollView.contentOffset = contentOffset;
             } else {
-                collectionView.contentOffset = CGPointMake(contentOffset.x, self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize+self.shareSuspensionDifferHeight);
+                scollView.contentOffset = CGPointMake(contentOffset.x, self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize+self.shareSuspensionDifferHeight);
             }
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(tesla:currentShowLayoutView:index:)]) {
-        [self.delegate tesla:self currentShowLayoutView:layoutView index:index];
+    if ([self.delegate respondsToSelector:@selector(tesla:currentShowScrollView:index:)]) {
+        [self.delegate tesla:self currentShowScrollView:layoutView index:index];
     }
     
-    self.currentLayoutView = layoutView;
+    self.currentScrollView = layoutView;
 }
 
 - (void)layoutSubviews{
@@ -287,7 +295,7 @@
         [self.shareLayoutView removeFromSuperview];
     }
     CGRect frame = self.shareLayoutView.frame;
-    frame.origin.y =  - self.currentLayoutView.contentOffset.y;
+    frame.origin.y =  - self.currentScrollView.contentOffset.y;
     CGFloat minY = self.suspensionAlwaysHeader.sectionSize - self.shareLayoutView.frame.size.height - self.shareSuspensionDifferHeight;
     if (frame.origin.y < minY) {
         frame.origin.y = minY;
@@ -302,15 +310,15 @@
     
     [self setCurrentLayoutViewWithIndex:index];
     
-    if (self.shareLayoutView.superview != self.currentLayoutView) {
+    if (self.shareLayoutView.superview != self.currentScrollView) {
         [self.shareLayoutView removeFromSuperview];
     }
     
-    if ([self.delegate respondsToSelector:@selector(tesla:didScrollEnd:currentLayoutView:)]) {
-        [self.delegate tesla:self didScrollEnd:index currentLayoutView:self.currentLayoutView];
+    if ([self.delegate respondsToSelector:@selector(tesla:didScrollEnd:currentScrollView:)]) {
+        [self.delegate tesla:self didScrollEnd:index currentScrollView:self.currentScrollView];
     }
     
-    CGFloat y = self.currentLayoutView.contentOffset.y;
+    CGFloat y = self.currentScrollView.contentOffset.y;
     if (y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize+self.shareSuspensionDifferHeight) {
         CGRect frame = self.shareLayoutView.frame;
         frame.origin.y = 0;
@@ -322,19 +330,19 @@
         frame.origin.x = 0;
         self.shareLayoutView.frame = frame;
     }
-    [self.currentLayoutView addSubview:self.shareLayoutView];
+    [self.currentScrollView addSubview:self.shareLayoutView];
     self.selectIndex = index;
 }
 
 #pragma mark -------  observeValueForKeyPath
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     CGPoint contentOffset = [change[NSKeyValueChangeNewKey] CGPointValue];
-    if ([self.delegate respondsToSelector:@selector(tesla:currentLayoutViewScrollDidScroll:contentOffset:)]) {
-        [self.delegate tesla:self currentLayoutViewScrollDidScroll:self.currentLayoutView contentOffset:contentOffset];
+    if ([self.delegate respondsToSelector:@selector(tesla:currentScrollViewScrollDidScroll:contentOffset:)]) {
+        [self.delegate tesla:self currentScrollViewScrollDidScroll:self.currentScrollView contentOffset:contentOffset];
     }
     if (contentOffset.y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize+self.shareSuspensionDifferHeight) {
-        for (FMLayoutView *coll in self.layoutViews.allValues) {
-            if (coll != self.currentLayoutView) {
+        for (UIScrollView *coll in self.layoutViews.allValues) {
+            if (coll != self.currentScrollView) {
                 coll.contentOffset = contentOffset;
             } else {
                 CGRect frame = self.shareLayoutView.frame;
@@ -379,8 +387,8 @@
             }
         }
     } else {
-        for (FMLayoutView *coll in self.layoutViews.allValues) {
-            if (coll != self.currentLayoutView) {
+        for (UIScrollView *coll in self.layoutViews.allValues) {
+            if (coll != self.currentScrollView) {
                 if (coll.contentOffset.y < self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize + self.shareSuspensionDifferHeight) {
                     coll.contentOffset = CGPointMake(0, self.shareLayoutView.frame.size.height-self.suspensionAlwaysHeader.sectionSize + self.shareSuspensionDifferHeight);
                 }

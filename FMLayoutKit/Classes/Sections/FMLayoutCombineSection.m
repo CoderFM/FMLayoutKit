@@ -62,6 +62,19 @@
                 }
             }
         }];
+        [self setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            NSInteger start = 0;
+            for (FMLayoutBaseSection *subSection in weakSelf.sections) {
+                if (item < subSection.itemCount + start) {
+                    if (subSection.configureCellData) {
+                        subSection.configureCellData(subSection, cell,item - start);
+                    }
+                    break;
+                } else {
+                    start += subSection.itemCount;
+                }
+            }
+        }];
     }
     return self;
 }

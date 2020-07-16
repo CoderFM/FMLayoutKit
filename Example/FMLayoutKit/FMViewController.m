@@ -286,29 +286,37 @@
     return 70;
 }
 
-- (void)tesla:(FMTeslaLayoutView *)tesla willCreateLayoutViewWithIndex:(NSInteger)index{
+- (void)tesla:(FMTeslaLayoutView *)tesla willCreateScrollViewWithIndex:(NSInteger)index{
     NSLog(@"willCreateLayoutViewWithIndex %ld", (long)index);
 }
 
-- (void)tesla:(FMTeslaLayoutView *)tesla didCreatedLayoutViewWithIndex:(NSInteger)index layoutView:(FMLayoutView *)layoutView{
+- (void)tesla:(FMTeslaLayoutView *)tesla didCreatedScrollViewWithIndex:(NSInteger)index scrollView:(UIScrollView *)scrollView{
+    if ([scrollView isKindOfClass:[FMLayoutView class]]) {
+        ((FMLayoutView *)scrollView).sections = [self.sections mutableCopy];
+    }
     NSLog(@"didCreatedLayoutViewWithIndex %ld", (long)index);
 }
 
-- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentLayoutView:(nonnull FMLayoutView *)layoutView{
-    [self.navTitleView selectWithIndex:index];
+- (UIScrollView *)tesla:(FMTeslaLayoutView *)tesla customCreateWithIndex:(NSInteger)index shareHeight:(CGFloat)shareHeight{
+    if (index == 3) {
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, shareHeight + 100)];
+        header.backgroundColor = [UIColor purpleColor];
+        tableView.tableHeaderView = header;
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 1000)];
+        footer.backgroundColor = [UIColor orangeColor];
+        tableView.tableFooterView = footer;
+        return tableView;
+    }
+    return nil;
 }
 
-- (void)tesla:(FMTeslaLayoutView *)tesla didSelectIndexPath:(NSIndexPath *)indexPath isShare:(BOOL)isSahre multiIndex:(NSInteger)multiIndex layoutView:(FMLayoutView *)layoutView{
-    FMCollViewController *coll = [[FMCollViewController alloc] init];
-    [self.navigationController pushViewController:coll animated:YES];
+- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentScrollView:(nonnull FMLayoutView *)layoutView{
+    [self.navTitleView selectWithIndex:index];
 }
 
 - (NSInteger)numberOfScreenInTesla:(nonnull FMTeslaLayoutView *)tesla {
     return 4;
-}
-
-- (nonnull NSMutableArray<FMLayoutBaseSection *> *)tesla:(nonnull FMTeslaLayoutView *)tesla sectionsInScreenIndex:(NSInteger)screenIndex {
-    return [self.sections mutableCopy];
 }
 
 - (NSArray<FMLayoutBaseSection *> *)shareSectionsInTesla:(FMTeslaLayoutView *)tesla{

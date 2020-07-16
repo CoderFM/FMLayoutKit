@@ -8,7 +8,7 @@
 
 #import "FMAppDelegate.h"
 
-/// pod trunk push FMCollectionLayout.podspec --allow-warnings
+/// pod trunk push FMLayoutKit.podspec --allow-warnings
 
 @implementation FMAppDelegate
 

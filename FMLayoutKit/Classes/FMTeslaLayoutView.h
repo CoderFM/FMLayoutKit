@@ -13,24 +13,24 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol FMTeslaLayoutViewDelegate <NSObject>
 @optional
 ///滚动结束事件
-- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentLayoutView:(FMLayoutView *)layoutView;
+- (void)tesla:(FMTeslaLayoutView *)tesla didScrollEnd:(NSInteger)index currentScrollView:(UIScrollView *)scrollView;
 ///滚动事件
 - (void)tesla:(FMTeslaLayoutView *)tesla scrollViewDidScroll:(UIScrollView *)scrollView;
 /// 当前上下滚动的事件
-- (void)tesla:(FMTeslaLayoutView *)tesla currentLayoutViewScrollDidScroll:(FMLayoutView *)currentLayoutView contentOffset:(CGPoint)contentOffset;
+- (void)tesla:(FMTeslaLayoutView *)tesla currentScrollViewScrollDidScroll:(UIScrollView *)currentScrollView contentOffset:(CGPoint)contentOffset;
 
 /// 配置FMCollectionLayoutView
 ///2
-- (void)tesla:(FMTeslaLayoutView *)tesla currentShowLayoutView:(FMLayoutView *)layoutView index:(NSInteger)index;
+- (void)tesla:(FMTeslaLayoutView *)tesla currentShowScrollView:(UIScrollView *)scrollView index:(NSInteger)index;
 
 ///0  即将根据Index创建FMCollectionLayoutView
-- (void)tesla:(FMTeslaLayoutView *)tesla willCreateLayoutViewWithIndex:(NSInteger)index;
+- (void)tesla:(FMTeslaLayoutView *)tesla willCreateScrollViewWithIndex:(NSInteger)index;
 
-///0.5 根据Index自己创建FMCollectionLayoutView
-- (FMLayoutView *)tesla:(FMTeslaLayoutView *)tesla customCreateWithIndex:(NSInteger)index;
+///0.5 根据Index自己创建FMCollectionLayoutView shareHeight为共享头部的高度  请将shareHeight顶部空出来并且请保持不使用contentInset  如果返回nil会自动创建FMLayoutView
+- (UIScrollView *)tesla:(FMTeslaLayoutView *)tesla customCreateWithIndex:(NSInteger)index shareHeight:(CGFloat)shareHeight;
 
-///1 根据Index创建完毕FMCollectionLayoutView
-- (void)tesla:(FMTeslaLayoutView *)tesla didCreatedLayoutViewWithIndex:(NSInteger)index layoutView:(FMLayoutView *)layoutView;
+///1 根据Index创建完毕UIScrollView
+- (void)tesla:(FMTeslaLayoutView *)tesla didCreatedScrollViewWithIndex:(NSInteger)index scrollView:(UIScrollView *)scrollView;
 
 /// 悬停标签控制view的尺寸最小高度  可以留着做效果
 - (CGFloat)shareSuspensionMinHeightWithTesla:(FMTeslaLayoutView *)tesla;
@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol FMTeslaLayoutViewDataSource <NSObject>
 @required
 - (NSInteger)numberOfScreenInTesla:(FMTeslaLayoutView *)tesla;
-- (NSMutableArray<FMLayoutBaseSection *> *)tesla:(FMTeslaLayoutView *)tesla sectionsInScreenIndex:(NSInteger)screenIndex;
 @optional
 - (NSArray<FMLayoutBaseSection *> *)shareSectionsInTesla:(FMTeslaLayoutView *)tesla;
 @end
