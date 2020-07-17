@@ -164,6 +164,9 @@
             section.itemSize = CGSizeMake(150, 100);
             section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
             section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+            [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+                [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", (long)item];
+            }];
             [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
                 
             }];
@@ -191,6 +194,9 @@
                         break;
                 }
             }];
+            [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+                [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", (long)item];
+            }];
             [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
                 
             }];
@@ -202,7 +208,7 @@
         section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.type = FMLayoutHeaderTypeSuspensionAlways;
         section.header.zIndex = FMLayoutZIndexFrontAlways;
-        section.header.isStickTop = YES;
+//        section.header.isStickTop = YES;
         //        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
             FMCollectionCustomDecoration *custom = (FMCollectionCustomDecoration *)header;
@@ -259,13 +265,15 @@
     
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(50, 50, 50, 50) itemSpace:20 lineSpace:0 column:1];
-        section.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 100, 600);
+        section.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 100, 300);
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         //
         section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
         
         FMLayoutCrossTransformSection *cSection = [FMLayoutCrossTransformSection sectionAutoWithSection:section];
-        cSection.transformType = FMLayoutCrossTransformScale;
+//        [cSection setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
+//            cell.la
+//        }];
         [sections addObject:cSection];
     }
     self.collectionView.sections  = sections;

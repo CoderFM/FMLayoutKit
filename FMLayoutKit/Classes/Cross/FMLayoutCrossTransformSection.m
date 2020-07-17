@@ -7,35 +7,6 @@
 
 #import "FMLayoutCrossTransformSection.h"
 
-static NSMutableDictionary *__FMLayoutCrossTransforms;
-FMLayoutCrossTransformBlock FMLayoutCrossTransformFromType(FMLayoutCrossTransformType type) {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        __FMLayoutCrossTransforms = [NSMutableDictionary dictionary];
-        FMLayoutCrossTransformAdd(FMLayoutCrossTransformScale, ^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
-            cell.layer.affineTransform = CGAffineTransformMakeScale(0.9 + (1 - (fabs(progress))) * 0.1, 0.9 + (1 - (fabs(progress))) * 0.1);
-        });
-        FMLayoutCrossTransformAdd(FMLayoutCrossTransformCrooked, ^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
-            CATransform3D transform;
-            if (progress < 0) {
-                transform = CATransform3DMakeRotation(M_PI_4 * 0.5 * (fabs(progress)), 1, 1, 0);
-            } else if (progress > 0) {
-                transform = CATransform3DMakeRotation(M_PI_4 * 0.5 * (fabs(progress)), -1, 1, 0);
-            } else {
-                transform = CATransform3DIdentity;
-            }
-            transform.m34 = 1/500.0;
-            cell.layer.allowsEdgeAntialiasing = YES;
-            cell.layer.transform = transform;
-        });
-    });
-    return __FMLayoutCrossTransforms[@(type)];
-}
-
-void FMLayoutCrossTransformAdd(FMLayoutCrossTransformType type, FMLayoutCrossTransformBlock block){
-    __FMLayoutCrossTransforms[@(type)] = [block copy];
-}
-
 @implementation FMLayoutCrossTransformSection
 
 - (instancetype)init
@@ -54,14 +25,73 @@ void FMLayoutCrossTransformAdd(FMLayoutCrossTransformType type, FMLayoutCrossTra
     return self;
 }
 
+- (void)setTransformType:(FMLayoutCrossTransformType)transformType{
+    _transformType = transformType;
+    switch (transformType) {
+        case FMLayoutCrossTransformScale:
+        {
+            [self setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
+                cell.layer.affineTransform = CGAffineTransformMakeScale(0.9 + (1 - (fabs(progress))) * 0.1, 0.9 + (1 - (fabs(progress))) * 0.1);
+            }];
+        }
+            break;
+        case FMLayoutCrossTransformCrooked:
+        {
+            [self setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
+                CATransform3D transform;
+                if (progress < 0) {
+                    transform = CATransform3DMakeRotation(M_PI_4 * 0.5 * (fabs(progress)), 1, 1, 0);
+                } else if (progress > 0) {
+                    transform = CATransform3DMakeRotation(M_PI_4 * 0.5 * (fabs(progress)), -1, 1, 0);
+                } else {
+                    transform = CATransform3DIdentity;
+                }
+                transform.m34 = 1/500.0;
+                cell.layer.allowsEdgeAntialiasing = YES;
+                cell.layer.transform = transform;
+            }];
+        }
+            break;
+        case FMLayoutCrossTransformFold:
+        {
+            [self setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
+                CATransform3D transform;
+                if (progress < 0) {
+                    cell.layer.anchorPoint = CGPointMake(0 + 0.5 * (1 - fabs(progress)), 0.5);
+                    transform = CATransform3DMakeTranslation(-cell.bounds.size.width * 0.5 *  fabs(progress), 0, 0);
+                    cell.layer.transform = transform;
+                    
+                    transform.m34 = 1.0/500;
+                    transform = CATransform3DRotate(transform, M_PI_4 * fabs(progress), 0, -1, 0);
+                } else {
+                    cell.layer.anchorPoint = CGPointMake(1 - 0.5 * (1 - fabs(progress)), 0.5);
+                    transform = CATransform3DMakeTranslation(cell.bounds.size.width * 0.5 * fabs(progress), 0, 0);
+                    cell.layer.transform = transform;
+                    
+                    transform.m34 = 1.0/500;
+                    transform = CATransform3DRotate(transform, M_PI_4 * fabs(progress), 0, 1, 0);
+                }
+                if (@available(iOS 12.0, *)) {
+                    cell.transform3D = transform;
+                } else {
+                    cell.layer.transform = transform;
+                }
+            }];
+        }
+            break;
+        default:
+            self.transformBlock = nil;
+            break;
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [super scrollViewDidScroll:scrollView];
-    if (self.transformType == FMLayoutCrossTransformNone && self.transformBlock == nil) {
+    if (self.transformBlock == nil) {
         return;
     }
-    FMLayoutCrossTransformBlock block = self.transformBlock ?: FMLayoutCrossTransformFromType(self.transformType);
+    FMLayoutCrossTransformBlock block = self.transformBlock;
     if (block) {
-        
         NSArray *cells = [(UICollectionView *)scrollView visibleCells];
         for (UICollectionViewCell *cell in cells) {
             block(cell, [self progressCell:cell scrollView:scrollView]);
