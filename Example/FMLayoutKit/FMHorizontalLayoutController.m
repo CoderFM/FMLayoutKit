@@ -370,6 +370,7 @@
                     section.header.type = FMLayoutHeaderTypeSuspensionBigger;
                     section.header.zIndex = FMLayoutZIndexFrontAlways;
                     section.header.minSize = 50;
+                    section.header.maxSize = 200;
                     section.header.isStickTop = YES;
             //        section.header.suspensionTopMargin = 50;
             //        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);

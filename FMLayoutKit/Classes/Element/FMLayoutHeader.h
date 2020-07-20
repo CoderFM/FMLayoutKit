@@ -29,8 +29,10 @@ typedef NS_ENUM(NSInteger, FMLayoutHeaderType) {
 @property(nonatomic, assign)CGFloat lastMargin;
 ///是否黏在顶部 目前仅支持FMLayoutHeaderTypeSuspensionAlways, FMLayoutHeaderTypeSuspensionBigger悬浮模式 不同的type效果不同 FMLayoutHeaderTypeSuspensionAlways是下拉黏在当前位置 上拉黏在顶部 而FMLayoutHeaderTypeSuspensionBiggers是上拉黏在顶部 下拉时放大效果
 @property(nonatomic, assign)BOOL isStickTop;
-/// 缩放模式(SuspensionBigger)下最小值  横向-宽度 纵向-高度
+/// 缩放模式(SuspensionBigger)下最小值  横向-宽度 纵向-高度  该值请务必小于size  默认是0
 @property(nonatomic, assign)CGFloat minSize;
+/// 缩放模式(SuspensionBigger)下最大值  横向-宽度 纵向-高度  该值请务必大于size  默认是CGFLOAT_MAX
+@property(nonatomic, assign)CGFloat maxSize;
 
 @end
 

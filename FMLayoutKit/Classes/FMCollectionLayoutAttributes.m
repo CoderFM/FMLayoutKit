@@ -87,6 +87,11 @@
                 CGRect frame = show.frame;
                 frame.origin.y += offsetY;
                 frame.size.height -= offsetY;
+                if (frame.size.height > section.header.maxSize) {
+                    CGFloat diff = frame.size.height - section.header.maxSize;
+                    frame.size.height -= diff;
+                    frame.origin.y += diff;
+                }
                 show.frame = frame;
                 return show;
             } else { //缩小

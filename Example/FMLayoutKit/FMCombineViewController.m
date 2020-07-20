@@ -14,6 +14,7 @@
 #import "FMCollectionCustomCell.h"
 #import "FMAddViewController.h"
 #import "FMCollectionViewCell.h"
+#import "LS_HomeActivityCell.h"
 
 @interface FMDeletePanGestureRecognizer : UIPanGestureRecognizer
 
@@ -286,7 +287,7 @@
     
     {
         FMLayoutScaleSection *section = [FMLayoutScaleSection sectionWithSectionInset:UIEdgeInsetsMake(10, 10, 10, 10) itemSpace:10 lineSpace:10 column:1];
-
+        
         section.scales = @"1:0.5";
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
@@ -301,7 +302,7 @@
                     return (([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2 - 10) * 0.5;
                     break;
             }
-//            return 50 + ((item % 2 == 0) ? item * 50 : item * 10);
+            //            return 50 + ((item % 2 == 0) ? item * 50 : item * 10);
         }];
         //
         section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
@@ -312,33 +313,53 @@
         [sections addObject:section];
     }
     
-     {
-            FMLayoutScaleSection *section = [FMLayoutScaleSection sectionWithSectionInset:UIEdgeInsetsMake(10, 10, 10, 10) itemSpace:10 lineSpace:10 column:1];
+    {
+        FMLayoutScaleSection *section = [FMLayoutScaleSection sectionWithSectionInset:UIEdgeInsetsMake(10, 10, 10, 10) itemSpace:10 lineSpace:10 column:1];
+        
+        section.sizeNums = @[@100, @200];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+//        section.cellElement = [FMLayoutElement elementWithViewClass:[LS_HomeActivityCell class]];
+//        section.autoHeightFixedWidth = YES;
+        [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+            switch (item) {
+                case 0:
+                case 3:
+                case 6:
+                case 9:
+                    return ([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2;
+                    break;
+                default:
+                    return (([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2 - 10) * 0.5;
+                    break;
+            }
+//            return 50 + ((item % 2 == 0) ? item * 50 : item * 10);
+        }];
 
-            section.sizeNums = @[@100, @200];
-            section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
-            [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
-                switch (item) {
-                    case 0:
-                    case 3:
-                    case 6:
-                    case 9:
-                        return ([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2;
-                        break;
-                    default:
-                        return (([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2 - 10) * 0.5;
-                        break;
-                }
-    //            return 50 + ((item % 2 == 0) ? item * 50 : item * 10);
-            }];
-            //
-            section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
-            [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-                [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", item];
-            }];
-            
-            [sections addObject:section];
-        }
+        section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", item];
+//            if (item == 0) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+//                return;
+//            }
+//            if (item == 1) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的\n爱神的箭埃里克森基多拉\n离开时尽量少肯德基分离式的";
+//                return;
+//            }
+//            if (item == 2) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述";
+//                return;
+//            }
+//            if (item == 3) {
+//                ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少\n离开时尽量少肯德基分离式的";
+//                return;
+//
+//            }
+//            ((LS_HomeActivityCell *)cell).introLabel.text = @" 一些描述\n爱神的箭埃里克森基多拉\n离开时尽量少";
+        }];
+        
+        [sections addObject:section];
+    }
     
     self.collectionView.sections  = sections;
     [self.collectionView reloadData];

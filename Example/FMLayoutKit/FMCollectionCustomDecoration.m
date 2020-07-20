@@ -41,6 +41,9 @@
     return self;
 }
 
-
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+}
 
 @end
