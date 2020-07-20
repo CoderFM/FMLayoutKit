@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FMLayoutKit'
-  s.version          = '1.0.7'
+  s.version          = '1.0.8'
   s.summary          = 'A short description of FMLayoutKit.'
 
 # This description is used to generate tags and improve search results.

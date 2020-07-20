@@ -9,7 +9,6 @@
 #import "FMLayoutCrossCell.h"
 #import "FMLayoutElement.h"
 #import "FMCollectionLayoutAttributes.h"
-#import "FMLayoutBaseSection+ConfigureBlock.h"
 
 @interface FMLayoutCrossSection ()
 

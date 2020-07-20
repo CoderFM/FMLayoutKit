@@ -60,10 +60,17 @@
     }];
 }
 
+- (void)setConfigureCellData:(void (^)(FMLayoutBaseSection * _Nonnull, UICollectionViewCell * _Nonnull, NSInteger))configureCellData{
+    [super setConfigureCellData:configureCellData];
+    if (!self.configurationCell && self.autoHeightFixedWidth) {
+        self.configurationCell = configureCellData;
+    }
+}
+
 - (FMCollectionLayoutAttributes *)getItemAttributesWithIndex:(NSInteger)j{
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:j inSection:self.indexPath.section];
     FMCollectionLayoutAttributes *itemAttr = [FMCollectionLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-    CGFloat itemFixed =  self.cellFixedSize;
+    CGFloat itemFixed = self.cellFixedSize;
     CGFloat itemOther = 0;
     if (self.autoHeightFixedWidth) {
         if (self.direction == FMLayoutDirectionHorizontal) {

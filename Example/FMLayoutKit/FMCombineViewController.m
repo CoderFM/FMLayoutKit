@@ -110,15 +110,15 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
-    [self addSections];
-//    [self addCrossFixedSections];
-    
-//    self.collectionView.enableLongPressDrag = YES;
-//    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
-//        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
-//        source.backgroundColor = [UIColor purpleColor];
-//        return source;
-//    }];
+    //    [self addSections];
+    //    [self addCrossFixedSections];
+    [self addScaleSection];
+    //    self.collectionView.enableLongPressDrag = YES;
+    //    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
+    //        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
+    //        source.backgroundColor = [UIColor purpleColor];
+    //        return source;
+    //    }];
 }
 
 - (void)addSections{
@@ -208,7 +208,7 @@
         section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.type = FMLayoutHeaderTypeSuspensionAlways;
         section.header.zIndex = FMLayoutZIndexFrontAlways;
-//        section.header.isStickTop = YES;
+        //        section.header.isStickTop = YES;
         //        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
         [section setConfigureHeaderData:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull header) {
             FMCollectionCustomDecoration *custom = (FMCollectionCustomDecoration *)header;
@@ -239,10 +239,10 @@
             FMCollectionCustomDecoration *customHeader = (FMCollectionCustomDecoration *)header;
             customHeader.textLabel.text = @"列表的样式, 支持多种cell, 当前手动返回计算返回高度";
         }];
-
+        
         section.footer = [FMLayoutFooter elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
         section.footer.topMargin = 10;
-
+        
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
         section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionDeleteCell class]]];
         section.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
@@ -252,7 +252,7 @@
         [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
             return [section.cellElements firstObject].reuseIdentifier;
         }];
-
+        
         [sections addObject:section];
     }
     
@@ -271,11 +271,75 @@
         section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
         
         FMLayoutCrossTransformSection *cSection = [FMLayoutCrossTransformSection sectionAutoWithSection:section];
-//        [cSection setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
-//            cell.la
-//        }];
+        //        [cSection setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
+        //            cell.la
+        //        }];
         [sections addObject:cSection];
     }
+    
+    self.collectionView.sections  = sections;
+    [self.collectionView reloadData];
+}
+
+- (void)addScaleSection{
+    NSMutableArray *sections = [NSMutableArray array];
+    
+    {
+        FMLayoutScaleSection *section = [FMLayoutScaleSection sectionWithSectionInset:UIEdgeInsetsMake(10, 10, 10, 10) itemSpace:10 lineSpace:10 column:1];
+
+        section.scales = @"1:0.5";
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+        [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+            switch (item) {
+                case 0:
+                case 3:
+                case 6:
+                case 9:
+                    return ([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2;
+                    break;
+                default:
+                    return (([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2 - 10) * 0.5;
+                    break;
+            }
+//            return 50 + ((item % 2 == 0) ? item * 50 : item * 10);
+        }];
+        //
+        section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
+        [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+            [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", item];
+        }];
+        
+        [sections addObject:section];
+    }
+    
+     {
+            FMLayoutScaleSection *section = [FMLayoutScaleSection sectionWithSectionInset:UIEdgeInsetsMake(10, 10, 10, 10) itemSpace:10 lineSpace:10 column:1];
+
+            section.sizeNums = @[@100, @200];
+            section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+            [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+                switch (item) {
+                    case 0:
+                    case 3:
+                    case 6:
+                    case 9:
+                        return ([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2;
+                        break;
+                    default:
+                        return (([UIScreen mainScreen].bounds.size.width - 30) / 3.0 * 2 - 10) * 0.5;
+                        break;
+                }
+    //            return 50 + ((item % 2 == 0) ? item * 50 : item * 10);
+            }];
+            //
+            section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
+            [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
+                [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", item];
+            }];
+            
+            [sections addObject:section];
+        }
+    
     self.collectionView.sections  = sections;
     [self.collectionView reloadData];
 }

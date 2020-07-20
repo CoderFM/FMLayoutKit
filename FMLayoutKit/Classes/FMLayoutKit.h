@@ -23,7 +23,7 @@
 #import "FMLayoutCrossSection.h"
 #import "FMLayoutCrossTransformSection.h"
 #import "FMLayoutCombineSection.h"
-#import "FMLayoutBaseSection+ConfigureBlock.h"
+#import "FMLayoutScaleSection.h"
 
 
 #import "FMSupplementary.h"

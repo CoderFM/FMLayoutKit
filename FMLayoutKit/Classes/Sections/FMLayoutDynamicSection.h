@@ -19,13 +19,14 @@ typedef CGFloat(^FMLayoutItemOtherBlock)(id section, NSInteger item);
 @property(nonatomic, assign)BOOL autoHeightFixedWidth;
 ///cell固定一个方向的大小 纵向-宽度   横向-高度
 @property(nonatomic, assign)CGFloat cellFixedSize;
-
-@property(nonatomic, strong)NSArray<FMLayoutElement *> *cellElements;///需要注册的cell元素
-@property(nonatomic, strong)FMLayoutElement *cellElement;///固定分组
-
-@property(nonatomic, copy)NSString *(^deqCellReturnReuseId)(FMLayoutDynamicSection *section, NSInteger index);///获取cell的复用标识
-@property(nonatomic, copy)void(^configurationCell)(FMLayoutDynamicSection *section, UICollectionViewCell *cell, NSInteger index);///填充数据
-
+///需要注册的cell元素
+@property(nonatomic, strong)NSArray<FMLayoutElement *> *cellElements;
+///固定单一分组  当固定单一分组时  可以不用手动配置deqCellReturnReuseId
+@property(nonatomic, strong)FMLayoutElement *cellElement;
+///获取cell的复用标识
+@property(nonatomic, copy)NSString *(^deqCellReturnReuseId)(FMLayoutDynamicSection *section, NSInteger index);
+///填充数据  仅当autoHeightFixedWidth为Yes时有用
+@property(nonatomic, copy)void(^configurationCell)(FMLayoutDynamicSection *section, UICollectionViewCell *cell, NSInteger index);
 ///block返回手动计算的高度  优先级比自动的高
 @property(nonatomic, copy)FMLayoutItemOtherBlock otherBlock;
 

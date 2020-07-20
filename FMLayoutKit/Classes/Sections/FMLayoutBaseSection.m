@@ -121,6 +121,26 @@
     }
 }
 
+- (void)setConfigureHeaderData:(void (^)(FMLayoutBaseSection * _Nonnull, UICollectionReusableView * _Nonnull))configureHeaderData{
+    _configureHeaderData = configureHeaderData;
+    if (self.header && self.header.autoHeight && !self.header.configureDataAutoHeight) {
+        __weak typeof(self) weakSelf = self;
+        [self.header setConfigureDataAutoHeight:^(UICollectionReusableView * _Nonnull view) {
+            !weakSelf.configureHeaderData?:weakSelf.configureHeaderData(weakSelf, view);
+        }];
+    }
+}
+
+- (void)setConfigureFooterData:(void (^)(FMLayoutBaseSection * _Nonnull, UICollectionReusableView * _Nonnull))configureFooterData{
+    _configureFooterData = configureFooterData;
+    if (self.footer && self.footer.autoHeight && !self.footer.configureDataAutoHeight) {
+        __weak typeof(self) weakSelf = self;
+        [self.footer setConfigureDataAutoHeight:^(UICollectionReusableView * _Nonnull view) {
+            !weakSelf.configureFooterData?:weakSelf.configureFooterData(weakSelf, view);
+        }];
+    }
+}
+
 - (NSMutableArray *)itemDatas{
     return [self.kvoArray mutableArrayValueForKey:@"targetArray"];
 }

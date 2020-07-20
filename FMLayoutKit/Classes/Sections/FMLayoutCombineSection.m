@@ -7,7 +7,6 @@
 
 #import "FMLayoutCombineSection.h"
 #import "FMCollectionLayoutAttributes.h"
-#import "FMLayoutBaseSection+ConfigureBlock.h"
 
 #import "FMLayoutHeader.h"
 

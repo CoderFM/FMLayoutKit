@@ -17,13 +17,11 @@
 		1022317B997FE907CDCD25317B4A071F /* FMLayoutFixedSection.m in Sources */ = {isa = PBXBuildFile; fileRef = AB29189261D660E85FDE41FE16816ECD /* FMLayoutFixedSection.m */; };
 		17B1B66CD4133C22EB8356A617AC6D6B /* FMLayoutBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = E57ABA024D08EDE3371F3F3C62400CAE /* FMLayoutBackground.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1972E85F0FCD0F3EAF28ED7CD036286E /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A85AE9E36F67A1B513CB8DA940771B4F /* Masonry-dummy.m */; };
-		1BFF10D7E7B1D060E481125CEE3C38C0 /* FMLayoutBaseSection+ConfigureBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7351A2561EC7858AB1976688F3DB8AFB /* FMLayoutBaseSection+ConfigureBlock.m */; };
 		1D02BDC76EBE6C218E5DCF6DE7312674 /* FMLayoutDynamicSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 695762AF41ACC2A7AFD29B9B1E1C6862 /* FMLayoutDynamicSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		280D36330BAC5715615FF4A8B42D60D6 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 607937A372913475EE7EAE532760ACD4 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		297A3627CF2F032CBFDC61D1A3786E63 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BCCE8C6C17F326AFEDF4357C62ADAF /* MASViewAttribute.m */; };
 		2BF16135E62ABD244F9394C280B06EE8 /* FMLayoutFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B03A6B14FC8CDE4DE74F867FC4F7F65 /* FMLayoutFooter.m */; };
 		346080C0D1CA23399ADD739D722D7CEF /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = EDA8A3885BC33F25CB32442EB2449111 /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36102C0CDE28DFC573D935BC80E1CC7C /* FMLayoutBaseSection+ConfigureBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5312CB743B682F80F3BAE1542C28FF60 /* FMLayoutBaseSection+ConfigureBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DA5F1D8E51CDD102A871C2F37770C7B /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = A78D3443F105E00FC21FE5A357C8F716 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E6BAAA0B701F41E9E589822F97BF3AF /* FMLayoutHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = F1BA5D5862C57CC3644C9D0385D221AC /* FMLayoutHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EABA5C42467DAD253F1AF5ADA7EB3F3 /* FMLayoutAbsoluteSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBE4990B360257A8AA8BAED6177471B /* FMLayoutAbsoluteSection.m */; };
@@ -67,6 +65,8 @@
 		C30625882498CABA000243D4 /* FMLayoutCrossCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C30625862498CABA000243D4 /* FMLayoutCrossCell.m */; };
 		C306258B2498CC06000243D4 /* FMLayoutCrossSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C30625892498CC06000243D4 /* FMLayoutCrossSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C306258C2498CC06000243D4 /* FMLayoutCrossSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C306258A2498CC06000243D4 /* FMLayoutCrossSection.m */; };
+		C38CD57124C528CA00D89C9E /* FMLayoutScaleSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C38CD56F24C528CA00D89C9E /* FMLayoutScaleSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C38CD57224C528CA00D89C9E /* FMLayoutScaleSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C38CD57024C528CA00D89C9E /* FMLayoutScaleSection.m */; };
 		C3973880248F716E00A7A2C2 /* FMLayoutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C397387F248F716E00A7A2C2 /* FMLayoutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C399ACAD24BECF8500DD02EE /* FMLayoutCrossTransformSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C399ACAB24BECF8500DD02EE /* FMLayoutCrossTransformSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C399ACAE24BECF8500DD02EE /* FMLayoutCrossTransformSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C399ACAC24BECF8500DD02EE /* FMLayoutCrossTransformSection.m */; };
@@ -148,7 +148,6 @@
 		45B08C70A4CDCFF6F7EAAB4ADBD47049 /* Pods-FMLayoutKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FMLayoutKit_Tests.modulemap"; sourceTree = "<group>"; };
 		470C5CD1265270E95A8A89443C727427 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
 		4AD89987EC7EAE20D7034EEF9935E7CC /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		5312CB743B682F80F3BAE1542C28FF60 /* FMLayoutBaseSection+ConfigureBlock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMLayoutBaseSection+ConfigureBlock.h"; sourceTree = "<group>"; };
 		55960467D1B758EC688A18A171012E78 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		5C82D5BFA0B27E8632239CAA6181284C /* FMLayoutBaseSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FMLayoutBaseSection.m; sourceTree = "<group>"; };
 		607937A372913475EE7EAE532760ACD4 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
@@ -161,7 +160,6 @@
 		6FF4AF21902029EC43C354AC0978CE49 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
 		70EF59D03E8E18F7F4A4759C9D883F45 /* Pods-FMLayoutKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FMLayoutKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		72A95F8027E3EB86CB9AE2D7539201FE /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
-		7351A2561EC7858AB1976688F3DB8AFB /* FMLayoutBaseSection+ConfigureBlock.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMLayoutBaseSection+ConfigureBlock.m"; sourceTree = "<group>"; };
 		73AF606D61C49DC01DC5C905A43E81D1 /* FMLayoutKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FMLayoutKit.modulemap; sourceTree = "<group>"; };
 		757A4B6AAA8326254A2E25CCE4363522 /* FMSupplementary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FMSupplementary.m; sourceTree = "<group>"; };
 		7A6BACBBBAF66F4EAF255239F54D56EA /* FMSupplementary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = FMSupplementary.h; sourceTree = "<group>"; };
@@ -200,6 +198,8 @@
 		C30625862498CABA000243D4 /* FMLayoutCrossCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCrossCell.m; sourceTree = "<group>"; };
 		C30625892498CC06000243D4 /* FMLayoutCrossSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutCrossSection.h; sourceTree = "<group>"; };
 		C306258A2498CC06000243D4 /* FMLayoutCrossSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCrossSection.m; sourceTree = "<group>"; };
+		C38CD56F24C528CA00D89C9E /* FMLayoutScaleSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutScaleSection.h; sourceTree = "<group>"; };
+		C38CD57024C528CA00D89C9E /* FMLayoutScaleSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutScaleSection.m; sourceTree = "<group>"; };
 		C397387F248F716E00A7A2C2 /* FMLayoutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMLayoutKit.h; path = FMLayoutKit/Classes/FMLayoutKit.h; sourceTree = "<group>"; };
 		C399ACAB24BECF8500DD02EE /* FMLayoutCrossTransformSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutCrossTransformSection.h; sourceTree = "<group>"; };
 		C399ACAC24BECF8500DD02EE /* FMLayoutCrossTransformSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCrossTransformSection.m; sourceTree = "<group>"; };
@@ -370,8 +370,6 @@
 				2CBE4990B360257A8AA8BAED6177471B /* FMLayoutAbsoluteSection.m */,
 				04571F5B56E0EDD2CBD13357E25B5C46 /* FMLayoutBaseSection.h */,
 				5C82D5BFA0B27E8632239CAA6181284C /* FMLayoutBaseSection.m */,
-				5312CB743B682F80F3BAE1542C28FF60 /* FMLayoutBaseSection+ConfigureBlock.h */,
-				7351A2561EC7858AB1976688F3DB8AFB /* FMLayoutBaseSection+ConfigureBlock.m */,
 				695762AF41ACC2A7AFD29B9B1E1C6862 /* FMLayoutDynamicSection.h */,
 				96DF14938E1694B50EC1788FF7CC6B31 /* FMLayoutDynamicSection.m */,
 				F7950A8B63A4F538F53B4D0165DAAAAE /* FMLayoutFillSection.h */,
@@ -380,6 +378,8 @@
 				AB29189261D660E85FDE41FE16816ECD /* FMLayoutFixedSection.m */,
 				B76709D281AC0B27965A319D31A49399 /* FMLayoutLabelSection.h */,
 				CBBED27DA45B26B520D460A4665F4D78 /* FMLayoutLabelSection.m */,
+				C38CD56F24C528CA00D89C9E /* FMLayoutScaleSection.h */,
+				C38CD57024C528CA00D89C9E /* FMLayoutScaleSection.m */,
 				C3C47B9924BAB5B00020C071 /* FMLayoutCombineSection.h */,
 				C3C47B9A24BAB5B00020C071 /* FMLayoutCombineSection.m */,
 			);
@@ -557,7 +557,6 @@
 				B67FA646712B7183A3742DE39A61BE2C /* FMKVOArrayObject.h in Headers */,
 				D240D2B05DDD6EABBFDF67F8E42921A4 /* FMLayoutAbsoluteSection.h in Headers */,
 				17B1B66CD4133C22EB8356A617AC6D6B /* FMLayoutBackground.h in Headers */,
-				36102C0CDE28DFC573D935BC80E1CC7C /* FMLayoutBaseSection+ConfigureBlock.h in Headers */,
 				F19C07B7E88762246953AF01071B2E24 /* FMLayoutBaseSection.h in Headers */,
 				1D02BDC76EBE6C218E5DCF6DE7312674 /* FMLayoutDynamicSection.h in Headers */,
 				B9EB397E56BC70BDD925430719BC6329 /* FMLayoutElement.h in Headers */,
@@ -570,6 +569,7 @@
 				C3A262922499EC06000A269D /* FMLayoutDebugLog.h in Headers */,
 				71C79BAA01DF9FE5DAA86B75A507F253 /* FMLayoutKit-umbrella.h in Headers */,
 				92DA6DE8550689C4F76DBFB01A460124 /* FMLayoutLabelSection.h in Headers */,
+				C38CD57124C528CA00D89C9E /* FMLayoutScaleSection.h in Headers */,
 				C3973880248F716E00A7A2C2 /* FMLayoutKit.h in Headers */,
 				C306258B2498CC06000243D4 /* FMLayoutCrossSection.h in Headers */,
 				98313EE28994F7745E8E60C1FC4EBB7A /* FMLayoutView.h in Headers */,
@@ -775,7 +775,6 @@
 				EAEF0BFE8D36DCB4694B7D396DD97AAE /* FMLayoutBackground.m in Sources */,
 				C306258424986E6A000243D4 /* FMLayout.m in Sources */,
 				C3A262932499EC06000A269D /* FMLayoutDebugLog.m in Sources */,
-				1BFF10D7E7B1D060E481125CEE3C38C0 /* FMLayoutBaseSection+ConfigureBlock.m in Sources */,
 				ECC24C178FF280A0D8F0C329AC7D59A7 /* FMLayoutBaseSection.m in Sources */,
 				F7F785200308DA7B9636000E2D47F4A8 /* FMLayoutDynamicSection.m in Sources */,
 				B08C380708F0F4816D1E2BE5D199B9C7 /* FMLayoutElement.m in Sources */,
@@ -790,6 +789,7 @@
 				5E69AAA6E15FDFECAA93CBAEC53577BC /* FMLayoutView.m in Sources */,
 				F977A8588FE03966589260ECDE5CCEC5 /* FMSupplementary.m in Sources */,
 				BA16C547F6B3F33429F514A9C7C998F0 /* FMTeslaLayoutView.m in Sources */,
+				C38CD57224C528CA00D89C9E /* FMLayoutScaleSection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

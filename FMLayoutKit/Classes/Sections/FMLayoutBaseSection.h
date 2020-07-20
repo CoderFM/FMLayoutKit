@@ -87,6 +87,17 @@ NS_ASSUME_NONNULL_BEGIN
 ///配置一下Attributes
 @property(nonatomic, copy)void(^configureCellLayoutAttributes)(id section, UICollectionViewLayoutAttributes *attributes, NSInteger item);
 
+///配置头部的block
+@property(nonatomic, copy)void(^configureHeaderData)(FMLayoutBaseSection *section, UICollectionReusableView *header);
+///配置底部的block
+@property(nonatomic, copy)void(^configureFooterData)(FMLayoutBaseSection *section, UICollectionReusableView *footer);
+///配置背景的block
+@property(nonatomic, copy)void(^configureBg)(FMLayoutBaseSection *section, UICollectionReusableView *bg);
+///配置Cell的block
+@property(nonatomic, copy)void(^configureCellData)(FMLayoutBaseSection *section, UICollectionViewCell *cell, NSInteger item);
+///cell点击事件
+@property(nonatomic, copy)void(^clickCellBlock)(FMLayoutBaseSection *section, NSInteger item);
+
 + (instancetype)sectionWithSectionInset:(UIEdgeInsets)inset itemSpace:(CGFloat)itemSpace lineSpace:(CGFloat)lineSpace column:(NSInteger)column;
 ///标记某一个改变  即将刷新该分组的大小  主要用于动态分组
 - (void)markChangeAt:(NSInteger)index;

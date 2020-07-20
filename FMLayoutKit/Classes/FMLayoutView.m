@@ -9,7 +9,6 @@
 #import "FMLayoutView.h"
 #import "FMLayoutFixedSection.h"
 #import "FMLayoutLabelSection.h"
-#import "FMLayoutBaseSection+ConfigureBlock.h"
 
 @interface _FMLayoutSussEmptyView : UICollectionReusableView
 
