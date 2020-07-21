@@ -111,15 +111,15 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
-    //    [self addSections];
+        [self addSections];
     //    [self addCrossFixedSections];
-    [self addScaleSection];
-    //    self.collectionView.enableLongPressDrag = YES;
-    //    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
-    //        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
-    //        source.backgroundColor = [UIColor purpleColor];
-    //        return source;
-    //    }];
+//    [self addScaleSection];
+    self.collectionView.enableLongPressDrag = YES;
+    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
+        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
+        source.backgroundColor = [UIColor purpleColor];
+        return source;
+    }];
 }
 
 - (void)addSections{
@@ -128,7 +128,6 @@
     __weak typeof(self) weakSelf = self;
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(20, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
-        
         section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class] isNib:NO reuseIdentifier:@"按实际大嫂家打卡机塑料袋卡死来得快"];
         section.header.lastMargin = 10;
         section.header.type = FMLayoutHeaderTypeSuspensionBigger;
@@ -205,6 +204,12 @@
         }
         
         FMLayoutCombineSection *section = [FMLayoutCombineSection combineSections:subSections];
+        [section setCanLongPressExchangeItem:^BOOL(id  _Nonnull section, NSInteger item) {
+            if (item < 2) {
+                return NO;
+            }
+            return YES;
+        }];
         section.canLongPressExchange = YES;
         section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
         section.header.type = FMLayoutHeaderTypeSuspensionAlways;

@@ -80,6 +80,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL canLongPressExchange;
 ///长按移动的方式
 @property(nonatomic, assign)FMLayoutLongMoveType moveType;
+///某一个item是否可以移动替换
+@property(nonatomic, copy)BOOL(^canLongPressExchangeItem)(id section, NSInteger item);
 ///第一个Item的Y值  横向纵向有区别
 @property(nonatomic, assign, readonly)CGFloat firstItemStartY;
 ///第一个Item的X值  横向纵向有区别

@@ -10,35 +10,53 @@
 
 #import "FMLayoutHeader.h"
 
+@interface __FMCombineModel : NSObject
+
+@property(nonatomic, assign)NSInteger start;
+@property(nonatomic, strong)FMLayoutBaseSection *section;
+
+@end
+
+@implementation __FMCombineModel
+
+@end
+
 @interface FMLayoutCombineSection ()
 
-@property(nonatomic, strong)NSArray *sections;
+@property(nonatomic, strong)NSArray<__FMCombineModel *> *sections;
+@property(nonatomic, readonly)NSArray<FMLayoutBaseSection *> *subSections;
 
 @end
 
 @implementation FMLayoutCombineSection
 
+- (NSArray<FMLayoutBaseSection *> *)subSections{
+    return [self.sections valueForKey:@"section"];
+}
+
 - (id)copyWithZone:(NSZone *)zone{
     FMLayoutCombineSection *section = [super copyWithZone:zone];
-    NSMutableArray *sections = [NSMutableArray array];
-    for (FMLayoutBaseSection *subSection in self.sections) {
-        [sections addObject:[subSection copy]];
-    }
-    section.sections = sections;
+    section.sections = [self.sections copy];
     return section;
 }
 
 - (NSInteger)itemCount{
     NSInteger count = 0;
-    for (FMLayoutBaseSection *section in self.sections) {
-        count += section.itemCount;
+    for (__FMCombineModel *combine in self.sections) {
+        count += combine.section.itemCount;
     }
     return count;
 }
 
 + (instancetype)combineSections:(NSArray<FMLayoutBaseSection *> *)sections{
-    FMLayoutCombineSection *section = [[FMLayoutCombineSection alloc] init];
-    section.sections = sections;
+    FMLayoutCombineSection *section = [[self alloc] init];
+    NSMutableArray *arrM = [NSMutableArray array];
+    for (int i = 0; i < sections.count; i++) {
+        __FMCombineModel *com = [[__FMCombineModel alloc] init];
+        com.section = sections[i];
+        [arrM addObject:com];
+    }
+    section.sections = [arrM copy];
     return section;
 }
 
@@ -49,28 +67,22 @@
         self.column = 1;
         __weak typeof(self) weakSelf = self;
         [self setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
-            NSInteger start = 0;
-            for (FMLayoutBaseSection *subSection in weakSelf.sections) {
-                if (item < subSection.itemCount + start) {
-                    if (subSection.clickCellBlock) {
-                        subSection.clickCellBlock(subSection, item - start);
+            for (__FMCombineModel *com in weakSelf.sections) {
+                if (item < com.start + com.section.itemCount) {
+                    if (com.section.clickCellBlock) {
+                        com.section.clickCellBlock(com.section, item - com.start);
                     }
                     break;
-                } else {
-                    start += subSection.itemCount;
                 }
             }
         }];
         [self setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-            NSInteger start = 0;
-            for (FMLayoutBaseSection *subSection in weakSelf.sections) {
-                if (item < subSection.itemCount + start) {
-                    if (subSection.configureCellData) {
-                        subSection.configureCellData(subSection, cell,item - start);
+            for (__FMCombineModel *com in weakSelf.sections) {
+                if (item < com.start + com.section.itemCount) {
+                    if (com.section.configureCellData) {
+                        com.section.configureCellData(com.section, cell,item - com.start);
                     }
                     break;
-                } else {
-                    start += subSection.itemCount;
                 }
             }
         }];
@@ -78,13 +90,23 @@
     return self;
 }
 
+- (void)handleLayout{
+    NSInteger start = 0;
+    for (__FMCombineModel *com in self.sections) {
+        com.start = start;
+        start += com.section.itemCount;
+    }
+    [super handleLayout];
+}
+
 - (void)prepareItems{
     [self resetcolumnSizes];
     CGFloat startOffset = self.direction == FMLayoutDirectionVertical ? self.firstItemStartY : self.firstItemStartX;
     CGFloat offset = startOffset;
     NSInteger start = 0;
-    for (int i = 0; i < self.sections.count; i++) {
-        FMLayoutBaseSection *section = self.sections[i];
+    NSArray *sections = self.subSections;
+    for (int i = 0; i < sections.count; i++) {
+        FMLayoutBaseSection *section = sections[i];
         section.header = nil;
         section.footer = nil;
         section.background = nil;
@@ -126,7 +148,8 @@
                 [attrs addObject:self.bgAttribute];
             }
         }
-        for (FMLayoutBaseSection *section in self.sections) {
+        NSArray *sections = self.subSections;
+        for (FMLayoutBaseSection *section in sections) {
             NSArray *subAttrs = [section showLayoutAttributesInRect:rect];
             [attrs addObjectsFromArray:subAttrs];
         }
@@ -144,26 +167,25 @@
 }
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath collectionView:(UICollectionView *)collectionView{
-    NSInteger start = 0;
-    for (FMLayoutBaseSection *section in self.sections) {
-        if (indexPath.item < section.itemCount + start) {
-            return [section dequeueReusableCellForIndexPath:indexPath collectionView:collectionView];
-        } else {
-            start = section.itemCount;
+    for (__FMCombineModel *com in self.sections) {
+        if (indexPath.item < com.start + com.section.itemCount) {
+            return [com.section dequeueReusableCellForIndexPath:indexPath collectionView:collectionView];
         }
     }
     @throw [NSException exceptionWithName:@"FMLayoutCombineSection instance dequeueReusableCellForIndexPath" reason:@"FMLayoutCombineSection" userInfo:nil];
 }
 
 - (void)registerCellsWithCollectionView:(UICollectionView *)collectionView{
-    for (FMLayoutBaseSection *section in self.sections) {
+    NSArray *sections = self.subSections;
+    for (FMLayoutBaseSection *section in sections) {
         [section registerCellsWithCollectionView:collectionView];
     }
 }
 
 - (CGFloat)crossSingleSectionSize{
     CGFloat maxSize = self.direction == FMLayoutDirectionVertical ? self.firstItemStartY : self.firstItemStartX;
-    for (FMLayoutBaseSection *section in self.sections) {
+    NSArray *sections = self.subSections;
+    for (FMLayoutBaseSection *section in sections) {
         CGFloat sectionSize = [section crossSingleSectionSize];
         if (maxSize < sectionSize) {
             maxSize = sectionSize;
@@ -178,7 +200,8 @@
     NSInteger getIndex = 0;
     NSInteger insetIndex = 0;
     NSInteger start = 0;
-    for (FMLayoutBaseSection *section in self.sections) {
+    NSArray *sections = self.subSections;
+    for (FMLayoutBaseSection *section in sections) {
         if (index < start + section.itemCount) {
             if (!get) {
                 get = section.itemDatas;

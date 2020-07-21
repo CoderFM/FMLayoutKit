@@ -164,14 +164,19 @@
     if (sourceIndexPath) {
         FMLayoutBaseSection *section = self.sections[sourceIndexPath.section];
         if (section.canLongPressExchange) {
-            _sourceIndexPath = sourceIndexPath;
-            self.moveType = section.moveType;
+            BOOL canLong = YES;
+            if (section.canLongPressExchangeItem) {
+                canLong = section.canLongPressExchangeItem(section, sourceIndexPath.item);
+            }
+            if (canLong) {
+                _sourceIndexPath = sourceIndexPath;
+                self.moveType = section.moveType;
+            }
         }
     } else {
         _sourceIndexPath = nil;
     }
 }
-
 
 - (void)longPress:(UILongPressGestureRecognizer *)longP{
     CGPoint location = [longP locationInView:self];
@@ -195,17 +200,24 @@
                     [self sourceCellViewMoveLocation:location animation:YES];
                 } else {
                     if (![indexPath isEqual:self.sourceIndexPath] && indexPath.section == self.sourceIndexPath.section) {
-                        [self moveItemAtIndexPath:self.sourceIndexPath toIndexPath:indexPath];
                         FMLayoutBaseSection *section = self.sections[indexPath.section];
-                        [section exchangeObjectAtIndex:self.sourceIndexPath.item toIndex:indexPath.item];
-                        self.sourceIndexPath = indexPath;
-                        {
-                            UICollectionViewCell *cell = [self cellForItemAtIndexPath:indexPath];
-                            CGRect frame = self.sourceCellView.frame;
-                            frame.size = cell.frame.size;
-                            [UIView animateWithDuration:0.2 animations:^{
-                                self.sourceCellView.frame = frame;
-                            }];
+                        BOOL canExchange = YES;
+                        if (section.canLongPressExchangeItem) {
+                            canExchange = section.canLongPressExchangeItem(section, indexPath.item);
+                        }
+                        if (canExchange) {
+                            [self moveItemAtIndexPath:self.sourceIndexPath toIndexPath:indexPath];
+                            
+                            [section exchangeObjectAtIndex:self.sourceIndexPath.item toIndex:indexPath.item];
+                            self.sourceIndexPath = indexPath;
+                            {
+                                UICollectionViewCell *cell = [self cellForItemAtIndexPath:indexPath];
+                                CGRect frame = self.sourceCellView.frame;
+                                frame.size = cell.frame.size;
+                                [UIView animateWithDuration:0.2 animations:^{
+                                    self.sourceCellView.frame = frame;
+                                }];
+                            }
                         }
                     }
                 }
