@@ -172,6 +172,11 @@
                 CGRect frame = show.frame;
                 frame.origin.x += offsetX;
                 frame.size.width -= offsetX;
+                if (frame.size.width > section.header.maxSize) {
+                    CGFloat diff = frame.size.width - section.header.maxSize;
+                    frame.size.width -= diff;
+                    frame.origin.x += diff;
+                }
                 show.frame = frame;
                 return show;
             } else { //缩小
@@ -190,7 +195,7 @@
                 
                 //缩小的最小之后大小固定
                 frame.origin.x = offsetX;
-                frame.size.height = minHeight;
+                frame.size.width = minHeight;
                 
                 //如果不是固定在顶固的  将偏移量重置
                 if (!section.header.isStickTop) {
