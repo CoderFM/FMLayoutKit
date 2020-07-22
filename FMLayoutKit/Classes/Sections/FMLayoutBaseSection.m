@@ -379,7 +379,9 @@
 }
 
 - (void)exchangeObjectAtIndex:(NSInteger)index toIndex:(NSInteger)toIndex{
-    [self.itemDatas exchangeObjectAtIndex:index withObjectAtIndex:toIndex];
+    id obj = self.itemDatas[index];
+    [self.itemDatas removeObjectAtIndex:index];
+    [self.itemDatas insertObject:obj atIndex:toIndex];
 }
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath{

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FMCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
 

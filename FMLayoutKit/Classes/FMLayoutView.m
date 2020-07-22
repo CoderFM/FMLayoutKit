@@ -264,7 +264,6 @@
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         
         sourceView = [[UIView alloc] initWithFrame:sourceCell.frame];
-        sourceView.backgroundColor = [UIColor purpleColor];
         sourceView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
         sourceView.layer.shadowOffset = CGSizeMake(0, 0);
         sourceView.layer.shadowOpacity = 0.7;

@@ -102,6 +102,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     FMLayoutView *view = [[FMLayoutView alloc] init];
     //    view.layout.minContentSize = 1000;
     view.backgroundColor = [UIColor whiteColor];
@@ -115,11 +116,13 @@
     //    [self addCrossFixedSections];
 //    [self addScaleSection];
     self.collectionView.enableLongPressDrag = YES;
-    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
-        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
-        source.backgroundColor = [UIColor purpleColor];
-        return source;
-    }];
+//    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
+//        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
+//        source.backgroundColor = [UIColor purpleColor];
+//        return source;
+//    }];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self.collectionView action:@selector(reloadData)];
 }
 
 - (void)addSections{
@@ -143,10 +146,10 @@
         section.footer.topMargin = 10;
         
         section.itemSize = CGSizeMake(200, 100);
-        section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+        section.itemDatas = [@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"] mutableCopy];
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionViewCell class] isNib:YES];
         [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-            
+            [(FMCollectionViewCell *)cell label].text = section.itemDatas[item];
         }];
         
         [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
@@ -154,6 +157,7 @@
             [weakSelf.navigationController pushViewController:add animated:YES];
         }];
         
+        section.canLongPressExchange = YES;
         [sections addObject:section];
     }
     {
@@ -162,10 +166,10 @@
             FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:2];
             
             section.itemSize = CGSizeMake(150, 100);
-            section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
+            section.itemDatas = [@[@"0-1", @"0-2", @"0-3", @"0-4", @"0-5", @"0-6", @"0-7", @"0-8", @"0-9", @"0-10", @"0-11"] mutableCopy];
             section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
             [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-                [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", (long)item];
+                [(FMCollectionCustomCell *)cell label].text = section.itemDatas[item];
             }];
             [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
                 
@@ -176,7 +180,7 @@
         {
             FMLayoutAbsoluteSection *section = [FMLayoutAbsoluteSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:0 column:0];
             
-            section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+            section.itemDatas = [@[@"1-1", @"1-2", @"1-3"] mutableCopy];
             section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
             [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
                 return [section.cellElements firstObject].reuseIdentifier;
@@ -195,7 +199,7 @@
                 }
             }];
             [section setConfigureCellData:^(FMLayoutBaseSection * _Nonnull section, UICollectionViewCell * _Nonnull cell, NSInteger item) {
-                [(FMCollectionCustomCell *)cell label].text = [NSString stringWithFormat:@"%ld", (long)item];
+                [(FMCollectionCustomCell *)cell label].text = section.itemDatas[item];
             }];
             [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
                 
