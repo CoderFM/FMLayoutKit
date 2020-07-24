@@ -234,9 +234,36 @@
         [section setConfigureBg:^(FMLayoutBaseSection * _Nonnull section, UICollectionReusableView * _Nonnull bg) {
             bg.backgroundColor = [UIColor yellowColor];
         }];
+        
+        {
+            FMLayoutDynamicSection *dsection = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
+            
+            dsection.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+            dsection.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionDeleteCell class]];
+            dsection.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
+            [dsection setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+                return 100 + item * 100;
+            }];
+            [section appendSection:dsection];
+        }
+        
+        {
+            FMLayoutDynamicSection *dsection = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];
+            
+            dsection.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
+            dsection.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionDeleteCell class]];
+            dsection.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
+            [dsection setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
+                return 100 + item * 100;
+            }];
+            [section insetSection:dsection atIndex:1];
+        }
+        
         [sections addObject:section];
         
     }
+    
+    
     
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(10, 0, 0, 0) itemSpace:0 lineSpace:10 column:1];

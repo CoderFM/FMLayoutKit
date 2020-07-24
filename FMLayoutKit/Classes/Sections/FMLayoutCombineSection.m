@@ -24,7 +24,6 @@
 @interface FMLayoutCombineSection ()
 
 @property(nonatomic, strong)NSArray<__FMCombineModel *> *sections;
-@property(nonatomic, readonly)NSArray<FMLayoutBaseSection *> *subSections;
 
 @end
 
@@ -54,14 +53,31 @@
 
 + (instancetype)combineSections:(NSArray<FMLayoutBaseSection *> *)sections{
     FMLayoutCombineSection *section = [[self alloc] init];
+    [section resetSecionsWithSections:sections];
+    return section;
+}
+
+- (void)appendSection:(FMLayoutBaseSection *)section{
+    NSMutableArray *sections = [NSMutableArray arrayWithArray:self.subSections];
+    [sections addObject:section];
+    [self resetSecionsWithSections:sections];
+}
+
+- (void)insetSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index{
+    NSMutableArray *sections = [NSMutableArray arrayWithArray:self.subSections];
+    [sections insertObject:section atIndex:index];
+    [self resetSecionsWithSections:sections];
+}
+
+- (void)resetSecionsWithSections:(NSArray<FMLayoutBaseSection *> *)sections{
     NSMutableArray *arrM = [NSMutableArray array];
     for (int i = 0; i < sections.count; i++) {
         __FMCombineModel *com = [[__FMCombineModel alloc] init];
         com.section = sections[i];
         [arrM addObject:com];
     }
-    section.sections = [arrM copy];
-    return section;
+    self.sections = [arrM copy];
+    self.hasHandle = NO;
 }
 
 - (instancetype)init
