@@ -17,6 +17,19 @@
 
 @implementation FMLayoutDynamicSection
 
+- (NSString * _Nonnull (^)(FMLayoutDynamicSection * _Nonnull, NSInteger))deqCellReturnReuseId{
+    if (_deqCellReturnReuseId == nil) {
+        _deqCellReturnReuseId = ^(FMLayoutDynamicSection * _Nonnull section, NSInteger j){
+            if (section.deqCellReturnElement) {
+                return section.deqCellReturnElement(section, j).reuseIdentifier;
+            } else {
+                return @"";
+            }
+        };
+    }
+    return _deqCellReturnReuseId;
+}
+
 - (id)copyWithZone:(NSZone *)zone{
     FMLayoutDynamicSection *section = [super copyWithZone:zone];
     section.autoHeightFixedWidth = self.autoHeightFixedWidth;
