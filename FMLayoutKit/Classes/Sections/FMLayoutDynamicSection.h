@@ -25,6 +25,8 @@ typedef CGFloat(^FMLayoutItemOtherBlock)(id section, NSInteger item);
 @property(nonatomic, strong)FMLayoutElement *cellElement;
 ///获取cell的复用标识
 @property(nonatomic, copy)NSString *(^deqCellReturnReuseId)(FMLayoutDynamicSection *section, NSInteger index);
+///获取cell的复用FMLayoutElement
+@property(nonatomic, copy)FMLayoutElement *(^deqCellReturnElement)(FMLayoutDynamicSection *section, NSInteger index);
 ///填充数据  仅当autoHeightFixedWidth为Yes时有用
 @property(nonatomic, copy)void(^configurationCell)(FMLayoutDynamicSection *section, UICollectionViewCell *cell, NSInteger index);
 ///block返回手动计算的高度  优先级比自动的高

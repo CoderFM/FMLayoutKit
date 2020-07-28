@@ -13,8 +13,6 @@
 
 @interface FMLayoutDynamicSection ()
 
-@property(nonatomic, strong)NSMapTable *reuseCells;
-
 @end
 
 @implementation FMLayoutDynamicSection
@@ -34,13 +32,6 @@
     return section;
 }
 
-- (NSMapTable *)reuseCells{
-    if (_reuseCells == nil) {
-        _reuseCells = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn valueOptions:NSPointerFunctionsWeakMemory];
-    }
-    return _reuseCells;
-}
-
 - (void)setCellFixedSize:(CGFloat)cellFixedSize{
     _cellFixedSize = cellFixedSize;
     self.hasHandle = NO;
@@ -57,6 +48,9 @@
     __weak typeof(self) weakSelf = self;
     [self setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
         return weakSelf.cellElement.reuseIdentifier;
+    }];
+    [self setDeqCellReturnElement:^FMLayoutElement * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
+        return weakSelf.cellElement;
     }];
 }
 
@@ -76,8 +70,14 @@
         if (self.direction == FMLayoutDirectionHorizontal) {
             @throw [NSException exceptionWithName:@"autoHeightFixedWidth must for FMLayoutDirectionVertical" reason:@"FMLayoutDynamicSection" userInfo:nil];
         }
-        if (self.deqCellReturnReuseId) {
-            UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, j) forIndexPath:indexPath];
+        if (self.deqCellReturnElement) {
+            UICollectionViewCell *cell;
+            FMLayoutElement *element = self.deqCellReturnElement(self, j);
+            if (element.isNib) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(element.viewClass) owner:nil options:nil] lastObject];
+            } else {
+                cell = [[element.viewClass alloc] init];
+            }
             if (self.configurationCell) {
                 self.configurationCell(self ,cell, j);
             }

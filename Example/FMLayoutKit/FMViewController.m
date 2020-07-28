@@ -249,7 +249,7 @@
             custom.label.text = section.itemDatas[index];
 //            [weakSelf tesla:nil configurationCell:cell indexPath:[NSIndexPath indexPathForItem:index inSection:section.indexPath.section] isShare:NO multiIndex:0 layoutView:nil];
         }];
-        [self.sections addObject:section];
+//        [self.sections addObject:section];
     }
 //
     {
