@@ -23,8 +23,6 @@ typedef CGFloat(^FMLayoutItemOtherBlock)(id section, NSInteger item);
 @property(nonatomic, strong)NSArray<FMLayoutElement *> *cellElements;
 ///固定单一分组  当固定单一分组时  可以不用手动配置deqCellReturnReuseId
 @property(nonatomic, strong)FMLayoutElement *cellElement;
-///获取cell的复用标识
-@property(nonatomic, copy)NSString *(^deqCellReturnReuseId)(FMLayoutDynamicSection *section, NSInteger index);
 ///获取cell的复用FMLayoutElement
 @property(nonatomic, copy)FMLayoutElement *(^deqCellReturnElement)(FMLayoutDynamicSection *section, NSInteger index);
 ///填充数据  仅当autoHeightFixedWidth为Yes时有用

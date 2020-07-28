@@ -241,10 +241,8 @@
             customHeader.textLabel.text = @"填充布局,寻找合适的空档,支持多种cell, header样式一直悬停在顶部";
         }];
 
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+
         [section setSizeBlock:^CGSize(id  _Nonnull section, NSInteger item) {
             switch (item) {
                 case 2:
@@ -297,13 +295,10 @@
             section.footer.topMargin = 10;
 
             section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
-            section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+            section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
             section.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
             [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
                 return 100 + item * 100;
-            }];
-            [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-                return [section.cellElements firstObject].reuseIdentifier;
             }];
 
             [self.shareSections addObject:section];
@@ -324,14 +319,12 @@
         section.footer.topMargin = 10;
 
         section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         section.cellFixedSize = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
         [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
             return 100 + item * 30;
         }];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
+
         [self.shareSections addObject:section];
     }
 
@@ -380,7 +373,8 @@
         [self.shareSections addObject:section];
     }
     
-    FMLayoutView *view = [[FMLayoutView alloc] initHorizontal];
+    FMLayoutView *view = [[FMLayoutView alloc] init];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     view.delegate = self;
 //    view.reloadOlnyChanged = NO;
     [view.layout setSections:self.shareSections];

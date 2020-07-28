@@ -117,8 +117,14 @@
         if (self.direction == FMLayoutDirectionHorizontal) {
             @throw [NSException exceptionWithName:@"autoHeightFixedWidth must for FMLayoutDirectionVertical" reason:@"FMLayoutDynamicSection" userInfo:nil];
         }
-        if (self.deqCellReturnReuseId) {
-            UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, j) forIndexPath:indexPath];
+        if (self.deqCellReturnElement) {
+            UICollectionViewCell *cell;
+            FMLayoutElement *element = self.deqCellReturnElement(self, j);
+            if (element.isNib) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(element.viewClass) owner:nil options:nil] lastObject];
+            } else {
+                cell = [[element.viewClass alloc] init];
+            }
             if (self.configurationCell) {
                 self.configurationCell(self ,cell, j);
             }

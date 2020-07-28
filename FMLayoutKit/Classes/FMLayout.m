@@ -131,6 +131,7 @@
     if (self.direction == FMLayoutDirectionVertical) {
         rect.size.width = self.collectionView.frame.size.width;
     } else {
+        rect.origin.y = 0;
         rect.size.height = self.collectionView.frame.size.height;
     }
     NSMutableArray<UICollectionViewLayoutAttributes *> *attrs = [NSMutableArray array];

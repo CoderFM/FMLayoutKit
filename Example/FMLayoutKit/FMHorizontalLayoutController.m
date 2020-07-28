@@ -178,10 +178,8 @@
         FMLayoutAbsoluteSection *section = [FMLayoutAbsoluteSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:0 lineSpace:0 column:0];
 
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
+
         [section setFrameBlock:^CGRect(id  _Nonnull section, NSInteger item) {
             switch (item) {
                 case 0:
@@ -464,6 +462,7 @@
     
     
     FMLayoutView *view = [[FMLayoutView alloc] initHorizontal];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     view.delegate = self;
 //    view.alwaysBounceVertical = YES;
     [view.layout setSections:self.shareSections];

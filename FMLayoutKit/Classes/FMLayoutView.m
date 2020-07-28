@@ -323,6 +323,9 @@
 {
     self = [super initWithFrame:frame collectionViewLayout:[[FMLayout alloc] init]];
     if (self) {
+        if(@available(iOS 11.0, *)) {
+            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         self.layout = (FMLayout *)self.collectionViewLayout;
         self.dataSource = self;
         self.delegate = self;

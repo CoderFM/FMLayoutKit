@@ -17,19 +17,6 @@
 
 @implementation FMLayoutDynamicSection
 
-- (NSString * _Nonnull (^)(FMLayoutDynamicSection * _Nonnull, NSInteger))deqCellReturnReuseId{
-    if (_deqCellReturnReuseId == nil) {
-        _deqCellReturnReuseId = ^(FMLayoutDynamicSection * _Nonnull section, NSInteger j){
-            if (section.deqCellReturnElement) {
-                return section.deqCellReturnElement(section, j).reuseIdentifier;
-            } else {
-                return @"";
-            }
-        };
-    }
-    return _deqCellReturnReuseId;
-}
-
 - (id)copyWithZone:(NSZone *)zone{
     FMLayoutDynamicSection *section = [super copyWithZone:zone];
     section.autoHeightFixedWidth = self.autoHeightFixedWidth;
@@ -39,7 +26,7 @@
         [arrM addObject:[element copy]];
     }
     section.cellElements = arrM;
-    section.deqCellReturnReuseId = [self.deqCellReturnReuseId copy];
+    section.deqCellReturnElement = [self.deqCellReturnElement copy];
     section.configurationCell = [self.configurationCell copy];
     section.otherBlock = [self.otherBlock copy];
     return section;
@@ -59,9 +46,6 @@
     _cellElement = cellElement;
     self.cellElements = @[cellElement];
     __weak typeof(self) weakSelf = self;
-    [self setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-        return weakSelf.cellElement.reuseIdentifier;
-    }];
     [self setDeqCellReturnElement:^FMLayoutElement * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
         return weakSelf.cellElement;
     }];
@@ -125,7 +109,7 @@
 
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath collectionView:(nonnull UICollectionView *)collectionView{
-    return [collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnReuseId(self, indexPath.item) forIndexPath:indexPath];
+    return [collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnElement(self, indexPath.item).reuseIdentifier forIndexPath:indexPath];
 }
 
 - (void)registerCellsWithCollectionView:(UICollectionView *)collectionView{

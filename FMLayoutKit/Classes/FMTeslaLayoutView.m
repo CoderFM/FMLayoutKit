@@ -117,6 +117,9 @@
 - (FM_ScrollView *)scrollView{
     if (_scrollView == nil) {
         FM_ScrollView *scroll = [[FM_ScrollView alloc] init];
+        if(@available(iOS 11.0, *)) {
+            scroll.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         scroll.backgroundColor = [UIColor clearColor];
         scroll.pagingEnabled = YES;
         scroll.delegate = self;

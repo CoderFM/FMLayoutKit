@@ -52,7 +52,12 @@
 
 - (void)updateHeightWithCollection:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath maxWidth:(CGFloat)maxWidth{
     if (self.autoHeight) {
-        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:self.elementKind withReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
+        UICollectionReusableView *view;
+        if (self.isNib) {
+            view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self.viewClass) owner:nil options:nil] lastObject];
+        } else {
+            view = [[self.viewClass alloc] init];
+        }
         if (self.configureDataAutoHeight) {
             self.configureDataAutoHeight(view);
         }

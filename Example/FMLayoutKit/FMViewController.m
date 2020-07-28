@@ -71,7 +71,7 @@
     [super viewDidLoad];
 //    self.navigationItem.title = @"特斯拉布局";
 
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.shareSections = [NSMutableArray array];
     self.sections = [NSMutableArray array];
@@ -183,13 +183,10 @@
         section.footer.topMargin = 10;
 
         section.itemDatas = [@[@"1", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         section.cellFixedSize = [UIScreen mainScreen].bounds.size.width;
         [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
             return 100 + item * 100;
-        }];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
         }];
 
         [self.sections addObject:section];
@@ -205,13 +202,10 @@
         section.footer.topMargin = 10;
 
         section.itemDatas = [@[@"1", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         section.cellFixedSize = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
         [section setOtherBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
             return 100 + item * 30;
-        }];
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
         }];
         
         __weak typeof(self) weakSelf = self;
@@ -236,11 +230,8 @@
         section.footer.topMargin = 10;
 
         section.itemDatas = [@[@"1\n1", @"2\n2\n2", @"3", @"2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2\n2\n2", @"2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2", @"3\n2\n2"] mutableCopy];
-        section.cellElements = @[[FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]]];
+        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         section.cellFixedSize = ([UIScreen mainScreen].bounds.size.width - 10) * 0.5;
-        [section setDeqCellReturnReuseId:^NSString * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
-            return [section.cellElements firstObject].reuseIdentifier;
-        }];
 
         section.autoHeightFixedWidth = YES;
         __weak typeof(self) weakSelf = self;
