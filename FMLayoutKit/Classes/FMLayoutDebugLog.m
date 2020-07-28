@@ -7,7 +7,7 @@
 
 #import "FMLayoutDebugLog.h"
 
-BOOL FMLayoutDebugLogOpen = YES;
+BOOL FMLayoutDebugLogOpen = NO;
 
 void FMLayoutLog(NSString *format){
     if (FMLayoutDebugLogOpen) {
