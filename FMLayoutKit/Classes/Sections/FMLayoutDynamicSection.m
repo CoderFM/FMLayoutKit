@@ -13,9 +13,42 @@
 
 @interface FMLayoutDynamicSection ()
 
+@property(nonatomic, strong)NSMapTable *autoHeightCells;
+
 @end
 
 @implementation FMLayoutDynamicSection
+
+- (NSMapTable *)autoHeightCells{
+    if (_autoHeightCells == nil) {
+        _autoHeightCells = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsStrongMemory];
+    }
+    return _autoHeightCells;
+}
+
+- (CGFloat)autoHeightVerticalWithWidth:(CGFloat)fixedWidth index:(NSInteger)index{
+    CGFloat itemOther = 0;
+    if (self.direction == FMLayoutDirectionHorizontal) {
+        @throw [NSException exceptionWithName:@"autoHeightFixedWidth must for FMLayoutDirectionVertical" reason:@"FMLayoutDynamicSection" userInfo:nil];
+    }
+    if (self.deqCellReturnElement) {
+        FMLayoutElement *element = self.deqCellReturnElement(self, index);
+        UICollectionViewCell *cell = [self.autoHeightCells objectForKey:element.viewClass];
+        if (cell == nil) {
+            if (element.isNib) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(element.viewClass) owner:nil options:nil] lastObject];
+            } else {
+                cell = [[element.viewClass alloc] init];
+            }
+            [self.autoHeightCells setObject:cell forKey:element.viewClass];
+        }
+        if (self.configurationCell) {
+            self.configurationCell(self ,cell, index);
+        }
+        itemOther = [cell systemLayoutSizeFittingSize:CGSizeMake(fixedWidth, MAXFLOAT)].height;
+    }
+    return itemOther;
+}
 
 - (id)copyWithZone:(NSZone *)zone{
     FMLayoutDynamicSection *section = [super copyWithZone:zone];
@@ -64,22 +97,7 @@
     CGFloat itemFixed = self.cellFixedSize;
     CGFloat itemOther = 0;
     if (self.autoHeightFixedWidth) {
-        if (self.direction == FMLayoutDirectionHorizontal) {
-            @throw [NSException exceptionWithName:@"autoHeightFixedWidth must for FMLayoutDirectionVertical" reason:@"FMLayoutDynamicSection" userInfo:nil];
-        }
-        if (self.deqCellReturnElement) {
-            UICollectionViewCell *cell;
-            FMLayoutElement *element = self.deqCellReturnElement(self, j);
-            if (element.isNib) {
-                cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(element.viewClass) owner:nil options:nil] lastObject];
-            } else {
-                cell = [[element.viewClass alloc] init];
-            }
-            if (self.configurationCell) {
-                self.configurationCell(self ,cell, j);
-            }
-            itemOther = [cell systemLayoutSizeFittingSize:CGSizeMake(itemFixed, MAXFLOAT)].height;
-        }
+        itemOther = [self autoHeightVerticalWithWidth:itemFixed index:j];
     } else {
         itemOther = !self.otherBlock?0:self.otherBlock(self, j);
     }
@@ -105,8 +123,6 @@
     }
     return itemAttr;
 }
-
-
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath collectionView:(nonnull UICollectionView *)collectionView{
     return [collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnElement(self, indexPath.item).reuseIdentifier forIndexPath:indexPath];

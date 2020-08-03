@@ -30,6 +30,8 @@ typedef CGFloat(^FMLayoutItemOtherBlock)(id section, NSInteger item);
 ///block返回手动计算的高度  优先级比自动的高
 @property(nonatomic, copy)FMLayoutItemOtherBlock otherBlock;
 
+- (CGFloat)autoHeightVerticalWithWidth:(CGFloat)fixedWidth index:(NSInteger)index;
+
 @end
 
 NS_ASSUME_NONNULL_END

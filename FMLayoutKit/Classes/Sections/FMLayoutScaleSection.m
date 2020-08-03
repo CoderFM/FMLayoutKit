@@ -114,22 +114,7 @@
     CGFloat itemFixed = model.fixedSize;
     CGFloat itemOther = 0;
     if (self.autoHeightFixedWidth) {
-        if (self.direction == FMLayoutDirectionHorizontal) {
-            @throw [NSException exceptionWithName:@"autoHeightFixedWidth must for FMLayoutDirectionVertical" reason:@"FMLayoutDynamicSection" userInfo:nil];
-        }
-        if (self.deqCellReturnElement) {
-            UICollectionViewCell *cell;
-            FMLayoutElement *element = self.deqCellReturnElement(self, j);
-            if (element.isNib) {
-                cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(element.viewClass) owner:nil options:nil] lastObject];
-            } else {
-                cell = [[element.viewClass alloc] init];
-            }
-            if (self.configurationCell) {
-                self.configurationCell(self ,cell, j);
-            }
-            itemOther = [cell systemLayoutSizeFittingSize:CGSizeMake(itemFixed, MAXFLOAT)].height;
-        }
+        itemOther = [self autoHeightVerticalWithWidth:itemFixed index:j];
     } else {
         itemOther = !self.otherBlock?0:self.otherBlock(self, j);
     }

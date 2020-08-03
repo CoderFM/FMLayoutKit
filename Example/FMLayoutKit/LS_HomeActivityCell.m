@@ -12,6 +12,10 @@
 
 @implementation LS_HomeActivityCell
 
+- (void)dealloc{
+    
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

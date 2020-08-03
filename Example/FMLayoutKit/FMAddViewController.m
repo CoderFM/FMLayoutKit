@@ -164,7 +164,7 @@
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
         [section setClickCellBlock:^(FMLayoutBaseSection * _Nonnull section, NSInteger item) {
             FMHorizontalLayoutController *vc = [[FMHorizontalLayoutController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         }];
         [self.shareSections addObject:section];
 //        self.firstSection = section;
