@@ -42,10 +42,6 @@
 @property(nonatomic, strong)NSMutableDictionary<NSNumber *, UIScrollView *> *layoutViews;
 
 @property(nonatomic, assign)BOOL isLayoutSubView;
-@property(nonatomic, assign)BOOL isLoadSubView;
-
-
-@property(nonatomic, assign)CGFloat shareHeight;
 @property(nonatomic, assign, readonly)CGFloat shareSuspensionDifferHeight;
 
 @end
@@ -55,7 +51,7 @@
 - (void)reLoadSubViews{
     if (self.isLayoutSubView && self.isLoadSubView) {
         self.isLoadSubView = NO;
-        for (UIView *view in self.layoutViews) {
+        for (UIView *view in self.layoutViews.allValues) {
             [view removeFromSuperview];
         }
         [self loadSubViews];

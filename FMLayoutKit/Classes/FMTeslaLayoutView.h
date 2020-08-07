@@ -51,6 +51,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL horizontalCanScroll;
 @property(nonatomic, assign)BOOL allShareStickTop;
 @property(nonatomic, assign)NSInteger selectIndex;
+
+@property(nonatomic, assign)BOOL isLoadSubView;
+@property(nonatomic, assign)CGFloat shareHeight;
+
 - (void)reLoadSubViews;
 - (void)reloadData;
 - (void)reloadDataWithIndex:(NSInteger)index;

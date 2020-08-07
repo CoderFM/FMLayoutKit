@@ -67,6 +67,9 @@
 - (CGFloat)crossSingleSectionSize{
     if (self.direction == FMLayoutDirectionHorizontal) {
         NSInteger itemCount = self.itemCount;
+        if (itemCount == 0) {
+            return self.sectionInset.top + self.sectionInset.bottom;
+        }
         NSInteger singleCount = (self.collectionView.frame.size.width - self.sectionInset.left - self.sectionInset.right) / (self.itemSize.width + self.itemSpace);///单行可显示的最大个数
         if (itemCount > singleCount * self.column) { //可滚动
             singleCount = itemCount % self.column == 0 ? itemCount / self.column : (itemCount / self.column + 1);
