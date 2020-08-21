@@ -95,6 +95,8 @@
             FMLayoutFillSection *section = [[FMLayoutFillSection alloc] init];
             section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3",] mutableCopy];
             section.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+//        section.lineSpace = 10;
+//        section.itemSpace = 10;
             section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
     //        section.header.suspensionTopMargin = 150;
             section.header.zIndex = FMLayoutZIndexFrontAlways;

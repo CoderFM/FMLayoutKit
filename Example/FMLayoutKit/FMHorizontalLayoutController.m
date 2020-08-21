@@ -232,6 +232,8 @@
             
 
             section.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+        section.lineSpace = 10;
+        section.itemSpace = 10;
 
             section.header = [FMLayoutHeader elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
             section.header.suspensionTopMargin = 0;
@@ -243,37 +245,60 @@
             }];
 
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
-            section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"3", @"1", @"2", @"3",] mutableCopy];
+            section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"3", @"1", @"2", @"3", @"3", @"1", @"2", @"3",] mutableCopy];
+        
+        CGFloat leftWith = [UIScreen mainScreen].bounds.size.width - section.sectionInset.left - section.sectionInset.right;
+        CGFloat width1 = leftWith;
+        CGFloat width2 = (leftWith - section.itemSpace) * 0.5;
+        CGFloat width4 = (width2 - section.itemSpace) * 0.5;
+        CGFloat height2width4 = width4 * 2 + section.lineSpace;
+        
             [section setSizeBlock:^CGSize(id  _Nonnull section, NSInteger item) {
-                switch (item) {
-                    case 2:
-                        return CGSizeMake(150, 140);
-                    case 5:
-                        return CGSizeMake((weakSelf.view.frame.size.width-20-150)/2, 70);
-                    case 8:
-                    case 11:
-                        return CGSizeMake(100, 240);
-                    case 10:
-                        return CGSizeMake(weakSelf.view.frame.size.width-20-200, 140);
-                    case 9:
-                    case 12:
-                        return CGSizeMake(weakSelf.view.frame.size.width-20-100, 100);
-                    case 0:
-                    case 1:
-                    case 3:
-                    case 4:
-                        return CGSizeMake((weakSelf.view.frame.size.width-20-150)/4, 70);
-                    default:
-//                    {
-//                        NSValue *value = weakSelf.fillSizeData[@(item)];
-//                        if (value == nil) {
-//                            value = [NSValue valueWithCGSize:CGSizeMake(FMLayoutRandomValue(100, 300), FMLayoutRandomValue(50, 200))];
-//                            weakSelf.fillSizeData[@(item)] = value;
-//                        }
-//                        return [value CGSizeValue];
-//                    }
-                        return CGSizeMake((weakSelf.view.frame.size.width-20-150)/4, 70);
+                if (item < 2) {
+                    return CGSizeMake(width2, width2);
                 }
+                if (item < 4) {
+                    return CGSizeMake(width4, width4);
+                }
+                if (item < 6) {
+                    return CGSizeMake(width4, height2width4);
+                }
+                if (item < 7) {
+                    return CGSizeMake(width2, width4);
+                }
+                if (item < 8) {
+                    return CGSizeMake(width1, width4);
+                }
+                return CGSizeMake(width2, width2);
+//                switch (item) {
+//                    case 2:
+//                        return CGSizeMake(150, 140);
+//                    case 5:
+//                        return CGSizeMake((weakSelf.view.frame.size.width-20-150)/2, 70);
+//                    case 8:
+//                    case 11:
+//                        return CGSizeMake(100, 240);
+//                    case 10:
+//                        return CGSizeMake(weakSelf.view.frame.size.width-20-200, 140);
+//                    case 9:
+//                    case 12:
+//                        return CGSizeMake(weakSelf.view.frame.size.width-20-100, 100);
+//                    case 0:
+//                    case 1:
+//                    case 3:
+//                    case 4:
+//                        return CGSizeMake((weakSelf.view.frame.size.width-20-150)/4, 70);
+//                    default:
+////                    {
+////                        NSValue *value = weakSelf.fillSizeData[@(item)];
+////                        if (value == nil) {
+////                            value = [NSValue valueWithCGSize:CGSizeMake(FMLayoutRandomValue(100, 300), FMLayoutRandomValue(50, 200))];
+////                            weakSelf.fillSizeData[@(item)] = value;
+////                        }
+////                        return [value CGSizeValue];
+////                    }
+//                        return CGSizeMake((weakSelf.view.frame.size.width-20-150)/4, 70);
+//                }
             }];
     //        [section setConfigureCellLayoutAttributes:^(id  _Nonnull section, UICollectionViewLayoutAttributes * _Nonnull attributes, NSInteger item) {
     //            if (item == 10) {
@@ -295,7 +320,7 @@
 //        }];
 //        [self.shareSections addObject:hSection];
         
-//            [self.shareSections addObject:section];
+            [self.shareSections addObject:section];
         }
     
     {
@@ -392,7 +417,7 @@
 
                     }];
 //                    [sections.sections addObject:section];
-                    [self.shareSections addObject:section];
+//                    [self.shareSections addObject:section];
                 }
 //            
 //            {

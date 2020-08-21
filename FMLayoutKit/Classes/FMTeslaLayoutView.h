@@ -45,7 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class FMLayoutBaseSection;
 @interface FMTeslaLayoutView : UIView
-//@property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, weak)id<FMTeslaLayoutViewDelegate> delegate;
 @property(nonatomic, weak)id<FMTeslaLayoutViewDataSource> dataSource;
 @property(nonatomic, assign)BOOL horizontalCanScroll;
@@ -54,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign)BOOL isLoadSubView;
 @property(nonatomic, assign)CGFloat shareHeight;
+
+
 
 - (void)reLoadSubViews;
 - (void)reloadData;

@@ -51,17 +51,16 @@
             if (self.direction == FMLayoutDirectionVertical) {
                 CGFloat lastX = 0;
                 CGFloat lastY = 0;
-                
                 /// 放在右侧寻找最适合
                 for (FMCollectionLayoutAttributes *attr in attrs) {
-                    CGFloat thisX = CGRectGetMaxX(attr.frame);
+                    CGFloat thisX = CGRectGetMaxX(attr.frame) + self.itemSpace;
                     CGFloat thisY = CGRectGetMinY(attr.frame);
                     
                     if (thisX + itemSize.width > self.collectionView.frame.size.width-self.sectionInset.right) {
                         continue;
                     } else {
                         CGRect frame = CGRectMake(thisX, thisY, itemSize.width, itemSize.height);
-                        if (![self intersectsRectInExsitAttributes:attrs frame:frame]) {///没有交集  可以是放
+                        if (![self intersectsRectInExsitAttributes:attrs frame:frame verticle:NO]) {///没有交集  可以是放
                             if (lastX == 0 && lastY == 0) { ///如果都没有设置  则就设置为最合适的
                                 lastY = thisY;
                                 lastX = thisX;
@@ -83,13 +82,13 @@
                 /// 放在下侧寻找最适合
                 for (FMCollectionLayoutAttributes *attr in attrs) {
                     CGFloat thisX = CGRectGetMinX(attr.frame);
-                    CGFloat thisY = CGRectGetMaxY(attr.frame);
+                    CGFloat thisY = CGRectGetMaxY(attr.frame) + self.lineSpace;
 
                     if (thisX + itemSize.width > self.collectionView.frame.size.width-self.sectionInset.right) {
                         continue;
                     } else {
                         CGRect frame = CGRectMake(thisX, thisY, itemSize.width, itemSize.height);
-                        if (![self intersectsRectInExsitAttributes:attrs frame:frame]) {///没有交集  可以是放
+                        if (![self intersectsRectInExsitAttributes:attrs frame:frame verticle:YES]) {///没有交集  可以是放
                             if (lastX == 0 && lastY == 0) {
                                 lastY = thisY;
                                 lastX = thisX;
@@ -109,6 +108,10 @@
                         }
                     }
                 }
+                if (lastY == 0 && lastX == 0) {
+                    lastY = self.firstItemStartY + maxHeight + self.lineSpace;
+                    lastX = self.firstItemStartX;
+                }
                 CGRect frame = CGRectMake(lastX, lastY, itemSize.width, itemSize.height);
                 CGFloat height = CGRectGetMaxY(frame) - self.sectionOffset - self.sectionInset.top - self.header.inset.top - self.header.size - - self.header.inset.bottom - self.header.lastMargin;
                 if (height > maxHeight) {
@@ -124,13 +127,13 @@
                 /// 放在下侧寻找最适合
                 for (FMCollectionLayoutAttributes *attr in attrs) {
                     CGFloat thisX = CGRectGetMinX(attr.frame);
-                    CGFloat thisY = CGRectGetMaxY(attr.frame);
+                    CGFloat thisY = CGRectGetMaxY(attr.frame) + self.lineSpace;
 
                     if (thisY + itemSize.height > self.collectionView.frame.size.height-self.sectionInset.bottom) {
                         continue;
                     } else {
                         CGRect frame = CGRectMake(thisX, thisY, itemSize.width, itemSize.height);
-                        if (![self intersectsRectInExsitAttributes:attrs frame:frame]) {///没有交集  可以是放
+                        if (![self intersectsRectInExsitAttributes:attrs frame:frame verticle:YES]) {///没有交集  可以是放
                             if (lastX == 0 && lastY == 0) {
                                 lastY = thisY;
                                 lastX = thisX;
@@ -151,14 +154,14 @@
                 
                 /// 放在右侧寻找最适合
                 for (FMCollectionLayoutAttributes *attr in attrs) {
-                    CGFloat thisX = CGRectGetMaxX(attr.frame);
+                    CGFloat thisX = CGRectGetMaxX(attr.frame) + self.itemSpace;
                     CGFloat thisY = CGRectGetMinY(attr.frame);
 
                     if (thisY + itemSize.height > self.collectionView.frame.size.height-self.sectionInset.bottom) {
                         continue;
                     } else {
                         CGRect frame = CGRectMake(thisX, thisY, itemSize.width, itemSize.height);
-                        if (![self intersectsRectInExsitAttributes:attrs frame:frame]) {///没有交集  可以是放
+                        if (![self intersectsRectInExsitAttributes:attrs frame:frame verticle:YES]) {///没有交集  可以是放
                             if (lastX == 0 && lastY == 0) { ///如果都没有设置  则就设置为最合适的
                                 lastY = thisY;
                                 lastX = thisX;
@@ -172,7 +175,10 @@
                     }
                 }
                 
-                
+                if (lastY == 0 && lastX == 0) {
+                    lastY = self.firstItemStartY;
+                    lastX = self.firstItemStartX + maxHeight + self.itemSpace;
+                }
                 CGRect frame = CGRectMake(lastX, lastY, itemSize.width, itemSize.height);
                 CGFloat height = CGRectGetMaxX(frame) - self.sectionOffset - self.sectionInset.left - self.header.inset.left - self.header.size - self.header.inset.right - self.header.lastMargin;
                 if (height > maxHeight) {
@@ -192,9 +198,18 @@
     self.itemsAttribute = [attrs copy];
 }
 
-- (BOOL)intersectsRectInExsitAttributes:(NSArray<FMCollectionLayoutAttributes *> *)attributes frame:(CGRect)frame{
+- (BOOL)intersectsRectInExsitAttributes:(NSArray<FMCollectionLayoutAttributes *> *)attributes frame:(CGRect)frame verticle:(BOOL)verticle{
     for (FMCollectionLayoutAttributes *attr in attributes) {
-        if (CGRectIntersectsRect(attr.frame, frame)) {
+        CGRect attrFrame = attr.frame;
+        CGRect itemFrame = frame;
+        if (!verticle) {
+            attrFrame.size.height += self.lineSpace;
+            itemFrame.size.width += self.itemSpace;
+        } else {
+            attrFrame.size.width += self.itemSpace;
+            itemFrame.size.height += self.lineSpace;
+        }
+        if (CGRectIntersectsRect(attrFrame, itemFrame)) {
             return YES;
         }
     }
