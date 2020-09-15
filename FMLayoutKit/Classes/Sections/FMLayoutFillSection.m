@@ -30,7 +30,7 @@
     NSMutableArray *attrs = [NSMutableArray array];
     int first = 0;
     if (self.handleType == FMLayoutHandleTypeAppend) {
-        attrs = [self.itemsAttribute mutableCopy];
+        attrs = [self.itemsAttribute?:@[] mutableCopy];
         first = (int)self.handleItemStart;
     }
     CGFloat maxHeight = 0;

@@ -255,7 +255,7 @@
     NSMutableArray *attrs = [NSMutableArray array];
     int first = 0;
     if (self.handleType == FMLayoutHandleTypeAppend) {
-        attrs = [self.itemsAttribute mutableCopy];
+        attrs = [self.itemsAttribute?:@[] mutableCopy];
         first = (int)self.handleItemStart;
     }
     for (int j = first; j < items; j++) {
@@ -402,6 +402,14 @@
 
 - (FMCollectionLayoutAttributes *)getItemAttributesWithIndex:(NSInteger)j{
     @throw [NSException exceptionWithName:@"child class must implementation this method" reason:@"FMLayoutBaseSection" userInfo:nil];
+}
+
+- (void)reload{
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:self.indexPath.section]];
+}
+
+- (void)reloadItem:(NSInteger)item{
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:item inSection:self.indexPath.section]]];
 }
 
 @end

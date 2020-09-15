@@ -112,17 +112,17 @@
         make.top.mas_equalTo(100);
     }];
     self.collectionView = view;
-        [self addSections];
-    //    [self addCrossFixedSections];
+//        [self addSections];
+    [self addCrossFixedSections];
 //    [self addScaleSection];
-    self.collectionView.enableLongPressDrag = YES;
+//    self.collectionView.enableLongPressDrag = YES;
 //    [self.collectionView setConfigureSourceView:^UIView * _Nonnull(UICollectionViewCell * _Nonnull sourceCell) {
 //        UIView *source = [[UIView alloc] initWithFrame:sourceCell.frame];
 //        source.backgroundColor = [UIColor purpleColor];
 //        return source;
 //    }];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self.collectionView action:@selector(reloadData)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self.collectionView action:@selector(reloadData)];
 }
 
 - (void)addSections{
@@ -182,7 +182,9 @@
             
             section.itemDatas = [@[@"1-1", @"1-2", @"1-3"] mutableCopy];
             section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
-
+            [section setDeqCellReturnElement:^FMLayoutElement * _Nonnull(FMLayoutDynamicSection * _Nonnull section, NSInteger index) {
+                return [section.cellElements lastObject];
+            }];
             [section setFrameBlock:^CGRect(id  _Nonnull section, NSInteger item) {
                 switch (item) {
                     case 0:
@@ -303,6 +305,7 @@
         section.itemDatas = [@[@"1", @"2", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3", @"2", @"3"] mutableCopy];
         
         FMLayoutCrossTransformSection *cSection = [FMLayoutCrossTransformSection sectionAutoWithSection:section];
+        cSection.transformType = FMLayoutCrossTransformScale;
         //        [cSection setTransformBlock:^(UICollectionViewCell * _Nonnull cell, CGFloat progress) {
         //            cell.la
         //        }];

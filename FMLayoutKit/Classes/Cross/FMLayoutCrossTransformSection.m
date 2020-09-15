@@ -14,7 +14,7 @@
     self = [super init];
     if (self) {
         [self setConfigureCollectionView:^(UICollectionView * _Nonnull collectionView, FMLayoutCrossSection * _Nonnull hSection) {
-            collectionView.decelerationRate = 0;
+            collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
             collectionView.alwaysBounceHorizontal = YES;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [collectionView layoutIfNeeded];

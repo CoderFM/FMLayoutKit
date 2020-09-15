@@ -24,9 +24,9 @@ typedef CGFloat(^FMLayoutItemOtherBlock)(id section, NSInteger item);
 ///固定单一分组  当固定单一分组时  可以不用手动配置deqCellReturnReuseId
 @property(nonatomic, strong)FMLayoutElement *cellElement;
 ///获取cell的复用FMLayoutElement
-@property(nonatomic, copy)FMLayoutElement *(^deqCellReturnElement)(FMLayoutDynamicSection *section, NSInteger index);
+@property(nonatomic, copy)FMLayoutElement *(^deqCellReturnElement)(FMLayoutDynamicSection *section, NSInteger item);
 ///填充数据  仅当autoHeightFixedWidth为Yes时有用
-@property(nonatomic, copy)void(^configurationCell)(FMLayoutDynamicSection *section, UICollectionViewCell *cell, NSInteger index);
+@property(nonatomic, copy)void(^configurationCell)(FMLayoutDynamicSection *section, UICollectionViewCell *cell, NSInteger item);
 ///block返回手动计算的高度  优先级比自动的高
 @property(nonatomic, copy)FMLayoutItemOtherBlock otherBlock;
 

@@ -145,6 +145,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerCells;
 - (void)registerCellsWithCollectionView:(UICollectionView *)collectionView;
 
+- (void)reload;
+- (void)reloadItem:(NSInteger)item;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -125,6 +125,9 @@
 }
 
 - (UICollectionViewCell *)dequeueReusableCellForIndexPath:(NSIndexPath *)indexPath collectionView:(nonnull UICollectionView *)collectionView{
+    if (!self.deqCellReturnElement) {
+        @throw [NSException exceptionWithName:@"dynamic section must have to set deqCellReturnElement value" reason:@"FMLayoutDynamicSection" userInfo:nil];
+    }
     return [collectionView dequeueReusableCellWithReuseIdentifier:self.deqCellReturnElement(self, indexPath.item).reuseIdentifier forIndexPath:indexPath];
 }
 
