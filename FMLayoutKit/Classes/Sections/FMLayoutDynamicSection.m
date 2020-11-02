@@ -47,6 +47,9 @@
         }
         itemOther = [cell systemLayoutSizeFittingSize:CGSizeMake(fixedWidth, MAXFLOAT)].height;
     }
+    if (self.autoHeightLaterHander) {
+        itemOther = self.autoHeightLaterHander(self, index, itemOther);
+    }
     return itemOther;
 }
 
@@ -60,6 +63,7 @@
     }
     section.cellElements = arrM;
     section.deqCellReturnElement = [self.deqCellReturnElement copy];
+    section.autoHeightLaterHander = [self.autoHeightLaterHander copy];
     section.configurationCell = [self.configurationCell copy];
     section.otherBlock = [self.otherBlock copy];
     return section;

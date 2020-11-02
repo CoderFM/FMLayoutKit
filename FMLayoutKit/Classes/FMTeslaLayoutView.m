@@ -54,6 +54,7 @@
         for (UIView *view in self.layoutViews.allValues) {
             [view removeFromSuperview];
         }
+        self.layoutViews = [NSMutableDictionary dictionary];
         [self loadSubViews];
     }
 }
@@ -186,10 +187,6 @@
 }
 
 - (void)loadSubViews{
-    [self.layoutViews.allValues enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
-    }];
-    [self.layoutViews removeAllObjects];
     CGFloat shareHeight = 0;
     if ([self.dataSource respondsToSelector:@selector(shareSectionsInTesla:)]) {
         NSMutableArray<FMLayoutBaseSection *> *sections = [[self.dataSource shareSectionsInTesla:self] mutableCopy];

@@ -12,11 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///返回cell大小的block  横向-返回宽度  纵向-返回高度
 typedef CGFloat(^FMLayoutItemOtherBlock)(id section, NSInteger item);
+typedef CGFloat(^FMLayoutAutoHeightLaterBlock)(id section, NSInteger item, CGFloat autoHeight);
 
 ///动态  可以注册多种cell  宽度固定   高度可以自适应 但需要用block填充数据  需要设置deqCellReturnReuseId该block值以获取cell    高度亦可以通过手动计算heightBlock返回   手动计算优先级要高
 @interface FMLayoutDynamicSection : FMLayoutBaseSection
 /// yes时   布局耗时比较长 是否自动计算高度 需设置configurationCell方法填充数据 仅支持纵向布局时使用
 @property(nonatomic, assign)BOOL autoHeightFixedWidth;
+@property(nonatomic, copy)FMLayoutAutoHeightLaterBlock autoHeightLaterHander;
 ///cell固定一个方向的大小 纵向-宽度   横向-高度
 @property(nonatomic, assign)CGFloat cellFixedSize;
 ///需要注册的cell元素

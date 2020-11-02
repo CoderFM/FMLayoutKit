@@ -28,7 +28,7 @@
 @property(nonatomic, weak)FMCollectionNavTitleView *navTitleView;
 
 @property(nonatomic, weak)UILabel *fpsLabel;
-
+@property(nonatomic, assign)BOOL hasAdd;
 @end
 
 @implementation FMViewController
@@ -67,12 +67,18 @@
     }
 }
 
+- (void)add{
+    self.hasAdd = YES;
+    [self.multiScreen reLoadSubViews];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.navigationItem.title = @"特斯拉布局";
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"添加刷新" style:UIBarButtonItemStyleDone target:self action:@selector(add)];
+    self.navigationItem.rightBarButtonItem = item1;
     self.shareSections = [NSMutableArray array];
     self.sections = [NSMutableArray array];
     __weak typeof(self) weakSelf = self;
@@ -307,7 +313,7 @@
 }
 
 - (NSInteger)numberOfScreenInTesla:(nonnull FMTeslaLayoutView *)tesla {
-    return 4;
+    return self.hasAdd ? 4 : 0;
 }
 
 - (NSArray<FMLayoutBaseSection *> *)shareSectionsInTesla:(FMTeslaLayoutView *)tesla{
