@@ -72,6 +72,10 @@
         FMLayoutBaseSection *section = self.sections[i];
         section.direction = self.direction;
         
+        if (section.isHidden) {
+            continue;
+        }
+        
         NSIndexPath *sectionIndexPath = [NSIndexPath indexPathForItem:0 inSection:i];
         section.indexPath = sectionIndexPath;
         

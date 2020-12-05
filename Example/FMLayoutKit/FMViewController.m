@@ -116,7 +116,7 @@
     
     {
         FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:2];
-
+        section.hidden = YES;
         section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class]];
         section.header.lastMargin = 10;
 //        section.header.type = FMSupplementaryTypeSuspensionAlways;

@@ -90,6 +90,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)FMLayoutLongMoveType moveType;
 ///某一个item是否可以移动替换
 @property(nonatomic, copy)BOOL(^canLongPressExchangeItem)(id section, NSInteger item);
+/// 显示隐藏
+@property(nonatomic, assign, getter=isHidden)BOOL hidden;
 ///第一个Item的Y值  横向纵向有区别
 @property(nonatomic, assign, readonly)CGFloat firstItemStartY;
 ///第一个Item的X值  横向纵向有区别

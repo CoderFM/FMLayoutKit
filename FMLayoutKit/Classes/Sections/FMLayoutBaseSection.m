@@ -275,6 +275,9 @@
 }
 
 - (NSArray *)showLayoutAttributesInRect:(CGRect)rect{
+    if (self.isHidden) {
+        return @[];
+    }
     NSMutableArray *attrs = [NSMutableArray array];
     if ([self intersectsRect:rect]) {
         if (self.headerAttribute) {
