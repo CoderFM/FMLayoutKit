@@ -31,7 +31,7 @@
 
 @end
 
-@interface FMTeslaLayoutView ()<FMCollectionLayoutViewConfigurationDelegate, UICollectionViewDelegate, UIGestureRecognizerDelegate>
+@interface FMTeslaLayoutView ()<UICollectionViewDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)FMLayoutBaseSection *suspensionAlwaysHeader;
 @property(nonatomic, weak)FM_ScrollView *scrollView;

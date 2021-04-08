@@ -10,9 +10,11 @@
 BOOL FMLayoutDebugLogOpen = NO;
 
 void FMLayoutLog(NSString *format){
+#if DEBUG
     if (FMLayoutDebugLogOpen) {
         NSLog(@"%@", format);
     }
+#endif
 }
 
 void FMLayoutOpenLog(){

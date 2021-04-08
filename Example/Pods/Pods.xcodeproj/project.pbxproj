@@ -65,6 +65,10 @@
 		C30625882498CABA000243D4 /* FMLayoutCrossCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C30625862498CABA000243D4 /* FMLayoutCrossCell.m */; };
 		C306258B2498CC06000243D4 /* FMLayoutCrossSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C30625892498CC06000243D4 /* FMLayoutCrossSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C306258C2498CC06000243D4 /* FMLayoutCrossSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C306258A2498CC06000243D4 /* FMLayoutCrossSection.m */; };
+		C38CB4B2260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C38CB4B0260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.h */; };
+		C38CB4B3260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C38CB4B1260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.m */; };
+		C38CB4BA260EC4B800E1C3AA /* UIView+FMLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = C38CB4B8260EC4B800E1C3AA /* UIView+FMLayout.h */; };
+		C38CB4BB260EC4B800E1C3AA /* UIView+FMLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C38CB4B9260EC4B800E1C3AA /* UIView+FMLayout.m */; };
 		C38CD57124C528CA00D89C9E /* FMLayoutScaleSection.h in Headers */ = {isa = PBXBuildFile; fileRef = C38CD56F24C528CA00D89C9E /* FMLayoutScaleSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C38CD57224C528CA00D89C9E /* FMLayoutScaleSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C38CD57024C528CA00D89C9E /* FMLayoutScaleSection.m */; };
 		C3973880248F716E00A7A2C2 /* FMLayoutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C397387F248F716E00A7A2C2 /* FMLayoutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -198,6 +202,10 @@
 		C30625862498CABA000243D4 /* FMLayoutCrossCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCrossCell.m; sourceTree = "<group>"; };
 		C30625892498CC06000243D4 /* FMLayoutCrossSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutCrossSection.h; sourceTree = "<group>"; };
 		C306258A2498CC06000243D4 /* FMLayoutCrossSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutCrossSection.m; sourceTree = "<group>"; };
+		C38CB4B0260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FMCollectionViewDelegateDataSourceProvider.h; path = FMLayoutKit/Classes/FMCollectionViewDelegateDataSourceProvider.h; sourceTree = "<group>"; };
+		C38CB4B1260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FMCollectionViewDelegateDataSourceProvider.m; path = FMLayoutKit/Classes/FMCollectionViewDelegateDataSourceProvider.m; sourceTree = "<group>"; };
+		C38CB4B8260EC4B800E1C3AA /* UIView+FMLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIView+FMLayout.h"; path = "FMLayoutKit/Classes/UIView+FMLayout.h"; sourceTree = "<group>"; };
+		C38CB4B9260EC4B800E1C3AA /* UIView+FMLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIView+FMLayout.m"; path = "FMLayoutKit/Classes/UIView+FMLayout.m"; sourceTree = "<group>"; };
 		C38CD56F24C528CA00D89C9E /* FMLayoutScaleSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMLayoutScaleSection.h; sourceTree = "<group>"; };
 		C38CD57024C528CA00D89C9E /* FMLayoutScaleSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMLayoutScaleSection.m; sourceTree = "<group>"; };
 		C397387F248F716E00A7A2C2 /* FMLayoutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMLayoutKit.h; path = FMLayoutKit/Classes/FMLayoutKit.h; sourceTree = "<group>"; };
@@ -428,6 +436,10 @@
 				B176EB4D307EA30B2F3A1980CAD83A70 /* FMTeslaLayoutView.h */,
 				6F3D0D5CF65ED9C7476ADC49BD08B176 /* FMTeslaLayoutView.m */,
 				CA6102B5FF7D583B8C2C690205DE20A4 /* FMTeslaSuspensionHeightChangeDelegate.h */,
+				C38CB4B0260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.h */,
+				C38CB4B1260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.m */,
+				C38CB4B8260EC4B800E1C3AA /* UIView+FMLayout.h */,
+				C38CB4B9260EC4B800E1C3AA /* UIView+FMLayout.m */,
 				FDD5EA2B508FBDBE1A7E2C95FAB84874 /* Element */,
 				F64D6E01665608365589F24F63B8FA36 /* Cross */,
 				521B128D0E16D2ED85B3CD0DC3C5815C /* Pod */,
@@ -576,6 +588,8 @@
 				C399ACAD24BECF8500DD02EE /* FMLayoutCrossTransformSection.h in Headers */,
 				C30625872498CABA000243D4 /* FMLayoutCrossCell.h in Headers */,
 				0036C8E1BBB2FF8C9EC7B0B1AAFD23DF /* FMSupplementary.h in Headers */,
+				C38CB4BA260EC4B800E1C3AA /* UIView+FMLayout.h in Headers */,
+				C38CB4B2260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.h in Headers */,
 				8475566499CB6BE91D3D16D549E3EB2D /* FMTeslaLayoutView.h in Headers */,
 				72B72B650AF3C690635A54BE8356662C /* FMTeslaSuspensionHeightChangeDelegate.h in Headers */,
 			);
@@ -769,6 +783,7 @@
 			files = (
 				8B86204F0349A782F91323459449CD0B /* FMCollectionLayoutAttributes.m in Sources */,
 				C30625882498CABA000243D4 /* FMLayoutCrossCell.m in Sources */,
+				C38CB4B3260EC0B500E1C3AA /* FMCollectionViewDelegateDataSourceProvider.m in Sources */,
 				4F5212C040672D2776544CAA39A4FCCE /* FMKVOArrayObject.m in Sources */,
 				3EABA5C42467DAD253F1AF5ADA7EB3F3 /* FMLayoutAbsoluteSection.m in Sources */,
 				C3C47B9C24BAB5B00020C071 /* FMLayoutCombineSection.m in Sources */,
@@ -783,6 +798,7 @@
 				2BF16135E62ABD244F9394C280B06EE8 /* FMLayoutFooter.m in Sources */,
 				C399ACAE24BECF8500DD02EE /* FMLayoutCrossTransformSection.m in Sources */,
 				B915FCFC0E255F43F5A4049082E68D95 /* FMLayoutHeader.m in Sources */,
+				C38CB4BB260EC4B800E1C3AA /* UIView+FMLayout.m in Sources */,
 				C306258C2498CC06000243D4 /* FMLayoutCrossSection.m in Sources */,
 				F4C5DC6114CB65244093D6A8DA36B005 /* FMLayoutKit-dummy.m in Sources */,
 				6ED2198EBA016B6DA6627F67D251986C /* FMLayoutLabelSection.m in Sources */,

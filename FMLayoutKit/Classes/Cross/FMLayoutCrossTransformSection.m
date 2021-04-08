@@ -71,7 +71,7 @@
                     transform.m34 = 1.0/500;
                     transform = CATransform3DRotate(transform, M_PI_4 * fabs(progress), 0, 1, 0);
                 }
-                if (@available(iOS 12.0, *)) {
+                if (@available(iOS 13.0, *)) {
                     cell.transform3D = transform;
                 } else {
                     cell.layer.transform = transform;

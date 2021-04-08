@@ -10,8 +10,6 @@
 
 @interface FMLayoutElement ()
 
-
-
 @end
 
 @implementation FMLayoutElement

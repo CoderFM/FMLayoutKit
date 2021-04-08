@@ -9,6 +9,7 @@
 #import "FMLayoutView.h"
 #import "FMLayoutFixedSection.h"
 #import "FMLayoutLabelSection.h"
+#import "UIView+FMLayout.h"
 
 @interface _FMLayoutSussEmptyView : UICollectionReusableView
 
@@ -256,25 +257,7 @@
     if (self.configureSourceView) {
         sourceView = self.configureSourceView(sourceCell);
     } else {
-        UIGraphicsBeginImageContextWithOptions(sourceCell.frame.size, NO, [UIScreen mainScreen].scale);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        [sourceCell.layer renderInContext:context];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        
-        sourceView = [[UIView alloc] initWithFrame:sourceCell.frame];
-        sourceView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-        sourceView.layer.shadowOffset = CGSizeMake(0, 0);
-        sourceView.layer.shadowOpacity = 0.7;
-        [sourceView addSubview:imageView];
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:sourceView attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-        NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:sourceView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-        NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:sourceView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-        NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:sourceView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-        [sourceView addConstraints:@[left,right,top,bottom]];
+        sourceView = [sourceCell snapshotView];
     }
     [self addSubview:sourceView];
     sourceCell.hidden = YES;
@@ -413,9 +396,6 @@
     if (sectionM.configureCellData) {
         sectionM.configureCellData(sectionM, cell, indexPath.item);
     }
-    if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationCell:indexPath:)]) {
-        [self.configuration layoutView:self configurationCell:cell indexPath:indexPath];
-    }
     return cell;
 }
 
@@ -429,9 +409,6 @@
         if (sectionM.configureHeaderData) {
             sectionM.configureHeaderData(sectionM, header);
         }
-        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationHeader:indexPath:)]) {
-            [self.configuration layoutView:self configurationHeader:header indexPath:indexPath];
-        }
         return header;
     }
     if (sectionM.footer && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
@@ -439,18 +416,12 @@
         if (sectionM.configureFooterData) {
             sectionM.configureFooterData(sectionM, footer);
         }
-        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationFooter:indexPath:)]) {
-            [self.configuration layoutView:self configurationFooter:footer indexPath:indexPath];
-        }
         return footer;
     }
     if (sectionM.background && [kind isEqualToString:UICollectionElementKindSectionBackground]) {
         UICollectionReusableView *bg = [sectionM.background dequeueReusableViewWithCollection:collectionView indexPath:indexPath];
         if (sectionM.configureBg) {
             sectionM.configureBg(sectionM, bg);
-        }
-        if (self.configuration && [self.configuration respondsToSelector:@selector(layoutView:configurationSectionBg:indexPath:)]) {
-            [self.configuration layoutView:self configurationSectionBg:bg indexPath:indexPath];
         }
         return bg;
     }

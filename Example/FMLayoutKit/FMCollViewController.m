@@ -20,7 +20,7 @@
 
 #import "FMFPSLabel.h"
 
-@interface FMCollViewController ()<FMCollectionLayoutViewConfigurationDelegate, UICollectionViewDelegate>
+@interface FMCollViewController ()<UICollectionViewDelegate>
 
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, weak)FMLayoutView  *collectionView;

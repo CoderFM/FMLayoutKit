@@ -19,7 +19,7 @@
 
 #import "FMAotuSizeReusableView.h"
 
-@interface FMAddViewController ()<FMCollectionLayoutViewConfigurationDelegate, UICollectionViewDelegate>
+@interface FMAddViewController ()<UICollectionViewDelegate>
 
 @property(nonatomic, strong)NSMutableArray<FMLayoutBaseSection *> *shareSections;
 @property(nonatomic, weak)FMLayoutView  *collectionView;
@@ -197,24 +197,6 @@
 //        self.firstSection = section;
     }
     
-//    {
-//        FMLayoutSingleDynamicAddSection *section = [FMLayoutSingleDynamicAddSection sectionWithSectionInset:UIEdgeInsetsMake(0, 0, 0, 0) itemSpace:10 lineSpace:10 column:3];
-//
-//        section.header = [FMLayoutHeader elementSize:150 viewClass:[FMCollectionCustomDecoration class]];
-//        section.header.zIndex = FMLayoutZIndexFrontOfItem;
-//        section.header.type = FMLayoutHeaderTypeFixed;
-//        section.header.lastMargin = 10;
-//
-//        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", @"1", @"2", @"3", ] mutableCopy];
-//        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
-//        section.cellFixedSize = 100;
-//        [section setHeightBlock:^CGFloat(id  _Nonnull section, NSInteger item) {
-//            return 100 + (item % 3) * 20;
-//        }];
-//        [self.shareSections addObject:section];
-//        self.secondSection = section;
-//    }
-    
     {
         FMLayoutDynamicSection *section = [FMLayoutDynamicSection sectionWithSectionInset:UIEdgeInsetsMake(5, 15, 5, 15) itemSpace:10 lineSpace:10 column:2];
         
@@ -274,7 +256,6 @@
     
     FMLayoutView *view = [[FMLayoutView alloc] init];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    view.configuration = self;
     view.delegate = self;
     [view.layout setSections:self.shareSections];
     view.backgroundColor = [UIColor whiteColor];

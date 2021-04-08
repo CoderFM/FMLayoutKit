@@ -10,17 +10,8 @@
 #import "FMLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@class FMLayoutView;
-@protocol FMCollectionLayoutViewConfigurationDelegate <NSObject>
-@optional
-- (void)layoutView:(FMLayoutView *)layoutView configurationCell:(UICollectionViewCell *)cell indexPath:(NSIndexPath *)indexPath;
-- (void)layoutView:(FMLayoutView *)layoutView configurationHeader:(UICollectionReusableView *)header indexPath:(NSIndexPath *)indexPath;
-- (void)layoutView:(FMLayoutView *)layoutView configurationFooter:(UICollectionReusableView *)footer indexPath:(NSIndexPath *)indexPath;
-- (void)layoutView:(FMLayoutView *)layoutView configurationSectionBg:(UICollectionReusableView *)bg indexPath:(NSIndexPath *)indexPath;
-@end
 
 @interface FMLayoutView : UICollectionView
-@property(nonatomic, weak)id<FMCollectionLayoutViewConfigurationDelegate> configuration;
 @property(nonatomic, weak)FMLayout *layout;
 ///重写了set get 目标指向->layout.sections
 @property(nonatomic)NSMutableArray<FMLayoutBaseSection *> *sections;
