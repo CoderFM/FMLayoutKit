@@ -1,0 +1,6 @@
+framework module FMLayoutKit {
+  umbrella header "FMLayoutKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

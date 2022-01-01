@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL isLoadSubView;
 @property(nonatomic, assign)CGFloat shareHeight;
 
-
+@property(nonatomic, strong, readonly)FMLayoutView *shareLayoutView;
 
 - (void)reLoadSubViews;
 - (void)reloadData;

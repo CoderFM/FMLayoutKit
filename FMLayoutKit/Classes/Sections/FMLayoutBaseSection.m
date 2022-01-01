@@ -50,7 +50,7 @@
 }
 
 - (NSInteger)itemCount{
-    return self.itemDatas.count;
+    return self.itemDatas ? self.itemDatas.count : 0;
 }
 
 - (void)setHeader:(FMLayoutHeader *)header{

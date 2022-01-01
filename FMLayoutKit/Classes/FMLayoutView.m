@@ -10,23 +10,7 @@
 #import "FMLayoutFixedSection.h"
 #import "FMLayoutLabelSection.h"
 #import "UIView+FMLayout.h"
-
-@interface _FMLayoutSussEmptyView : UICollectionReusableView
-
-@end
-
-@implementation _FMLayoutSussEmptyView
- 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.hidden = YES;
-    }
-    return self;
-}
-
-@end
+#import "_FMLayoutSussEmptyView.h"
 
 @interface FMLayoutView ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -44,34 +28,6 @@
 @implementation FMLayoutView
 
 #pragma mark ----- Public
-- (void)appendLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections{
-    [self.sections addObjectsFromArray:sections];
-}
-- (void)insertLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections atIndexSet:(NSIndexSet *)indexSet{
-    [self.sections insertObjects:sections atIndexes:indexSet];
-}
-- (void)insertLayoutSection:(FMLayoutBaseSection *)section atIndex:(NSInteger)index{
-    if (index > self.sections.count) {
-        [self.sections addObject:section];
-    } else {
-        [self.sections insertObject:section atIndex:index];
-    }
-}
-- (void)deleteLayoutSections:(NSArray<FMLayoutBaseSection *> *)sections{
-    [self.sections removeObjectsInArray:sections];
-}
-
-- (void)deleteLayoutSectionAt:(NSUInteger)index{
-    [self.sections removeObjectAtIndex:index];
-}
-
-- (void)deleteLayoutSectionSet:(NSIndexSet *)set{
-    [self.sections removeObjectsAtIndexes:set];
-}
-
-- (void)exchangeLayoutSection:(NSUInteger)index to:(NSUInteger)to{
-    [self.sections exchangeObjectAtIndex:index withObjectAtIndex:to];
-}
 
 - (NSMutableArray<FMLayoutBaseSection *> *)sections{
     return self.layout.sections;

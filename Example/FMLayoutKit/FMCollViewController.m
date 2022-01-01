@@ -34,29 +34,8 @@
 
 - (void)reloadSection{
     FMLayoutBaseSection *section = [self.shareSections[2] copy];
-    [self.collectionView insertLayoutSection:section atIndex:1];
+    [self.collectionView.sections insertObject:section atIndex:1];
     [self.collectionView reloadData];
-    return;
-    {
-        FMLayoutFixedSection *section = [FMLayoutFixedSection sectionWithSectionInset:UIEdgeInsetsMake(0, 15, 15, 15) itemSpace:10 lineSpace:10 column:3];
-
-        section.header = [FMLayoutHeader elementSize:100 viewClass:[FMCollectionCustomDecoration class]];
-        section.header.lastMargin = 10;
-        section.header.type = FMLayoutHeaderTypeSuspension;
-        section.header.inset = UIEdgeInsetsMake(0, -15, 0, -15);
-
-        section.footer = [FMLayoutFooter elementSize:50 viewClass:[FMCollectionCustomDecoration class]];
-        section.footer.topMargin = 10;
-
-        section.itemSize = CGSizeMake(100, 100);
-        section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3"] mutableCopy];
-        section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
-        [self.collectionView insertLayoutSection:section atIndex:1];
-    }
-//    [self.collectionView.layout invalidateLayout];
-//    [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:1]];
-    
-//    [self.collectionView reloadData];
 }
 
 - (void)addItem{
@@ -70,7 +49,7 @@
 }
 
 - (void)deleteSection{
-    [self.collectionView deleteLayoutSectionAt:1];
+    [self.collectionView.sections removeObjectAtIndex:1];
 //    [self.collectionView reloadData];
 }
 
@@ -100,7 +79,7 @@
         section.itemDatas = [@[@"1", @"2", @"3", @"1", @"2", @"3"] mutableCopy];
         section.cellElement = [FMLayoutElement elementWithViewClass:[FMCollectionCustomCell class]];
 //        [self.shareSections addObject:section];
-        [self.collectionView appendLayoutSections:@[section]];
+        [self.collectionView.sections addObject:section];
     }
     [self.collectionView reloadData];
 }
